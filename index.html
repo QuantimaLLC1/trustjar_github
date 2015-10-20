@@ -30,6 +30,7 @@
   </head>
 
   <body>
+    <div id="disableControls"></div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -82,38 +83,39 @@
           <div style="width:10px"></div>   
         </div> 
 
-        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff">  
+      <form action="" onsubmit="return indexSubmitStep1();" data-ajax="false"><!--   Step 1 form: create a new relationshop-->
+          <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff">  
 
-          <div class="row">
-
-            <div class="col-md-4">   
-                  <label id="indexContactLabel" for="userContact" style="margin-top:8px">You</label>
-                  <input type="email" class="form-control" id="userContact" placeholder="email or mobile" style="margin-bottom: 10px">
-            </div>
-            
-            <div class="col-md-4">   
-              <label id="relationshipType" for="exampleInputEmail1" style="margin-top:8px">are in a (select one):</label><br>
-              <div class="btn-group" data-toggle="buttons" style="margin-bottom: 10px">          
-               <label class="btn btn-success">
-                 <input type="radio" name="options" id="indexCasual" autocomplete="off" style="margin-top:8px"> Casual
-               </label>
-               <label class="btn btn-success">
-                 <input type="radio" name="options" id="indexExclusive" autocomplete="off" Sstyle="margin-top:8px"> Exclusive
-               </label>
+            <div class="row">
+              <div class="col-md-4">   
+                    <label id="indexContactLabel" for="userContact" style="margin-top:8px">You</label>
+                    <input type="text" class="form-control" id="indexUserContact" placeholder="email or mobile" style="margin-bottom: 10px" autofocus required>
               </div>
-            </div>
+              
+              <div class="col-md-4">   
+                <label id="relationshipType" for="exampleInputEmail1" style="margin-top:8px">are in a (select one):</label><br>
+                <div class="btn-group" data-toggle="buttons" style="margin-bottom: 10px">          
+                 <label class="btn btn-success">
+                   <input type="radio" name="indexRelationshipType" id="indexCasual" value="Casual" style="margin-top:8px" required> Casual
+                 </label>
+                 <label class="btn btn-success">
+                   <input type="radio" name="indexRelationshipType" id="indexExclusive" value="Exclusive" style="margin-top:8px" required> Exclusive
+                 </label>
+                </div>
+              </div>
 
-            <div class="col-md-4">   
-                  <label id="indexContactLabel" for="otherContact" style="margin-top:8px">relationship with:</label>
-                  <input type="email" class="form-control" id="otherContact" placeholder="email or mobile" style="margin-bottom: 10px">
+              <div class="col-md-4">   
+                    <label id="indexContactLabel" for="otherContact" style="margin-top:8px">relationship with:</label>
+                    <input type="text" class="form-control" id="indexCounterpartyContact" placeholder="email or mobile" style="margin-bottom: 10px" required>
+              </div>
+
+            </div>
+            <div class="row">
+                <button id="step1Submit" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button>  
             </div>
 
           </div>
-          <div class="row">
-              <button type="submit" class="btn btn-primary" onClick="indexShowStep2()" style="margin-left:15px; margin-bottom:10px">Submit</button>  
-          </div>
-
-        </div>
+      </form> <!--  End Step 1 form: create a new relationship-->
 
         <div class="col-md-2">   
           <div style="width:10px"></div>   
@@ -126,7 +128,7 @@
         </div> 
 
         <div class="col-md-8" style="font-weight:bold; padding:10px">   
-            You (aaaron@gmail.com) are declaring a casual relationship with bbrown@aol.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="indexEditStep1()">Edit</a>
+            You (<span id="indexServerUserContact"></span>) are declaring a <span id="indexServerRelationshipType"></span> relationship with <span id="indexServerCounterpartyContact"></span>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="indexEditLink" onClick="indexEditStep1()">Edit</a>
         </div>
         <div class="col-md-2">   
           <div style="width:10px"></div>   
@@ -153,7 +155,7 @@
                 <label id="indexContactLabel" for="exampleInputEmail1">Your name</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="your name" style="margin-bottom: 10px">                
                 <label id="indexContactLabel" for="exampleInputEmail1">User ID</label><br>
-                aaaron@gmail.com 
+                <span id="indexServerUserContact2"></span>
                 <a href="#" data-toggle="tooltip" data-placement="top" title="Any email or mobile number you add can be used to sign in. Use this contact for your first sign-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
 
 
@@ -229,10 +231,12 @@
         document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
       }
     </script>
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/trustjar.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
   
 
-</body></html>
+</body>
+</html>
