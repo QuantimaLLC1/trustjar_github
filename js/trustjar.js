@@ -65,6 +65,59 @@
   };
 */
 
+
+
+// Code to insert anonymous header (with login fields)
+$('.anonHeader').append( 
+  "<div class='container'>" +
+    "<div class='navbar-header'>" + 
+      "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'>" + 
+        "<span class='sr-only'>Toggle navigation</span>" + 
+        "<span style='color:#fff'>Sign in</span>" +
+      "</button>" + 
+      "<a class='navbar-brand' href='index.html' style='font-size:32px'>trustjar</a>" +
+    "</div>" +
+    "<div id='navbar' class='navbar-collapse collapse'>" + 
+      "<form class='navbar-form navbar-right' action='' onsubmit='return goToDashboard();'' data-ajax='false'>" + 
+        "<div class='form-group'>" +
+          "<input type='text' placeholder='email or mobile phone' class='form-control' style='margin-bottom:10px'>" +
+          "<input type='password' placeholder='password' class='form-control' style='margin-bottom:10px'>" +
+          "<a href='dashboard.html'><button type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>" +
+          "<br>" +
+          "<div class='checkbox' style='color:#ffffff'>" +
+            "<label>" +
+              "<input type='checkbox' style='float:left; margin-right:5px'>Remember me" +
+            "</label>" +
+            "<a href='forgotPw.html' style='color:#46bcde; margin-left:85px'>Forgot password</a>" +
+          "</div>" +
+        "</div>" +
+      "</form>" +
+    "</div><!--/.navbar-collapse -->" +
+  "</div>"
+);
+
+
+// Code to insert anonymous header (with login fields)
+$('.footer').append( 
+  "<div class='container'>" +
+    "<div class='navbar-header'>" + 
+      "<a href='content.html'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Contact us</a>" + 
+      "<p>© Quantima 2015. All rights reserved.</p>" + 
+    "</div>" +
+  "</div>"
+);
+
+
+
+
+
+
+
+
+
+
+
+
 GLOB.trustjarRef = new Firebase("https://trustjar.firebaseio.com");
 
 /*
@@ -91,13 +144,13 @@ GLOB.pageRef = GLOB.trustjarRef.child('global');
 
 
 // Server sets the page to be displayed
-GLOB.pageRef.child('currentPage').on('child_added', function(childSnapshot, prevChildName) {
+GLOB.trustjarRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the JSON string stored in alertMsg  
   var val = childSnapshot.val();
   var curPage = document.location.href.match(/[^\/]+$/)[0]
   // If a message to change the current page is received, change to that page.  
-  if (curPage != val) {
-    window.location = val;
+  if (curPage != val.thisPage) {
+    window.location = val.thisPage;
   };
 });
 
