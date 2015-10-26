@@ -35,15 +35,12 @@ table.index td {
 /* Footer media queries */
 
 @media (max-width: 600px) {
-
   .footer{
   font-size: 14px;
   line-height: 1.8;
   padding: 25px 0 90px;
   }
-
 }
-
 
 .overlay {
    background-color: #F0F0F0;
@@ -59,3 +56,23 @@ table.index td {
    top: 0px;
    left: 0px;
 }
+
+
+  .unit-test-end {
+    position: absolute;
+    color:#000000;
+    margin: auto;
+    top: 20%;
+    left: 0;
+    right: 0;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 12px;
+    background-color:#ffffff;
+    width:250px; 
+    padding:10px;
+    border: solid;
+    border-width: 5px;
+    border-color:#990000;
+    text-shadow:none;
+    z-index: 1200;
+  }

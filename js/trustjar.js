@@ -98,6 +98,24 @@ $('.anonHeader').append(
 
 
 // Code to insert anonymous header (with login fields)
+$('.identHeader').append( 
+  "<div class='container-fluid'>" +
+    "<div class='navbar-header'>" +
+      "<p class='navbar-right navbar-toggle'><a href='index.html' class='navbar-link'>Sign out</a></p>" +
+       "<a class='navbar-brand' href='dashboard.html'>trustjar</a>" +
+      "</p>" +
+    "</div>" +
+    "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>" +
+      "<ul class='nav navbar-nav navbar-right'>" +
+        "<li><a href='index.html' type='button' style='margin: 7px 7px 7px 0px; border: 1px solid #333333; border-radius: 5px; padding: 10px;''>Sign out</a>" +
+        "</li>" +
+      "</ul>" +
+    "</div>" +
+  "</div>"
+);
+
+
+// Code to insert footer to all templates
 $('.footer').append( 
   "<div class='container'>" +
     "<div class='navbar-header'>" + 
@@ -136,7 +154,9 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-GLOB.indexSubmitStep1Ref = GLOB.trustjarRef.child('index/client/step1Submit');
+GLOB.indexSubmitStep1Ref = GLOB.trustjarRef.child('client/index/step1Submit');
+GLOB.serverRef = GLOB.trustjarRef.child('server');
+GLOB.clientRef = GLOB.trustjarRef.child('client');
 GLOB.indexServerRef = GLOB.trustjarRef.child('index/server');
 GLOB.pageRef = GLOB.trustjarRef.child('global');
 
@@ -144,7 +164,7 @@ GLOB.pageRef = GLOB.trustjarRef.child('global');
 
 
 // Server sets the page to be displayed
-GLOB.trustjarRef.on('child_added', function(childSnapshot, prevChildName) {
+GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the JSON string stored in alertMsg  
   var val = childSnapshot.val();
   var curPage = document.location.href.match(/[^\/]+$/)[0]
@@ -152,17 +172,57 @@ GLOB.trustjarRef.on('child_added', function(childSnapshot, prevChildName) {
   if (curPage != val.thisPage) {
     window.location = val.thisPage;
   };
-});
-
-// Server changes page to be displayed
-GLOB.pageRef.child('currentPage').on('child_changed', function(childSnapshot, prevChildName) {
-  // Retrieve the JSON string stored in alertMsg  
-  var val = childSnapshot.val();
-  window.location = val;
-  if (curPage != val) {
-    window.location = val;
+  if (val.indexStep == 2) {
+    $("#indexServerUserContact").html(val.indexUserContactData);
+    $("#indexServerUserContact2").html(val.indexUserContactData);
+    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
+    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
+    $( "#indexStep1" ).hide();
+    $( "#step1done" ).show();
+    $( "#indexStep2" ).show();
+    $( "#disableControls" ).removeClass( "overlay" );
+  };
+  if (val.indexStep == 1) {
+    $("#indexUserContact").val($("#indexServerUserContact").html());
+    $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
+    $("#indexCasual").prop( "checked", true );
+    $("#indexCasual").parent('label').addClass('active');
+    $( "#indexStep1" ).show();
+    $( "#step1done" ).hide();
+    $( "#indexStep2" ).hide();
   };
 });
+
+// Server sets the page to be displayed
+GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
+  // Retrieve the JSON string stored in alertMsg  
+  var val = childSnapshot.val();
+  var curPage = document.location.href.match(/[^\/]+$/)[0]
+  // If a message to change the current page is received, change to that page.  
+  if (curPage != val.thisPage) {
+    window.location = val.thisPage;
+  };
+  if (val.indexStep == 2) {
+    $("#indexServerUserContact").html(val.indexUserContactData);
+    $("#indexServerUserContact2").html(val.indexUserContactData);
+    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
+    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
+    $( "#indexStep1" ).hide();
+    $( "#step1done" ).show();
+    $( "#indexStep2" ).show();
+    $( "#disableControls" ).removeClass( "overlay" );
+  };
+  if (val.indexStep == 1) {
+    $("#indexUserContact").val($("#indexServerUserContact").html());
+    $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
+    $("#indexCasual").prop( "checked", true );
+    $("#indexCasual").parent('label').addClass('active');
+    $( "#indexStep1" ).show();
+    $( "#step1done" ).hide();
+    $( "#indexStep2" ).hide();
+  };
+});
+
 
 
 
@@ -197,11 +257,11 @@ function indexEditStep1 () {
 // Add another contact field to the current request form
 GLOB.indexServerRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the unique ID from the Firebase message
-  var step1Data = childSnapshot.val();
-  $("#indexServerUserContact").html(step1Data.indexUserContactData);
-  $("#indexServerUserContact2").html(step1Data.indexUserContactData);
-  $("#indexServerRelationshipType").html(step1Data.indexRelationshipTypeData);
-  $("#indexServerCounterpartyContact").html(step1Data.indexCounterpartyContactData);
+  var val = childSnapshot.val();
+  $("#indexServerUserContact").html(val.indexUserContactData);
+  $("#indexServerUserContact2").html(val.indexUserContactData);
+  $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
+  $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
   $( "#indexStep1" ).hide();
   $( "#step1done" ).show();
   $( "#indexStep2" ).show();
