@@ -110,62 +110,54 @@
       </div> <!-- End row -->
 
 
+      <form action="" onsubmit="return indexSubmitStep2();" data-ajax="false"><!--   Step 2 form: create a new relationshop-->
+        <div class="row" id="indexStep2" style="display:none">
+          <div class="col-md-2">   
+            <div style="width:10px"></div>   
+          </div> 
 
-      <div class="row" id="indexStep2" style="display:none">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
+          <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
 
-        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-          <div class="row">
-            <div class="col-md-12">   
-                <p> Please complete the form below so you can manage this relationship in the future. Messages will be sent to both of you to confirm your identities and complete the process. We'll never use your contact information for any other purpose.</p>
-            </div>
-          </div> <!-- End row -->
-
-          <div class="row">
-            <div class="col-md-6">   
-                <label id="indexContactLabel" for="exampleInputEmail1">Your name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="your name" style="margin-bottom: 10px">                
-                <label id="indexContactLabel" for="exampleInputEmail1">User ID</label><br>
-                <span id="indexServerUserContact2"></span>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Any email or mobile number you add can be used to sign in. Use this contact for your first sign-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
-
-
-
-            </div>
-            <div class="col-md-6">                   
-              <label id="indexContactLabel" for="exampleInputEmail1">Password</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="password" style="margin-bottom: 10px">
-              <label id="indexContactLabel" for="exampleInputEmail1">Confirm password</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="confirm password" style="margin-bottom: 10px">
-            </div>
-          </div> <!-- End row -->
-
-          <div class="row">
-            <div class="col-md-12">   
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox">I have read and accept the <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>.
-                </label>            
+            <div class="row">
+              <div class="col-md-12">   
+                  <p> Please complete the form below so you can manage this relationship in the future. Messages will be sent to both of you to confirm your identities and complete the process. We'll never use your contact information for any other purpose.</p>
               </div>
-               <a href="content1.html"><button type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button></a>         
-            </div>
+            </div> <!-- End row -->
+
+            <div class="row">
+              <div class="col-md-6">   
+                  <label id="indexContactLabel" for="indexUserName">Your name</label>
+                  <input type="text" class="form-control" id="indexUserName" placeholder="your name" style="margin-bottom: 10px" required>                
+                  <label id="indexContactLabel" for="indexServerUserContact2">User ID</label><br>
+                  <span id="indexServerUserContact2"></span>
+                  <a href="#" data-toggle="tooltip" data-placement="top" title="Any email or mobile number you add can be used to sign in. Use this contact for your first sign-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+
+
+
+              </div>
+              <div class="col-md-6">                   
+                <label id="indexContactLabel" for="indexPassword1">Password</label>
+                <input type="password" class="form-control" id="indexPassword1" placeholder="password" style="margin-bottom: 10px" required>
+                <label id="indexContactLabel" for="indexPassword2">Confirm password</label>
+                <input type="password" class="form-control" id="indexPassword2" placeholder="confirm password" style="margin-bottom: 10px" required>
+              </div>
+            </div> <!-- End row -->
+
+            <div class="row">
+              <div class="col-md-12">   
+                 <button id="indexStep2Submit" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button>         
+              </div>
+            </div> <!-- End row -->
+
           </div> <!-- End row -->
 
-        </div> <!-- End row -->
-
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- /container -->
-
-
-
+          <div class="col-md-2">   
+          </div> 
+        </div> <!-- /container -->
+      </form>
     </div> <!-- /container -->
 
     <div class="container" style="margin-top:50px">
-
       <div class="row">
         <div class="col-md-2">
         </div> 
@@ -194,19 +186,21 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster
-    <script src="js/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
+ causing local problems. Writing out temporarily.
       if (!window.jQuery) {
         document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
       }
+ -->
     </script>
+    <script src='js/jquery-2.1.4.min.js'></script>
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/trustjar.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
   
-
 </body>
 </html>

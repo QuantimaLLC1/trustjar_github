@@ -1,3 +1,7 @@
+html, body {
+   height: 100%;
+}
+
   table.box {
     background-color:#EBFFEB;
     border: 1px solid #cccccc;
@@ -76,3 +80,31 @@ table.index td {
     text-shadow:none;
     z-index: 1200;
   }
+
+@media screen and (min-width: 768px) {  
+  #myModal .modal-dialog  {
+    width:90%;
+  }
+}
+
+.modal-content {
+    /* 80% of window height */
+    height: 100%;
+}
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow: hidden;
+}
+
+.modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #cccccc;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+ }

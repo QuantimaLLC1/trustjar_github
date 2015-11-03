@@ -75,7 +75,7 @@ $('.anonHeader').append(
         "<span class='sr-only'>Toggle navigation</span>" + 
         "<span style='color:#fff'>Sign in</span>" +
       "</button>" + 
-      "<a class='navbar-brand' href='index.html' style='font-size:32px'>trustjar</a>" +
+      "<a href='index.html' id='indexHome' class='navbar-brand' style='font-size:32px'>trustjar</a>" +
     "</div>" +
     "<div id='navbar' class='navbar-collapse collapse'>" + 
       "<form class='navbar-form navbar-right' action='' onsubmit='return goToDashboard();'' data-ajax='false'>" + 
@@ -97,12 +97,20 @@ $('.anonHeader').append(
 );
 
 
+
+// Disable the home (icon) link if the user is on the home page (logged out version)
+if (document.location.href.match(/[^\/]+$/)[0] == 'index.html') {
+   $("#indexHome").removeAttr("href");
+};
+
+
+
 // Code to insert anonymous header (with login fields)
 $('.identHeader').append( 
   "<div class='container-fluid'>" +
     "<div class='navbar-header'>" +
       "<p class='navbar-right navbar-toggle'><a href='index.html' class='navbar-link'>Sign out</a></p>" +
-       "<a class='navbar-brand' href='dashboard.html'>trustjar</a>" +
+       "<a href='dashboard.html' id='dashboardHome' class='navbar-brand'>trustjar</a>" +
       "</p>" +
     "</div>" +
     "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>" +
@@ -114,17 +122,85 @@ $('.identHeader').append(
   "</div>"
 );
 
+// Disable the home (icon) link if the user is on the home page (logged in version)
+if (document.location.href.match(/[^\/]+$/)[0] == 'dashboard.html') {
+   $("#dashboardHome").removeAttr("href");
+};
 
 // Code to insert footer to all templates
 $('.footer').append( 
   "<div class='container'>" +
     "<div class='navbar-header'>" + 
-      "<a href='content.html'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='content.html'>Contact us</a>" + 
+      "<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
+      "<a href='#' id='privacyLink'>Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
+      "<a href='#' id='termsLink'>Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
+      "<a href='#' id='contactLink'>Contact us</a>" + 
       "<p>© Quantima 2015. All rights reserved.</p>" + 
     "</div>" +
   "</div>"
 );
 
+$('body').append( 
+  "<div class='modal fade' id='footerOverlay' role='dialog'>" +
+    "<div class='modal-dialog'>" +
+      "<div class='modal-content'>" +
+        "<div class='modal-header' id='modalHeader'>" +
+          "<button type='button' class='close' data-dismiss='modal'>&times;</button>" +
+          "<h4 class='modal-title'>Trustjar Terms and conditions</h4>" +
+        "</div>" +
+        "<div class='modal-body' id='modalBody'>" +
+        "</div>" +
+        "<div class='modal-footer'>" +
+          "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>" +
+        "</div>" +
+      "</div>" +
+    "</div>" +
+  "</div>"
+);
+
+
+
+
+// Opens help overlay
+$("#helpLink").click(function(){
+  $("#footerOverlay").modal({backdrop: true});
+  document.getElementById("modalHeader").innerHTML='trustjar Help';
+  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./help.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+});
+
+
+// Opens terms and conditions overlay
+$("#privacyLink").click(function(){
+  $("#footerOverlay").modal({backdrop: true});
+  document.getElementById("modalHeader").innerHTML='trustjar Privacy Policy';
+  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./privacy.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+});
+
+
+// Opens terms and conditions overlay
+$("#termsLink").click(function(){
+  $("#footerOverlay").modal({backdrop: true});
+  document.getElementById("modalHeader").innerHTML='trustjar Terms and Conditions';
+  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./terms.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+});
+
+// Opens help overlay
+$("#contactLink").click(function(){
+  $("#footerOverlay").modal({backdrop: true});
+  document.getElementById("modalHeader").innerHTML='Contact trustjar';
+  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./contact.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+});
+
+
+
+
+/*
+// Opens terms and conditions overlay
+$("#termsLink").click(function(){
+  $("#myModal").modal({backdrop: true});
+  document.getElementById("indexHelp").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./terms.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+});
+*/
 
 
 
@@ -154,11 +230,12 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-GLOB.indexSubmitStep1Ref = GLOB.trustjarRef.child('client/index/step1Submit');
 GLOB.serverRef = GLOB.trustjarRef.child('server');
 GLOB.clientRef = GLOB.trustjarRef.child('client');
 GLOB.indexServerRef = GLOB.trustjarRef.child('index/server');
 GLOB.pageRef = GLOB.trustjarRef.child('global');
+GLOB.indexSubmitStep1Ref = GLOB.trustjarRef.child('client/index/step1Submit');
+GLOB.indexSubmitStep2Ref = GLOB.trustjarRef.child('client/index/step2Submit');
 
 
 
@@ -232,7 +309,7 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
 
 
 
-// Add another contact field to the current request form
+// Send Step 1 data to Firebase when user selects submit
 function indexSubmitStep1 () {
       GLOB.indexSubmitStep1Ref.push( {  
         "userContact" : $('#indexUserContact').val(),
@@ -243,7 +320,28 @@ function indexSubmitStep1 () {
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
 }
 
-// Add another contact field to the current request form
+
+// Send Step 2 data to Firebase when user selects submit. Form will display an alert if the password 
+// values don't match.
+function indexSubmitStep2 () {
+  var password1 = $('#indexPassword1').val()
+  var password2 = $('#indexPassword2').val()
+  if(password1 != password2) {
+    alert("Your passwords Don't Match. Please correct and resubmit.");
+    return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+  } else {
+      GLOB.indexSubmitStep2Ref.push( {  
+        "userName" : $('#indexUserName').val(),
+        "password" : $('#indexPassword1').val(),
+        "passwordConfirm" : $('#indexPassword2').val(),
+      } ); 
+      $( "#disableControls" ).addClass( "overlay" );
+      return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+  }
+}
+
+// Edit submitted Step 1 information. Since this has already been used to prepopulate Step 2, no 
+// interaction with server is required.
 function indexEditStep1 () {
   $("#indexUserContact").val($("#indexServerUserContact").html());
   $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
@@ -254,7 +352,9 @@ function indexEditStep1 () {
   $( "#indexStep2" ).hide();
 }
 
-// Add another contact field to the current request form
+// Server confirms receipt of Step 1 information from user by sending a Firebase message
+// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version
+// is triggered the first time this data is sent to Firebase.
 GLOB.indexServerRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the unique ID from the Firebase message
   var val = childSnapshot.val();
@@ -268,8 +368,9 @@ GLOB.indexServerRef.on('child_added', function(childSnapshot, prevChildName) {
   $( "#disableControls" ).removeClass( "overlay" );
 });
 
-
-// Add another contact field to the current request form
+// Server confirms receipt of Step 1 information from user by sending a Firebase message
+// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version 
+// is used if existing Firebase data for these vaules is being modified.
 GLOB.indexServerRef.on('child_changed', function(childSnapshot, prevChildName) {
   // Retrieve the unique ID from the Firebase message
   var step1Data = childSnapshot.val();
@@ -293,12 +394,12 @@ GLOB.indexServerRef.on('child_changed', function(childSnapshot, prevChildName) {
 
 
 
-// Add another contact field to the current request form
+// Add another contact field to the user's profile. Called if user is entering multiple contacts at once.
 function addProfileContact () {
   $( "#addContactProfile" ).before( "<div class='form-group' style='margin-bottom:8px'><input type='email' class='form-control' id='newContact1' placeholder='phone or email'></div>" );
 }
 
-// Add another contact field to the current request form
+// Add another contact field to the current request form. Called if user is entering multiple contacts at once.
 function addContact () {
   $( "#addContactDash" ).before( "<div class='form-group' style='margin-bottom:8px'><input type='email' class='form-control' id='newContact1' placeholder='phone or email'></div>" );
 }
