@@ -10,9 +10,6 @@
       window.location = 'index.html';
     }
 
-
-
-
 // CODE REQUIRED FOR UNIT TEST
   // This allows us to run the unit test as an array of individual test components.
   // The unit tests are in an array, allTests, defined as allTests = [ function() { ... }, function() { ... }, etc ]
@@ -78,15 +75,15 @@ $('.anonHeader').append(
       "<a href='index.html' id='indexHome' class='navbar-brand' style='font-size:32px'>trustjar</a>" +
     "</div>" +
     "<div id='navbar' class='navbar-collapse collapse'>" + 
-      "<form class='navbar-form navbar-right' action='' onsubmit='return goToDashboard();'' data-ajax='false'>" + 
+      "<form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();'' data-ajax='false'>" + 
         "<div class='form-group'>" +
-          "<input type='text' placeholder='email or mobile phone' class='form-control' style='margin-bottom:10px'>" +
-          "<input type='password' placeholder='password' class='form-control' style='margin-bottom:10px'>" +
-          "<a href='dashboard.html'><button type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>" +
+          "<input type='text' id='loginId' placeholder='email or mobile phone' class='form-control' style='margin-bottom:10px'>" +
+          "<input id='loginPassword' type='password' placeholder='password' class='form-control' style='margin-bottom:10px'>" +
+          "<a href='dashboard.html'><button id='login' type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>" +
           "<br>" +
           "<div class='checkbox' style='color:#ffffff'>" +
             "<label>" +
-              "<input type='checkbox' style='float:left; margin-right:5px'>Remember me" +
+              "<input id='rememberMe' type='checkbox' style='float:left; margin-right:5px'>Remember me" +
             "</label>" +
             "<a href='forgotPw.html' style='color:#46bcde; margin-left:85px'>Forgot password</a>" +
           "</div>" +
@@ -96,14 +93,10 @@ $('.anonHeader').append(
   "</div>"
 );
 
-
-
 // Disable the home (icon) link if the user is on the home page (logged out version)
 if (document.location.href.match(/[^\/]+$/)[0] == 'index.html') {
    $("#indexHome").removeAttr("href");
 };
-
-
 
 // Code to insert anonymous header (with login fields)
 $('.identHeader').append( 
@@ -160,7 +153,7 @@ $('body').append(
 
 
 
-
+// FOOTER LINKS
 // Opens help overlay
 $("#helpLink").click(function(){
   $("#footerOverlay").modal({backdrop: true});
@@ -300,12 +293,16 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
   };
 });
 
-
-
-
-
-
-
+// Send Step 1 data to Firebase when user selects submit
+function headerSubmitLogin () {
+      GLOB.indexSubmitStep1Ref.push( {  
+        "userContact" : $('#indexUserContact').val(),
+        "relationshipType" : $("input[name=indexRelationshipType]:checked").val(),
+        "counterpartyContact" : $('#indexCounterpartyContact').val(),
+      } ); 
+      $( "#disableControls" ).addClass( "overlay" );
+      return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+}
 
 
 
@@ -403,25 +400,7 @@ function addProfileContact () {
 function addContact () {
   $( "#addContactDash" ).before( "<div class='form-group' style='margin-bottom:8px'><input type='email' class='form-control' id='newContact1' placeholder='phone or email'></div>" );
 }
-/*
-// Add another contact field to the current request form
-function indexEditStep1 () {
-  $( "#indexStep1" ).show();
-  $( "#step1done" ).hide();
-  $( "#indexStep2" ).hide();
-  $("#userContact").val('aaaron@gmail.com');
-  $("#otherContact").val('bbrown@aol.com');
-  $("#indexCasual").prop( "checked", true );
-  $("#indexCasual").parent('label').addClass('active');
-}
 
-// Add another contact field to the current request form
-function indexShowStep2 () {
-  $( "#indexStep1" ).hide();
-  $( "#step1done" ).show();
-  $( "#indexStep2" ).show();
-}
-*/
 
 // Add another contact field to the current request form
 function forgotShowStep2 () {
@@ -430,19 +409,19 @@ function forgotShowStep2 () {
   $( "#forgotStep2" ).show();
 }
 
-// Add another contact field to the current request form
+// Displays the Registration form in landing2.html
 function landing2ShowRegister () {
   $( "#landing2Register" ).show();
   $( "#landing2Login" ).hide();
 }
 
-// Add another contact field to the current request form
+// Displays the login credentials form in landing2.html
 function landing2ShowLogin () {
   $( "#landing2Login" ).show();
   $( "#landing2Register" ).hide();
 }
 
-// Confirmation dialog for acceptance of an exclusive relationship when it will create a conflict. It asks twice for confirmation.
+// Double confirmation dialog for acceptance of an exclusive relationship when it will create a conflict. It asks twice for confirmation.
 function exclusiveConfirmation () {
     var confirmExclusive1 = confirm("WARNING: You're accepting an exclusive relationship while connected to a casual relationship. Both parties will be notified and they will receive each other's contact information. To avoid this, please remove the casual relationship from your dashboard before accepting this relationship. Are you sure you want to continue? ");
     if (confirmExclusive1 == true) {
