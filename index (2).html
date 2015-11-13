@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://getbootstrap.com/examples/jumbotron/ -->
+  <html lang="en">
+    <script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
+
+    <title>Welcome to trustjar</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/trustjar.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span style="color:#fff">Sign in</span>
+          </button>
+          <a class="navbar-brand" href="index.html" style="font-size:32px">trustjar</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse"> 
+          <form class="navbar-form navbar-right" action="" onsubmit="return goToDashboard();" data-ajax="false"> 
+            <div class="form-group">
+              <input type="text" placeholder="email or mobile phone" class="form-control" style="margin-bottom:10px">
+              <input type="password" placeholder="password" class="form-control" style="margin-bottom:10px">
+              <a href="dashboard.html"><button type="submit" class="btn btn-success" style="margin-bottom:10px">Sign in</button></a>
+                <br>
+                <div class="checkbox" style="color:#ffffff">
+                  <label>
+                    <input type="checkbox" style="float:left; margin-right:5px">Remember me
+                  </label>            
+              <a href="forgotPw.html" style="color:#46bcde; margin-left:85px">Forgot password</a>
+                </div>
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+       
+    <div style="height:80px"></div>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-2"> 
+          <div style="width:10px"></div>   
+        </div> 
+
+        <div class="col-md-8">  
+          <h3 style="font-weight:bold; color:#555555">Certify your relationship.</h3>
+        </div>
+
+        <div class="col-md-2">   
+        </div> 
+      </div> <!-- End row -->
+
+      <div class="row" id="indexStep1">
+
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+
+        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff">  
+
+          <div class="row">
+
+            <div class="col-md-4">   
+                  <label id="indexContactLabel" for="userContact" style="margin-top:8px">You</label>
+                  <input type="email" class="form-control" id="userContact" placeholder="email or mobile" style="margin-bottom: 10px">
+            </div>
+            
+            <div class="col-md-4">   
+              <label id="relationshipType" for="exampleInputEmail1" style="margin-top:8px">are in a (select one):</label><br>
+              <div class="btn-group" data-toggle="buttons" style="margin-bottom: 10px">          
+               <label class="btn btn-success">
+                 <input type="radio" name="options" id="indexCasual" autocomplete="off" style="margin-top:8px"> Casual
+               </label>
+               <label class="btn btn-success">
+                 <input type="radio" name="options" id="indexExclusive" autocomplete="off" Sstyle="margin-top:8px"> Exclusive
+               </label>
+              </div>
+            </div>
+
+            <div class="col-md-4">   
+                  <label id="indexContactLabel" for="otherContact" style="margin-top:8px">relationship with:</label>
+                  <input type="email" class="form-control" id="otherContact" placeholder="email or mobile" style="margin-bottom: 10px">
+            </div>
+
+          </div>
+          <div class="row">
+              <button type="submit" class="btn btn-primary" onClick="indexShowStep2()" style="margin-left:15px; margin-bottom:10px">Submit</button>  
+          </div>
+
+        </div>
+
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+      </div> <!-- End row -->
+
+      <div class="row" id="step1done" style="display:none">
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+
+        <div class="col-md-8" style="font-weight:bold; padding:10px">   
+            You (aaaron@gmail.com) are declaring a casual relationship with bbrown@aol.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="indexEditStep1()">Edit</a>
+        </div>
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+      </div> <!-- End row -->
+
+
+
+      <div class="row" id="indexStep2" style="display:none">
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+
+        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
+
+          <div class="row">
+            <div class="col-md-12">   
+                <p> Step 2: Please complete the form below so you can manage this relationship in the future. Messages will be sent to both of you to confirm your identities and complete the process. We'll never use your contact information for any other purpose.</p>
+            </div>
+          </div> <!-- End row -->
+
+          <div class="row">
+            <div class="col-md-6">   
+                <label id="indexContactLabel" for="exampleInputEmail1">User ID</label> 
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Use this email address to log in to the site. Notifications by trustjar will also be sent to this address."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
+                <input type="email" class="form-control" id="exampleInputEmail1" value="aaaron@gmail.com" style="margin-bottom: 10px" onClick="$('#indexAddContact').removeAttr('disabled');">
+              <div class="checkbox">
+                <label>
+                  <input id="indexAddContact" type="checkbox" disabled checked>Add this contact to my relationships.
+                  <a href="#" data-toggle="tooltip" data-placement="top" title="Check this box if you want to include this email address in your relationships. If this is the same email you used to create the relationship, it's included automatically."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
+                </label>            
+              </div>
+
+                
+
+
+
+            </div>
+            <div class="col-md-6">                   
+              <label id="indexContactLabel" for="exampleInputEmail1">Password</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="password" style="margin-bottom: 10px">
+              <label id="indexContactLabel" for="exampleInputEmail1">Confirm password</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="confirm password" style="margin-bottom: 10px">
+            </div>
+          </div> <!-- End row -->
+
+          <div class="row">
+            <div class="col-md-12">   
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox">I have read and accept the <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a>.
+                </label>            
+              </div>
+               <a href="content1.html"><button type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button></a>         
+            </div>
+          </div> <!-- End row -->
+
+        </div> <!-- End row -->
+
+        <div class="col-md-2">   
+        </div> 
+      </div> <!-- /container -->
+
+
+
+    </div> <!-- /container -->
+
+    <div class="container" style="margin-top:50px">
+
+      <div class="row">
+        <div class="col-md-2">
+        </div> 
+        <div class="col-md-8">  
+          <a href="#" onClick="$('#whatIsThis').toggle()">What is trustjar?</a>
+          <div id="whatIsThis" style="display:none; margin-bottom:70px">
+            <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
+
+            <p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
+
+            <p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
+
+            <p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
+
+            <p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
+          </div>
+        </div>
+        <div class="col-md-2">   
+        </div> 
+      </div>
+    </div> <!-- /container -->
+
+      <footer class="footer">
+        <div class="container">
+            <a href="content.html">Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="content.html">Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="content.html">Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="content.html">Contact us</a>
+            <p>© Quantima 2015. All rights reserved.</p>
+        </div>
+      </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster
+    <script src="js/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+      if (!window.jQuery) {
+        document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
+      }
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/trustjar.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  
+
+</body></html>

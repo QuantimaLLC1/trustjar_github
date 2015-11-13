@@ -75,15 +75,15 @@ $('.anonHeader').append(
       "<a href='index.html' id='indexHome' class='navbar-brand' style='font-size:32px'>trustjar</a>" +
     "</div>" +
     "<div id='navbar' class='navbar-collapse collapse'>" + 
-      "<form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();'' data-ajax='false'>" + 
+      "<form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();' data-ajax='false'>" + 
         "<div class='form-group'>" +
-          "<input type='text' id='loginId' placeholder='email or mobile phone' class='form-control' style='margin-bottom:10px'>" +
+          "<input type='email' id='loginId' placeholder='login ID' class='form-control' style='margin-bottom:10px'>" +
           "<input id='loginPassword' type='password' placeholder='password' class='form-control' style='margin-bottom:10px'>" +
           "<a href='dashboard.html'><button id='login' type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>" +
           "<br>" +
           "<div class='checkbox' style='color:#ffffff'>" +
             "<label>" +
-              "<input id='rememberMe' type='checkbox' style='float:left; margin-right:5px'>Remember me" +
+              "<input id='rememberMe' name='rememberMe' type='checkbox' style='float:left; margin-right:5px'>Remember me" +
             "</label>" +
             "<a href='forgotPw.html' style='color:#46bcde; margin-left:85px'>Forgot password</a>" +
           "</div>" +
@@ -144,79 +144,60 @@ $('body').append(
         "<div class='modal-body' id='modalBody'>" +
         "</div>" +
         "<div class='modal-footer'>" +
-          "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>" +
+          "<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>" +
         "</div>" +
       "</div>" +
     "</div>" +
   "</div>"
 );
 
-
-
 // FOOTER LINKS
 // Opens help overlay
 $("#helpLink").click(function(){
   $("#footerOverlay").modal({backdrop: true});
-  document.getElementById("modalHeader").innerHTML='trustjar Help';
-  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./help.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+  $("#modalHeader").html('trustjar Help');
+  GLOB.footerRef.child('help').once('child_added', function(childSnapshot, prevChildName) {
+      var val = childSnapshot.val();
+      var helpCopy = val.replace('data:text/html;charset=utf-8,', '');
+      $("#modalBody").html(helpCopy);
+  });
 });
-
 
 // Opens terms and conditions overlay
 $("#privacyLink").click(function(){
   $("#footerOverlay").modal({backdrop: true});
-  document.getElementById("modalHeader").innerHTML='trustjar Privacy Policy';
-  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./privacy.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+  $("#modalHeader").html('trustjar Privacy Policy');
+  GLOB.footerRef.child('privacy').once('child_added', function(childSnapshot, prevChildName) {
+      var val = childSnapshot.val();
+      var privacyCopy = val.replace('data:text/html;charset=utf-8,', '');
+      $("#modalBody").html(privacyCopy);
+  });
 });
-
 
 // Opens terms and conditions overlay
 $("#termsLink").click(function(){
   $("#footerOverlay").modal({backdrop: true});
-  document.getElementById("modalHeader").innerHTML='trustjar Terms and Conditions';
-  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./terms.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+  $("#modalHeader").html('trustjar Terms and Conditions');
+  GLOB.footerRef.child('terms').once('child_added', function(childSnapshot, prevChildName) {
+      var val = childSnapshot.val();
+      var termsCopy = val.replace('data:text/html;charset=utf-8,', '');
+      $("#modalBody").html(termsCopy);
+  });
 });
 
-// Opens help overlay
+// Opens Contact overlay
 $("#contactLink").click(function(){
   $("#footerOverlay").modal({backdrop: true});
-  document.getElementById("modalHeader").innerHTML='Contact trustjar';
-  document.getElementById("modalBody").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./contact.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
+  $("#modalHeader").html('Contact trustjar');
+  GLOB.footerRef.child('contact').once('child_added', function(childSnapshot, prevChildName) {
+      var val = childSnapshot.val();
+      var contactCopy = val.replace('data:text/html;charset=utf-8,', '');
+      $("#modalBody").html(contactCopy);
+  });
 });
-
-
-
-
-/*
-// Opens terms and conditions overlay
-$("#termsLink").click(function(){
-  $("#myModal").modal({backdrop: true});
-  document.getElementById("indexHelp").innerHTML='<object id="overlayObject" scrolling="no" type="text/html" data="./terms.html" style="border: 0px; padding: 0px; margin: 0px; width: 100%; height:550px; overflow:hidden; scrolling:no"></object>';
-});
-*/
-
-
-
-
-
-
-
-
-
-
 
 GLOB.trustjarRef = new Firebase("https://trustjar.firebaseio.com");
 
-/*
-GLOB.trustjarRef.authAnonymously(function(error, authData) {
-  remember: "sessionOnly"
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-});
-*/
 
 // Initialize all tooltips (bootstrap)
 $(function () {
@@ -226,9 +207,11 @@ $(function () {
 GLOB.serverRef = GLOB.trustjarRef.child('server');
 GLOB.clientRef = GLOB.trustjarRef.child('client');
 GLOB.indexServerRef = GLOB.trustjarRef.child('index/server');
+GLOB.loginRef = GLOB.trustjarRef.child('login');
 GLOB.pageRef = GLOB.trustjarRef.child('global');
-GLOB.indexSubmitStep1Ref = GLOB.trustjarRef.child('client/index/step1Submit');
-GLOB.indexSubmitStep2Ref = GLOB.trustjarRef.child('client/index/step2Submit');
+GLOB.indexSubmitStep1Ref = GLOB.clientRef.child('index/step1Submit');
+GLOB.indexSubmitStep2Ref = GLOB.clientRef.child('index/step2Submit');
+GLOB.footerRef = GLOB.trustjarRef.child('footer');
 
 
 
@@ -244,7 +227,7 @@ GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
   };
   if (val.indexStep == 2) {
     $("#indexServerUserContact").html(val.indexUserContactData);
-    $("#indexServerUserContact2").html(val.indexUserContactData);
+    $("#indexServerUserContact2").val(val.indexUserContactData);
     $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
     $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
     $( "#indexStep1" ).hide();
@@ -274,7 +257,7 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
   };
   if (val.indexStep == 2) {
     $("#indexServerUserContact").html(val.indexUserContactData);
-    $("#indexServerUserContact2").html(val.indexUserContactData);
+    $("#indexServerUserContact2").val(val.indexUserContactData);
     $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
     $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
     $( "#indexStep1" ).hide();
@@ -295,10 +278,10 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
 
 // Send Step 1 data to Firebase when user selects submit
 function headerSubmitLogin () {
-      GLOB.indexSubmitStep1Ref.push( {  
-        "userContact" : $('#indexUserContact').val(),
-        "relationshipType" : $("input[name=indexRelationshipType]:checked").val(),
-        "counterpartyContact" : $('#indexCounterpartyContact').val(),
+      GLOB.loginRef.push( {  
+        "loginId" : $('#loginId').val(),
+        "rememberMe" : $("input[name=rememberMe]:checked").val(),
+        "password" : $('#loginPassword').val(),
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
@@ -328,9 +311,9 @@ function indexSubmitStep2 () {
     return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
   } else {
       GLOB.indexSubmitStep2Ref.push( {  
-        "userName" : $('#indexUserName').val(),
+        "userId" : $('#indexServerUserContact2').val(),
         "password" : $('#indexPassword1').val(),
-        "passwordConfirm" : $('#indexPassword2').val(),
+        "confirmPassword" : $('#indexPassword2').val(),
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)http://getbootstrap.com/examples/jumbotron/ -->
   <html lang="en">
-    <script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,7 +62,7 @@
 
             <div class="row">
               <div class="col-md-4">   
-                    <label id="indexContactLabel" for="userContact" style="margin-top:8px">You</label>
+                    <label id="indexContactLabel" for="indexUserContact" style="margin-top:8px">You</label>
                     <input type="text" class="form-control" id="indexUserContact" placeholder="email or mobile" style="margin-bottom: 10px" autofocus required>
               </div>
               
@@ -126,14 +126,16 @@
 
             <div class="row">
               <div class="col-md-6">   
-                  <label id="indexContactLabel" for="indexUserName">Your name</label>
-                  <input type="text" class="form-control" id="indexUserName" placeholder="your name" style="margin-bottom: 10px" required>                
-                  <label id="indexContactLabel" for="indexServerUserContact2">User ID</label><br>
-                  <span id="indexServerUserContact2"></span>
-                  <a href="#" data-toggle="tooltip" data-placement="top" title="Any email or mobile number you add can be used to sign in. Use this contact for your first sign-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+                  <label id="indexContactLabel" for="indexServerUserContact2">User ID</label> <a href="#" data-toggle="tooltip" data-placement="top" title="Use this email address to log into the site. Notifications from Trustjar will also be sent to this address."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+                  <input type="email" class="form-control" id="indexServerUserContact2" placeholder="Email address" style="margin-bottom: 10px" required onClick="$('#indexAddContact').removeAttr('disabled');">                
+               <div class="checkbox">
+                <label>
+                  <input id="indexAddContact" type="checkbox" disabled checked>Add this contact to my relationships.
+                  <a href="#" data-toggle="tooltip" data-placement="top" title="Check this box if you want to include this email address in your relationships. If this is the same email you used to create the relationship, it's included automatically."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
+                </label>            
+              </div>
 
-
-
+                  
               </div>
               <div class="col-md-6">                   
                 <label id="indexContactLabel" for="indexPassword1">Password</label>
