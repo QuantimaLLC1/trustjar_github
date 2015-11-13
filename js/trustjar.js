@@ -244,6 +244,11 @@ GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
     $( "#step1done" ).hide();
     $( "#indexStep2" ).hide();
   };
+  if (val.notification != null) {
+    $("#disableControls").removeClass( "overlay" );
+    $("#indexNotice").show();
+    $("#indexNoticeContent").html(val.notification);
+  };
 });
 
 // Server sets the page to be displayed
@@ -273,6 +278,11 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
     $( "#indexStep1" ).show();
     $( "#step1done" ).hide();
     $( "#indexStep2" ).hide();
+  };
+  if (val.notification != null) {
+    $("#disableControls").removeClass( "overlay" );
+    $("#indexNotice").show();
+    $("#indexNoticeContent").html(val.notification);
   };
 });
 
