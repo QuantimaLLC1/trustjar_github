@@ -42,6 +42,117 @@
     );
   };
 
+
+function animateLogotype() {
+setTimeout(function(){ $("#logotype").css({'font-weight':300})}, 25)
+setTimeout(function(){ $("#logotype").css({'font-weight':400})}, 50)
+setTimeout(function(){ $("#logotype").css({'font-weight':600})}, 75)
+setTimeout(function(){ $("#logotype").css({'font-weight':700})}, 100)
+setTimeout(function(){ $("#logotype").css({'font-weight':900})}, 125)
+setTimeout(function(){ $("#logotype").css({'font-weight':200})}, 150)
+
+ $( "#landingWrapper" ).fadeIn( 100 );
+
+
+setTimeout(function(){ $("#t").css({'font-weight':300})}, 500)
+
+setTimeout(function(){ $("#t").css({'font-weight':400})}, 550)
+setTimeout(function(){ $("#r").css({'font-weight':300})}, 550)
+
+setTimeout(function(){ $("#t").css({'font-weight':600})}, 600)
+setTimeout(function(){ $("#r").css({'font-weight':400})}, 600)
+setTimeout(function(){ $("#u").css({'font-weight':300})}, 600)
+
+setTimeout(function(){ $("#t").css({'font-weight':700})}, 650)
+setTimeout(function(){ $("#r").css({'font-weight':600})}, 650)
+setTimeout(function(){ $("#u").css({'font-weight':400})}, 650)
+setTimeout(function(){ $("#s").css({'font-weight':300})}, 650)
+
+setTimeout(function(){ $("#t").css({'font-weight':900})}, 700)
+setTimeout(function(){ $("#r").css({'font-weight':700})}, 700)
+setTimeout(function(){ $("#u").css({'font-weight':600})}, 700)
+setTimeout(function(){ $("#s").css({'font-weight':400})}, 700)
+setTimeout(function(){ $("#t2").css({'font-weight':300})}, 700)
+
+setTimeout(function(){ $("#t").css({'font-weight':700})}, 750)
+setTimeout(function(){ $("#r").css({'font-weight':900})}, 750)
+setTimeout(function(){ $("#u").css({'font-weight':700})}, 750)
+setTimeout(function(){ $("#s").css({'font-weight':600})}, 750)
+setTimeout(function(){ $("#t2").css({'font-weight':400})}, 750)
+setTimeout(function(){ $("#j").css({'font-weight':300})}, 750)
+
+setTimeout(function(){ $("#t").css({'font-weight':600})}, 800)
+setTimeout(function(){ $("#r").css({'font-weight':700})}, 800)
+setTimeout(function(){ $("#u").css({'font-weight':900})}, 800)
+setTimeout(function(){ $("#s").css({'font-weight':700})}, 800)
+setTimeout(function(){ $("#t2").css({'font-weight':600})}, 800)
+setTimeout(function(){ $("#j").css({'font-weight':400})}, 800)
+setTimeout(function(){ $("#a").css({'font-weight':300})}, 800)
+
+setTimeout(function(){ $("#t").css({'font-weight':400})}, 850)
+setTimeout(function(){ $("#r").css({'font-weight':600})}, 850)
+setTimeout(function(){ $("#u").css({'font-weight':700})}, 850)
+setTimeout(function(){ $("#s").css({'font-weight':900})}, 850)
+setTimeout(function(){ $("#t2").css({'font-weight':700})}, 850)
+setTimeout(function(){ $("#j").css({'font-weight':600})}, 850)
+setTimeout(function(){ $("#a").css({'font-weight':400})}, 850)
+setTimeout(function(){ $("#r2").css({'font-weight':300})}, 850)
+
+setTimeout(function(){ $("#t").css({'font-weight':300})}, 900)
+setTimeout(function(){ $("#r").css({'font-weight':400})}, 900)
+setTimeout(function(){ $("#u").css({'font-weight':600})}, 850)
+setTimeout(function(){ $("#s").css({'font-weight':700})}, 900)
+setTimeout(function(){ $("#t2").css({'font-weight':900})}, 900)
+setTimeout(function(){ $("#j").css({'font-weight':700})}, 900)
+setTimeout(function(){ $("#a").css({'font-weight':600})}, 900)
+setTimeout(function(){ $("#r2").css({'font-weight':400})}, 900)
+
+setTimeout(function(){ $("#r").css({'font-weight':300})}, 950)
+setTimeout(function(){ $("#u").css({'font-weight':400})}, 950)
+setTimeout(function(){ $("#s").css({'font-weight':600})}, 950)
+setTimeout(function(){ $("#t2").css({'font-weight':700})}, 950)
+setTimeout(function(){ $("#j").css({'font-weight':900})}, 950)
+setTimeout(function(){ $("#a").css({'font-weight':700})}, 950)
+setTimeout(function(){ $("#r2").css({'font-weight':600})}, 950)
+
+setTimeout(function(){ $("#u").css({'font-weight':300})}, 1000)
+setTimeout(function(){ $("#s").css({'font-weight':400})}, 1000)
+setTimeout(function(){ $("#t2").css({'font-weight':600})}, 1000)
+setTimeout(function(){ $("#j").css({'font-weight':700})}, 1000)
+setTimeout(function(){ $("#a").css({'font-weight':900})}, 1000)
+setTimeout(function(){ $("#r2").css({'font-weight':700})}, 1000)
+
+setTimeout(function(){ $("#s").css({'font-weight':300})}, 1050)
+setTimeout(function(){ $("#t2").css({'font-weight':400})}, 1050)
+setTimeout(function(){ $("#j").css({'font-weight':600})}, 1050)
+setTimeout(function(){ $("#a").css({'font-weight':700})}, 1050)
+setTimeout(function(){ $("#r2").css({'font-weight':900})}, 1050)
+
+setTimeout(function(){ $("#t2").css({'font-weight':300})}, 1100)
+setTimeout(function(){ $("#j").css({'font-weight':400})}, 1100)
+setTimeout(function(){ $("#a").css({'font-weight':600})}, 1100)
+setTimeout(function(){ $("#r2").css({'font-weight':700})}, 1100)
+
+setTimeout(function(){ $("#j").css({'font-weight':300})}, 1150)
+setTimeout(function(){ $("#a").css({'font-weight':400})}, 1150)
+setTimeout(function(){ $("#r2").css({'font-weight':600})}, 1150)
+
+setTimeout(function(){ $("#a").css({'font-weight':300})}, 1200)
+setTimeout(function(){ $("#r2").css({'font-weight':400})}, 1200)
+
+setTimeout(function(){ $("#r2").css({'font-weight':300})}, 1250)
+
+};
+
+
+
+// Initialize all tooltips (bootstrap)
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+
+
 /*
 // CODE TO INITIALIZE CLIENT FOR UNIT TEST
   // Set the initial Firebase reference based on whether the client is authenticated or not.
@@ -62,36 +173,6 @@
   };
 */
 
-
-
-// Code to insert anonymous header (with login fields)
-$('.anonHeader').append( 
-  "<div class='container'>" +
-    "<div class='navbar-header'>" + 
-      "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'>" + 
-        "<span class='sr-only'>Toggle navigation</span>" + 
-        "<span style='color:#fff'>Sign in</span>" +
-      "</button>" + 
-      "<a href='index.html' id='indexHome' class='navbar-brand' style='font-size:32px'>trustjar</a>" +
-    "</div>" +
-    "<div id='navbar' class='navbar-collapse collapse'>" + 
-      "<form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();' data-ajax='false'>" + 
-        "<div class='form-group'>" +
-          "<input type='email' id='loginId' placeholder='login ID' class='form-control' style='margin-bottom:10px'>" +
-          "<input id='loginPassword' type='password' placeholder='password' class='form-control' style='margin-bottom:10px'>" +
-          "<a href='dashboard.html'><button id='login' type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>" +
-          "<br>" +
-          "<div class='checkbox' style='color:#ffffff'>" +
-            "<label>" +
-              "<input id='rememberMe' name='rememberMe' type='checkbox' style='float:left; margin-right:5px'>Remember me" +
-            "</label>" +
-            "<a href='forgotPw.html' style='color:#46bcde; margin-left:85px'>Forgot password</a>" +
-          "</div>" +
-        "</div>" +
-      "</form>" +
-    "</div><!--/.navbar-collapse -->" +
-  "</div>"
-);
 
 // Disable the home (icon) link if the user is on the home page (logged out version)
 if (document.location.href.match(/[^\/]+$/)[0] == 'index.html') {
@@ -119,19 +200,6 @@ $('.identHeader').append(
 if (document.location.href.match(/[^\/]+$/)[0] == 'dashboard.html') {
    $("#dashboardHome").removeAttr("href");
 };
-
-// Code to insert footer to all templates
-$('.footer').append( 
-  "<div class='container'>" +
-    "<div class='navbar-header'>" + 
-      "<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
-      "<a href='#' id='privacyLink'>Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
-      "<a href='#' id='termsLink'>Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" +
-      "<a href='#' id='contactLink'>Contact us</a>" + 
-      "<p>© Quantima 2015. All rights reserved.</p>" + 
-    "</div>" +
-  "</div>"
-);
 
 $('body').append( 
   "<div class='modal fade' id='footerOverlay' role='dialog'>" +
@@ -198,24 +266,189 @@ $("#contactLink").click(function(){
 
 GLOB.trustjarRef = new Firebase("https://trustjar.firebaseio.com");
 
-
-// Initialize all tooltips (bootstrap)
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-
 GLOB.serverRef = GLOB.trustjarRef.child('server');
 GLOB.clientRef = GLOB.trustjarRef.child('client');
+GLOB.authRef = GLOB.trustjarRef.child('authentication');
 GLOB.indexServerRef = GLOB.trustjarRef.child('index/server');
 GLOB.loginRef = GLOB.trustjarRef.child('login');
 GLOB.pageRef = GLOB.trustjarRef.child('global');
+GLOB.indexstep1ServerRef = GLOB.serverRef.child('index/step1Submit');
+GLOB.indexStep2ServerRef = GLOB.serverRef.child('index/step2Submit');
 GLOB.indexSubmitStep1Ref = GLOB.clientRef.child('index/step1Submit');
 GLOB.indexSubmitStep2Ref = GLOB.clientRef.child('index/step2Submit');
+GLOB.serverLanding1Ref = GLOB.serverRef.child('landing1');
+GLOB.clientLanding1Ref = GLOB.clientRef.child('landing1');
 GLOB.footerRef = GLOB.trustjarRef.child('footer');
+GLOB.displayRef = GLOB.trustjarRef.child('currentPage');
+GLOB.notificationRef = GLOB.trustjarRef.child('notifications');
+
+
+// Server sets the page to be displayed
+GLOB.displayRef.on('child_added', function(childSnapshot, prevChildName) {
+  // Retrieve the JSON string stored in alertMsg  
+  var val = childSnapshot.val();
+  var showNew = "#" + val;
+  $(".splash").fadeOut(200);
+  $('.pageDiv').each(function() {
+    var pageId = '#' + this.id;
+    if ( $(pageId).css('display') == 'block') {
+      $(pageId).fadeOut(500);
+    }
+  setTimeout(function() {
+      $(showNew).fadeIn(500);
+      $('.anonHeader').fadeIn(500);
+      $('.footer').fadeIn(500);
+    }, 210);
+  });
+});
+
+
+// Server sets the page to be displayed
+GLOB.displayRef.on('child_changed', function(childSnapshot, prevChildName) {
+  // Retrieve the JSON string stored in alertMsg  
+  var val = childSnapshot.val();
+  var showNew = "#" + val;
+  $(".splash").fadeOut(200);
+  $('.pageDiv').each(function() {
+    var pageId = '#' + this.id;
+    if ( $(pageId).css('display') == 'block') {
+      $(pageId).fadeOut(250);
+    }
+  setTimeout(function() {
+      $(showNew).fadeIn(500);
+      $('.anonHeader').fadeIn(500);
+      $('.footer').fadeIn(500);
+    }, 260);
+  });
+});
+
+
+// Notification function. Notification will display only on the currently active pageDiv.
+GLOB.notificationRef.on('child_added', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val !== "") {
+    $("#disableControls").removeClass( "overlay" );
+    $(".notice").show();
+    $(".noticeContent").html(val);
+  } else {
+    $(".notice").hide();
+    $(".noticeContent").html('');
+  };
+});
+
+
+// Notification function. Notification will display only on the currently active pageDiv.
+GLOB.notificationRef.on('child_changed', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val !== "") {
+    $("#disableControls").removeClass( "overlay" );
+    $(".notice").show();
+    $(".noticeContent").html(val);
+  } 
+  else {
+    $(".notice").hide();
+    $(".noticeContent").html('');
+  };
+});
+
+// indexDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.indexStep2ServerRef.on('child_added', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  GLOB.indexStep1RequestorContact = val.indexUserContactData;
+  GLOB.indexStep1RelationshipType = val.indexRelationshipTypeData;
+  GLOB.indexStep1CounterpartyContact - val.indexCounterpartyContactData;
+    $("#indexServerUserContact").html(GLOB.indexStep1RequestorContact);
+    $("#indexServerUserContact2").val(GLOB.indexStep1RequestorContact);
+    $("#indexServerRelationshipType").html(GLOB.indexStep1RelationshipType);
+    $("#indexServerCounterpartyContact").html(GLOB.indexStep1CounterpartyContact);
+    $( "#indexStep1" ).hide();
+    $( "#step1done" ).show();
+    $( "#indexStep2" ).show();
+    $( "#disableControls" ).removeClass( "overlay" );
+});
+
+
+// indexDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.indexStep2ServerRef.on('child_changed', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+    $("#indexServerUserContact").html(val.indexUserContactData);
+    $("#indexServerUserContact2").val(val.indexUserContactData);
+    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
+    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
+    $( "#indexStep1" ).hide();
+    $( "#step1done" ).show();
+    $( "#indexStep2" ).show();
+    $( "#disableControls" ).removeClass( "overlay" );
+});
+
+  // Populate landing1.html 
+GLOB.serverLanding1Ref.on('child_added', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val.thisPage = 'landing1.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
+    // They will be displayed if the server confirms there is a conflict.
+    $('#landing1ExclusiveCheckbox').prop('required', false);
+    $("#landing1ConfirmExclusiveConflict").hide();
+    $('#landing1CasualCheckbox').prop('required', false);
+    $("#landing1ConfirmCasualConflict").hide();
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing1RequestingParty").html(requestingPartyContacts);
+    $("#landing1RelationshipType").html(val.landing1RelationshipType);
+    $("#landing1Counterparty").html(counterpartyContacts);
+    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
+    if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
+      $("#landing1ConfirmExclusiveConflict").show();
+      $('#landing1ExclusiveCheckbox').attr('required', 'required');
+    };
+    if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
+      $("#landing1ConfirmCasualConflict").show();
+      $('#landing1CasualCheckbox').attr('required', 'required');
+    };
+  };
+});
+
+  // Populate landing1.html 
+GLOB.serverLanding1Ref.on('child_changed', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val.thisPage = 'landing1.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
+    // They will be displayed if the server confirms there is a conflict.
+    $('#landing1ExclusiveCheckbox').prop('required', false);
+    $("#landing1ConfirmExclusiveConflict").hide();
+    $('#landing1CasualCheckbox').prop('required', false);
+    $("#landing1ConfirmCasualConflict").hide();
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing1RequestingParty").html(requestingPartyContacts);
+    $("#landing1RelationshipType").html(val.landing1RelationshipType);
+    $("#landing1Counterparty").html(counterpartyContacts);
+    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
+    if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
+      $("#landing1ConfirmExclusiveConflict").show();
+      $('#landing1ExclusiveCheckbox').attr('required', 'required');
+    };
+    if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
+      $("#landing1ConfirmCasualConflict").show();
+      $('#landing1CasualCheckbox').attr('required', 'required');
+    };
+  };
+});
 
 
 
 
+
+
+
+
+/*
 // Server sets the page to be displayed
 GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the JSON string stored in alertMsg  
@@ -244,10 +477,36 @@ GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
     $( "#step1done" ).hide();
     $( "#indexStep2" ).hide();
   };
+  // Show page notifications if one is included in the Firebase message. This will work for any
+  // currently displayed page.
   if (val.notification != null) {
     $("#disableControls").removeClass( "overlay" );
-    $("#indexNotice").show();
-    $("#indexNoticeContent").html(val.notification);
+    $(".notice").show();
+    $(".noticeContent").html(val.notification);
+  } else {
+    $(".notice").hide();
+    $(".noticeContent").html('');
+  };
+  // Populate landing1.html 
+  if (val.thisPage = 'landing1.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default. They will be displayed if the server confirms there is a conflict.
+    $("#landing1ConfirmExclusiveConflict").hide();
+    $("#landing1ConfirmCasualConflict").hide();
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing1RequestingParty").html(requestingPartyContacts);
+    $("#landing1RelationshipType").html(val.landing1RelationshipType);
+    $("#landing1Counterparty").html(counterpartyContacts);
+    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
+    if (val.landing1ExclusiveConflict == true) {
+      $("#landing1ConfirmExclusiveConflict").show();
+    };
+    if (val.landing1CasualConflict == true) {
+      $("#landing1ConfirmCasualConflict").show();
+    };
   };
 });
 
@@ -279,18 +538,44 @@ GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
     $( "#step1done" ).hide();
     $( "#indexStep2" ).hide();
   };
+  // Show page notifications if one is included in the Firebase message. This will work for any
+  // currently displayed page.
   if (val.notification != null) {
     $("#disableControls").removeClass( "overlay" );
-    $("#indexNotice").show();
-    $("#indexNoticeContent").html(val.notification);
+    $(".notice").show();
+    $(".noticeContent").html(val.notification);
+  } else {
+    $(".notice").hide();
+    $(".noticeContent").html('');
+  };
+  // Populate landing1.html 
+  if (val.thisPage = 'landing1.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default. They will be displayed if the server confirms there is a conflict.
+    $("#landing1ConfirmExclusiveConflict").hide();
+    $("#landing1ConfirmCasualConflict").hide();
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing1RequestingParty").html(requestingPartyContacts);
+    $("#landing1RelationshipType").html(val.landing1RelationshipType);
+    $("#landing1Counterparty").html(counterpartyContacts);
+    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
+    if (val.landing1ExclusiveConflict == true) {
+      $("#landing1ConfirmExclusiveConflict").show();
+    };
+    if (val.landing1CasualConflict == true) {
+      $("#landing1ConfirmCasualConflict").show();
+    };
   };
 });
-
+*/
 // Send Step 1 data to Firebase when user selects submit
 function headerSubmitLogin () {
       GLOB.loginRef.push( {  
         "loginId" : $('#loginId').val(),
-        "rememberMe" : $("input[name=rememberMe]:checked").val(),
+        "rememberMe" : $('#rememberMe').prop( "checked" ),
         "password" : $('#loginPassword').val(),
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
@@ -333,19 +618,52 @@ function indexSubmitStep2 () {
 // Edit submitted Step 1 information. Since this has already been used to prepopulate Step 2, no 
 // interaction with server is required.
 function indexEditStep1 () {
-  $("#indexUserContact").val($("#indexServerUserContact").html());
-  $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
-  $("#indexCasual").prop( "checked", true );
-  $("#indexCasual").parent('label').addClass('active');
+  $("#indexUserContact").val(GLOB.indexStep1RequestorContact);
+  $("#indexCounterpartyContact").val(GLOB.indexStep1CounterpartyContact);
+  if (GLOB.indexStep1RelationshipType == 'casual') {
+    $("#indexCasual").prop( "checked", true );
+    $("#indexCasual").parent('label').addClass('active');
+  }
+  if (GLOB.indexStep1RelationshipType == 'exclusive') {
+    $("#indexExclusive").prop( "checked", true );
+    $("#indexExclusive").parent('label').addClass('active');
+  }
   $( "#indexStep1" ).show();
   $( "#step1done" ).hide();
   $( "#indexStep2" ).hide();
 }
 
+// Submit login credentials to confirm identity (via page body form) in landing1Div
+function landing1SubmitCredentials () {
+  GLOB.clientLanding1Ref.push( {  
+    "loginEmail" : $('#landing1EmailCredentials').val(),
+    "password" : $('#landing1PasswordCredentials').val(),
+    "defaultCheckbox" : $('#landing1DefaultCheckbox').prop( "checked" ),
+    "casualConflict" : $( "#landing1CasualCheckbox" ).prop( "checked" ),
+    "exclusiveConflict" : $('#landing1ExclusiveCheckbox').prop( "checked" ),
+  } ); 
+  $( "#disableControls" ).addClass( "overlay" );
+  return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+}
+
+
+// Submit login credentials to confirm identity (via page body form) in landing1Div
+function landing2SubmitCredentials () {
+  GLOB.clientLanding1Ref.push( {  
+    "loginEmail" : $('#landing2EmailCredentials').val(),
+    "password" : $('#landing2PasswordCredentials').val(),
+    "defaultCheckbox" : $('#landing2DefaultCheckbox').prop( "checked" ),
+    "casualConflict" : $( "#landing2CasualCheckbox" ).prop( "checked" ),
+    "exclusiveConflict" : $('#landing2ExclusiveCheckbox').prop( "checked" ),
+  } ); 
+  $( "#disableControls" ).addClass( "overlay" );
+  return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+}
+
 // Server confirms receipt of Step 1 information from user by sending a Firebase message
 // to populate the Step 1 summary and contact info for the user in the Step 2 form. This version
 // is triggered the first time this data is sent to Firebase.
-GLOB.indexServerRef.on('child_added', function(childSnapshot, prevChildName) {
+GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
   // Retrieve the unique ID from the Firebase message
   var val = childSnapshot.val();
   $("#indexServerUserContact").html(val.indexUserContactData);
@@ -361,7 +679,7 @@ GLOB.indexServerRef.on('child_added', function(childSnapshot, prevChildName) {
 // Server confirms receipt of Step 1 information from user by sending a Firebase message
 // to populate the Step 1 summary and contact info for the user in the Step 2 form. This version 
 // is used if existing Firebase data for these vaules is being modified.
-GLOB.indexServerRef.on('child_changed', function(childSnapshot, prevChildName) {
+GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
   // Retrieve the unique ID from the Firebase message
   var step1Data = childSnapshot.val();
   $("#indexServerUserContact").html(step1Data.indexUserContactData);
@@ -374,14 +692,21 @@ GLOB.indexServerRef.on('child_changed', function(childSnapshot, prevChildName) {
   $( "#disableControls" ).removeClass( "overlay" );
 });
 
-
-
-
-
-
-
-
-
+/*
+function newDiv( testDiv ) {
+  $(".splash").fadeOut(200);
+  var showNew = "#" + testDiv;
+  $('.pageDiv').each(function() {
+    var pageId = '#' + this.id;
+    if ( $(pageId).css('display') == 'block') {
+      $(pageId).fadeOut(200);
+    }
+  });
+  setTimeout(function() {
+    $(showNew).fadeIn(500)
+  }, 210);
+};
+*/
 
 
 // Add another contact field to the user's profile. Called if user is entering multiple contacts at once.
@@ -414,6 +739,7 @@ function landing2ShowLogin () {
   $( "#landing2Register" ).hide();
 }
 
+/*
 // Double confirmation dialog for acceptance of an exclusive relationship when it will create a conflict. It asks twice for confirmation.
 function exclusiveConfirmation () {
     var confirmExclusive1 = confirm("WARNING: You're accepting an exclusive relationship while connected to a casual relationship. Both parties will be notified and they will receive each other's contact information. To avoid this, please remove the casual relationship from your dashboard before accepting this relationship. Are you sure you want to continue? ");
@@ -431,7 +757,7 @@ function goToDashboard () {
      return false;
 }
 
-
+*/
 /*
     // Script to import footer
     var link = document.querySelector('link[rel="import"]');
@@ -447,17 +773,27 @@ function goToDashboard () {
 // $(".footerContent").get("./footer.html"); 
 
 
+    function initialize() {
+      var curPage = document.location.href.match(/[^\/]+$/)[0]
+      // If a message to change the current page is received, change to that page.  
+      if (curPage == 'index.html') {
+        GLOB.authRef.push( {  
+          "authToken" : "test",
+        } ); 
+      };
+    }
 
-
+    window.onload = initialize();
 
 /*
+
+
     function initialize() {
       // Remove any previous listeners
       GLOB.trustjarRef.off();
       GLOB.trustjarRef.remove();
 
     }
-
-    window.onload = initialize();
 */
+
 

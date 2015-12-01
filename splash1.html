@@ -15,7 +15,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron.css" rel="stylesheet">
     <link href="css/trustjar.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -29,47 +28,10 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top anonHeader">
-    </nav>
-       
-       
-    <div style="height:80px"></div>
-
-    <div class="container">
-
-      <div class="row">
-        <div class="col-md-2"> 
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div class="col-md-8">  
-          <h3 style="font-weight:bold; color:#555555">Content template</h3>
-          Currently a placeholder for footer links.
-          <br><br>
-
-        </div>
-
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- End row -->
-
-    </div> <!-- /container -->
-
-    <div class="container" style="margin-top:50px">
-
-      <div class="row">
-        <div class="col-md-2">
-        </div> 
-        </div>
-        <div class="col-md-2">   
-        </div> 
-      </div>
-    </div> <!-- /container -->
+       <div id="landingWrapper"></div> 
+          <div id="logotype" class="splash" style="color:#ffffff; z-index:1" onClick="animateLogotype()"><span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
 
 
-
-      <footer class="footer">
-      </footer>
 
 
     <!-- Bootstrap core JavaScript
@@ -87,6 +49,9 @@
     <script src="js/trustjar.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script  language="javascript">
+      window.onload = animateLogotype()
+    </script>
   
 
 </body></html>

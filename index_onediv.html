@@ -39,34 +39,6 @@
 
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top anonHeader">
-  <div class='container'>
-    <div class='navbar-header'>
-      <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'> 
-        <span class='sr-only'>Toggle navigation</span>
-        <span style='color:#fff'>Sign in</span>
-      </button>
-      <a href='index.html' id='indexHome' class='navbar-brand' style='font-size:32px'>trustjar</a>
-    </div>
-    <div id='navbar' class='navbar-collapse collapse'>
-      <form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();' data-ajax='false'>
-        <div class='form-group'>
-          <input type='email' id='loginId' placeholder='login ID' class='form-control' style='margin-bottom:10px' required>
-          <input id='loginPassword' type='password' placeholder='password' class='form-control' style='margin-bottom:10px' required>
-          <a href='#'><button id='login' type='submit' class='btn btn-success' style='margin-bottom:10px'>Sign in</button></a>
-          <br>
-          <div class='checkbox' style='color:#ffffff'>
-            <label>
-              <input id='rememberMe' name='rememberMe' type='checkbox' style='float:left; margin-right:5px'>Remember me
-            </label>
-            <a href='forgotPw.html' style='color:#46bcde; margin-left:85px'>Forgot password</a>
-          </div>
-        </div>
-      </form>
-    </div><!--/.navbar-collapse -->
-  </div>
-</nav>
-
 
 
 
@@ -76,6 +48,7 @@
 <!-- ***********************************HOME (INDEXDIV) PAGE **************************************** -->
 <div id="indexDiv" class="pageDiv">
   <div id="lightmask"></div>
+  <nav class="navbar navbar-inverse navbar-fixed-top anonHeader"></nav>
     <div style="height:80px"></div>
 
     <div class="container">
@@ -216,7 +189,7 @@
         </div> 
         <div class="col-md-8">  
           <a href="#" onClick="$('#whatIsThis').toggle()">What is trustjar?</a>
-          <div id="indexWhatIsThis" style="display:none; margin-bottom:70px">
+          <div id="whatIsThis" style="display:none; margin-bottom:70px">
             <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
 
             <p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
@@ -233,12 +206,16 @@
       </div>
     </div> <!-- /container -->
 
+      <footer class="footer">
+      </footer>
 </div>
 
 <!-- ********************************************* END HOME DISPLAY ************************************************** -->
 <!-- *********************************** LANDING PAGE 1 (LANDING1DIV) DISPLAY **************************************** -->
 <div id="landing1Div" class="pageDiv"> 
   <div id="lightmask"></div> 
+    <nav class="navbar navbar-inverse navbar-fixed-top anonHeader">
+    </nav>
        
        
     <div style="height:80px"></div>
@@ -289,10 +266,19 @@
         </div> 
       </div> <!-- End row -->
 
-      <div class="row" id="landing1Credentials">
-        <form action='' onsubmit='return landing1SubmitCredentials();' data-ajax='false'>
-        <div class='form-group'>
 
+      <div class="row" id="step1done">
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+        <div class="col-md-2">   
+          <div style="width:10px"></div>   
+        </div> 
+      </div> <!-- End row -->
+
+
+
+      <div class="row" id="landing1Login">
         <div class="col-md-2">   
           <div style="width:10px"></div>   
         </div> 
@@ -301,30 +287,29 @@
 
           <div class="row">
             <div class="col-md-6">                   
-                <label id="indexContactLabel" for="landing1EmailCredentials">Login email</label>
-                <input type="email" class="form-control" id="landing1EmailCredentials" placeholder="Login email" style="margin-bottom: 10px" required>
+                <label id="indexContactLabel" for="exampleInputEmail1">Email or mobile phone</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email or mobile phone" style="margin-bottom: 10px">
 
             </div>
             <div class="col-md-6">                   
-              <label id="indexContactLabel" for="landing1PasswordCredentials">Password</label>
-              <input type="password" class="form-control" id="landing1PasswordCredentials" placeholder="password" style="margin-bottom: 10px" required>
+              <label id="indexContactLabel" for="exampleInputEmail1">Password</label>
+              <input type="password" class="form-control" id="exampleInputEmail1" placeholder="password" style="margin-bottom: 10px">
             </div>
           </div> <!-- End row -->
 
           <div class="row">
             <div class="col-md-12">   
-              <div class="checkbox" required>
+              <div class="checkbox">
                 <label>
                   <!-- Consent checkbox for casual or exclusive when there are no conflicts -->
-                  <input id="landing1DefaultCheckbox" type="checkbox" required>By providing my login credentials, I certify that I own <span id="landing1ConfirmContacts"></span>. I acknowledge that this relationship is approved and is subject to the rules as outlined in <a href="#">Terms and Conditions</a>. I understand that all contacts that identify me in my profile will be automatically connected to this relationship. No other information about other current or past relationships will be shared with any partner.
+                  <input id="confirmNoConflict" type="checkbox">By providing my login credentials, I certify that I own <span id="landing1ConfirmContacts"></span>. I acknowledge that this relationship is approved and is subject to the rules as outlined in <a href="#">Terms and Conditions</a>. I understand that all contacts that identify me in my profile will be automatically connected to this relationship. No other information about other current or past relationships will be shared with any partner.
                   <!-- Consent checkbox when a conflict will be created by accepting an exclusive relationship -->
-                  <div id="landing1ConfirmExclusiveConflict" class="alertText"><br><input id="landing1ExclusiveCheckbox" type="checkbox">I further acknowledge that by accepting this exclusive relationship, ALL OTHER RELATIONSHIPS to which I'm connected will be automatically deleted and notifications of the removal will be sent to each affected partner.</div>
+                  <div id="landing1ConfirmExclusiveConflict"><br><input type="checkbox">I further acknowledge that by accepting this exclusive relationship, ALL OTHER RELATIONSHIPS to which I'm connected will be automatically deleted and notifications of the removal will be sent to each affected partner.</div>
                   <!-- Consent checkbox when a conflict will be created by accepting a casual relationship -->
-                  <div id="landing1ConfirmCasualConflict" class="alertText"><br><input id="landing1CasualCheckbox" type="checkbox">I further acknowledge that by accepting this casual relationship, the exclusive relationship to which I'm currently connected WILL BE AUTOMATICALLY DELETED and a notification sent to the exclusive partner that my relationship with them has been removed.</div>
+                  <div id="landing1ConfirmCasualConflict"><br><input type="checkbox">I further acknowledge that by accepting this casual relationship, the exclusive relationship to which I'm currently connected WILL BE AUTOMATICALLY DELETED and a notification sent to the exclusive partner that my relationship with them has been removed.</div>
                 </label>            
               </div>
-               <a href="#"><button type="submit" id="landing1CredentialsSubmit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button></a>
-
+               <button type="submit" class="btn btn-primary" onClick="exclusiveConfirmation()" style="margin-left:15px; margin-bottom:10px">Submit</button>         
             </div>
           </div> <!-- End row -->
 
@@ -332,6 +317,7 @@
           <div class="col-md-2">   
           </div> 
         </div> <!-- End row -->
+
       </div> <!-- End row -->
 
 
@@ -365,178 +351,7 @@
                   <input type="checkbox">I have read and accept the <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a> and certify that 472-444-5678 belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
                 </label>            
               </div>
-               <button type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button>         
-            </div>
-          </div> <!-- End row -->
-
-          <div class="col-md-2">   
-          </div> 
-        </div> <!-- End row -->
-
-      </div> <!-- End row -->
-
-      </div><!-- End form group -->
-      </form>
-    </div> <!-- /container -->
-
-    <div class="container" style="margin-top:50px">
-
-      <div class="row">
-        <div class="col-md-2">
-        </div> 
-        <div class="col-md-8">  
-          <a href="#" id="landing1WhatIsTrustjar" onClick="$('#landing1WhatIsThis').toggle()">What is trustjar?</a>
-          <div id="landing1WhatIsThis" style="display:none">
-            <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
-
-            <p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
-
-            <p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
-
-            <p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
-
-            <p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
-          </div>
-        </div>
-        <div class="col-md-2">   
-        </div> 
-      </div>
-    </div> <!-- /container -->
-
-</div>
-<!-- *************************************** END LANDING PAGE 1 DISPLAY **************************************** -->
-<!-- ************************************** START LANDING PAGE 2 DISPLAY *************************************** -->
-<div id="landing2Div" class="pageDiv"> 
-  <div id="lightmask"></div> 
-    <div style="height:80px"></div>
-
-    <div class="container">
-
-      <div class="row">
-        <div class="col-md-2"> 
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div class="col-md-8"; margin-bottom:8px>  
-          <h3 style="font-weight:bold; color:#555555">Casual relationship request</h3>
-          <p>Alana Aaron wants to confirm your casual relationship by connecting the following contact points:</p>
-          
-      <div class="row">
-        <div class="col-md-5"> 
-          <div style="font-weight:bold; text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">   
-             aaaron@gmail.com<br>444-556-7899
-          </div>
-        </div> 
-
-        <div class="col-md-2" style="text-align:center"> 
-          <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true" style="font-size:50px"></span>
-        </div> 
-
-        <div class="col-md-5"> 
-          <div style="font-weight:bold; text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">   
-             472-444-5678
-          </div>
-         </div> 
-      </div> <!-- End row -->
-       
-
-        <p>You may receive requests at other points of contact. Each one must be confirmed individually if they’re not already part of your profile. This is done to certify your identity and will NEVER be used for any other purpose. For more, read our <a href="content.html">terms and conditions</a>.</p>
-
-        <p><span style="font-weight:bold">Important: Please be sure that the points of contact provided actually belong to Alana Aaron.</span> If they don’t, just ignore this request.</p>
-
-        <p>There are two ways to confirm this relationship and add this contact to your profile:</p>
-
-        <p>If you already have an account, please <a href="#" onClick="landing2ShowLogin()">provide your login credentials</a>.</p>
-
-        <p>If you don’t have an account, <a href="#" onClick="landing2ShowRegister()">please register</a>. All fields are required.</p>
-
-        </div>
-
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- End row -->
-
-
-      <div class="row" id="step1done">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-      </div> <!-- End row -->
-
-
-
-      <div class="row" id="landing2Login" style="display:none">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-          <div class="row">
-            <div class="col-md-6">                   
-                <label id="indexContactLabel" for="exampleInputEmail1">Email or mobile phone</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email or mobile phone" style="margin-bottom: 10px">
-
-            </div>
-            <div class="col-md-6">                   
-              <label id="indexContactLabel" for="exampleInputEmail1">Password</label>
-              <input type="password" class="form-control" id="exampleInputEmail1" placeholder="password" style="margin-bottom: 10px">
-            </div>
-          </div> <!-- End row -->
-
-          <div class="row">
-            <div class="col-md-12">   
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox">By providing my login credentials, I certify that 472-444-5678 belongs to me and understand that it will be added to my profile and shared with all confirmed relationships. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationshipss outlined in <a href="content.html">Terms and Conditions</a>.
-                </label>            
-              </div>
-               <a href="dashboard.html"><button type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button></a>         
-            </div>
-          </div> <!-- End row -->
-
-          <div class="col-md-2">   
-          </div> 
-        </div> <!-- End row -->
-
-      </div> <!-- End row -->
-
-
-      <div class="row" id="landing2Register" style="display:none">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-          <div class="row">
-            <div class="col-md-6">   
-                <label id="indexContactLabel" for="exampleInputEmail1">Your name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="your name" style="margin-bottom: 10px">                
-                <label id="indexContactLabel" for="exampleInputEmail1">User ID</label><br>
-                  472-444-5678
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Any email or mobile number you add can be used to sign in. Use this contact for your first sign-in."><span class="glyphicon glyphicon-info-sign" aria-hidden="true">
-                </a>
-            </div>
-            <div class="col-md-6">                   
-              <label id="indexContactLabel" for="exampleInputEmail1">Password</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your name" style="margin-bottom: 10px">
-              <label id="indexContactLabel" for="exampleInputEmail1">Confirm password</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="login ID" style="margin-bottom: 10px">
-            </div>
-          </div> <!-- End row -->
-
-          <div class="row">
-            <div class="col-md-12">   
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox">I have read and accept the <a href="content.html">Privacy Policy</a> and <a href="#">Terms and Conditions</a> and certify that 472-444-5678 belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in <a href="content.html">Terms and Conditions</a>.
-                </label>            
-              </div>
-               <a href="content1.html"><button type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Submit</button> </a>        
+               <button type="submit" class="btn btn-primary" onClick="indexShowStep2()" style="margin-left:15px; margin-bottom:10px">Submit</button>         
             </div>
           </div> <!-- End row -->
 
@@ -554,7 +369,7 @@
         <div class="col-md-2">
         </div> 
         <div class="col-md-8">  
-          <a href="#" onClick="$('#whatIsThis').toggle()">What is trustjar?</a>
+          <a href="#" onClick="$('#whatIsThis').toggle()">What is this?</a>
           <div id="whatIsThis" style="display:none">
             <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
 
@@ -571,21 +386,24 @@
         </div> 
       </div>
     </div> <!-- /container -->
+
+      <footer class="footer">
+      </footer>
 </div>
-<!-- *************************************** END LANDING PAGE 2 DISPLAY **************************************** -->
+<!-- *************************************** END LANDING PAGE 1 DISPLAY **************************************** -->
 
 
-<footer class="footer globalFooter">
-  <div class='container'>
-    <div class='navbar-header'>
-      <a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='privacyLink'>Privacy policy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='termsLink'>Terms and conditions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='contactLink'>Contact us</a>
-      <p>© Quantima 2015. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- Bootstrap core JavaScript
