@@ -7,7 +7,7 @@
       // Remove any previous listeners
       GLOB.trustjarRef.off();
       GLOB.trustjarRef.remove();
-      window.location = 'index.html';
+      location.reload(true);
     }
 
 // CODE REQUIRED FOR UNIT TEST
@@ -172,6 +172,16 @@ $(function () {
     GLOB.trustjarRef = new Firebase('https://trustjar.firebaseio.com/placeholder');
   };
 */
+// Toggle password visibility when the 'hide password' box is checked
+  $('#landing1HidePassword').change(function() {
+    if($(this).is(':checked')){
+      console.log("CCCCheckeddddddd");
+      $('.password').attr({type:"password"});
+    } else {
+      console.log("UNCheckeddddddd");
+      $('.password').attr({type:"text"});
+    } 
+  });
 
 
 // Disable the home (icon) link if the user is on the home page (logged out version)
@@ -278,6 +288,8 @@ GLOB.indexSubmitStep1Ref = GLOB.clientRef.child('index/step1Submit');
 GLOB.indexSubmitStep2Ref = GLOB.clientRef.child('index/step2Submit');
 GLOB.serverLanding1Ref = GLOB.serverRef.child('landing1');
 GLOB.clientLanding1Ref = GLOB.clientRef.child('landing1');
+GLOB.serverLanding2Ref = GLOB.serverRef.child('landing2');
+GLOB.clientLanding2Ref = GLOB.clientRef.child('landing2');
 GLOB.footerRef = GLOB.trustjarRef.child('footer');
 GLOB.displayRef = GLOB.trustjarRef.child('currentPage');
 GLOB.notificationRef = GLOB.trustjarRef.child('notifications');
@@ -389,9 +401,9 @@ GLOB.serverLanding1Ref.on('child_added', function(childSnapshot, prevChildName) 
     // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
     // They will be displayed if the server confirms there is a conflict.
     $('#landing1ExclusiveCheckbox').prop('required', false);
-    $("#landing1ConfirmExclusiveConflict").hide();
+    $("#landing1ConfirmExclusiveConflict").addClass( "hidden" );
     $('#landing1CasualCheckbox').prop('required', false);
-    $("#landing1ConfirmCasualConflict").hide();
+    $("#landing1ConfirmCasualConflict").addClass( "hidden" );
     // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
     // tag so they can stack in the display.
     var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
@@ -401,11 +413,11 @@ GLOB.serverLanding1Ref.on('child_added', function(childSnapshot, prevChildName) 
     $("#landing1Counterparty").html(counterpartyContacts);
     $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
     if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
-      $("#landing1ConfirmExclusiveConflict").show();
+      $("#landing1ConfirmExclusiveConflict").removeClass( "hidden" );
       $('#landing1ExclusiveCheckbox').attr('required', 'required');
     };
     if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
-      $("#landing1ConfirmCasualConflict").show();
+      $("#landing1ConfirmCasualConflict").removeClass( "hidden" );
       $('#landing1CasualCheckbox').attr('required', 'required');
     };
   };
@@ -414,14 +426,14 @@ GLOB.serverLanding1Ref.on('child_added', function(childSnapshot, prevChildName) 
   // Populate landing1.html 
 GLOB.serverLanding1Ref.on('child_changed', function(childSnapshot, prevChildName) {
   var val = childSnapshot.val();
-  if (val.thisPage = 'landing1.html') {
+  if (val.thisPage = 'landing2.html') {
     $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
     // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
     // They will be displayed if the server confirms there is a conflict.
     $('#landing1ExclusiveCheckbox').prop('required', false);
-    $("#landing1ConfirmExclusiveConflict").hide();
+    $("#landing1ConfirmExclusiveConflict").addClass( "hidden" );
     $('#landing1CasualCheckbox').prop('required', false);
-    $("#landing1ConfirmCasualConflict").hide();
+    $("#landing1ConfirmCasualConflict").addClass( "hidden" );
     // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
     // tag so they can stack in the display.
     var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
@@ -431,12 +443,73 @@ GLOB.serverLanding1Ref.on('child_changed', function(childSnapshot, prevChildName
     $("#landing1Counterparty").html(counterpartyContacts);
     $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
     if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
-      $("#landing1ConfirmExclusiveConflict").show();
+      $("#landing1ConfirmExclusiveConflict").removeClass( "hidden" );
       $('#landing1ExclusiveCheckbox').attr('required', 'required');
     };
     if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
-      $("#landing1ConfirmCasualConflict").show();
+      $("#landing1ConfirmCasualConflict").removeClass( "hidden" );
       $('#landing1CasualCheckbox').attr('required', 'required');
+    };
+  };
+});
+
+
+  // Populate landing2.html 
+GLOB.serverLanding2Ref.on('child_added', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val.thisPage = 'landing2.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
+    // They will be displayed if the server confirms there is a conflict.
+    $('#landing2ExclusiveCheckbox').prop('required', false);
+    $("#landing2ConfirmExclusiveConflict").addClass( "hidden" );
+    $('#landing2CasualCheckbox').prop('required', false);
+    $("#landing2ConfirmCasualConflict").addClass( "hidden" );
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing2RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing2CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing2RequestingParty").html(requestingPartyContacts);
+    $("#landing2RelationshipType").html(val.landing2RelationshipType);
+    $("#landing2Counterparty").html(counterpartyContacts);
+    $("#landing2ConfirmContacts").html(val.landing2CounterpartyContacts);
+    if ((val.conflict == true) && (val.landing2RelationshipType == "exclusive")) {
+      $("#landing2ConfirmExclusiveConflict").removeClass( "hidden" );
+      $('#landing2ExclusiveCheckbox').attr('required', 'required');
+    };
+    if ((val.conflict == true) && (val.landing2RelationshipType == "casual")) {
+      $("#landing2ConfirmCasualConflict").removeClass( "hidden" );
+      $('#landing2CasualCheckbox').attr('required', 'required');
+    };
+  };
+});
+
+  // Populate landing2.html 
+GLOB.serverLanding2Ref.on('child_changed', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  if (val.thisPage = 'landing2.html') {
+    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
+    // They will be displayed if the server confirms there is a conflict.
+    $('#landing2ExclusiveCheckbox').prop('required', false);
+    $("#landing2ConfirmExclusiveConflict").addClass( "hidden" );
+    $('#landing2CasualCheckbox').prop('required', false);
+    $("#landing2ConfirmCasualConflict").addClass( "hidden" );
+    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+    // tag so they can stack in the display.
+    var requestingPartyContacts = val.landing2RequestingPartyContacts.replace(/,/g, '<br>');
+    var counterpartyContacts = val.landing2CounterpartyContacts.replace(/,/g, '<br>');
+    $("#landing2RequestingParty").html(requestingPartyContacts);
+    $("#landing2RelationshipType").html(val.landing2RelationshipType);
+    $("#landing2Counterparty").html(counterpartyContacts);
+    $("#landing2ConfirmContacts").html(val.landing2CounterpartyContacts);
+    if ((val.conflict == true) && (val.landing2RelationshipType == "exclusive")) {
+      $("#landing2ConfirmExclusiveConflict").removeClass( "hidden" );
+      $('#landing2ExclusiveCheckbox').attr('required', 'required');
+    };
+    if ((val.conflict == true) && (val.landing2RelationshipType == "casual")) {
+      $("#landing2ConfirmCasualConflict").removeClass( "hidden" );
+      $('#landing2CasualCheckbox').attr('required', 'required');
     };
   };
 });
@@ -609,6 +682,7 @@ function indexSubmitStep2 () {
         "userId" : $('#indexServerUserContact2').val(),
         "password" : $('#indexPassword1').val(),
         "confirmPassword" : $('#indexPassword2').val(),
+        "addContact" : $('#landing1ExclusiveCheckbox').prop( "checked" )
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
@@ -649,7 +723,7 @@ function landing1SubmitCredentials () {
 
 // Submit login credentials to confirm identity (via page body form) in landing1Div
 function landing2SubmitCredentials () {
-  GLOB.clientLanding1Ref.push( {  
+  GLOB.clientLanding2Ref.push( {  
     "loginEmail" : $('#landing2EmailCredentials').val(),
     "password" : $('#landing2PasswordCredentials').val(),
     "defaultCheckbox" : $('#landing2DefaultCheckbox').prop( "checked" ),
@@ -658,6 +732,26 @@ function landing2SubmitCredentials () {
   } ); 
   $( "#disableControls" ).addClass( "overlay" );
   return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+}
+
+// Send Step 2 data to Firebase when user selects submit. Form will display an alert if the password 
+// values don't match.
+function landing2Register () {
+  var password1 = $('#landing2Password1').val()
+  var password2 = $('#landing2Password2').val()
+  if(password1 != password2) {
+    alert("Your passwords Don't Match. Please correct and resubmit.");
+    return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+  } else {
+    GLOB.clientLanding2Ref.push( {  
+      "loginId" : $('#landing2RegLoginId').val(),
+      "landing2Password1" : $('#landing2Password1').val(),
+      "landing2Password2" : $('#landing2Password2').val(),
+      "addContact" : $( "#landing2AddContact" ).prop( "checked" ),
+    } ); 
+    $( "#disableControls" ).addClass( "overlay" );
+    return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+  };
 }
 
 // Server confirms receipt of Step 1 information from user by sending a Firebase message
@@ -729,14 +823,14 @@ function forgotShowStep2 () {
 
 // Displays the Registration form in landing2.html
 function landing2ShowRegister () {
-  $( "#landing2Register" ).show();
-  $( "#landing2Login" ).hide();
+  $( "#landing2Register" ).removeClass( "hidden" );
+  $( "#landing2Credentials" ).addClass( "hidden" );
 }
 
 // Displays the login credentials form in landing2.html
-function landing2ShowLogin () {
-  $( "#landing2Login" ).show();
-  $( "#landing2Register" ).hide();
+function landing2ShowCredentials () {
+  $( "#landing2Register" ).addClass( "hidden" );
+  $( "#landing2Credentials" ).removeClass( "hidden" );
 }
 
 /*
@@ -774,13 +868,11 @@ function goToDashboard () {
 
 
     function initialize() {
-      var curPage = document.location.href.match(/[^\/]+$/)[0]
-      // If a message to change the current page is received, change to that page.  
-      if (curPage == 'index.html') {
+      // Send authentication credentials if they're present
         GLOB.authRef.push( {  
           "authToken" : "test",
         } ); 
-      };
+      // Confirm that the page is ready in the Javascript console
     }
 
     window.onload = initialize();

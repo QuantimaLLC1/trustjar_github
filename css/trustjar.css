@@ -31,6 +31,10 @@ html, body {
     color:#990000;
 }
 
+.hidden {
+    display:none;
+}
+
 .notice {
     display:none;
     padding:10px; 
