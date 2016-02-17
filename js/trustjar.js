@@ -185,21 +185,21 @@ $(function () {
 
 
 // Disable the home (icon) link if the user is on the home page (logged out version)
-if (document.location.href.match(/[^\/]+$/)[0] == 'index.html') {
-   $("#indexHome").removeAttr("href");
+if (document.location.href.match(/[^\/]+$/)[0] == 'home.html') {
+   $("#home").removeAttr("href");
 };
 
 // Code to insert anonymous header (with login fields)
 $('.identHeader').append( 
   "<div class='container-fluid'>" +
     "<div class='navbar-header'>" +
-      "<p class='navbar-right navbar-toggle'><a href='index.html' class='navbar-link'>Sign out</a></p>" +
+      "<p class='navbar-right navbar-toggle'><a href='home.html' class='navbar-link'>Sign out</a></p>" +
        "<a href='dashboard.html' id='dashboardHome' class='navbar-brand'>trustjar</a>" +
       "</p>" +
     "</div>" +
     "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>" +
       "<ul class='nav navbar-nav navbar-right'>" +
-        "<li><a href='index.html' type='button' style='margin: 7px 7px 7px 0px; border: 1px solid #333333; border-radius: 5px; padding: 10px;''>Sign out</a>" +
+        "<li><a href='home.html' type='button' style='margin: 7px 7px 7px 0px; border: 1px solid #333333; border-radius: 5px; padding: 10px;''>Sign out</a>" +
         "</li>" +
       "</ul>" +
     "</div>" +
@@ -279,13 +279,16 @@ GLOB.trustjarRef = new Firebase("https://trustjar.firebaseio.com");
 GLOB.serverRef = GLOB.trustjarRef.child('server');
 GLOB.clientRef = GLOB.trustjarRef.child('client');
 GLOB.authRef = GLOB.trustjarRef.child('authentication');
-GLOB.indexServerRef = GLOB.trustjarRef.child('index/server');
+GLOB.homePageDataRef = GLOB.trustjarRef.child('server/home');
+GLOB.blankServerRef = GLOB.trustjarRef.child('server/blank');
 GLOB.loginRef = GLOB.trustjarRef.child('login');
 GLOB.pageRef = GLOB.trustjarRef.child('global');
-GLOB.indexstep1ServerRef = GLOB.serverRef.child('index/step1Submit');
-GLOB.indexStep2ServerRef = GLOB.serverRef.child('index/step2Submit');
-GLOB.indexSubmitStep1Ref = GLOB.clientRef.child('index/step1Submit');
-GLOB.indexSubmitStep2Ref = GLOB.clientRef.child('index/step2Submit');
+GLOB.homeRequestServerRef = GLOB.serverRef.child('home/homeRequestSubmit');
+GLOB.registerPageDataRef = GLOB.serverRef.child('register');
+GLOB.registerSubmitRef = GLOB.clientRef.child('register');
+GLOB.landing1PageDataRef = GLOB.serverRef.child('landing1');
+GLOB.landing1SubmitRef = GLOB.clientRef.child('landing1');
+GLOB.homeSubmitRequestRef = GLOB.clientRef.child('home');
 GLOB.serverLanding1Ref = GLOB.serverRef.child('landing1');
 GLOB.clientLanding1Ref = GLOB.clientRef.child('landing1');
 GLOB.serverLanding2Ref = GLOB.serverRef.child('landing2');
@@ -334,6 +337,42 @@ GLOB.displayRef.on('child_changed', function(childSnapshot, prevChildName) {
   });
 });
 
+// Server confirms receipt of Step 1 information from user by sending a Firebase message
+// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version
+// is triggered the first time this data is sent to Firebase.
+GLOB.homePageDataRef.on('child_added', function(childSnapshot, prevChildName) {
+  // Retrieve the unique ID from the Firebase message
+  var val = childSnapshot.val();
+  if (val.serverAlert == "") {
+    $("#homeServerAlertContent").html(val.serverAlert);
+    $("#homeServerAlert").hide();
+    $("#homeServerAlertContent").html('');
+  } else {
+    $("#disableControls").removeClass( "overlay" );
+    $("#homeServerAlert").show();
+    $("#homeServerAlertContent").html(val.serverAlert);
+  };
+});
+
+// Server confirms receipt of Step 1 information from user by sending a Firebase message
+// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version 
+// is used if existing Firebase data for these vaules is being modified.
+GLOB.homePageDataRef.on('child_changed', function(childSnapshot, prevChildName) {
+  // Retrieve the unique ID from the Firebase message
+  var val = childSnapshot.val();
+  if (val.serverAlert == "") {
+    $("#homeServerAlert").hide();
+    $("#homeServerAlertContent").html('');
+  } else {
+    $("#disableControls").removeClass( "overlay" );
+    $("#homeServerAlert").show();
+    $("#homeServerAlertContent").html(val.serverAlert);
+  };
+});
+
+
+
+
 
 // Notification function. Notification will display only on the currently active pageDiv.
 GLOB.notificationRef.on('child_added', function(childSnapshot, prevChildName) {
@@ -363,93 +402,124 @@ GLOB.notificationRef.on('child_changed', function(childSnapshot, prevChildName) 
   };
 });
 
-// indexDiv: populate Step 2 data, hide Step 1, show Step 2
-GLOB.indexStep2ServerRef.on('child_added', function(childSnapshot, prevChildName) {
+// homeDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.blankServerRef.on('child_added', function(childSnapshot, prevChildName) {
   var val = childSnapshot.val();
-  GLOB.indexStep1RequestorContact = val.indexUserContactData;
-  GLOB.indexStep1RelationshipType = val.indexRelationshipTypeData;
-  GLOB.indexStep1CounterpartyContact - val.indexCounterpartyContactData;
-    $("#indexServerUserContact").html(GLOB.indexStep1RequestorContact);
-    $("#indexServerUserContact2").val(GLOB.indexStep1RequestorContact);
-    $("#indexServerRelationshipType").html(GLOB.indexStep1RelationshipType);
-    $("#indexServerCounterpartyContact").html(GLOB.indexStep1CounterpartyContact);
-    $( "#indexStep1" ).hide();
-    $( "#step1done" ).show();
-    $( "#indexStep2" ).show();
+  GLOB.blankTitle = val.blankTitleData;
+  GLOB.blankCopy = val.blankCopyData;
+    $("#blankTitle").html(GLOB.blankTitle);
+    $("#blankCopy").html(GLOB.blankCopy);
     $( "#disableControls" ).removeClass( "overlay" );
 });
 
 
-// indexDiv: populate Step 2 data, hide Step 1, show Step 2
-GLOB.indexStep2ServerRef.on('child_changed', function(childSnapshot, prevChildName) {
+// homeDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.blankServerRef.on('child_changed', function(childSnapshot, prevChildName) {
   var val = childSnapshot.val();
-    $("#indexServerUserContact").html(val.indexUserContactData);
-    $("#indexServerUserContact2").val(val.indexUserContactData);
-    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
-    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
-    $( "#indexStep1" ).hide();
-    $( "#step1done" ).show();
-    $( "#indexStep2" ).show();
+  GLOB.blankTitle = val.blankTitleData;
+  GLOB.blankCopy = val.blankCopyData;
+    $("#blankTitle").html(GLOB.blankTitle);
+    $("#blankCopy").html(GLOB.blankCopy);
     $( "#disableControls" ).removeClass( "overlay" );
+});
+
+// homeDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.registerPageDataRef.on('child_added', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  GLOB.registerUserContact = val.userContactData;
+  GLOB.registerRelationshipType = val.relationshipTypeData;
+  GLOB.registerCounterpartyContact = val.counterpartyContactData;
+  GLOB.registerPasscode = val.passcodeData;
+  $("#registerUserContact").html(GLOB.registerUserContact);
+  // $("#homeServerUserContact2").val(GLOB.homeRequestUserContact);
+  $("#registerPasscode").html(GLOB.registerPasscode);
+  $("#registerRelationshipType").html(GLOB.registerRelationshipType);
+  $("#registerCounterpartyContact").html(GLOB.registerCounterpartyContact);
+  $( "#disableControls" ).removeClass( "overlay" );
+  $("#registerServerAlertContent").html(val.serverAlert);
+  if (val.serverAlert == "") {
+    $("#registerServerAlert").hide();
+  } else {
+    $("#registerServerAlert").show();
+  };
+  $("#disableControls").removeClass( "overlay" );
+});
+
+
+// homeDiv: populate Step 2 data, hide Step 1, show Step 2
+GLOB.registerPageDataRef.on('child_changed', function(childSnapshot, prevChildName) {
+  var val = childSnapshot.val();
+  GLOB.registerUserContact = val.userContactData;
+  GLOB.registerRelationshipType = val.relationshipTypeData;
+  GLOB.registerCounterpartyContact = val.counterpartyContactData;
+  GLOB.registerPasscode = val.passcodeData;
+  $("#registerUserContact").html(GLOB.registerUserContact);
+  // $("#homeServerUserContact2").val(GLOB.homeRequestUserContact);
+  $("#registerPasscode").html(GLOB.registerPasscode);
+  $("#registerRelationshipType").html(GLOB.registerRelationshipType);
+  $("#registerCounterpartyContact").html(GLOB.registerCounterpartyContact);
+  $( "#disableControls" ).removeClass( "overlay" );
+  $("#registerServerAlertContent").html(val.serverAlert);
+  if (val.serverAlert == "") {
+    $("#registerServerAlert").hide();
+  } else {
+    $("#registerServerAlert").show();
+  };
+  $("#disableControls").removeClass( "overlay" );
 });
 
   // Populate landing1.html 
-GLOB.serverLanding1Ref.on('child_added', function(childSnapshot, prevChildName) {
+GLOB.landing1PageDataRef.on('child_added', function(childSnapshot, prevChildName) {
   var val = childSnapshot.val();
-  if (val.thisPage = 'landing1.html') {
-    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
-    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
-    // They will be displayed if the server confirms there is a conflict.
-    $('#landing1ExclusiveCheckbox').prop('required', false);
-    $("#landing1ConfirmExclusiveConflict").addClass( "hidden" );
-    $('#landing1CasualCheckbox').prop('required', false);
-    $("#landing1ConfirmCasualConflict").addClass( "hidden" );
-    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
-    // tag so they can stack in the display.
-    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
-    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
-    $("#landing1RequestingParty").html(requestingPartyContacts);
-    $("#landing1RelationshipType").html(val.landing1RelationshipType);
-    $("#landing1Counterparty").html(counterpartyContacts);
-    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
-    if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
-      $("#landing1ConfirmExclusiveConflict").removeClass( "hidden" );
-      $('#landing1ExclusiveCheckbox').attr('required', 'required');
-    };
-    if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
-      $("#landing1ConfirmCasualConflict").removeClass( "hidden" );
-      $('#landing1CasualCheckbox').attr('required', 'required');
-    };
+  $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+  // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+  // tag so they can stack in the display.
+  var requestingPartyContacts = val.requestorContactData.replace(/,/g, '<br>');
+  var counterpartyContacts = val.counterpartyContactData.replace(/,/g, '<br>');
+  GLOB.landing1Passcode = val.passcodeData;
+  $("#landing1RequestorName").html(val.requestorName);
+  $("#landing1Requestor").html(requestingPartyContacts);
+  $("#landing1RelationshipType1").html(val.relationshipTypeData);
+  $("#landing1Counterparty").html(counterpartyContacts);
+  $("#landing1ConfirmContacts").html(val.counterpartyContactData);
+  $("#landing1Counterparty").append('<br><b>' + val.thisCounterpartyContactData + '</b>');
+  $("#landing1Counterparty2").html(val.thisCounterpartyContactData);
+  if (val.relationshipTypeData == "casual") {
+    $("#landing1RelationshipType2").html("a casual");
+    $("#landing1CasualContent").removeClass("hidden");
+    $("#landing1CasualContent2").removeClass("hidden");
+  };
+  if (val.relationshipTypeData == "exclusive") {
+    $("#landing1RelationshipType2").text("an exclusive");
+    $("#landing1CasualContent").addClass("hidden");
+    $("#landing1CasualContent2").addClass("hidden");
   };
 });
 
   // Populate landing1.html 
-GLOB.serverLanding1Ref.on('child_changed', function(childSnapshot, prevChildName) {
+GLOB.landing1PageDataRef.on('child_changed', function(childSnapshot, prevChildName) {
   var val = childSnapshot.val();
-  if (val.thisPage = 'landing2.html') {
-    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
-    // Hide the checkboxes used for conflicts by default, and remove the 'required' attribute. 
-    // They will be displayed if the server confirms there is a conflict.
-    $('#landing1ExclusiveCheckbox').prop('required', false);
-    $("#landing1ConfirmExclusiveConflict").addClass( "hidden" );
-    $('#landing1CasualCheckbox').prop('required', false);
-    $("#landing1ConfirmCasualConflict").addClass( "hidden" );
-    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
-    // tag so they can stack in the display.
-    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
-    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
-    $("#landing1RequestingParty").html(requestingPartyContacts);
-    $("#landing1RelationshipType").html(val.landing1RelationshipType);
-    $("#landing1Counterparty").html(counterpartyContacts);
-    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
-    if ((val.conflict == true) && (val.landing1RelationshipType == "exclusive")) {
-      $("#landing1ConfirmExclusiveConflict").removeClass( "hidden" );
-      $('#landing1ExclusiveCheckbox').attr('required', 'required');
-    };
-    if ((val.conflict == true) && (val.landing1RelationshipType == "casual")) {
-      $("#landing1ConfirmCasualConflict").removeClass( "hidden" );
-      $('#landing1CasualCheckbox').attr('required', 'required');
-    };
+  $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
+  // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
+  // tag so they can stack in the display.
+  var requestingPartyContacts = val.requestorContactData.replace(/,/g, '<br>');
+  var counterpartyContacts = val.counterpartyContactData.replace(/,/g, '<br>');
+  $("#landing1RequestorName").html(val.requestorName);
+  $("#landing1Requestor").html(requestingPartyContacts);
+  $("#landing1RelationshipType1").html(val.relationshipTypeData);
+  $("#landing1Counterparty").html(counterpartyContacts);
+  $("#landing1ConfirmContacts").html(val.counterpartyContactData);
+  $("#landing1Counterparty").append('<br><b>' + val.thisCounterpartyContactData + '</b>');
+  $("#landing1Counterparty2").html(val.thisCounterpartyContactData);
+  if (val.relationshipTypeData == "casual") {
+    $("#landing1RelationshipType2").html("a casual");
+    $("#landing1CasualContent").removeClass("hidden");
+    $("#landing1CasualContent2").removeClass("hidden");
+  };
+  if (val.relationshipTypeData == "exclusive") {
+    $("#landing1RelationshipType2").text("an exclusive");
+    $("#landing1CasualContent").addClass("hidden");
+    $("#landing1CasualContent2").addClass("hidden");
   };
 });
 
@@ -517,139 +587,11 @@ GLOB.serverLanding2Ref.on('child_changed', function(childSnapshot, prevChildName
 
 
 
-
-
-
-
-/*
-// Server sets the page to be displayed
-GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
-  // Retrieve the JSON string stored in alertMsg  
-  var val = childSnapshot.val();
-  var curPage = document.location.href.match(/[^\/]+$/)[0]
-  // If a message to change the current page is received, change to that page.  
-  if (curPage != val.thisPage) {
-    window.location = val.thisPage;
-  };
-  if (val.indexStep == 2) {
-    $("#indexServerUserContact").html(val.indexUserContactData);
-    $("#indexServerUserContact2").val(val.indexUserContactData);
-    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
-    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
-    $( "#indexStep1" ).hide();
-    $( "#step1done" ).show();
-    $( "#indexStep2" ).show();
-    $( "#disableControls" ).removeClass( "overlay" );
-  };
-  if (val.indexStep == 1) {
-    $("#indexUserContact").val($("#indexServerUserContact").html());
-    $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
-    $("#indexCasual").prop( "checked", true );
-    $("#indexCasual").parent('label').addClass('active');
-    $( "#indexStep1" ).show();
-    $( "#step1done" ).hide();
-    $( "#indexStep2" ).hide();
-  };
-  // Show page notifications if one is included in the Firebase message. This will work for any
-  // currently displayed page.
-  if (val.notification != null) {
-    $("#disableControls").removeClass( "overlay" );
-    $(".notice").show();
-    $(".noticeContent").html(val.notification);
-  } else {
-    $(".notice").hide();
-    $(".noticeContent").html('');
-  };
-  // Populate landing1.html 
-  if (val.thisPage = 'landing1.html') {
-    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
-    // Hide the checkboxes used for conflicts by default. They will be displayed if the server confirms there is a conflict.
-    $("#landing1ConfirmExclusiveConflict").hide();
-    $("#landing1ConfirmCasualConflict").hide();
-    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
-    // tag so they can stack in the display.
-    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
-    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
-    $("#landing1RequestingParty").html(requestingPartyContacts);
-    $("#landing1RelationshipType").html(val.landing1RelationshipType);
-    $("#landing1Counterparty").html(counterpartyContacts);
-    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
-    if (val.landing1ExclusiveConflict == true) {
-      $("#landing1ConfirmExclusiveConflict").show();
-    };
-    if (val.landing1CasualConflict == true) {
-      $("#landing1ConfirmCasualConflict").show();
-    };
-  };
-});
-
-// Server sets the page to be displayed
-GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
-  // Retrieve the JSON string stored in alertMsg  
-  var val = childSnapshot.val();
-  var curPage = document.location.href.match(/[^\/]+$/)[0]
-  // If a message to change the current page is received, change to that page.  
-  if (curPage != val.thisPage) {
-    window.location = val.thisPage;
-  };
-  if (val.indexStep == 2) {
-    $("#indexServerUserContact").html(val.indexUserContactData);
-    $("#indexServerUserContact2").val(val.indexUserContactData);
-    $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
-    $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
-    $( "#indexStep1" ).hide();
-    $( "#step1done" ).show();
-    $( "#indexStep2" ).show();
-    $( "#disableControls" ).removeClass( "overlay" );
-  };
-  if (val.indexStep == 1) {
-    $("#indexUserContact").val($("#indexServerUserContact").html());
-    $("#indexCounterpartyContact").val($("#indexServerCounterpartyContact").html());
-    $("#indexCasual").prop( "checked", true );
-    $("#indexCasual").parent('label').addClass('active');
-    $( "#indexStep1" ).show();
-    $( "#step1done" ).hide();
-    $( "#indexStep2" ).hide();
-  };
-  // Show page notifications if one is included in the Firebase message. This will work for any
-  // currently displayed page.
-  if (val.notification != null) {
-    $("#disableControls").removeClass( "overlay" );
-    $(".notice").show();
-    $(".noticeContent").html(val.notification);
-  } else {
-    $(".notice").hide();
-    $(".noticeContent").html('');
-  };
-  // Populate landing1.html 
-  if (val.thisPage = 'landing1.html') {
-    $("#disableControls").removeClass( "overlay" ); // in case the server's responding to a user action on this page like an error
-    // Hide the checkboxes used for conflicts by default. They will be displayed if the server confirms there is a conflict.
-    $("#landing1ConfirmExclusiveConflict").hide();
-    $("#landing1ConfirmCasualConflict").hide();
-    // if multiple contacts are sent by the server, they will be sent as a comma-delimited list. Replace the commas with the <br>
-    // tag so they can stack in the display.
-    var requestingPartyContacts = val.landing1RequestingPartyContacts.replace(/,/g, '<br>');
-    var counterpartyContacts = val.landing1CounterpartyContacts.replace(/,/g, '<br>');
-    $("#landing1RequestingParty").html(requestingPartyContacts);
-    $("#landing1RelationshipType").html(val.landing1RelationshipType);
-    $("#landing1Counterparty").html(counterpartyContacts);
-    $("#landing1ConfirmContacts").html(val.landing1CounterpartyContacts);
-    if (val.landing1ExclusiveConflict == true) {
-      $("#landing1ConfirmExclusiveConflict").show();
-    };
-    if (val.landing1CasualConflict == true) {
-      $("#landing1ConfirmCasualConflict").show();
-    };
-  };
-});
-*/
 // Send Step 1 data to Firebase when user selects submit
 function headerSubmitLogin () {
       GLOB.loginRef.push( {  
         "loginId" : $('#loginId').val(),
-        "rememberMe" : $('#rememberMe').prop( "checked" ),
-        "password" : $('#loginPassword').val(),
+        "password" : $('#loginPassword').val()
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
@@ -658,11 +600,11 @@ function headerSubmitLogin () {
 
 
 // Send Step 1 data to Firebase when user selects submit
-function indexSubmitStep1 () {
-      GLOB.indexSubmitStep1Ref.push( {  
-        "userContact" : $('#indexUserContact').val(),
-        "relationshipType" : $("input[name=indexRelationshipType]:checked").val(),
-        "counterpartyContact" : $('#indexCounterpartyContact').val(),
+function homeSubmitRequest () {
+      GLOB.homeSubmitRequestRef.push( {  
+        "userContact" : $('#homeUserContact').val(),
+        "relationshipType" : $("input[name=homeRelationshipType]:checked").val(),
+        "counterpartyContact" : $('#homeCounterpartyContact').val(),
       } ); 
       $( "#disableControls" ).addClass( "overlay" );
       return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
@@ -671,50 +613,20 @@ function indexSubmitStep1 () {
 
 // Send Step 2 data to Firebase when user selects submit. Form will display an alert if the password 
 // values don't match.
-function indexSubmitStep2 () {
-  var password1 = $('#indexPassword1').val()
-  var password2 = $('#indexPassword2').val()
-  if(password1 != password2) {
-    alert("Your passwords Don't Match. Please correct and resubmit.");
-    return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
-  } else {
-      GLOB.indexSubmitStep2Ref.push( {  
-        "userId" : $('#indexServerUserContact2').val(),
-        "password" : $('#indexPassword1').val(),
-        "confirmPassword" : $('#indexPassword2').val(),
-        "addContact" : $('#landing1ExclusiveCheckbox').prop( "checked" )
-      } ); 
-      $( "#disableControls" ).addClass( "overlay" );
-      return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
-  }
-}
-
-// Edit submitted Step 1 information. Since this has already been used to prepopulate Step 2, no 
-// interaction with server is required.
-function indexEditStep1 () {
-  $("#indexUserContact").val(GLOB.indexStep1RequestorContact);
-  $("#indexCounterpartyContact").val(GLOB.indexStep1CounterpartyContact);
-  if (GLOB.indexStep1RelationshipType == 'casual') {
-    $("#indexCasual").prop( "checked", true );
-    $("#indexCasual").parent('label').addClass('active');
-  }
-  if (GLOB.indexStep1RelationshipType == 'exclusive') {
-    $("#indexExclusive").prop( "checked", true );
-    $("#indexExclusive").parent('label').addClass('active');
-  }
-  $( "#indexStep1" ).show();
-  $( "#step1done" ).hide();
-  $( "#indexStep2" ).hide();
+function registerForm () {
+  var Name = $('#registerName').val()
+  GLOB.registerSubmitRef.push( {  
+    "name" : $('#registerName').val(),
+    "TOS" : $('#registerTOS').prop( "checked" )
+  }); 
+  $( "#disableControls" ).addClass( "overlay" );
+  return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
 }
 
 // Submit login credentials to confirm identity (via page body form) in landing1Div
-function landing1SubmitCredentials () {
+function landing1Submit () {
   GLOB.clientLanding1Ref.push( {  
-    "loginEmail" : $('#landing1EmailCredentials').val(),
-    "password" : $('#landing1PasswordCredentials').val(),
-    "defaultCheckbox" : $('#landing1DefaultCheckbox').prop( "checked" ),
-    "casualConflict" : $( "#landing1CasualCheckbox" ).prop( "checked" ),
-    "exclusiveConflict" : $('#landing1ExclusiveCheckbox').prop( "checked" ),
+    "passcode" : GLOB.landing1Passcode,
   } ); 
   $( "#disableControls" ).addClass( "overlay" );
   return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
@@ -754,54 +666,6 @@ function landing2Register () {
   };
 }
 
-// Server confirms receipt of Step 1 information from user by sending a Firebase message
-// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version
-// is triggered the first time this data is sent to Firebase.
-GLOB.serverRef.on('child_added', function(childSnapshot, prevChildName) {
-  // Retrieve the unique ID from the Firebase message
-  var val = childSnapshot.val();
-  $("#indexServerUserContact").html(val.indexUserContactData);
-  $("#indexServerUserContact2").html(val.indexUserContactData);
-  $("#indexServerRelationshipType").html(val.indexRelationshipTypeData);
-  $("#indexServerCounterpartyContact").html(val.indexCounterpartyContactData);
-  $( "#indexStep1" ).hide();
-  $( "#step1done" ).show();
-  $( "#indexStep2" ).show();
-  $( "#disableControls" ).removeClass( "overlay" );
-});
-
-// Server confirms receipt of Step 1 information from user by sending a Firebase message
-// to populate the Step 1 summary and contact info for the user in the Step 2 form. This version 
-// is used if existing Firebase data for these vaules is being modified.
-GLOB.serverRef.on('child_changed', function(childSnapshot, prevChildName) {
-  // Retrieve the unique ID from the Firebase message
-  var step1Data = childSnapshot.val();
-  $("#indexServerUserContact").html(step1Data.indexUserContactData);
-  $("#indexServerUserContact2").html(step1Data.indexUserContactData);
-  $("#indexServerRelationshipType").html(step1Data.indexRelationshipTypeData);
-  $("#indexServerCounterpartyContact").html(step1Data.indexCounterpartyContactData);
-  $( "#indexStep1" ).hide();
-  $( "#step1done" ).show();
-  $( "#indexStep2" ).show();
-  $( "#disableControls" ).removeClass( "overlay" );
-});
-
-/*
-function newDiv( testDiv ) {
-  $(".splash").fadeOut(200);
-  var showNew = "#" + testDiv;
-  $('.pageDiv').each(function() {
-    var pageId = '#' + this.id;
-    if ( $(pageId).css('display') == 'block') {
-      $(pageId).fadeOut(200);
-    }
-  });
-  setTimeout(function() {
-    $(showNew).fadeIn(500)
-  }, 210);
-};
-*/
-
 
 // Add another contact field to the user's profile. Called if user is entering multiple contacts at once.
 function addProfileContact () {
@@ -816,7 +680,7 @@ function addContact () {
 
 // Add another contact field to the current request form
 function forgotShowStep2 () {
-  $( "#forgotStep1" ).hide();
+  $( "#forgothomeRequest" ).hide();
   $( "#contactChanged" ).hide();
   $( "#forgotStep2" ).show();
 }
@@ -861,7 +725,7 @@ function goToDashboard () {
     var clone = document.importNode(template.content, true);
 
     document.querySelector('#homeFooter').appendChild(clone);
-*/
+
 
 
 // $(".footerContent").get("./footer.html"); 
@@ -877,7 +741,7 @@ function goToDashboard () {
 
     window.onload = initialize();
 
-/*
+
 
 
     function initialize() {
