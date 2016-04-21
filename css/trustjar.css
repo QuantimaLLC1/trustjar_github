@@ -32,16 +32,71 @@ html, body {
   display:none;
 }
 
-.serverAlert {
-/*  display:none; */  
-  padding:10px; 
-  margin-top: 120px;
-  border: 1px #cc0000 solid;
-  visibility:hidden;
+h3 {
+  font-weight:bold; 
+  color:#555555
 }
 
-.serverAlertText {
-  font-size: 13px;
+.logotype {
+  font-size:32px;
+  color:#333333;
+}
+
+.signInButton {
+  color:#ffffff
+}
+
+#whatIsTrustjarCopy {
+  display:none; 
+  margin-bottom:70px
+}
+
+.relationshipText {
+  font-weight:bold; 
+  padding:10px
+}
+
+.relationshipIcon {
+  font-size:50px
+}
+
+.center {
+  text-align:center;
+}
+
+.alertText {     /*also used for conflict text*/
+  color:#cc0000
+}
+
+.passcodeDisplay {
+  font-size:20px; 
+  font-weight:bold;
+  margin-top:8px
+}
+
+
+.relationshipContactContainer {
+  text-align:center; 
+  padding:10px; 
+  border: 1px #999999 solid; 
+  border-radius:5px; 
+  margin-bottom:8px; 
+  vertical-align:middle
+}
+
+.serverAlert {
+/*  display:none; */  
+  padding:6px; 
+  margin-top: 80px;
+  padding-top:8px;
+  border: 1px #cc0000 solid;
+  visibility:hidden;
+  min-height: 40px;
+  vertical-align: middle;
+}
+
+.hidden {
+    display:none;
 }
 
 .anonHeader {
@@ -50,7 +105,7 @@ html, body {
 
 .pageDiv {
   display:none; 
-  z-index:10
+/*  z-index:10*/
 }
 
 table.box {
@@ -87,8 +142,12 @@ table.index td {
     clip:rect(1px 1px 1px 1px);
 }
 
-.hidden {
-    display:none;
+#whatIsTrustjarContainer {
+   margin-top: 20px
+}
+
+#whatIsTrustjar {
+   display:none;
 }
 
 /* Sticky footer styles

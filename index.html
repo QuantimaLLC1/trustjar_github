@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)http://getbootstrap.com/examples/jumbotron/ -->
 <html lang="en">
 <script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Welcome to trustjar</title>
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="css/trustjar.css" rel="stylesheet">
-  <script src="js/ie-emulation-modes-warning.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Welcome to trustjar</title>
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/trustjar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,604 +23,499 @@
 
 <div id-"splashDiv">
 
-  <div id="logotype" class="splash" onClick="animateLogotype()"><span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
-
+<!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
+		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
+ -->
 </div>
 
 <!-- Server Alert section -->
-    <div class="row">
-      <div class="col-md-2">   
-      </div> 
+<div class="row">
+	<div class="col-md-1">   
+	</div> 
 
-      <div class="col-md-8">   
-        <div id="serverAlertContainer" class="serverAlert well"><!-- Server alert component. Error messages and other system response messages go here. -->   
-          <div class="row">
-            <div id="serverAlertContent" class="col-md-11 serverAlertText" style="font-size:12px"> 
-            </div> 
-           </div> <!-- End row -->
-        </div>
-      </div> 
+	<div class="col-md-10">   
+		<div id="serverAlertContainer" class="serverAlert well"><!-- Server alert component. Error messages and other system response messages go here. -->   
+		</div>
+	</div> 
 
-      <div class="col-md-2">   
-      </div> 
-    </div> <!-- End row -->
+	<div class="col-md-1">   
+	</div> 
+</div> <!-- End row -->
 
 <!-- Header section -->
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top anonHeader">
-  <div class='container'>
-    <div class='navbar-header'>
-      <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'> 
-        <span class='sr-only'>Toggle navigation</span>
-        <span style='color:#fff'>Sign in</span>
-      </button>
-      <a href='home.html' id='homeHome' class='navbar-brand' style='font-size:32px'>trustjar</a>
-    </div>
-    <div id='navbar' class='navbar-collapse collapse'>
-
-      <form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();' data-ajax='false'>
-
-        <div class='form-group'>
-
-          <input type='text' id='loginId' placeholder='Email / mobile' class='form-control' required>  
- 
-          <div class="input-group">
-            <input id='loginPasscode' type='password' placeholder='passcode' class='form-control' required>
-            <div id="loginShowHide" class="input-group-addon">show</div>
-          </div>
- 
-          <button id='loginBtn' type='submit' class='btn btn-success'>Sign in</button>
- 
-          <br>
-          <a href='forgotPw.html' class="pull-right" style='color:#46bcde; margin-left:160px'>Retrieve passcode</a>
-         </div>
-
-      </form>
-    </div><!--/.navbar-collapse -->
-  </div><!-- container -->
- </nav>
+<nav id="trustjarHeader" class="navbar navbar-fixed-top anonHeader">
+	<div class='container'>
+		<div class='navbar-header'>
+			<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'> 
+				<span class='sr-only'>Toggle navigation</span>
+				<span>Sign in</span>
+			</button>
+			<div id='headerLogo' class='navbar-brand logotype'><a href="#" id="headerLogoLink" class="logotype goHome">trustjar</a></div>
+		</div>
+		<div id='navbar' class='navbar-collapse collapse'>
+			<form class='navbar-form navbar-right' action='' onsubmit='return headerSubmitLogin();' data-ajax='false'>
+				<div class='form-group'>
+					<input type='text' id='loginId' placeholder='Email / mobile' class='form-control' required>  
+					<div class="input-group">
+						<input id='loginPasscode' type='password' placeholder='passcode' class='form-control' required>
+						<div id="loginShowHide" class="input-group-addon">show</div>
+					</div>
+					<button id='loginBtn' type='submit' class='btn btn-success'>Sign in</button>
+					<br>
+					<a href='#' id="retrievePasscodeLink" class="pull-right">Retrieve passcode</a>
+				 </div>
+			</form>
+		</div><!--/.navbar-collapse -->
+	</div><!-- container -->
+</nav>
 
 
 <!-- *********************************** END HEADER **************************************** -->
+<!-- *********************************** BLANK DIV **************************************** -->
+
+<div class="pageDiv" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
+</div>
+
+<!-- *********************************** END BLANK DIV **************************************** -->
 
 
-<div>
-  <div class="container"><!-- Bootstrap container to manage page width across different sizes -->
+<div class="container"><!-- Bootstrap container to manage page width across different sizes -->
 
+<!-- *********************************** RETRIEVEPASSCODE DIV **************************************** -->
+
+<div class="pageDiv row" id="retrievePasscode">
+	<div class="col-md-3">   
+	</div>
+	<div class="col-md-6"> 
+		<h3>Passcode assistance</h3>
+		<p>Enter an email address or phone number that's already associated with your existing trustjar account. We'll send your passcode to that contact.</p><br>
+		<div class="well">
+			<form action="" onsubmit="return retrievePasscodeSubmit()" data-ajax="false"><!--   Request form: create a new relationshop-->
+				<label id="forgotContactLabel" for="retrievePasscodeUserContact">Email or mobile phone number</label>
+				<div class="row">
+					<div class="col-md-9">   
+						<input type="text" class="form-control" id="retrievePasscodeUserContact" required>
+					</div>
+					<div class="col-md-3">   
+						<button id="retrievePasscodeSubmitBtn" type="submit" class="btn btn-primary">Submit</button>  
+					</div>
+				</div> <!-- End row -->
+			</form>
+		</div>
+		<div class="col-md-3">     
+		</div> 
+	</div> <!-- End row -->
+</div>
+
+<!-- *********************************** END RETRIEVEPASSCODE DIV **************************************** -->
+<!-- *********************************** RETRIEVEPASSCODECONFIRMATION DIV **************************************** -->
+
+<div class="pageDiv row" id="retrievePasscodeConfirmation">
+	<div class="col-md-1">   
+	</div> 
+	<div class="col-md-10">
+		<h3>Passcode sent.</h3>
+			Please check the email address or phone number you entered to complete the verification process. 
+	</div>
+	<div class="col-md-1">     
+	</div> 
+</div><!-- End homeConfirmation -->
+
+<!-- *********************************** END RETRIEVEPASSCODECONFIRMATION DIV **************************************** -->
 <!-- *********************************** HOME DIV **************************************** -->
 
-  <div class="pageDiv" id="home">
-
-      <div class="row">
-        <div class="col-md-2">   
-        </div> 
-
-        <div class="col-md-8">
-
-          <h3 style="font-weight:bold; color:#555555">Certify your relationship.</h3>
-          <div class="form-group well" style="border: 1px solid #999999">  
-            <form action="" onsubmit="return homeSubmitRequest()" data-ajax="false"><!--   Request form: create a new relationshop-->
-
-                  <div class="row">
-                    <div class="col-md-5 form-group">   
-                          <label id="homeContactLabel" for="homeUserContact">You</label>
-                          <input type="text" class="form-control" id="homeUserContact" placeholder="email or mobile" autofocus required>
-                    </div>
-                    
-                    <div class="col-md-2 form-group">   
-                      <label id="relationshipType" for="exampleInputEmail1">are in a</label><br>
-                      <div class="btn-group" data-toggle="buttons">          
-                       <label>
-                         <input type="radio" name="homeRelationshipType" id="homeCasual" value="Casual" required> Casual
-                       </label><br>
-                       <label>
-                         <input type="radio" name="homeRelationshipType" id="homeExclusive" value="Exclusive" required> Exclusive
-                       </label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-5 form-group">   
-                          <label id="homeContactLabel" for="otherContact">relationship with:</label>
-                          <input type="text" class="form-control" id="homeCounterpartyContact" placeholder="email or mobile" required>
-                    </div>
-
-                  </div> <!-- End row -->
-                    <div class="row">
-                      <div class="col-md-12">   
-                        <button id="homeRequestSubmitBtn" type="submit" class="btn btn-primary">Continue</button>  
-                    </div>
-                  </div>
-
-            </form> <!--  End Step 1 form: create a new relationship-->
-          </div>
-
-
-
-          <a href="#" onClick="$('#whatIsThis').toggle()">What is trustjar?</a>
-          <div id="homeWhatIsThis" style="display:none; margin-bottom:70px">
-            <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
-
-            <p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
-
-            <p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
-
-            <p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
-
-            <p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
-          </div>
-
-
-
-
-        </div>
-        <div class="col-md-2">     
-        </div> 
-      </div> <!-- End row -->
-  </div><!-- End Home -->
+<div class="pageDiv" id="home">
+		<h3>Certify your relationship.</h3>
+		<div class="form-group well">  
+			<form action="" onsubmit="return homeSubmitRequest()" data-ajax="false"><!--   Request form: create a new relationshop-->
+				<div class="row">
+					<div class="col-md-5 form-group">   
+						<label id="homeContactLabel" for="homeUserContact">You</label>
+						<input type="text" class="form-control" id="homeUserContact" placeholder="email or mobile" autofocus required>
+					</div>			
+					<div class="col-md-2 form-group">   
+						<label id="relationshipType" for="homeRelationshipType">are in a</label><br>
+						<div class="btn-group" data-toggle="buttons">          
+							<label>
+								<input type="radio" name="homeRelationshipType" id="homeCasual" value="Casual" required> Casual
+							</label><br>
+							<label>
+								<input type="radio" name="homeRelationshipType" id="homeExclusive" value="Exclusive" required> Exclusive
+							</label>
+						</div>
+					</div>
+					<div class="col-md-5 form-group">   
+						<label id="homeContactLabel" for="otherContact">relationship with:</label>
+						<input type="text" class="form-control" id="homeCounterpartyContact" placeholder="email or mobile" required>
+					</div>
+				</div> <!-- End row --> 
+				<div class="row">
+					 <div class="col-md-12">   
+							<button id="homeRequestSubmitBtn" type="submit" class="btn btn-primary">Continue</button>  
+					</div>
+				</div>
+			</form> <!--  End home form-->
+		</div>
+</div><!-- End Home -->
 
 <!-- *********************************** END HOME DIV **************************************** -->
 <!-- *********************************** HOMECONFIRMATION DIV **************************************** -->
 
-  <div class="pageDiv" id="homeConfirmation">
 
-      <div class="row">
-        <div class="col-md-2">   
-        </div> 
+<div class="pageDiv row" id="homeConfirmation">
+	<div class="col-md-1">   
+	</div> 
+	<div class="col-md-10">
+		<h3>Relationship request submitted.</h3> 
+		Please check <span id="homeConfirmationContact"></span> to complete the verification process.
+	</div>
+	<div class="col-md-1">     
+	</div> 
+</div><!-- End homeConfirmation -->
 
-        <div class="col-md-8">
-          <h3 style="font-weight:bold; color:#555555">Relationship request submitted.</h3>
-          <div style="padding-top:10px">  
-            Please check <span id="homeConfirmationContact"></span> to complete the verification process. 
-          </div>
-
-        </div>
-        <div class="col-md-2">     
-        </div> 
-      </div> <!-- End row -->
-  </div><!-- End Blank -->
 
 <!-- *********************************** END HOMECONFIRMATION DIV **************************************** -->
 <!-- *********************************** REQUESTORLANDING DIV **************************************** -->
 
-  <div class="pageDiv" id="requestorLanding">
+<div class="pageDiv row" id="requestorLanding">
+	<div class="col-md-1">     
+	</div> 
 
-      <div class="row" id="step1done">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-        <div class="col-md-8" style="font-weight:bold; padding:10px">   
-          You are declaring the following <span id="requestorLandingRelationshipType"></span> relationship:
-          <div class="row">
-            <div class="col-md-5"> 
-              <div id="requestorLandingUserContact" style="text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">   
-              </div>
-            </div> 
+	<div class="col-md-10">     
+		<div class="row">
+			<div class="col-md-2">     
+			</div> 
 
-            <div class="col-md-2" style="text-align:center"> 
-              <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true" style="font-size:50px"></span>
-            </div> 
+			<div class="col-md-8 relationshipText">   
+				You are declaring the following <span id="requestorLandingRelationshipType"></span> relationship:
+				<div class="row">
+					<div class="col-md-5"> 
+						<div id="requestorLandingUserContact" class="relationshipContactContainer">   
+						</div>
+					</div> 
+					<div class="col-md-2 center"> 
+						<span class="glyphicon glyphicon-resize-horizontal relationshipIcon" aria-hidden="true"></span>
+					</div> 
+					<div class="col-md-5"> 
+						<div id="requestorLandingCounterpartyContact" class="relationshipContactContainer">
+						</div>
+					</div> 
+				</div> <!-- End row -->
+			</div>
 
-            <div class="col-md-5"> 
-              <div id="requestorLandingCounterpartyContact" style="text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">
-              </div>
-            </div> 
-          </div> <!-- End row -->
-        </div>
-          <div class="col-md-2">   
-            <div style="width:10px"></div>   
-          </div> 
-        </div> <!-- End row -->
-
-
-         <div class="row">
-
-            <form action="" onsubmit="return requestorLandingForm();" data-ajax="false"><!--   Step 2 form: create a new relationshop-->
-              <div class="col-md-2">   
-                <div style="width:10px"></div>   
-              </div> 
-
-              <div class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-                <div class="row">
-                  <div class="col-md-12">   
-                      <p>Thanks for confirming your identity. Please complete the form below so you can manage this relationship in the future. Messages will be sent to both of you to confirm your identities and complete the process. Registration is free and you can delete your account at anytime. We'll never use your contact information for any other purpose.</p>
-                  </div>
-                </div> <!-- End row -->
-
-                <div class="row">
-                  <div class="col-md-6">   
-                      <label id="homeContactLabel" for="requestorLandingUserContact2">Name</label> <a href="#" data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
-                      <input type="text" class="form-control" id="requestorLandingName" placeholder="Your name" style="margin-bottom: 10px" required onClick="$('#homeAddContact').removeAttr('disabled');">                
-
-                      
-                  </div>
-                  <div class="col-md-6">                   
-                    <label id="homeContactLabel" for="requestorLandingPasscode">Passcode</label> <a href="#" data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit thsi form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
-                    <div id="requestorLandingPasscode" style="font-size:20px; font-weight:bold"></div>
-                  </div>
-                </div> <!-- End row -->
-
-                   <div class="checkbox">
-                    <label>
-                      <input id="requestorLandingTOS" type="checkbox" required> I have read and accept the Privacy Policy and Terms and Conditions.
-                    </label>            
-                  </div>
-
-                <div class="row">
-                  <div class="col-md-12">   
-                     <button id="requestorLandingSubmitBtn" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Send this request</button>         
-                     <button id="requestorLandingCancelBtn" type="button" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px" onClick="requestorLandingCancel()">Cancel this request</button>         
-                  </div>
-                </div> <!-- End row -->
-
-              </div> <!-- End row -->
-
-              <div class="col-md-2">   
-              </div> 
-            </form>
-          </div><!-- End row -->
-      </div>
+			<div class="col-md-2">   
+			</div> 
+		</div> <!-- End row -->
+		<br>
+		<div class="well">
+			<form action="" onsubmit="return requestorLandingForm();" data-ajax="false"><!--   Requestor landing form: complete the request and register -->
+				<p>Thanks for confirming your identity. Please complete the form below so you can manage this relationship in the future. A message will be sent to your partner to confirm their identity and complete the process. We'll never use your contact information for any other purpose.</p>
+				<div class="row">
+					<div class="col-md-6">   
+						<label id="homeContactLabel" for="requestorLandingUserContact2">Name</label> <a href="#" data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+						<input type="text" class="form-control" id="requestorLandingName" placeholder="Your name" required>	
+					</div>
+					<div class="col-md-6">                   
+						<label id="homeContactLabel" for="requestorLandingPasscode">Passcode</label> <a href="#" data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit thsi form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
+						<div id="requestorLandingPasscode" class="passcodeDisplay"></div>
+					</div>
+				</div> <!-- End row -->
+				<div class="checkbox">
+					<label>
+						<input id="requestorLandingTOS" type="checkbox" required> I have read and accept the Privacy Policy and Terms and Conditions.
+					</label>            
+				</div>
+				<button id="requestorLandingSubmitBtn" type="submit" class="btn btn-primary">Send this request</button>         
+				<button id="requestorLandingCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel this request</button>   
+			</form>
+		</div>      
+	</div> <!-- End row -->
+	<div class="col-md-1">   
+	</div> 
+</div><!-- End requestorLanding -->
 
 
 <!-- *********************************** END REQUESTORLANDING DIV **************************************** -->
 <!-- *********************************** REQUESTORCANCELCONFIRMATION DIV **************************************** -->
 
-  <div class="pageDiv" id="requestorCancelConfirmation">
+<div class="pageDiv row" id="requestorCancelConfirmation">
+	<div class="col-md-1">   
+	</div> 
+	<div class="col-md-10">
+		<h3>Relationship request canceled.</h3> 
+		<p>To start a new request, return to the <a href="#" class="goHome">home page</a>.</p> 
+	</div>
+	<div class="col-md-1">     
+	</div> 
+</div> <!-- End row -->
 
-      <div class="row">
-        <div class="col-md-2">   
-        </div> 
-
-        <div class="col-md-8">
-          <h3 style="font-weight:bold; color:#555555">Relationship request canceled.</h3>
-          <div style="padding-top:10px">  
-            To start a new request, return to the <a href="#" onClick="changePage(home)">home page</a>. 
-          </div>
-
-        </div>
-        <div class="col-md-2">     
-        </div> 
-      </div> <!-- End row -->
-  </div><!-- End Blank -->
-
-<!-- *********************************** END HOMECONFIRMATION DIV **************************************** -->
+<!-- *********************************** END REQUESTORCANCELCONFIRMATION DIV **************************************** -->
 <!-- *********************************** COUNTERPARTYLANDING DIV **************************************** -->
 
-  <div class="pageDiv" id="counterpartyLanding">
+<div class="pageDiv row" id="counterpartyLanding">
+		<div class="col-md-1">    
+		</div> 
+
+		<div class="col-md-10"; margin-bottom:8px>  
+			<h3><span id="counterpartyLandingRelationshipType1" class="cplCopy"></span> relationship request</h3>
+			<p><span id="counterpartyLandingRequestorName" class="cplCopy"></span> wants to connect to you in <span id="counterpartyLandingRelationshipType2" class="cplCopy"></span> relationship. By accepting, you're confirming that you're not in a<span class="hidden" id="counterpartyLandingCasualContent">n exclusive</span> relationship with anyone else. <span class="hidden" id="counterpartyLandingCasualContent2">Any other casual relationships you have will remain private.</span></p>
+			<p><b>Please be sure that ALL points of contact provided below are accurate for BOTH of you.</b> If not, please let your partner know so they can correct it. If you don't recognize the other person or "your" other contacts don't belong to you, please ignore this request.</p>
+			<div class="row">
+				<div class="col-md-5"> 
+					<div id="counterpartyLandingRequestor" class="relationshipContactContainer cplCopy">   
+					</div>
+				</div> 
+				<div class="col-md-2 center"> 
+					<span class="glyphicon glyphicon-resize-horizontal relationshipIcon" aria-hidden="true"></span>
+				</div> 
+				<div class="col-md-5"> 
+					<div id="counterpartyLandingContact" class="relationshipContactContainer cplCopy">
+					</div>
+				</div> 
+			</div> <!-- End row -->
+			 
+			<p>The information you provide will NEVER be used for any other purpose. For more, read our terms and conditions.</p><hr>
+
+			<!-- COUNTERPARTYLANDING1 FORM -->
+			<div id="counterpartyLandingForm1" class="hidden clf">   
+				<form action="" onsubmit="return counterpartyLanding1Submit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="counterpartyLanding1TOSCheckbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingContact2" class="cplCopy"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships.
+							</label>            
+						</div>
+						 <button id="counterpartyLanding1SubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>       
+						 <button id="counterpartyLanding1CancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+				</form>
+			</div> <!-- End counterpartyLanding1Form -->
+
+				<!-- COUNTERPARTYLANDING2 FORMS -->
+				<div id="counterpartyLandingForm2" class="hidden clf">   
+					Do you already have a Trustjar account?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="btn-group" data-toggle="buttons">          
+					<label>
+						<input type="radio" name="currentUser" id="counterpartyLanding2Yes" autocomplete="off" onChange="counterpartyLanding2aToggle()"> Yes &nbsp;&nbsp;&nbsp;
+					 </label>
+					 <label>
+					 <input type="radio" name="currentUser" id="counterpartyLanding2No" autocomplete="off" onChange="counterpartyLanding2bToggle()"> No
+					 </label>
+					</div>
+				</div> <!-- End counterpartyLanding2Form. Selection of 'yes/no' toggle displays form 2a or 2b -->
+
+				<!-- COUNTERPARTYLANDING2A FORM -->
+				<div id="counterpartyLandingForm2a" class="hidden clf"><!-- This form appears when the user selects the "Yes" radio button above -->  
+					<form action="" onsubmit="return counterpartyLanding2aSubmit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
+						Confirm that you want to add <span id="counterpartyLandingContact3" class="cplCopy"></span> to your existing Trustjar by entering your passcode:
+						<a href="#" data-toggle="tooltip" data-placement="top" title="If you can't find it, use the Retrieve Passcode link in the header to have it re-sent to the email or phone number with which you opened the account."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></a>
+
+						<div class="input-group">
+							<input type="password" class="form-control" id="counterpartyLanding2aPasscode" placeholder="Passcode" required>
+							<div id="counterpartyLanding2aShowHide" class="input-group-addon">show</div>
+						</div>
+
+						<div class="checkbox">
+							<label>
+								<input id="counterpartyLanding2aTOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingContact4" class="cplCopy"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
+							</label>            
+						</div>
+						<button id="counterpartyLanding2aSubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>       
+						<button id="counterpartyLanding2aCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+					</form>
+				</div> <!-- End counterpartyLanding2a -->
+
+				<!-- COUNTERPARTYLANDING2B FORM -->
+				<div id="counterpartyLandingForm2b" class="hidden clf"><!-- This form appears when the user selects the "No" radio button above -->
+					<form action="" onsubmit="return counterpartyLanding2bSubmit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
+						<div class="row">
+							<div class="col-md-6">   
+								<label id="indexContactLabel" for="counterpartyLanding2bName">Name</label> 
+								<a href="#" data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+								<input id="counterpartyLanding2bName" type="text" class="form-control" required>
+							</div>
+							<div class="col-md-6">                   
+								<b>Passcode:</b>
+								<a href="#" data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit this form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> <br>
+								<div id="counterpartyLanding2bPasscode" class="passcodeDisplay cplCopy"></div>
+							</div>
+						</div> <!-- End row -->
+						<div class="checkbox">
+							<label>
+							<input id="counterpartyLanding2bTOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingContact5" class="cplCopy"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
+							</label>            
+						</div>
+						<button id="counterpartyLanding2bSubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>        
+						<button id="counterpartyLanding2bCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+					</form>
+				</div> <!-- End counterpartyLanding2b -->
+
+				<!-- COUNTERPARTYLANDING3 FORM -->
+				<div id="counterpartyLandingForm3" class="hidden clf">   
+					<form action="" onsubmit="return counterpartyLanding3Submit()" data-ajax="false">
+						Confirm that you want to add <span id="counterpartyLandingContact6" class="cplCopy"></span> to this relationship by entering the passcode you received at any contact that's already in this relationship:
+						<a href="#" data-toggle="tooltip" data-placement="top" title="If you can't find it, use the Retrieve Passcode link in the header."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></a>
+						<div class="input-group">
+							<input type="password" class="form-control" id="counterpartyLanding3Passcode" placeholder="Passcode" required>
+							<div id="loginShowHide" class="input-group-addon">show</div>
+						</div>
+						<div class="checkbox">
+							<label>
+							<input id="counterpartyLanding3TOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingContact7" class="cplCopy"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
+						</div>
+						<button id="counterpartyLanding3SubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>       
+						<button id="counterpartyLanding3CancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+					</form>
+				</div> <!-- End counterpartyLanding3Form -->
+
+				<!-- COUNTERPARTYLANDING4 FORM -->
+				<div id="counterpartyLandingForm4" class="hidden clf">   
+					<div class="alertText">
+						<p><b>Important note:</b> <span id="counterpartyLandingContact8" class="cplCopy"></span> is part of an existing profile that's already in an exclusive relationship with someone else, which means you can't accept this relationship. You must remove this contact from that profile.
+
+						There are two ways this can happen:
+						<ul>
+							<li> 
+
+							(If ANY contact in that profile is in an exclusive relationship, this contact is in an exclusive relationship, whether your exclusive partner knows about this contact or not.) You will not be allowed to accept this request until you either remove the exclusive relationship (which will notify your exclusive relationship partner) or remove <span id="counterpartyLandingContact9" class="cplCopy"></span> from the trustjar account that's in the exclusive relationship.
+					</div>
+				</div> <!-- End counterpartyLanding4Form -->
+			</div><!-- End counterpartyLanding page body -->
+
+		<div class="col-md-1">    
+		</div> 
+	</div> <!-- End counterpartyLanding -->
 
-      <div class="row">
-        <div class="col-md-2"> 
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div class="col-md-8"; margin-bottom:8px>  
-          <h3 style="font-weight:bold; color:#555555"><span id="counterpartyLandingRelationshipType1"></span> relationship request</h3>
-          <p><span id="counterpartyLandingRequestorName"></span> wants to connect to you in <span id="counterpartyLandingRelationshipType2"></span> relationship. By accepting, you're confirming that you're not in a<span class="hidden" id="counterpartyLandingCasualContent">n exclusive</span> relationship with anyone else. <span class="hidden" id="counterpartyLandingCasualContent2">Any other casual relationships you have will remain private.</span></p>
-          <p><b>Please be sure that ALL points of contact provided below are accurate for BOTH of you.</b> If not, please let your partner know so they can correct it. If you don't recognize the other person or "your" other contacts don't belong to you, please ignore this request.</p>
-
-          <div class="row">
-            <div class="col-md-5"> 
-              <div id="counterpartyLandingRequestor" style="text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">   
-              </div>
-            </div> 
-
-            <div class="col-md-2" style="text-align:center"> 
-              <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true" style="font-size:50px"></span>
-            </div> 
-
-            <div class="col-md-5"> 
-              <div id="counterpartyLandingCounterparty" style="text-align:center; padding:10px; border: 1px #999999 solid; border-radius:5px; margin-bottom:8px; vertical-align:middle">
-              </div>
-            </div> 
-          </div> <!-- End row -->
-       
-        <p>The information you provide will NEVER be used for any other purpose. For more, read our terms and conditions.</p>
-
-        </div>
-
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- End row -->
-
-<!-- *********************************** COUNTERPARTYLANDING FORMS **************************************** -->
-
-
-      <div class="row hidden" id="counterpartyLanding1">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div id="counterpartyLanding1Form" class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-         <form action="" onsubmit="return counterpartyLanding1Submit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
-
-            <div class="row">
-              <div class="col-md-12">   
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" id="counterpartyLanding1TOSCheckbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingCounterparty2"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships.
-                  </label>            
-                </div>
-                 <button id="counterpartyLanding1SubmitBtn" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Approve this request</button>       
-                 <button id="counterpartyLanding1CancelBtn" type="button" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px" onClick="counterpartyLandingCancel()">Cancel</button>        
-             </div>
-            </div> <!-- End row -->
-          </form>
-        </div> <!-- End row -->
-          
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- End row -->
-
-
-      <div class="row hidden" id="counterpartyLanding2">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div id="counterpartyLanding2Form" class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-          <div class="row">
-            <div class="col-md-12">
-                Do you already have a Trustjar account?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              
-              <div class="btn-group" data-toggle="buttons">          
-               <label>
-                 <input type="radio" name="currentUser" id="counterpartyLanding2Yes" autocomplete="off" style="margin-top:8px" onChange="counterpartyLanding2YesToggle()"> Yes &nbsp;&nbsp;&nbsp;
-               </label>
-               <label>
-                 <input type="radio" name="currentUser" id="counterpartyLanding2No" autocomplete="off" Sstyle="margin-top:8px" onChange="counterpartyLanding2NoToggle()"> No
-               </label>
-              </div>
-
-
-            </div>
-          </div> <!-- End row -->
-<!-- *********************************** COUNTERPARTYLANDING2a FORM **************************************** -->
-
-          <div id="counterpartyLanding2a" class="hidden"><!-- This form appears when the user selects the "Yes" radio button above -->  
-            <form action="" onsubmit="return counterpartyLanding2aSubmit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
-            Confirm that you want to add <span id="counterpartyLandingCounterparty3"></span> to your existing Trustjar by entering your passcode:
-              <a href="#" data-toggle="tooltip" data-placement="top" title="If you can't find it, use the Retrieve Passcode link in the header to have it re-sent to the email or phone number with which you opened the account."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></a>
-
-          <div class="input-group">
-            <input type="password" class="form-control" id="counterpartyLanding2aPasscode" placeholder="Passcode" required>
-            <div id="counterpartyLanding2ShowHide" class="input-group-addon">show</div>
-          </div>
- 
- 
-              <div class="checkbox">
-                <label>
-                  <input id="counterpartyLanding2aTOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingCounterparty4"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
-                </label>            
-              </div>
-              <button id="counterpartyLanding2aSubmitBtn" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Approve this request</button>       
-              <button id="counterpartyLanding2aCancelBtn" type="button" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px" onClick="counterpartyLandingCancel()">Cancel</button>
-            </form>
-          </div> <!-- End "Yes" form -->
-
-
-
-<!-- *********************************** COUNTERPARTYLANDING2b FORM **************************************** -->
-
-          <div id="counterpartyLanding2b" class="hidden"><!-- This form appears when the user selects the "No" radio button above -->
-            <form action="" onsubmit="return counterpartyLanding2bSubmit()" data-ajax="false"><!--   Request form: accept via counterpartyLanding1 -->
-              <div class="row">
-                <div class="col-md-6">   
-                    <label id="indexContactLabel" for="exampleInputEmail1">Name</label> 
-                     <a href="#" data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
-                    <input id="counterpartyLanding2bName" type="text" class="form-control" id="exampleInputEmail1" value="" style="margin-bottom: 10px" onClick="$('#indexAddContact').removeAttr('disabled');">
-                  <div class="checkbox">
-                  </div>
-
-                </div>
-                <div class="col-md-6">                   
-                  <b>Passcode:</b>
-                  <a href="#" data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit this form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> <br>
-                  <div id="counterpartyLanding2bPasscode" style="margin-top:8px; font-size:20px; font-weight:bold"></div>
-                </div>
-              </div> <!-- End row -->
-
-              <div class="row">
-                <div class="col-md-12">   
-                  <div class="checkbox">
-                    <label>
-                    <input id="counterpartyLanding2bTOSCheckbox" type="checkbox">I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingCounterparty5"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
-                    </label>            
-                  </div>
-                   <button id="counterpartyLanding2bSubmitBtn" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Approve this request</button>        
-                   <button id="counterpartyLanding2bCancelBtn" type="button" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px" onClick="counterpartyLandingCancel()">Cancel</button>        
-                </div>
-              </div> <!-- End row -->
-            </form>
-          </div> <!-- End "No" form -->
-        </div> <!-- End row -->
-
-        <div class="col-md-2">   
-        </div> 
-      </div> <!-- End row -->
-
-
-
-
-
-<!-- *********************************** COUNTERPARTYLANDING3 **************************************** -->
-
-
-
-
-
-
-      <div class="row hidden" id="counterpartyLanding3">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div id="counterpartyLanding3Form" class="col-md-8" style="border: 1px solid #999999; border-radius:5px; background-color:#eeeeff; padding:10px">   
-
-            <form action="" onsubmit="return counterpartyLanding3Submit()" data-ajax="false">
-                Confirm that you want to add <span id="counterpartyLandingCounterparty6"></span> to this relationship by entering the passcode you received at any contact that's already in this relationship:
-                <a href="#" data-toggle="tooltip" data-placement="top" title="If you can't find it, use the Retrieve Passcode link in the header."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></a>
-                <div class="input-group">
-                  <input type="password" class="form-control" id="counterpartyLanding3Passcode" placeholder="Passcode" required>
-                  <div id="loginShowHide" class="input-group-addon">show</div>
-                </div>
- 
- 
-              <div class="checkbox">
-                <label>
-                  <input id="counterpartyLanding3TOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingCounterparty7"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
-              </div>
-              <button id="counterpartyLanding3SubmitBtn" type="submit" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px">Approve this request</button>       
-              <button id="counterpartyLanding3CancelBtn" type="button" class="btn btn-primary" style="margin-left:15px; margin-bottom:10px" onClick="counterpartyLandingCancel()">Cancel</button>
-            </form>
-
-        </div> <!-- End row -->
-
-        <div class="col-md-2">   
-        </div> 
-
-      </div> <!-- End row -->
-
-
-
-
-
-
-
-
-
-<!-- *********************************** COUNTERPARTYLANDING4 **************************************** -->
-
-
-
-
-      <div class="row hidden" id="counterpartyLanding4">
-        <div class="col-md-2">   
-          <div style="width:10px"></div>   
-        </div> 
-
-        <div id="counterpartyLanding4Copy" class="col-md-8">   
-          <div style="color:#cc0000">
-            <b>Important note:</b> <span id="counterpartyLandingCounterparty8"></span> is in an exclusive relationship. You will not be allowed to accept this request until you either remove the exclusive relationship (which will notify your exclusive relationship partner) or remove <span id="counterpartyLandingCounterparty9"></span> from the trustjar shared with <span id="counterpartyLandingCounterpartyConflictId"></span>.
-          </div>
-        </div> <!-- End row -->
-
-        <div class="col-md-2">   
-        </div> 
-
-      </div> <!-- End row -->
-
-    <div style="margin-top:50px">
-
-      <div class="row">
-        <div class="col-md-2">
-        </div> 
-        <div class="col-md-8">  
-          <a href="#" onClick="$('#counterpartyLandingWhatIsThis').toggle()">What is trustjar?</a>
-          <div id="counterpartyLandingWhatIsThis" style="display:none">
-            <p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
-
-            <p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
-
-            <p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
-
-            <p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
-
-            <p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
-          </div>
-        </div>
-        <div class="col-md-2">   
-        </div> 
-
-      </div> <!-- End row -->
-  </div><!-- End counterpartyLanding -->
-</div> <!-- /container -->
 
 <!-- *********************************** END COUNTERPARTYLANDING **************************************** -->
 <!-- *********************************** COUNTERPARTYCANCELCONFIRMATION DIV **************************************** -->
 
-  <div class="pageDiv" id="counterpartyCancelConfirmation">
-
-      <div class="row">
-        <div class="col-md-2">   
-        </div> 
-
-        <div class="col-md-8">
-          <h3 style="font-weight:bold; color:#555555">Relationship request canceled.</h3>
-          <div style="padding-top:10px">  
-            <p>The person who requested the relationship has been notified. </p>
-            <p>To start a new request, return to the <a href="#" onClick="changePage(home)">home page</a>. </p>
-          </div>
-
-        </div>
-        <div class="col-md-2">     
-        </div> 
-      </div> <!-- End row -->
-  </div>
+	<div class="pageDiv row" id="counterpartyCancelConfirmation">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10">
+				<h3>Relationship request canceled.</h3>
+				<div>  
+					<p>The person who requested the relationship has been notified. </p>
+					<p>To start a new request, return to the <span class="goHome">home page</a>. </p>
+				</div>
+			</div>
+			<div class="col-md-1">     
+			</div> 
+	</div>
 
 <!-- *********************************** END COUNTERPARTYCONFIRMATION DIV **************************************** -->
 
+
+		<div class="row">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10" id="whatIsTrustjarContainer">
+				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
+				<div id="whatIsTrustjarCopy">
+					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
+
+					<p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
+
+					<p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
+
+					<p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
+
+					<p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
+				</div>
+			</div>
+			<div class="col-md-1">   
+			</div> 
+		</div> <!-- End row -->
+
+
+
+
+
+
+
+
 <!-- ********************************************* FOOTER ************************************************** -->
 
-<footer class="footer globalFooter">
-  <div class='container'>
-    <div class='navbar-header'>
-      <a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href='#' id='contactLink'>Contact</a>
-      <p>© Quantima 2015. All rights reserved.</p>
-    </div>
-  </div><!-- /container -->
+<footer class="footer">
+	<div class='container'>
+		<div class='navbar-header'>
+			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='contactLink'>Contact</a>
+			<p>© Quantima 2015. All rights reserved.</p>
+		</div>
+	</div><!-- /container -->
 </footer>
 <!-- ********************************************* END FOOTER ************************************************** -->
+</div> <!-- /container -->
 <!-- *************************************** FOOTER LINK OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
 
 <div class='modal fade' id='footerOverlay' role='dialog'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header' id='modalHeader'>
-        <button type='button' class='close' data-dismiss='modal'>&times;</button>
-        <h4 class='modal-title'>Trustjar Terms and conditions</h4>
-      </div>
-      <div class='modal-body' id='modalBody'>
-      </div>
-      <div class='modal-footer'>
-        <button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-      </div>
-    </div>
-  </div>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header' id='modalHeader'>
+				<button type='button' class='close' data-dismiss='modal'>&times;</button>
+				<h4 class='modal-title'>Trustjar Terms and conditions</h4>
+			</div>
+			<div class='modal-body' id='modalBody'>
+			</div>
+			<div class='modal-footer'>
+				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <!-- *************************************** END FOOTER LINK OVERLAY ************************************************** -->
+<!-- *************************************** 'CANCEL CONFIRMATION' OVERLAY ************************************************** -->
+<!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
+<div class='modal fade' id='cancelRelationshipOverlay' role='dialog'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header' id='modalHeader'>
+				<button type='button' class='close' data-dismiss='modal'>&times;</button>
+				<h4 class='modal-title'>Are you sure?</h4>
+			</div>
+			<div class='modal-body' id='modalBody'>
+				This will permanently remove the request from our system. Do you want to continue?
+			</div>
+			<div class='modal-footer'>
+				<button id='modalCancelRequest' type='button' class='btn btn-default cancelRelationshipConfirm' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
+			</div>
+		</div>
+	</div>
+</div>
 
+<!-- ********************************* END 'CANCEL CONFIRMATION' LINK OVERLAY ******************************************** -->
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster
+<script src="js/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+	if (!window.jQuery) {
+		document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
+	}
+	</script>
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/trustjar.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript" src="./js/unitTests.js"></script> <!-- Code containing the unit test --> 
+<!--
+	<script  language="javascript">
+		window.onload = animateLogotype()
+	</script>
+-->
 
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster
-    <script src="js/jquery.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script>
-      if (!window.jQuery) {
-        document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
-      }
-    </script>
-    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/trustjar.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-<!--    <script  language="javascript">
-      window.onload = animateLogotype()
-    </script>
-  -->
-
-</body></html>
+</body>
+</html>
