@@ -103,6 +103,11 @@
 		$('#whatIsTrustjarCopy').toggle()
 	});
 
+	function goToNewPage(newURL){
+		GLOB.goToNewURL = newURL;
+		// alert(GLOB.goToNewURL);
+	}
+
 
 	// Overlay to disable controls. This overlay is activated when the client sends a Firebase message 
 	// to the server. Once the server responds, the overlay is removed.
@@ -136,10 +141,12 @@
 	// The following references will not be overwritten when a unique ID is received.
 	GLOB.trustjarRef = new Firebase("https://trustjar.firebaseio.com");
 	GLOB.identifierRef = GLOB.trustjarRef.child(GLOB.uniqueId);
-	GLOB.displayRef = GLOB.identifierRef.child('currentPage');
-	GLOB.clientRef = GLOB.identifierRef.child('fromClient');
-	GLOB.serverRef = GLOB.identifierRef.child('fromServer');
-	GLOB.alertRef = GLOB.identifierRef.child('serverAlert');
+	GLOB.clientRef = GLOB.trustjarRef.child('sessions/fromClient/' + GLOB.uniqueId);
+	GLOB.serverRef = GLOB.trustjarRef.child('sessions/fromServer/' + GLOB.uniqueId);
+	GLOB.displayRef = GLOB.serverRef.child('currentPage');
+//	GLOB.clientRef = GLOB.identifierRef.child('fromClient');
+//	GLOB.serverRef = GLOB.identifierRef.child('fromServer');
+	GLOB.alertRef = GLOB.serverRef.child('serverAlert');
 	GLOB.footerRef = GLOB.trustjarRef.child('commonBranch/footer');
 	GLOB.requestorLandingPageDataRef = GLOB.serverRef.child('requestorLanding');
 	GLOB.counterpartyLandingPageDataRef = GLOB.serverRef.child('counterpartyLanding'); 
@@ -147,7 +154,6 @@
 	GLOB.homeConfirmationPageDataRef = GLOB.serverRef.child('homeConfirmation');
 	GLOB.requestorCancelConfirmationPageDataRef = GLOB.serverRef.child('requestorCancelConfirmation');
 	GLOB.serverAlertRef = GLOB.serverRef.child('serverAlert');
-
 
 // PAGE DATA FUNCTIONS
 	// Define the functions for populating pages with server-generated page data.
@@ -264,34 +270,45 @@
 		// Retrieve the unique ID from the Firebase message
 		var val = childSnapshot.val();
 		var handlerFunction = eventListenersMap[ val ];
-		if( handlerFunction == null ) {
-			badPageName( val );
+		var checkURL = val.substring(0,3)
+		if( checkURL == 'URL' ) {
+			var newPage = val.substring(4);
+			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
+			// For the time being, it's commented out.
+			// window.location = newPage
+
+			// In the meantime, we'll call a function for the unit test.
+			goToNewPage(newPage)
 		} else {
-			getDataOnce (val, handlerFunction)
-			// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-			var showNew = "#" + val;
-			// if another page div is being displayed, fade it out
-			$('.pageDiv').each(function() {
-				var pageId = '#' + this.id;
-				if ( $(pageId).css('display') == 'block') {
-					$(pageId).fadeOut(300);
-					// Remove the 'disable controls' overlay if one is present
-					enableControls();
-					$('#whatIsTrustjar').fadeOut(300)
+			if( handlerFunction == null ) {
+				badPageName( val );
+			} else {
+				getDataOnce (val, handlerFunction)
+				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
+				var showNew = "#" + val;
+				// if another page div is being displayed, fade it out
+				$('.pageDiv').each(function() {
+					var pageId = '#' + this.id;
+					if ( $(pageId).css('display') == 'block') {
+						$(pageId).fadeOut(300);
+						// Remove the 'disable controls' overlay if one is present
+						enableControls();
+						$('#whatIsTrustjar').fadeOut(300)
+					}
+				});
+				// fade the new page in, allowing for the old page to fade out first
+				setTimeout(function() {
+					$(showNew).fadeIn(300);
+					$('.anonHeader').fadeIn(300);
+					$('.footer').fadeIn(300);
+					$('#whatIsTrustjar').fadeIn(300)
+				}, 300);
+				// Disable the 'return to home' link in the header logo if the user's already on the homepage.
+				if (showNew == '#home') {
+					$('#headerLogoLink').filter(function(){
+					    return this.innerHTML === 'trustjar';
+					}).replaceWith('trustjar');
 				}
-			});
-			// fade the new page in, allowing for the old page to fade out first
-			setTimeout(function() {
-				$(showNew).fadeIn(300);
-				$('.anonHeader').fadeIn(300);
-				$('.footer').fadeIn(300);
-				$('#whatIsTrustjar').fadeIn(300)
-			}, 300);
-			// Disable the 'return to home' link in the header logo if the user's already on the homepage.
-			if (showNew == '#home') {
-				$('#headerLogoLink').filter(function(){
-				    return this.innerHTML === 'trustjar';
-				}).replaceWith('trustjar');
 			}
 		}
 	});
@@ -301,34 +318,45 @@
 		// Retrieve the unique ID from the Firebase message
 		var val = childSnapshot.val();
 		var handlerFunction = eventListenersMap[ val ];
-		if( handlerFunction == null ) {
-			badPageName( val );
+		var checkURL = val.substring(0,3)
+		if( checkURL == 'URL' ) {
+			var newPage = val.substring(4);
+			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
+			// For the time being, it's commented out.
+			// window.location = newPage
+
+			// In the meantime, we'll call a function for the unit test.
+			goToNewPage(newPage)
 		} else {
-			getDataOnce (val, handlerFunction)
-			// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-			var showNew = "#" + val;
-			// if another page div is being displayed, fade it out
-			$('.pageDiv').each(function() {
-				var pageId = '#' + this.id;
-				if ( $(pageId).css('display') == 'block') {
-					$(pageId).fadeOut(300);
-					// Remove the 'disable controls' overlay if one is present
-					enableControls();
-					$('#whatIsTrustjar').fadeOut(300)
+			if( handlerFunction == null ) {
+				badPageName( val );
+			} else {
+				getDataOnce (val, handlerFunction)
+				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
+				var showNew = "#" + val;
+				// if another page div is being displayed, fade it out
+				$('.pageDiv').each(function() {
+					var pageId = '#' + this.id;
+					if ( $(pageId).css('display') == 'block') {
+						$(pageId).fadeOut(300);
+						// Remove the 'disable controls' overlay if one is present
+						enableControls();
+						$('#whatIsTrustjar').fadeOut(300)
+					}
+				});
+				// fade the new page in, allowing for the old page to fade out first
+				setTimeout(function() {
+					$(showNew).fadeIn(300);
+					$('.anonHeader').fadeIn(300);
+					$('.footer').fadeIn(300);
+					$('#whatIsTrustjar').fadeIn(300)
+				}, 300);
+				// Disable the 'return to home' link in the header logo if the user's already on the homepage.
+				if (showNew == '#home') {
+					$('#headerLogoLink').filter(function(){
+					    return this.innerHTML === 'trustjar';
+					}).replaceWith('trustjar');
 				}
-			});
-			// fade the new page in, allowing for the old page to fade out first
-			setTimeout(function() {
-				$(showNew).fadeIn(300);
-				$('.anonHeader').fadeIn(300);
-				$('.footer').fadeIn(300);
-				$('#whatIsTrustjar').fadeIn(300)
-			}, 300);
-			// Disable the 'return to home' link in the header logo if the user's already on the homepage.
-			if (showNew == '#home') {
-				$('#headerLogoLink').filter(function(){
-				    return this.innerHTML === 'trustjar';
-				}).replaceWith('trustjar');
 			}
 		}
 	});

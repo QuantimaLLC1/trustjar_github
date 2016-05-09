@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Welcome to trustjar</title>
+	<!-- Bootstrap core CSS -->
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="disableControls" class="overlay hidden"></div>
+<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
+<div id="landingWrapper"></div>
+
+<div id-"splashDiv">
+
+<!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
+		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
+ -->
+</div>
+
+<!-- *********************************** END HEADER **************************************** -->
+
+<!-- *********************************** JUMBOTRON SECTION **************************************** -->
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron" style="background-color:#125561">
+	  <div class="container" style="color:#cccccc">
+		 <h1>Alana Aaron's trustjar</h1>      
+		 <div class="pull-right">Sign out</div>     
+		 <!-- Table with user's contact info -->
+		  <div style="height:1px; width:100%; background-color:#cccccc; margin-bottom:5px"></div>
+		  <div id="headerIds">
+			<div>alana.aaron@hotmail.com</div>
+			<div>444-556-7899</div>
+			<div style="color:#cccccc">545-656-6554 (pending)</div>
+			<div style="color:#cccccc"><a href="#" onClick="$('#editProfile').show(); $('#headerIds').hide()">Edit profile</a></div>
+		  </div>
+	<!-- 'Edit profile' form. Hidden by default. -->         
+	<div id="editProfile" class="container col-md-8" style="color:#333333; background-color:#eeeeee; border: 1px solid #cccccc; display:none">
+
+	  <!-- Profile edit form -->
+	  <div class="row">
+		<div id="editProfileContacts" class="col-md-6">
+				  <label for="exampleInputEmail1" style="margin-top:8px">Add a contact</label> 
+				  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="phone or email">
+				  <div style="font-weight: bold; margin-top:5px">Current contacts</div>
+				  <div id="contact1">
+					<span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="This contact can't be removed from your Trustjar until it's removed from all relationships." style="font-size:25px; color:#999999; vertical-align:middle"></span>
+					aaaron@gmail.com
+				  </div>
+				  <div id="contact2">
+					<a href="#" data-toggle="modal" data-target="#profileFinalContact" onClick="$('#contact2').hide()"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size:25px; color:#cc0000; vertical-align:middle"></span></a>
+					444-556-7899
+				  </div>
+				  <div id="contact3">
+					<a href="#" data-toggle="modal" data-target="#add2Profile1" onClick="$('#contact3').hide()"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size:25px; color:#cc0000; vertical-align:middle"></span>
+					545-656-6554 (pending)
+				  </div>
+		</div>
+		<div class="col-md-6">
+				  <label for="exampleInputEmail1" style="margin-top:5px">Name</label> 
+				  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Alana Aaron">
+				  <label for="currentPassword" style="margin-top:5px">Passcode (required)</label>
+				  <input type="password" class="form-control" id="dashboardExclusivePasscode">
+				  <div style="text-align:center; vertical-align:bottom; margin-top:15px; margin-bottom:10px">
+				  <a href="#" onClick="$('#editProfile').hide(); $('#headerIds').show()">
+					<button type="button" class="btn btn-primary btn-md">
+					 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
+					</button>
+				  </a>
+				  <a href="#" onClick="$('#editProfile').hide(); $('#headerIds').show()">
+					<button type="button" class="btn btn-primary btn-md">
+					 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Cancel
+					</button>
+				  </a>
+				  <span style="padding-left:30px"></span>
+				  <a href="#" data-toggle="modal" data-target="#closeAccount">
+					<button type="button" class="btn btn-danger btn-md">
+					 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Close account
+					</button>
+				  </a>
+				</div>
+			</div>
+		  </div><!-- End row -->
+		</div>
+	  </div>
+	</div>
+
+<!-- *********************************** END JUMBOTRON SECTION **************************************** -->
+<!-- *********************************** SERVER ALERT SECTION **************************************** -->
+<div class="container"><!-- Bootstrap container to manage page width across different sizes -->
+	<div class="row">
+		<div class="col-md-1">   
+		</div> 
+
+		<div class="col-md-10">   
+			<div id="serverAlertContainer" class="serverAlert well"><!-- Server alert component. Error messages and other system response messages go here. -->   
+			</div>
+		</div> 
+
+		<div class="col-md-1">   
+		</div> 
+	</div> <!-- End row -->
+<!-- *********************************** END SERVER ALERT SECTION **************************************** -->
+<!-- *********************************** RELATIONSHIP SECTION **************************************** -->
+
+		<h2>Current Relationships</h2>           
+	<div class="col-md-9" class="well" style="background-color:#e1ebf3; padding-bottom:10px">   
+
+		<!-- Relationship component -->
+		<div class="row">
+			<div class="col-md-11">
+				<h4>Casual relationship with Bobby Brown</h4>           
+			</div>
+			<div class="col-md-1">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size:25px; color:#cc0000; position: absolute; right: 15px; top:10px"></span>
+			</div>
+		</div> <!-- End row -->
+
+
+		<div class="row">
+			<div class="col-md-5"> 
+			 	<div id="manageContactsContainer" style="text-align:right">   
+					aaaron@gmail.com<br>
+					444-556-7899<br>
+					<a href="#" id="manageContacts" class="swapForm">   
+				  		Manage contacts
+					</a><br>
+					<a href="#" data-toggle="modal" data-target="#dashboardCasualUpgradeRelationship">
+						Upgrade relationship
+					</a>
+				</div>
+				<div id="manageContactsForm" style="display:none; padding:10px; border: 1px #999999 solid; border-radius:5px">
+					<div style="text-align:left">
+				 		<label>
+							<input type="checkbox" checked style="text-align:left; font-weight: normal !important"> aaaron@gmail.com
+				  		</label><br>            
+						<label>
+							<input type="checkbox" checked> 444-556-7899
+						</label><br>            
+				  		<label>
+							<input type="checkbox"> 545-656-6554 (<a href="#" data-toggle="modal" data-target="#pendingModal1">pending</a>)
+
+				  		</label>            
+					</div>
+					<div style="text-align:left; font-size:13px">
+						Your partner will be notified of all changes.
+					</div>
+					<button id="manageContactsHide" type="submit" class="btn btn-primary btn-sm swapText">
+						Change
+					</button>
+					<button id="manageContactsHide" type="submit" class="btn btn-primary btn-sm swapText">
+						Cancel
+					</button>
+				</div>
+			</div> 
+
+			<div class="col-md-2" style="text-align:center"> 
+				<span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true" style="font-size:50px"></span>
+			</div> 
+
+			<div class="col-md-5"> 
+				<div>   
+					bbrown@gmail.com<br>
+					472-444-5678<br>
+				<div> 
+				<!-- Span added to properly align the tooltip. The parent div automatically has width 100% to support responsiv design behavior. -->
+				<div id="aKaufContact1">
+					bobbybrown@myworkplace.com (<a href="#" data-toggle="modal" data-target="#pendingModal1">pending</a>)
+				</div>
+
+				<div id="aKaufContact2" style="display:none">
+					bbrown@yetanotheremail.com (<a href="#" data-toggle="modal" data-target="#pendingModal1">pending</a>)
+				</div>
+
+				<!-- Modal dialog for removing a pending contact from the dashboard-->
+				<div id="pendingModal1" class="modal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Acceptance pending</h4>
+							</div>
+					  		<div class="modal-body">
+								<p>If you haven't heard back, check the email or phone number. If it's incorrect, you can delete it and then add it back. If your partner lost the request, you can resend it.</p>
+					  		</div>
+					  		<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" onClick="$('#aKaufContact1').hide()">Delete</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" onClick="; $('#dashboardCasualAlertSpace').html('A request was re-sent to bobbybrown@myworkplace.com.')">Resend</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <div id="aKaufmanContact1Form" style="display:none">
+                  <form>
+                    <div style="margin:0px">
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="bobbybrown@myworkplace.com">
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-primary" onClick="showNameForm('aKaufmanContact1Form', 'aKaufContact1')">Change</button>
+                        </span>
+                      </div><!-- /input-group -->
+                    </div>
+                  </form>
+                </div>
+               </div>
+
+                <a href="#">
+                  <div id="dashboardCasualAddPartnerLink1" onClick="showNameForm('dashboardExclusiveAddPartnerLink1', 'dashboardCasualAddPartnerForm1'); return false">
+                    Add another contact
+                  </div>
+                </a>
+              <div style="display:none" id="dashboardCasualAddPartnerForm1">
+                  <div>
+                    <form>
+                      <div style="margin:0px">
+                      <div class="input-group">
+                        <input type="email" class="form-control" placeholder="phone or email">
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-primary" onClick="showNameForm('dashboardCasualAddPartnerForm1', 'dashboardCasualAddPartnerLink1'); $('#aKaufContact2').show(); $('#dashboardCasualAlertSpace').html('A request was sent to bbrown@yetanotheremail.com. This contact will appear as &quot;pending&quot; in your dashboard.'); return false">Add</button>
+                          <button type="submit" class="btn btn-danger" onClick="showNameForm('dashboardCasualAddPartnerForm1', 'dashboardCasualAddPartnerLink1'); return false">X</button>
+                        </span>
+                      </div><!-- /input-group -->
+                        <label for="exampleInputEmail1" style="text-align:left; font-size:13px">Your partner will have to validate this contact.</label>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+
+
+    <!-- Modal dialog to upgrade a relationship -->
+    <div  id="dashboardCasualUpgradeRelationship" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Time to get exclusive</h4>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to change this to an exclusive relationship? Your partner will have to accept this change to complete the upgrade.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Upgrade to exclusive</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- *********************************** END RELATIONSHIP SECTION **************************************** -->
+
+
+
+<!-- ********************************************* FOOTER ************************************************** -->
+
+<footer class="footer">
+	<div class='container'>
+		<div class='navbar-header'>
+			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id='contactLink'>Contact</a>
+			<p>© Quantima 2015. All rights reserved.</p>
+		</div>
+	</div><!-- /container -->
+</footer>
+<!-- ********************************************* END FOOTER ************************************************** -->
+</div> <!-- /container -->
+<!-- *************************************** FOOTER LINK OVERLAY ************************************************** -->
+<!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
+
+
+<div class='modal fade' id='footerOverlay' role='dialog'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header' id='modalHeader'>
+				<button type='button' class='close' data-dismiss='modal'>&times;</button>
+				<h4 class='modal-title'>Trustjar Terms and conditions</h4>
+			</div>
+			<div class='modal-body' id='modalBody'>
+			</div>
+			<div class='modal-footer'>
+				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- *************************************** END FOOTER LINK OVERLAY ************************************************** -->
+<!-- *************************************** 'SIGN OUT' OVERLAY ************************************************** -->
+<!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
+
+<div class='modal fade' id='signOutOverlay' role='dialog'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header' id='modalHeader'>
+				<button type='button' class='close' data-dismiss='modal'>&times;</button>
+				<h4 class='modal-title'>Are you sure?</h4>
+			</div>
+			<div class='modal-body' id='modalBody'>
+				Please confirm that you want to sign out of Trustjar.
+			</div>
+			<div class='modal-footer'>
+				<button id='modalCancelRequest' type='button' class='btn btn-default cancelRelationshipConfirm' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ********************************* END 'SIGN OUT' OVERLAY ******************************************** -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster
+<script src="../js/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+	if (!window.jQuery) {
+		document.write("<script src='../js/jquery-2.1.4.min.js'><\/script>");
+	}
+	</script>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript" src="../js/unitTests.js"></script> <!-- Code containing the unit test --> 
+<!--
+	<script  language="javascript">
+		window.onload = animateLogotype()
+	</script>
+-->
+
+</body>
+</html>

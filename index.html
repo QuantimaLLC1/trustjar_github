@@ -13,11 +13,11 @@
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="css/trustjar.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="disableControls" class="overlay hidden"></div>
+<div id="disableControls" class="hidden"><div class="overlay"></div><img src="images/loadinfo.net.gif" class="spinnyWheel"></div>
 <div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
 <div id="landingWrapper"></div>
 
@@ -117,7 +117,7 @@
 	</div> 
 	<div class="col-md-10">
 		<h3>Passcode sent.</h3>
-			Please check the email address or phone number you entered to complete the verification process. 
+			If the contact you entered is in our system, a message will be sent to that contact with the requested passcode. 
 	</div>
 	<div class="col-md-1">     
 	</div> 
@@ -502,15 +502,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script>
 	if (!window.jQuery) {
-		document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
+		document.write("<script src='js/jquery-2.2.3.min.js'><\/script>");
 	}
 	</script>
-	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/trustjar.js"></script>
+	<script src="js/index.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script>
-	<script type="text/javascript" src="./js/unitTests.js"></script> <!-- Code containing the unit test --> 
+	<script type="text/javascript" src="js/unitTests.js"></script> <!-- Code containing the unit test --> 
 <!--
 	<script  language="javascript">
 		window.onload = animateLogotype()
