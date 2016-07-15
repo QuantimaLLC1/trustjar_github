@@ -105,7 +105,7 @@ h3 {
 
 .pageDiv {
   display:none; 
-  z-index:10
+/*  z-index:10*/
 }
 
 table.box {
@@ -147,6 +147,7 @@ table.index td {
 }
 
 #whatIsTrustjar {
+   display:none;
 }
 
 /* Sticky footer styles
@@ -197,19 +198,6 @@ table.index td {
     position: absolute;
     width:250px;
     height:150px;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 1050;
-  }
-
-
-.spinnyWheel {
-    border:5px solid #000000;
-    border-radius:5px;
-    position: absolute;
     top:0;
     bottom: 0;
     left: 0;

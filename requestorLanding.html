@@ -23,7 +23,6 @@
 
 <div id="splashDiv">
 	(splash)
-
 <!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
 		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
  -->
@@ -74,46 +73,79 @@
 
 
 <!-- *********************************** END HEADER **************************************** -->
-<div class="container">
-<!-- *********************************** HOME DIV **************************************** -->
+<!-- *********************************** BLANK DIV **************************************** -->
 
-<div id="home" class="pageTemplate">
-	<h3>Certify your relationship.</h3>
-	<div class="form-group well">  
-		<form action="" onsubmit="return homeSubmitRequest()" data-ajax="false"><!--   Request form: create a new relationshop-->
-			<div class="row">
-				<div class="col-md-5 form-group">   
-					<label id="homeContactLabel" for="homeUserContact">You</label>
-					<input type="text" class="form-control" id="homeUserContact" placeholder="email or mobile" autofocus required>
-				</div>			
-				<div class="col-md-2 form-group">   
-					<label id="relationshipType" for="homeRelationshipType">are in a</label><br>
-					<div class="btn-group" data-toggle="buttons">          
-						<label>
-							<input type="radio" name="homeRelationshipType" id="homeCasual" value="Casual" required> Casual
-						</label><br>
-						<label>
-							<input type="radio" name="homeRelationshipType" id="homeExclusive" value="Exclusive" required> Exclusive
-						</label>
+<div class="pageDiv" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
+</div>
+
+<!-- *********************************** END BLANK DIV **************************************** -->
+
+
+<div class="container"><!-- Bootstrap container to manage page width across different sizes -->
+
+<!-- *********************************** REQUESTORLANDING DIV **************************************** -->
+
+<div class="pageDiv row" id="requestorLanding">
+	<div class="col-md-1">     
+	</div> 
+
+	<div class="col-md-10">     
+		<div class="row">
+			<div class="col-md-2">     
+			</div> 
+
+			<div class="col-md-8 relationshipText">   
+				You are declaring the following <span id="requestorLandingRelationshipType"></span> relationship:
+				<div class="row">
+					<div class="col-md-5"> 
+						<div id="requestorLandingUserContact" class="relationshipContactContainer">   
+						</div>
+					</div> 
+					<div class="col-md-2 center"> 
+						<span class="glyphicon glyphicon-resize-horizontal relationshipIcon" aria-hidden="true"></span>
+					</div> 
+					<div class="col-md-5"> 
+						<div id="requestorLandingCounterpartyContact" class="relationshipContactContainer">
+						</div>
+					</div> 
+				</div> <!-- End row -->
+			</div>
+
+			<div class="col-md-2">   
+			</div> 
+		</div> <!-- End row -->
+		<br>
+		<div class="well">
+			<form action="" onsubmit="return requestorLandingForm();" data-ajax="false"><!--   Requestor landing form: complete the request and register -->
+				<p>Thanks for confirming your identity. Please complete the form below so you can manage this relationship in the future. A message will be sent to your partner to confirm their identity and complete the process. We'll never use your contact information for any other purpose.</p>
+				<div class="row">
+					<div class="col-md-6">   
+						<label id="homeContactLabel" for="requestorLandingUserContact2">Name</label> <a data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+						<input type="text" class="form-control" id="requestorLandingName" placeholder="Your name" required>	
 					</div>
+					<div class="col-md-6">                   
+						<label id="homeContactLabel" for="requestorLandingPasscode">Passcode</label> <a data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit thsi form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
+						<div id="requestorLandingPasscode" class="passcodeDisplay"></div>
+					</div>
+				</div> <!-- End row -->
+				<div class="checkbox">
+					<label>
+						<input id="requestorLandingTOS" type="checkbox" required> I have read and accept the Privacy Policy and Terms and Conditions.
+					</label>            
 				</div>
-				<div class="col-md-5 form-group">   
-					<label id="homeContactLabel" for="otherContact">relationship with:</label>
-					<input type="text" class="form-control" id="homeCounterpartyContact" placeholder="email or mobile" required>
-				</div>
-			</div> <!-- End row --> 
-			<div class="row">
-				<div class="col-md-12">   
-					<button id="homeRequestSubmitBtn" type="submit" class="btn btn-primary">Continue</button>  
-				</div>
-			</div> <!-- End row --> 
-		</form> <!--  End newRelationshiprequest form-->
-	</div>
+				<button id="requestorLandingSubmitBtn" type="submit" class="btn btn-primary">Send this request</button>         
+				<button id="requestorLandingCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel this request</button>   
+			</form>
+		</div>      
+	</div> <!-- End row -->
+	<div class="col-md-1">   
+	</div> 
+
 
 	<div class="row">
 		<div class="col-md-12">   
 			<div id="whatIsTrustjarContainer">
-				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
+				<a id="whatIsTrustjar">What is trustjar?</a>
 				<div id="whatIsTrustjarCopy">
 					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
 
@@ -130,27 +162,33 @@
 	</div> <!-- End row -->
 </div><!-- End Home -->
 
-<!-- *********************************** END HOME DIV **************************************** -->
-<!-- *********************************** HOMECONFIRMATION DIV **************************************** -->
 
 
-<div class="pageTemplate row" id="homeConfirmation">
+	
+</div><!-- End requestorLanding -->
+
+
+<!-- *********************************** END REQUESTORLANDING DIV **************************************** -->
+<!-- *********************************** REQUESTORCANCELCONFIRMATION DIV **************************************** -->
+
+<div class="pageDiv row" id="requestorCancelConfirmation">
 	<div class="col-md-1">   
 	</div> 
 	<div class="col-md-10">
-		<h3>Relationship request submitted.</h3> 
-		Please check the email or phone number you entered to complete the verification process.
+		<h3>Relationship request canceled.</h3> 
+		<p>To start a new request, return to the <a href="#" class="goHome">home page</a>.</p> 
 	</div>
 	<div class="col-md-1">     
 	</div> 
-</div><!-- End homeConfirmation -->
+</div> <!-- End row -->
+
+<!-- *********************************** END REQUESTORCANCELCONFIRMATION DIV **************************************** -->
 
 
-<!-- *********************************** END HOMECONFIRMATION DIV **************************************** -->
 
 <!-- ********************************************* FOOTER ************************************************** -->
 
-<footer class="footer globalFooter">
+<footer class="footer">
 	<div class='container'>
 		<div class='navbar-header'>
 			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -218,8 +256,7 @@
 		document.write("<script src='js/jquery-2.2.3.min.js'><\/script>");
 	}
 	</script>
-<!--	<script src="https://www.gstatic.com/firebasejs/3.0.0/firebase.js"></script> -->
- 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/login_pages.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

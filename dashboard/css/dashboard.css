@@ -32,9 +32,18 @@ html, body {
   display:none;
 }
 
+.dashboardWell1 {
+  background-color: #e1ebf3 !important;
+}
+
 h3 {
   font-weight:bold; 
   color:#555555
+}
+
+h4 {
+    margin-top: 0px;
+    font-size: 24px;
 }
 
 .logotype {
@@ -87,7 +96,6 @@ h3 {
 .serverAlert {
 /*  display:none; */  
   padding:6px; 
-  margin-top: 80px;
   padding-top:8px;
   border: 1px #cc0000 solid;
   visibility:hidden;
@@ -103,9 +111,9 @@ h3 {
   display:none;
 }
 
-.pageDiv {
+.pageTemplate {
   display:none; 
-  z-index:10
+/*  z-index:10*/
 }
 
 table.box {
@@ -142,26 +150,39 @@ table.index td {
     clip:rect(1px 1px 1px 1px);
 }
 
-#whatIsTrustjarContainer {
-   margin-top: 20px
+.requestorCheckbox {
+  text-align:left; 
+  font-weight: normal !important
+}
+/*
+.showEditContactsForm { 
+  display:none;
 }
 
-#whatIsTrustjar {
+*/.pending { 
+  color:#999999;
 }
+
+
+
+
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
 .footer {
   font-size: 16px;
   font-weight: bold;
-  position: fixed;
-  bottom: 0;
+/*  position: fixed;
+*/  bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
   padding: 10px 10px 60px 0px; 
-  display:none;
+  /*display:none;*/
 }
 
 
@@ -206,16 +227,8 @@ table.index td {
   }
 
 
-.spinnyWheel {
-    border:5px solid #000000;
-    border-radius:5px;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 1050;
+.jumbotron {
+    padding:20px; 
   }
 
 

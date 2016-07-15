@@ -21,7 +21,7 @@
 <div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
 <div id="landingWrapper"></div>
 
-<div id="splashDiv">
+<div id-"splashDiv">
 	(splash)
 
 <!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
@@ -74,83 +74,60 @@
 
 
 <!-- *********************************** END HEADER **************************************** -->
-<div class="container">
-<!-- *********************************** HOME DIV **************************************** -->
+<!-- *********************************** BLANK DIV **************************************** -->
 
-<div id="home" class="pageTemplate">
-	<h3>Certify your relationship.</h3>
-	<div class="form-group well">  
-		<form action="" onsubmit="return homeSubmitRequest()" data-ajax="false"><!--   Request form: create a new relationshop-->
-			<div class="row">
-				<div class="col-md-5 form-group">   
-					<label id="homeContactLabel" for="homeUserContact">You</label>
-					<input type="text" class="form-control" id="homeUserContact" placeholder="email or mobile" autofocus required>
-				</div>			
-				<div class="col-md-2 form-group">   
-					<label id="relationshipType" for="homeRelationshipType">are in a</label><br>
-					<div class="btn-group" data-toggle="buttons">          
-						<label>
-							<input type="radio" name="homeRelationshipType" id="homeCasual" value="Casual" required> Casual
-						</label><br>
-						<label>
-							<input type="radio" name="homeRelationshipType" id="homeExclusive" value="Exclusive" required> Exclusive
-						</label>
-					</div>
-				</div>
-				<div class="col-md-5 form-group">   
-					<label id="homeContactLabel" for="otherContact">relationship with:</label>
-					<input type="text" class="form-control" id="homeCounterpartyContact" placeholder="email or mobile" required>
-				</div>
-			</div> <!-- End row --> 
-			<div class="row">
-				<div class="col-md-12">   
-					<button id="homeRequestSubmitBtn" type="submit" class="btn btn-primary">Continue</button>  
-				</div>
-			</div> <!-- End row --> 
-		</form> <!--  End newRelationshiprequest form-->
+<div class="pageDiv" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
+</div>
+
+<!-- *********************************** END BLANK DIV **************************************** -->
+
+
+<div class="container"><!-- Bootstrap container to manage page width across different sizes -->
+
+<!-- *********************************** requestPASSCODE DIV **************************************** -->
+
+<div class="pageDiv row" id="requestPasscode">
+	<div class="col-md-3">   
 	</div>
-
-	<div class="row">
-		<div class="col-md-12">   
-			<div id="whatIsTrustjarContainer">
-				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
-				<div id="whatIsTrustjarCopy">
-					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
-
-					<p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
-
-					<p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
-
-					<p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
-
-					<p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
-				</div>
-			</div>
+	<div class="col-md-6"> 
+		<h3>Passcode assistance</h3>
+		<p>Enter an email address or phone number that's already associated with your existing trustjar account. If it's part of a confirmed account, we'll send a new passcode to that contact.</p><br>
+		<div class="well">
+			<form action="" onsubmit="return requestPasscodeSubmit()" data-ajax="false"><!--   Request form: create a new relationshop-->
+				<label id="forgotContactLabel" for="requestPasscodeUserContact">Email or mobile phone number</label>
+				<div class="row">
+					<div class="col-md-9">   
+						<input type="text" class="form-control" id="requestPasscodeUserContact" required>
+					</div>
+					<div class="col-md-3">   
+						<button id="requestPasscodeSubmitBtn" type="submit" class="btn btn-primary">Submit</button>  
+					</div>
+				</div> <!-- End row -->
+			</form>
 		</div>
+		<div class="col-md-3">     
+		</div> 
 	</div> <!-- End row -->
-</div><!-- End Home -->
+</div>
 
-<!-- *********************************** END HOME DIV **************************************** -->
-<!-- *********************************** HOMECONFIRMATION DIV **************************************** -->
+<!-- *********************************** END requestPASSCODE DIV **************************************** -->
+<!-- *********************************** requestPASSCODECONFIRMATION DIV **************************************** -->
 
-
-<div class="pageTemplate row" id="homeConfirmation">
+<div class="pageDiv row" id="requestPasscodeConfirmation">
 	<div class="col-md-1">   
 	</div> 
 	<div class="col-md-10">
-		<h3>Relationship request submitted.</h3> 
-		Please check the email or phone number you entered to complete the verification process.
+		<h3>Passcode sent.</h3>
+			If the contact you entered is in our system, a message will be sent to that contact with the new passcode. 
 	</div>
 	<div class="col-md-1">     
 	</div> 
 </div><!-- End homeConfirmation -->
 
-
-<!-- *********************************** END HOMECONFIRMATION DIV **************************************** -->
-
+<!-- *********************************** END requestPASSCODECONFIRMATION DIV **************************************** -->
 <!-- ********************************************* FOOTER ************************************************** -->
 
-<footer class="footer globalFooter">
+<footer class="footer">
 	<div class='container'>
 		<div class='navbar-header'>
 			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -218,8 +195,7 @@
 		document.write("<script src='js/jquery-2.2.3.min.js'><\/script>");
 	}
 	</script>
-<!--	<script src="https://www.gstatic.com/firebasejs/3.0.0/firebase.js"></script> -->
- 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/login_pages.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
