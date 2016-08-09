@@ -75,7 +75,7 @@
 <!-- *********************************** END HEADER **************************************** -->
 <!-- *********************************** BLANK DIV **************************************** -->
 
-<div class="pageDiv" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
+<div class="pageTemplate" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
 </div>
 
 <!-- *********************************** END BLANK DIV **************************************** -->
@@ -85,7 +85,7 @@
 
 <!-- *********************************** REQUESTORLANDING DIV **************************************** -->
 
-<div class="pageDiv row" id="requestorLanding">
+<div class="pageTemplate row" id="requestorLanding">
 	<div class="col-md-1">     
 	</div> 
 
@@ -134,7 +134,7 @@
 					</label>            
 				</div>
 				<button id="requestorLandingSubmitBtn" type="submit" class="btn btn-primary">Send this request</button>         
-				<button id="requestorLandingCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel this request</button>   
+				<button id="requestorLandingCancelBtn" type="button" class="btn btn-primary requestorCancelBtn">Cancel this request</button>   
 			</form>
 		</div>      
 	</div> <!-- End row -->
@@ -171,7 +171,7 @@
 <!-- *********************************** END REQUESTORLANDING DIV **************************************** -->
 <!-- *********************************** REQUESTORCANCELCONFIRMATION DIV **************************************** -->
 
-<div class="pageDiv row" id="requestorCancelConfirmation">
+<div class="pageTemplate row" id="requestorCancelConfirmation">
 	<div class="col-md-1">   
 	</div> 
 	<div class="col-md-10">
@@ -226,7 +226,7 @@
 <!-- *************************************** 'CANCEL CONFIRMATION' OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
-<div class='modal fade' id='cancelRelationshipOverlay' role='dialog'>
+<div class='modal fade' id='requestorCancelRelationshipOverlay' role='dialog'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>
 			<div class='modal-header' id='modalHeader'>
@@ -237,7 +237,7 @@
 				This will permanently remove the request from our system. Do you want to continue?
 			</div>
 			<div class='modal-footer'>
-				<button id='modalCancelRequest' type='button' class='btn btn-default cancelRelationshipConfirm' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='requestorCancelRequestBtn' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
 				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
 			</div>
 		</div>

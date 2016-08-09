@@ -1,0 +1,47 @@
+<svg id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="129.92" height="29.92" viewBox="0 0 129.92 29.92">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        stroke: #000;
+        stroke-width: 5px;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: #4f8bad;
+        stroke-width: 8.92px;
+      }
+
+      .cls-2 {
+        filter: url(#filter);
+      }
+
+      .cls-3 {
+        filter: url(#filter-2);
+      }
+    </style>
+    <filter id="filter" x="425" y="323" width="21" height="21" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="325" y="323" width="21" height="21" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="Shape_2_copy_2" data-name="Shape 2 copy 2" class="cls-1" d="M337,333v-1h97v1H337Zm0,1v-1h97v1H337Zm0,1v-1h97v1H337Z" transform="translate(-320.54 -318.54)"/>
+  <g transform="translate(-320.54 -318.54)" style="fill: none; filter: url(#filter)">
+    <path id="x_copy" data-name="x copy" class="cls-2" d="M444.181,322.991L445.1,323.9l-19.19,19.19-0.914-.914ZM445.1,323.9l0.914,0.914-19.19,19.19-0.914-.914Zm-18.276-.914-0.914.914L445.1,343.1l0.914-.914Zm-0.914.914-0.914.914,19.19,19.19,0.914-.914Z" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use transform="translate(-320.54 -318.54)" xlink:href="#x_copy" style="stroke: #4f8bad; filter: none; fill: none"/>
+  <g transform="translate(-320.54 -318.54)" style="fill: none; filter: url(#filter-2)">
+    <path id="x_copy_2" data-name="x copy 2" class="cls-3" d="M326.819,322.991l-0.914.914L345.1,343.1l0.914-.914Zm-0.914.914-0.914.914,19.19,19.19,0.914-.914Zm18.276-.914L345.1,323.9,325.9,343.1l-0.914-.914ZM345.1,323.9l0.914,0.914-19.19,19.19L325.9,343.1Z" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use transform="translate(-320.54 -318.54)" xlink:href="#x_copy_2" style="stroke: #4f8bad; filter: none; fill: none"/>
+</svg>

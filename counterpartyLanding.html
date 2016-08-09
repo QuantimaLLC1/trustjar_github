@@ -143,7 +143,7 @@
 							<input id="counterpartyLandingExistingUserTOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="counterpartyLandingContact3" class="cplCopy"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
 						</div>
 						<button id="counterpartyLandingExistingUserSubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>       
-						<button id="counterpartyLandingExistingUserCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+						<button id="counterpartyLandingExistingUserCancelBtn" type="button" class="btn btn-primary counterpartyCancelBtn">Cancel</button>
 					</form>
 				</div> <!-- End counterpartyLandingExistingUserForm -->
 
@@ -168,7 +168,7 @@
 							</label>            
 						</div>
 						<button id="counterpartyLandingNewUserSubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>        
-						<button id="counterpartyLandingNewUserCancelBtn" type="button" class="btn btn-primary cancelRelationshipBtn">Cancel</button>
+						<button id="counterpartyLandingNewUserCancelBtn" type="button" class="btn btn-primary counterpartyCancelBtn">Cancel</button>
 					</form>
 				</div> <!-- End counterpartyLandingNewUser -->
 
@@ -260,7 +260,7 @@
 <!-- *************************************** 'CANCEL CONFIRMATION' OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
-<div class='modal fade' id='cancelRelationshipOverlay' role='dialog'>
+<div class='modal fade' id='counterpartyCancelRelationshipOverlay' role='dialog'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>
 			<div class='modal-header' id='modalHeader'>
@@ -271,7 +271,7 @@
 				This will permanently remove the request from our system. Do you want to continue?
 			</div>
 			<div class='modal-footer'>
-				<button id='modalCancelRequest' type='button' class='btn btn-default cancelRelationshipConfirm' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='counterpartyCancelConfirmBtn' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
 				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
 			</div>
 		</div>

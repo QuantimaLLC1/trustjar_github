@@ -99,13 +99,13 @@
 	// Replaces a list of contacts with an 'edit profile' form in the header.
 	$(document).on('click', '#editProfileLink', function(){
 		$('#editProfileForm').show(); 
-		$('#profileContactsContainer').hide()
+//		$('#profileContactsContainer').hide()
 	});
 
 	// Cancels the 'edit profile' form and restores the default view.
 	$(document).on('click', '#cancelEditProfileBtn', function(){
 		$('#editProfileForm').hide(); 
-		$('#profileContactsContainer').show()
+//		$('#profileContactsContainer').show()
 	});
 
 	// Replaces a list of contacts in a relationship with an 'edit contacts' form. Allows a user to edit a contact list in a relationship.
@@ -161,10 +161,14 @@
 
 
 	// When a user clicks a 'Become exclusive' link, this passes the relationship ID to 
-	// the 'confirm' button in the confirmation dialog
+	// the 'confirm' button in the confirmation dialog. This should only work if it's the only relationship in the dashboard
 	$(document).on('click', '.becomeExclusive', function(){
-		thisRelationshipId = this.id.replace('BecomeExclusiveBtn','');
-		$('#confirmBecomeExclusiveBtn').attr("id", thisRelationshipId + "ConfirmBecomeExclusiveBtn")
+		if ($('.relationshipModule').length == 1) {
+			$('#dashboardBecomeExclusive').modal('show')
+		// If there's more than one relationship in the dashboard, show a modal telling the user to remove the other relationships.
+		} else {
+			$('#dashboardDontBecomeExclusive').modal('show')
+		};
 	});
 
 // UNIQUE ID PLACEHOLDER
@@ -183,86 +187,108 @@
 	// received by Firebase and processed by listeners elsewhere in this document. We do this because the number of possible
 	// relationships on this page will vary from user to user, including the possibility that zero relationships are in a user's dashboard.
 	function buildDashboard(requestor, counterparty, relationship){
-				$('#relationshipColumn').append(
-					"<div id='" + relationship + "Div' class=' well dashboardWell1'>" +
-						// First row contains the requestor and counterparty names and the '<->' icon
-						"<div id='relationshipNames' class='row'>" + 
-							"<div id='" + relationship + "RequestorName' class='col-md-5' style='text-align:right'>" +
-									"<h4 class='relationshipRequestorName'>" + 
-										requestor + 
-									"</h4>" +
-								"</div>" +
-								"<div class='col-md-2' style='text-align:center'>" +
-									"<span class='glyphicon glyphicon-resize-horizontal' aria-hidden='true' style='font-size:60px; position:relative; top:-10px'></span>" +
-								"</div>" +
-								"<div id='" + relationship + "CounterpartyName' class='col-md-5'>" +
-										"<h4>" + 
-											counterparty + 
-										"</h4>" +
-								"</div>" +
-							"</div>" +
-							"<div id='" + relationship + "ContactList' class='row' style='position:relative; top:-30px'>" +
-								"<div class='col-md-5'>" + 
-									// This gets populated with the linst of verified requestor contacts that have been included in this relationship.
-									"<div id='" +  relationship +  "RequestorContactList' style='text-align:right'>" +   
-									"</div>" +
-								"</div>" + 
-								"<div class='col-md-2' style='text-align:center'>" + 
-								"</div>" + 
-								"<div class='col-md-5'>" + 
-									// This gets populated with the linst of confirmed and unconfirmed counterparty contacts that are included in the relationship.
-									"<div id='" +  relationship +  "CounterpartyContactList'>" +   
-									"</div>" +
-								"</div>" +
-							"</div>" +
+		$('#relationshipColumn').append(
+			"<div id='" + relationship + "Div' class=' well relationshipModule'>" +
 
-							"<div id='" + relationship + "EditContactsForm' style='position:relative; top:-20px; display:none; border:1px solid; padding:10px'>" +
-								"<div class='row'>" +
-									"<div class='col-md-5'>" + 
-										// As part of the 'Edit contacts' form, this is populated with ALL verified and unverified contacts in the user's profile, to allow inclusion in or removal from the relationship.
-										// Unconfirmed contacts can't be included but are presented as a visual cue to remind the user to verify them.
-										"<div id='" +  relationship +  "RequestorContactForm' style='text-align:right' class='requestorContactForm'>" +   
-										"</div>" +
-									"</div>" + 
-									"<div class='col-md-2' style='text-align:center'>" + 
-									"</div>" + 
-									"<div class='col-md-5'>" + 
-										// As part of the 'Edit contacts' form, this is populated with ALL confirmed and unconfirmed counterparty contacts, to allow removal from the relationship.
-										"<div id='" +  relationship +  "CounterpartyContactForm'>" +  
-											// Allows the user to add a counterparty contact to an existing relationship.
-											"<input id='" + relationship + "AddCounterpartyContact' type='text' class='form-control' placeholder='Add a new phone or email'>" + 
-										"</div>" +
-									"</div>" +
-								"</div>" +
-								// This row contains the change / cancel buttons for the form.
-								"<div class='row'>" +
-									"<div class='col-md-12' style='text-align:center'>" + 
-										"Your partner will be notified of all changes.<br>" +
-										"<a href='#' data-toggle='modal' id='" + relationship + "ChangeBtn' data-target='#confirmeditRelationshipContacts' class='btn btn-primary btn-sm editRelationshipContactsBtn'>" + 
-											"Change" +
-										"</a>" +
-										"<button id='" + relationship + "CancelEditContacts' type='submit' class='btn btn-primary btn-sm cancelEditContactsForm'>" +
-											"Cancel" +
-										"</button>" +
-									"</div>" + 
-								"</div>" +
+				// First row contains the requestor and counterparty names and the '<->' icon
+				"<div id='relationshipNames' class='row boxHeader'>" + 
+					// Requestor name
+					"<div id='" + relationship + "RequestorName' class='col-md-5' style='text-align:right'>" +
+						"<div class='relationshipRequestorName'>" + 
+							requestor + 
+						"</div>" +
+					"</div>" +
+					"<div class='col-md-2' style='text-align:center'>" +
+					"</div>" +
+					// Counterparty name
+					"<div id='" + relationship + "CounterpartyName' class='col-md-5'>" +
+						"<div>" + 
+							counterparty + 
+						"</div>" +
+					"</div>" +
+				"</div>" +
+				// Contact lists
+				"<div id='" + relationship + "ContactList' class='row profileContacts'>" +
+				"<hr class='dotted'>" +
+					"<div class='col-md-5'>" + 
+						// This gets populated with the linst of verified requestor contacts that have been included in this relationship.
+						"<div id='" +  relationship +  "RequestorContactList' style='text-align:right'>" +   
+						"</div>" +
+					"</div>" + 
+					"<div class='col-md-2' style='text-align:center'>" + 
+						"<span class='glyphicon glyphicon-resize-horizontal' aria-hidden='true' style='font-size:60px'></span>" +
+					"</div>" + 
+					"<div class='col-md-5'>" + 
+						// This gets populated with the linst of confirmed and unconfirmed counterparty contacts that are included in the relationship.
+						"<div id='" +  relationship +  "CounterpartyContactList'>" +   
+						"</div>" +
+					"</div>" +
+				"</div>" +
+				// Edit contacts form appears when user clicks 'edit contacts'
+				"<div id='" + relationship + "EditContactsForm' class='profileContacts' style='position:relative; display:none; border:1px solid; padding:10px'>" +
+					"<div class='row'>" +
+						"<div class='col-md-5'>" + 
+							// As part of the 'Edit contacts' form, this is populated with ALL verified and unverified contacts in the user's profile, to allow inclusion in or removal from the relationship.
+							// Unconfirmed contacts can't be included but are presented as a visual cue to remind the user to verify them.
+							"<div id='" +  relationship +  "RequestorContactForm' style='text-align:right' class='requestorContactForm'>" +   
 							"</div>" +
-							// The links along the bottom of the relationship module: Edit contacts, Become exclusive, or Remove relationship.
-							"<div class='center' style='font-size:16px; position:relative; top:-10px'>" +
-								"<a href='#' id='" + relationship + "EditContacts' class='editContactsForm'>" +   
-									"Edit contacts" +
-								"</a><span class='becomeExclusiveSpan'>&nbsp;&nbsp; | &nbsp;&nbsp;" +
-								"<a href='#' id='" + relationship + "BecomeExclusiveBtn' class='becomeExclusive' data-toggle='modal' data-target='#dashboardBecomeExclusive'>" +
-									"Become exclusive" +
-								"</a></span>" +
-								"</a>&nbsp;&nbsp; | &nbsp;&nbsp;" +
-								"<a href='#' id='" + relationship + "RemoveRelationship' class='removeRelationship' data-toggle='modal' data-target='#dashboardRemoveRelationship'>" + 
-									"Remove relationship" +
-								"</a>" +
+						"</div>" + 
+						"<div class='col-md-2' style='text-align:center'>" + 
+						"</div>" + 
+						"<div class='col-md-5'>" + 
+							// As part of the 'Edit contacts' form, this is populated with ALL confirmed and unconfirmed counterparty contacts, to allow removal from the relationship.
+							"<div id='" +  relationship +  "CounterpartyContactForm' class='profileContacts'>" +  
+								// Allows the user to add a counterparty contact to an existing relationship.
+								"<input id='" + relationship + "AddCounterpartyContact' type='text' class='form-control' placeholder='Add a new phone or email'>" + 
 							"</div>" +
 						"</div>" +
-					"</div>"
-				);
+					"</div>" +
+					// This row contains the change / cancel buttons for the 'edit contacts' form.
+					"<div class='row'>" +
+						"<div class='col-md-12' style='text-align:center'>" + 
+							"Your partner will be notified of all changes.<br>" +
+							"<a href='#' data-toggle='modal' id='" + relationship + "ChangeBtn' data-target='#confirmeditRelationshipContacts' class='btn btn-primary btn-sm editRelationshipContactsBtn'>" + 
+								"Change" +
+							"</a>" +
+							"<button id='" + relationship + "CancelEditContacts' type='submit' class='btn btn-primary btn-sm cancelEditContactsForm'>" +
+								"Cancel" +
+							"</button>" +
+						"</div>" + 
+					"</div>" +
+				"</div>" +
+				// The links along the bottom of the relationship module: edit contacts, become exclusive, end relationship.
+				"<div class='row center'>" +
+
+					"<div class='col-md-4'>" +
+
+						"<a href='#' id='" + relationship + "EditContacts' class='editContactsForm'>" + 
+							"<button type='submit' class='btn btn-primary btn-md'>" +
+								"edit contacts" +
+							"</button>" +  
+						"</a>" + 
+					"</div>" +
+
+					"<div class='col-md-4'>" +
+						"<span class='becomeExclusiveSpan'>" +
+							"<a href='#' id='" + relationship + "BecomeExclusiveBtn' class='becomeExclusive' data-toggle='modal'>" +
+								"<button type='submit' class='btn btn-primary btn-md'>" +
+	 								"become exclusive" +
+								"</button>" +  
+							"</a>" + 
+						"</span>" +
+					"</div>" +
+
+					"<div class='col-md-4'>" +
+						"<a href='#' id='" + relationship + "RemoveRelationship' class='removeRelationship' data-toggle='modal' data-target='#dashboardRemoveRelationship'>" + 
+							"<button type='submit' class='btn btn-primary btn-md'>" +
+							"end relationship" +
+							"</button>" +  
+						"</a>" +
+					"</div>" +
+
+				"</div>" +
+			"</div>"
+		);
 	}
 
 // FIREBASE REFERENCES
@@ -278,127 +304,68 @@
 	// Used to read footer content on a common public branch set by Firebase. May change pending server implementation.
 	GLOB.footerRef = GLOB.trustjarRef.child('commonBranch/footer');
 	// Firebase reference for all dashboard page data.
-	GLOB.pageDataRef = GLOB.serverRef.child('pageData');
+	GLOB.pageDataRef = GLOB.serverRef.child('dashboardPageData');
 	// Reference for all server-generated 'system alert' messages.
 	GLOB.serverAlertRef = GLOB.serverRef.child('serverAlert');
 
 // FIREBASE SERVER FUNCTIONS
-	// Page display listeners
-	GLOB.displayRef.on('child_added', function(childSnapshot, prevChildName) {
+	// Page display listener
+	GLOB.displayRef.on('value', function(dataSnapshot) {
 		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
-		// If the received page template name is in the eventListenersMap, assign it to a variable.
-		var handlerFunction = eventListenersMap[ val ];
-		// Check if the page referred to is an external URL
-		var checkURL = val.substring(0,3)
-		if( checkURL == 'URL' ) {
-			var newPage = val.substring(4);
-			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
-			// For the time being, it's commented out.
-			// window.location = newPage
+		var val = dataSnapshot.val();
+		// Check if there's a datasnapshot at this Firebase reference. If not, this will prevent an error on page load.
+		if (val !== null) {
+			// If the received page template name is in the eventListenersMap, assign it to a variable.
+			var handlerFunction = eventListenersMap[ val ];
+			// Check if the page referred to is an external URL
+			var checkURL = val.substring(0,3)
+			if( checkURL == 'URL' ) {
+				var newPage = val.substring(4);
+				// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
+				// For the time being, it's commented out.
+				// window.location = newPage
 
-			// In the meantime, we'll call a function for the unit test.
-			goToNewPage(newPage)
-		} else {
-			// If the page template name received by Firebase is not in the eventsListenersMap, return a "bad page" message to Firebase
-			if( handlerFunction == null ) {
-				badPageName( val );
+				// In the meantime, we'll call a function for the unit test.
+				goToNewPage(newPage)
 			} else {
-				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-				var showNew = "#" + val;
-				// if the display is still showing the splash page, fade it out. SplashDiv is not part of the pageTemplate class
-				// because 'pageTemplate's are hidden by default, and the splash is displayed by default.
-				$('#splashDiv').fadeOut(300);
-				// if another pageTemplate is being displayed, fade it out
-				$('.pageTemplate').each(function() {
-					var pageId = '#' + this.id;
-					if ( $(pageId).css('display') == 'block') {
-						$(pageId).fadeOut(300);
-						// Remove the 'disable controls' overlay if one is present
-						enableControls();
-					}
-				});
-				// fade the new page in, allowing for the old page to fade out first
-				setTimeout(function() {
-					$(showNew).fadeIn(300);
-					$('.anonHeader').fadeIn(300);
-					$('.footer').fadeIn(300);
-					$('#whatIsTrustjar').fadeIn(300)
-				}, 300);
+				// If the page template name received by Firebase is not in the eventsListenersMap, return a "bad page" message to Firebase
+				if( handlerFunction == null ) {
+					badPageName( val );
+				} else {
+					// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
+					var showNew = "#" + val;
+					// if the display is still showing the splash page, fade it out. SplashDiv is not part of the pageTemplate class
+					// because 'pageTemplate's are hidden by default, and the splash is displayed by default.
+					$('#splashDiv').fadeOut(300);
+					// if another pageTemplate is being displayed, fade it out
+					$('.pageTemplate').each(function() {
+						var pageId = '#' + this.id;
+						if ( $(pageId).css('display') == 'block') {
+							$(pageId).fadeOut(300);
+							// Remove the 'disable controls' overlay if one is present
+							enableControls();
+						}
+					});
+					// fade the new page in, allowing for the old page to fade out first
+					setTimeout(function() {
+						$(showNew).fadeIn(300);
+						$('.anonHeader').fadeIn(300);
+						$('.footer').fadeIn(300);
+						$('#whatIsTrustjar').fadeIn(300)
+					}, 300);
+				}
 			}
 		}
 	});
-
-	// Server sets the page to be displayed
-	GLOB.displayRef.on('child_changed', function(childSnapshot, prevChildName) {
-		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
-		// If the received page template name is in the eventListenersMap, assign it to a variable.
-		var handlerFunction = eventListenersMap[ val ];
-		// Check if the page referred to is an external URL
-		var checkURL = val.substring(0,3)
-		if( checkURL == 'URL' ) {
-			var newPage = val.substring(4);
-			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
-			// For the time being, it's commented out.
-			// window.location = newPage
-
-			// In the meantime, we'll call a function for the unit test.
-			goToNewPage(newPage)
-		} else {
-			// If the page template name received by Firebase is not in the eventsListenersMap, return a "bad page" message to Firebase
-			if( handlerFunction == null ) {
-				badPageName( val );
-			} else {
-				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-				var showNew = "#" + val;
-				// if the display is still showing the splash page, fade it out. SplashDiv is not part of the pageTemplate class
-				// because 'pageTemplate's are hidden by default, and the splash is displayed by default.
-				$('#splashDiv').fadeOut(300);
-				// if another page template is being displayed, fade it out
-				$('.pageTemplate').each(function() {
-					var pageId = '#' + this.id;
-					if ( $(pageId).css('display') == 'block') {
-						$(pageId).fadeOut(300);
-						// Remove the 'disable controls' overlay if one is present
-						enableControls();
-					}
-				});
-				// fade the new page in, allowing for the old page to fade out first
-				setTimeout(function() {
-					$(showNew).fadeIn(300);
-					$('.anonHeader').fadeIn(300);
-					$('.footer').fadeIn(300);
-					$('#whatIsTrustjar').fadeIn(300)
-				}, 300);
-			}
-		}
-	});
-
-
 
 	// Page data functions
-	GLOB.pageDataRef.on('child_added', function(childSnapshot, prevChildName) {
+	GLOB.pageDataRef.on('value', function(dataSnapshot) {
 		// Retrieve the data snapshot from the Firebase message
-		var val = childSnapshot.val();
+		var val = dataSnapshot.val();
+		// Check if there's a datasnapshot at this Firebase reference. If not, this will prevent an error on page load.
+		if (val !== null) {
 
-		// PAGE LEVEL DATA
-			GLOB.relationshipType = val.relationshipType;
-			// Place the relationship type where it belongs in the main page template.
-			$('#relationshipType').html(GLOB.relationshipType);
-			// If the relationship is exclusive, hide the "Add a new relationship" form and 'Become exclusive' links within relationship modules. There may be other layout rules applied pending Creative.
-			if (GLOB.relationshipType == 'exclusive') {
-				$('#newRelationshipContainer').hide();
-				$('.becomeExclusiveSpan').hide();
-				$('#relationshipTypeHeader').html('Exclusive relationship');				
-			};
-
-			// If the relationship is casual, show the "Add a new relationship" form and 'Become exclusive' links within relationship modules. There may be other layout rules applied pending Creative.
-			if (GLOB.relationshipType == 'casual') {
-				$('#newRelationshipContainer').show();
-				$('#relationshipTypeHeader').html('Casual relationships');				
-			};
-
+			// Assign the user / requestor's name to a global variable.
 			GLOB.profileName = val.profileName;
 			// Place the requestor name where it belongs in the header and in each relationship module
 			$('#headerProfileName').html(GLOB.profileName);
@@ -432,262 +399,128 @@
 			//RELATIONSHIP LEVEL DATA
 			// Initialize the entire relationship column
 			$('#relationshipColumn').html('');
-			// Assign the set of relationship data in the Firebase message to a global variable.
-			GLOB.relationshipData = val.relationshipLevelData;
 
-			// Define an array for the set of relationship ID's that will define each relationship in the set.
-			GLOB.relationshipId = [];
-
-			// Iterate through each relationship ID in the array to derive and displey the subset of relationship date for each relationship.
-			GLOB.relationshipId = Object.keys(GLOB.relationshipData);
-			for (var i = 0; i < GLOB.relationshipId.length; i++) {
-
-				var thisRelationship = GLOB.relationshipId[i];
-				// Retrieve the counterparty name for this relationship
-				var counterpartyName = eval("GLOB.relationshipData." + thisRelationship + ".counterpartyName");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the requestor contact list.
-				var requestorContactListId = '#' + thisRelationship + "RequestorContactList"
-				// Incorporate the relationship identifier into the ID of the HTML element that  will contain the requestor contacts to be included in the 'Edit contacts' form.
-				var requestorContactFormId = '#' + thisRelationship + "RequestorContactForm"
-				// Retrieve the list of included requestor contacts for this relationship as a comma delimited string. Only verified contacts can be in a relationship as defined by the
-				// 'includedRequestorContacts' portion of the Firebase message, and all such contacts must be a subset of verified profile contacts.
-				var includedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".includedRequestorContacts");
-				// Retrieve the list of unverified requestor contacts for this relationship as a comma delimited string. These will populate the 'Edit contacts' form.
-				var unverifiedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".unverifiedRequestorContacts");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact list.
-				var counterpartyContactListId = '#' + thisRelationship + "CounterpartyContactList"
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact form.				
-				var counterpartyContactFormId = '#' + thisRelationship + "CounterpartyContactForm"
-				// Retrieve the list of confirmed counterparty contacts for this relationship as a comma delimited string.
-				var confirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".confirmedCounterpartyContacts");
-				// Retrieve the list of unconfirmed counterparty contacts for this relationship as a comma delimited string.				
-				var unconfirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".unconfirmedCounterpartyContacts");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the "add a new counterparty contact" field.				
-				var addCounterpartyField = "#" + thisRelationship + "AddCounterpartyContact"
-
-				// Call the function that renders the HTML comprising a relationship module, using the user's name, the counterparty name, and the relationship identifier.
-				buildDashboard(GLOB.profileName, counterpartyName, thisRelationship);
-
-				// If the relationship is exclusive, hide the "Become exclusive" link within the relationship. This must be done after the relationship div is constructed.
-				if (GLOB.relationshipType == 'exclusive') {
-					$('.becomeExclusiveSpan').hide();
-				};
-
-				// For each contact in the includedRequestorContacts list, create a display element and add it to the default relationship display.
-				$(includedRequestorContacts).each(function (i, contact) {
-					$(requestorContactListId).append(" <div><b>" + contact + "</b></div>")
-				});
-
-/*				// For each contact in the unverifiedRequestorContacts list, create a display element, including a checkbox and an 'unverified' link and add it to the default relationship display.
-				$(unverifiedRequestorContacts).each(function (i, contact) {
-					$(requestorContactListId).append(" <div class='pending'><b>(<a href='#' id='" + contact + "Unverified' data-toggle='modal' data-target='#counterpartyResend'>unverified</a>) " + contact + "</b></div>")
-				});
-*/				
-
-				// For each contact in the verifiedProfileContacts list, create a display element including a checkboxand add it to the requestor section of the 'Edit contacts' form.
-				$(GLOB.verifiedProfileContacts).each(function (i, contact) {
-					$(requestorContactFormId).append(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' class='pull-right " + thisRelationship + "RequestorCheckbox'><label>" + contact + "&nbsp;</label></div>")
-					// if the requestor contact is already part of the "included Requestor Contacts" list, pre-check the checkbox associated with it to reflect the default display.
-					if(jQuery.inArray(contact, includedRequestorContacts) !== -1){
-						contactCheckbox = "#" + contact + thisRelationship + "Checkbox";
-						// Strip the special characters from the ID string. This allows the user to enter characters that are used as standard notation for emails and phone numbers without creating an error.
-						formattedContactCheckbox = contactCheckbox.replace('@', '\\@').replace('.', '\\.').replace('-', '\\-').replace('(', '\\(').replace(')', '\\)')
-						// Use the stripped ID string to check the checkbox corresponding to an already added contact.
-						$( formattedContactCheckbox ).prop( "checked", true );
-					}
-				});
-
-				// For each contact in the unverifiedProfileContacts list, create a display element, including a checkbox and an 'unverified' link and add it to the requestor section of the 'Edit contacts' form.
-				$(GLOB.unverifiedProfileContacts).each(function (i, contact) {
-					$(requestorContactFormId).append(" <div class='pending'><input id='" + contact  + thisRelationship + "Checkbox' type='checkbox' disabled class='pull-right'>(<a href='#' id='" + thisRelationship + contact + "UnverifiedEditRelationship' data-toggle='modal' data-target='#resendVerification' class='unverifiedLink " + contact + "Verify'>unverified</a>) <label>" + contact + "&nbsp;</label></div>")
-				});
-
-				// For each contact in the confirmedCounterpartyContacts list, create a display element including a checkbox and add it to the default display and the requestor section of the 'Edit contacts' form.
-				// .before is used to make sure the list appears above the "add a new phone or email" text input field.
-				$(confirmedCounterpartyContacts).each(function (i, contact) {
-					$(counterpartyContactListId).append(" <div><b>" + contact + "</b></div>")
-					$(addCounterpartyField).before(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label></div>")
-				});
-
-				// For each contact in the unconfirmedCounterpartyContacts list, create a display element, including a checkbox and an 'unconfirmed link', and add it to the default display and the counterparty section of the 'Edit contacts' form.
-				// .before is used to make sure the list appears above the "add a new phone or email" text input field.
-				$(unconfirmedCounterpartyContacts).each(function (i, contact) {
-					$(counterpartyContactListId).append(" <div class='pending'><b>" + contact + " (<a href='#' id='" + thisRelationship + contact + "Unconfirmed' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</b></div>")
-					$(addCounterpartyField).before(" <div class='pending'><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label> (<a href='#' id='" + contact + "UnconfirmedEditForm' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</div>")
-				});
-			};
-
-	});
-
-
-	// Page data functions
-	GLOB.pageDataRef.on('child_changed', function(childSnapshot, prevChildName) {
-		// Retrieve the data snapshot from the Firebase message
-		var val = childSnapshot.val();
-
-		// PAGE LEVEL DATA
 			GLOB.relationshipType = val.relationshipType;
-			// Place the relationship type where it belongs in the main page template.
-			$('#relationshipType').html(GLOB.relationshipType);
+			// If this data set is the relationship type, change the page layout rules to reflect the relationship type.
 			// If the relationship is exclusive, hide the "Add a new relationship" form and 'Become exclusive' links within relationship modules. There may be other layout rules applied pending Creative.
 			if (GLOB.relationshipType == 'exclusive') {
 				$('#newRelationshipContainer').hide();
 				$('.becomeExclusiveSpan').hide();
-				$('#relationshipTypeHeader').html('Exclusive relationship');				
+				$('#relationshipTypeHeader').html('EXCLUSIVE RELATIONSHIP');				
 			};
 
 			// If the relationship is casual, show the "Add a new relationship" form and 'Become exclusive' links within relationship modules. There may be other layout rules applied pending Creative.
 			if (GLOB.relationshipType == 'casual') {
 				$('#newRelationshipContainer').show();
-				$('#relationshipTypeHeader').html('Casual relationships');				
+				$('#relationshipTypeHeader').html('CASUAL RELATIONSHIP(S)');				
 			};
 
-			GLOB.profileName = val.profileName;
-			// Place the requestor name where it belongs in the header and in each relationship module
-			$('#headerProfileName').html(GLOB.profileName);
-			$('#editProfileFormName').val(GLOB.profileName);
-
-			// Initialize all page display elements
-			$('#profileContacts').html('');
-			$('#editProfileContactList').html('')			
-			$('#newRelationshipFormContacts').html('')	
-
-			//Assign the array of verified profile contacts to a global variable.
-			GLOB.verifiedProfileContacts = val.verifiedProfileContacts;
-			// Format all verified profile contacts for display in the header, the 'Edit profile' form and the 'Add a new relationship' form.
-			// Append each verified contact to the designated locations mentioned above. If the display element is part of a form, add checkboxes so the user can select them.
-			$(GLOB.verifiedProfileContacts).each(function (i, contact) {
-				$('#profileContacts').append(" <div>" + contact + "</div>")
-				$('#editProfileContactList').append(" <div><input id='" + contact + "Checkbox' type='checkbox' class='profileCheckbox' checked> <label>" + contact + "</label></div>")
-				$('#newRelationshipFormContacts').append(" <div><input id='" + contact + "NewRelationshipCheckbox' class='newRelationshipCheckbox' type='checkbox'> <label>" + contact + "</label></b></div>")
-			});
-
-			//Assign the array of unverified profile contacts to a global variable. 
-			GLOB.unverifiedProfileContacts = val.unverifiedProfileContacts;
-			// Format and append all unverified profile contacts for display in the header, the 'Edit profile' form and the 'Add a new relationship' form.
-			// A link is appended to each to allow the user to resend a 'verify' notification. If the display element is part of a form, add checkboxes so the user can select them.
-			$(GLOB.unverifiedProfileContacts).each(function (i, contact) {
-				$('#profileContacts').append(" <div class='pending'>" + contact + " (<a href='#' id='" + contact + "UnverifiedProfile' data-toggle='modal' data-target='#resendVerification' class='unverifiedLink " + contact + "Verify'>unverified</a>)</div>")
-				$('#editProfileContactList').append(" <div class='pending'><input id='" + contact + "Checkbox' type='checkbox' class='profileCheckbox' checked> <label>" + contact + "</label> (<a href='#' id='" + contact + "UnverifiedProfileEdit' data-toggle='modal' data-target='#resendVerification' class='unverifiedLink " + contact + "Verify'>unverified</a>)</div>")
-				$('#newRelationshipFormContacts').append(" <div class='pending'><b><input id='" + contact + "NewRelationshipCheckbox' class='newRelationshipCheckbox' type='checkbox' disabled> <label>" + contact + "</label> (<a href='#' id='" + contact + "NewRelationshipUnverified' data-toggle='modal'class='unverifiedLink " + contact + "Verify' data-target='#resendVerification'>unverified</a>)</b></div>")
-			});
-
-			//RELATIONSHIP LEVEL DATA
-			// Initialize the entire relationship column
-			$('#relationshipColumn').html('');
 			// Assign the set of relationship data in the Firebase message to a global variable.
 			GLOB.relationshipData = val.relationshipLevelData;
+			// If there are existing relationships in the page data:
+			if (GLOB.relationshipData !== undefined) {
+				// Disable the 'exclusive' radio button in the 'new relationship' form
+				$( '#newRelationshipRadioExclusive' ).attr( 'disabled', true);
+				// Restore the tooltip text that tells the user why the radio button is disabled
+				$('#newRelationshipRadioExclusive').parent().replaceWith("<label id='newRelationshipExclusive' data-toggle='tooltip' data-placement='right' title='You can&apos;t create an exclusive relationship if you already have any other relationships in your Trustjar.' style='float:right'><input id='newRelationshipRadioExclusive' type='radio' name='newRelationshipType' value='exclusive' autocomplete='off' required disabled> Exclusive</label>")
+				// Initialize Bootstrap tooltips
+				$('[data-toggle="tooltip"]').tooltip()
 
-			// Define an array for the set of relationship ID's that will define each relationship in the set.
-			GLOB.relationshipId = [];
+				// Define an array for the set of relationship ID's that will define each relationship in the set.
+				GLOB.relationshipId = [];
 
-			// Iterate through each relationship ID in the array to derive and displey the subset of relationship date for each relationship.
-			GLOB.relationshipId = Object.keys(GLOB.relationshipData);
-			for (var i = 0; i < GLOB.relationshipId.length; i++) {
+				// Iterate through each relationship ID in the array to derive and displey the subset of relationship date for each relationship.
+				GLOB.relationshipId = Object.keys(GLOB.relationshipData);
 
-				var thisRelationship = GLOB.relationshipId[i];
-				// Retrieve the counterparty name for this relationship
-				var counterpartyName = eval("GLOB.relationshipData." + thisRelationship + ".counterpartyName");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the requestor contact list.
-				var requestorContactListId = '#' + thisRelationship + "RequestorContactList"
-				// Incorporate the relationship identifier into the ID of the HTML element that  will contain the requestor contacts to be included in the 'Edit contacts' form.
-				var requestorContactFormId = '#' + thisRelationship + "RequestorContactForm"
-				// Retrieve the list of included requestor contacts for this relationship as a comma delimited string. Only verified contacts can be in a relationship as defined by the
-				// 'includedRequestorContacts' portion of the Firebase message, and all such contacts must be a subset of verified profile contacts.
-				var includedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".includedRequestorContacts");
-				// Retrieve the list of unverified requestor contacts for this relationship as a comma delimited string. These will populate the 'Edit contacts' form.
-				var unverifiedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".unverifiedRequestorContacts");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact list.
-				var counterpartyContactListId = '#' + thisRelationship + "CounterpartyContactList"
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact form.				
-				var counterpartyContactFormId = '#' + thisRelationship + "CounterpartyContactForm"
-				// Retrieve the list of confirmed counterparty contacts for this relationship as a comma delimited string.
-				var confirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".confirmedCounterpartyContacts");
-				// Retrieve the list of unconfirmed counterparty contacts for this relationship as a comma delimited string.				
-				var unconfirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".unconfirmedCounterpartyContacts");
-				// Incorporate the relationship identifier into the ID of the HTML element that will contain the "add a new counterparty contact" field.				
-				var addCounterpartyField = "#" + thisRelationship + "AddCounterpartyContact"
+				for (var i = 0; i < GLOB.relationshipId.length; i++) {
 
-				// Call the function that renders the HTML comprising a relationship module, using the user's name, the counterparty name, and the relationship identifier.
-				buildDashboard(GLOB.profileName, counterpartyName, thisRelationship);
+					var thisRelationship = GLOB.relationshipId[i];
 
-				// If the relationship is exclusive, hide the "Become exclusive" link within the relationship. This must be done after the relationship div is constructed.
-				if (GLOB.relationshipType == 'exclusive') {
-					$('.becomeExclusiveSpan').hide();
+
+					// Retrieve the counterparty name for this relationship
+					var counterpartyName = eval("GLOB.relationshipData." + thisRelationship + ".counterpartyName");
+					// Incorporate the relationship identifier into the ID of the HTML element that will contain the requestor contact list.
+					var requestorContactListId = '#' + thisRelationship + "RequestorContactList"
+					// Incorporate the relationship identifier into the ID of the HTML element that  will contain the requestor contacts to be included in the 'Edit contacts' form.
+					var requestorContactFormId = '#' + thisRelationship + "RequestorContactForm"
+					// Retrieve the list of included requestor contacts for this relationship as a comma delimited string. Only verified contacts can be in a relationship as defined by the
+					// 'includedRequestorContacts' portion of the Firebase message, and all such contacts must be a subset of verified profile contacts.
+					var includedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".includedRequestorContacts");
+					// Retrieve the list of unverified requestor contacts for this relationship as a comma delimited string. These will populate the 'Edit contacts' form.
+					var unverifiedRequestorContacts = eval("GLOB.relationshipData." + thisRelationship + ".unverifiedRequestorContacts");
+					// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact list.
+					var counterpartyContactListId = '#' + thisRelationship + "CounterpartyContactList"
+					// Incorporate the relationship identifier into the ID of the HTML element that will contain the counterparty contact form.				
+					var counterpartyContactFormId = '#' + thisRelationship + "CounterpartyContactForm"
+					// Retrieve the list of confirmed counterparty contacts for this relationship as a comma delimited string.
+					var confirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".confirmedCounterpartyContacts");
+					// Retrieve the list of unconfirmed counterparty contacts for this relationship as a comma delimited string.				
+					var unconfirmedCounterpartyContacts = eval("GLOB.relationshipData." + thisRelationship + ".unconfirmedCounterpartyContacts");
+					// Incorporate the relationship identifier into the ID of the HTML element that will contain the "add a new counterparty contact" field.				
+					var addCounterpartyField = "#" + thisRelationship + "AddCounterpartyContact"
+
+					// Call the function that renders the HTML comprising a relationship module, using the user's name, the counterparty name, and the relationship identifier.
+					buildDashboard(GLOB.profileName, counterpartyName, thisRelationship);
+
+					// If the relationship is exclusive, hide the "Become exclusive" link within the relationship. This must be done after the relationship div is constructed.
+					if (GLOB.relationshipType == 'exclusive') {
+						$('.becomeExclusiveSpan').hide();
+					};
+
+					// For each contact in the includedRequestorContacts list, create a display element and add it to the default relationship display.
+					$(includedRequestorContacts).each(function (i, contact) {
+						$(requestorContactListId).append(" <div><b>" + contact + "</b></div>")
+					});				
+
+					// For each contact in the verifiedProfileContacts list, create a display element including a checkboxand add it to the requestor section of the 'Edit contacts' form.
+					$(GLOB.verifiedProfileContacts).each(function (i, contact) {
+						$(requestorContactFormId).append(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' class='pull-right " + thisRelationship + "RequestorCheckbox'><label>" + contact + "&nbsp;</label></div>")
+						// if the requestor contact is already part of the "included Requestor Contacts" list, pre-check the checkbox associated with it to reflect the default display.
+						if(jQuery.inArray(contact, includedRequestorContacts) !== -1){
+							contactCheckbox = "#" + contact + thisRelationship + "Checkbox";
+							// Strip the special characters from the ID string. This allows the user to enter characters that are used as standard notation for emails and phone numbers without creating an error.
+							formattedContactCheckbox = contactCheckbox.replace('@', '\\@').replace('.', '\\.').replace('-', '\\-').replace('(', '\\(').replace(')', '\\)')
+							// Use the stripped ID string to check the checkbox corresponding to an already added contact.
+							$( formattedContactCheckbox ).prop( "checked", true );
+						}
+					});
+
+					// For each contact in the unverifiedProfileContacts list, create a display element, including a checkbox and an 'unverified' link and add it to the requestor section of the 'Edit contacts' form.
+					$(GLOB.unverifiedProfileContacts).each(function (i, contact) {
+						$(requestorContactFormId).append(" <div class='pending'><input id='" + contact  + thisRelationship + "Checkbox' type='checkbox' disabled class='pull-right'>(<a href='#' id='" + thisRelationship + contact + "UnverifiedEditRelationship' data-toggle='modal' data-target='#resendVerification' class='unverifiedLink " + contact + "Verify'>unverified</a>) <label>" + contact + "&nbsp;</label></div>")
+					});
+
+					// For each contact in the confirmedCounterpartyContacts list, create a display element including a checkbox and add it to the default display and the requestor section of the 'Edit contacts' form.
+					// .before is used to make sure the list appears above the "add a new phone or email" text input field.
+					$(confirmedCounterpartyContacts).each(function (i, contact) {
+						$(counterpartyContactListId).append(" <div><b>" + contact + "</b></div>")
+						$(addCounterpartyField).before(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label></div>")
+					});
+
+					// For each contact in the unconfirmedCounterpartyContacts list, create a display element, including a checkbox and an 'unconfirmed link', and add it to the default display and the counterparty section of the 'Edit contacts' form.
+					// .before is used to make sure the list appears above the "add a new phone or email" text input field.
+					$(unconfirmedCounterpartyContacts).each(function (i, contact) {
+						$(counterpartyContactListId).append(" <div class='pending'><b>" + contact + " (<a href='#' id='" + thisRelationship + contact + "Unconfirmed' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</b></div>")
+						$(addCounterpartyField).before(" <div class='pending'><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label> (<a href='#' id='" + contact + "UnconfirmedEditForm' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</div>")
+					});
 				};
-
-				// For each contact in the includedRequestorContacts list, create a display element and add it to the default relationship display.
-				$(includedRequestorContacts).each(function (i, contact) {
-					$(requestorContactListId).append(" <div><b>" + contact + "</b></div>")
+			} else {
+				// Strip the tooltip from the Exclusive radio button that says 'You can't use this if you have any existing relationships...'
+				$('#newRelationshipExclusive').replaceWith(function () {
+				    return $('<label>').append($(this).contents());
 				});
-
-/*				// For each contact in the unverifiedRequestorContacts list, create a display element, including a checkbox and an 'unverified' link and add it to the default relationship display.
-				$(unverifiedRequestorContacts).each(function (i, contact) {
-					$(requestorContactListId).append(" <div class='pending'><b>(<a href='#' id='" + contact + "Unverified' data-toggle='modal' data-target='#counterpartyResend'>unverified</a>) " + contact + "</b></div>")
-				});
-*/				
-
-				// For each contact in the verifiedProfileContacts list, create a display element including a checkboxand add it to the requestor section of the 'Edit contacts' form.
-				$(GLOB.verifiedProfileContacts).each(function (i, contact) {
-					$(requestorContactFormId).append(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' class='pull-right " + thisRelationship + "RequestorCheckbox'><label>" + contact + "&nbsp;</label></div>")
-					// if the requestor contact is already part of the "included Requestor Contacts" list, pre-check the checkbox associated with it to reflect the default display.
-					if(jQuery.inArray(contact, includedRequestorContacts) !== -1){
-						contactCheckbox = "#" + contact + thisRelationship + "Checkbox";
-						// Strip the special characters from the ID string. This allows the user to enter characters that are used as standard notation for emails and phone numbers without creating an error.
-						formattedContactCheckbox = contactCheckbox.replace('@', '\\@').replace('.', '\\.').replace('-', '\\-').replace('(', '\\(').replace(')', '\\)')
-						// Use the stripped ID string to check the checkbox corresponding to an already added contact.
-						$( formattedContactCheckbox ).prop( "checked", true );
-					}
-				});
-
-				// For each contact in the unverifiedProfileContacts list, create a display element, including a checkbox and an 'unverified' link and add it to the requestor section of the 'Edit contacts' form.
-				$(GLOB.unverifiedProfileContacts).each(function (i, contact) {
-					$(requestorContactFormId).append(" <div class='pending'><input id='" + contact  + thisRelationship + "Checkbox' type='checkbox' disabled class='pull-right'>(<a href='#' id='" + thisRelationship + contact + "UnverifiedEditRelationship' data-toggle='modal' data-target='#resendVerification' class='unverifiedLink " + contact + "Verify'>unverified</a>) <label>" + contact + "&nbsp;</label></div>")
-				});
-
-				// For each contact in the confirmedCounterpartyContacts list, create a display element including a checkbox and add it to the default display and the requestor section of the 'Edit contacts' form.
-				// .before is used to make sure the list appears above the "add a new phone or email" text input field.
-				$(confirmedCounterpartyContacts).each(function (i, contact) {
-					$(counterpartyContactListId).append(" <div><b>" + contact + "</b></div>")
-					$(addCounterpartyField).before(" <div><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label></div>")
-				});
-
-				// For each contact in the unconfirmedCounterpartyContacts list, create a display element, including a checkbox and an 'unconfirmed link', and add it to the default display and the counterparty section of the 'Edit contacts' form.
-				// .before is used to make sure the list appears above the "add a new phone or email" text input field.
-				$(unconfirmedCounterpartyContacts).each(function (i, contact) {
-					$(counterpartyContactListId).append(" <div class='pending'><b>" + contact + " (<a href='#' id='" + thisRelationship + contact + "Unconfirmed' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</b></div>")
-					$(addCounterpartyField).before(" <div class='pending'><input id='" + contact + thisRelationship + "Checkbox' type='checkbox' checked> <label>" + contact + "</label> (<a href='#' id='" + contact + "UnconfirmedEditForm' data-toggle='modal' data-target='#counterpartyResend' class='unconfirmedLink " + contact + "Confirm'>unconfirmed</a>)</div>")
-				});
-			};
-
+				// Enable the 'exclusive' radio button in the form
+				$( '#newRelationshipRadioExclusive' ).attr( 'disabled', false);
+			}
+		}
 	});
 
 	// Server alert functions
-	GLOB.serverAlertRef.on('child_added', function(childSnapshot, prevChildName) {
+	GLOB.serverAlertRef.on('value', function(dataSnapshot) {
 		// Retrieve the alert string from the Firebase message
-		var val = childSnapshot.val();
+		var val = dataSnapshot.val();
 		// If the alert comtent is empty, hide the server alert
-		if (val == "") {
-			$('#serverAlertContainer').fadeTo(500, 0, function(){
-	   		$('#serverAlertContainer').css("visibility", "hidden");   
-	   		// The opacity must be reset because opacity was the attribute used for the fade effect.  
-	   		$('#serverAlertContainer').css("opacity", "100");   
-			});
-		} else {
-		// If the alert comtent is not empty, show the server alert and remove the overlay
-		// that disables user controls.
-			enableControls();
-			$('#serverAlertContainer').css('visibility', 'visible').hide().fadeIn('slow');
-		};
-		$("#serverAlertContainer").html(val);
-	});
-
-
-	GLOB.serverAlertRef.on('child_changed', function(childSnapshot, prevChildName) {
-		// Retrieve the alert string from the Firebase message
-		var val = childSnapshot.val();
-		// If the alert comtent is empty, hide the server alert
-		if (val == "") {
+		if (val == undefined) {
 			$('#serverAlertContainer').fadeTo(500, 0, function(){
 	   		$('#serverAlertContainer').css("visibility", "hidden");   
 	   		// The opacity must be reset because opacity was the attribute used for the fade effect.  
@@ -850,7 +683,7 @@
 
 			GLOB.clientRef.push( {  
 				"msgType" : "removeRelationship",
-				"relationship": thisRelationship
+				"relationshipId": thisRelationship
 			}); 
 			// Disable user controls
 			disableControls ();
@@ -926,8 +759,7 @@
 		$('.confirmBecomeExclusive').on('click', function() {
 			var thisRelationship = this.id.replace('ConfirmBecomeExclusiveBtn','');
 			GLOB.clientRef.push( {  
-				"msgType" : "becomeExclusive",
-				"relationshipId": thisRelationship
+				"msgType" : "convertToExclusive"
 			}); 
 			// Disable user controls
 			disableControls ();

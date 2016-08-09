@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Trustjar dashboard">
+	<meta name="author" content="Paul Caron">
 	<title>Welcome to trustjar</title>
 	<!-- Bootstrap core CSS -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
 </head>
 
 <body>
- 	<div id="disableControls" class="overlay hidden"></div>
+<div id="disableControls" class="hidden"><div class="overlay"></div><img src="images/loadinfo.net.gif" class="spinnyWheel"></div>
 	<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
 <!-- 	<div id="landingWrapper"></div> -->
 	<div id="splashDiv">
@@ -30,37 +30,45 @@
 <!-- *********************************** END HEADER **************************************** -->
 <!-- *********************************** DASHBOARD SECTION **************************************** -->
 
-<div id="dashboard" class="pageTemplate">
+<div id="dashboard" class="pageTemplate topAnimals">
 
 <!-- *********************************** JUMBOTRON SECTION **************************************** -->
 
 <!-- Main jumbotron header. Includes profile section. -->
-<div class="jumbotron" style="background-color:#125561">
-	<div class="container" style="color:#cccccc">
+<div class="header">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
+
 				<!-- User's name is populated below -->
-				<h1><span id="headerProfileName"></span>'s trustjar</h1>      
-				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
-					<div id="signOut"class="pull-right">Sign out</div>
-				</a>
-				<!-- User's contact info. Populated by Firebase. -->
-				<div style="height:1px; width:100%; background-color:#cccccc; margin-bottom:5px"></div>
-				<div id="profileContactsContainer">
-					<div id="profileContacts">
+				<div id="leftHeader">
+					<div style="float:left">
+						<div id="headerName">
+							<span id="headerProfileName"></span>'s
+						</div> 
+						<div id="dashboardHeaderLogo">TRUS<span id="tj">TJ</span>AR</div>
 					</div>
-					<div style="color:#cccccc"><a href="#" id="editProfileLink">Edit profile</a>
+					<div id="profileContactsContainer" class="profileContacts" style="float:left; margin-left:40px">
+						<div id="profileContacts" style="display:none">
+						</div>
+						<div style="margin:auto">You have <span id="numberOfContacts" style="color:#228b22; font-weight:bold">3</span> contacts in your profile &nbsp;
+							<a href="#" id="editProfileLink">
+								<img src="images/edit.gif" alt="edit profile" title="edit profile">
+							</a>
+						</div>
 					</div>
 				</div>
+				<hr class="dotted">
+
 				<!-- 'Edit profile' form. Hidden by default. -->         
-				<div id="editProfileForm" class="container col-md-8 row" style="color:#333333; background-color:#eeeeee; border: 1px solid #cccccc; display:none">
-					<form name="profileForm" action="" onsubmit="return profileFormSubmit()" data-ajax="false">
+				<div id="editProfileForm" class="row" style="color:#333333; background-color:#eeeeee; margin:5px; border: 6px solid #000000; display:none; z-index: 1">
+					<form name="profileForm" action="" onsubmit="return profileFormSubmit()" data-ajax="false" class="col-md-12">
 						<div id="editProfileContacts" class="col-md-6">
 							<label for="newProfileContact" style="margin-top:8px">Add a contact</label> 
 							<input type="text" class="form-control" id="newProfileContact" placeholder="phone or email">
 							<div style="font-weight: bold; margin-top:5px">
 								Current contacts
-								<a href="#" data-toggle="tooltip" data-placement="right" title="Contacts can only be removed when they're not in a relationship." onClick="return false"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+								<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="right" title="Verified contacts can only be removed when they're not in a relationship." aria-hidden="true">
 							</div>
 							<!-- Profile contact list. Populated by Firebase, complete with checkboxes and 'unverified' links. -->
 							<div id="editProfileContactList">
@@ -79,7 +87,7 @@
 								Save
 								</button>
 								<!-- 'Cancel' closes the Profile form and returns the user to the default contact display. -->
-								<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-md">
+								<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-sm">
 								Cancel
 								</button>
 								<span style="padding-left:30px"></span>
@@ -91,6 +99,12 @@
 						</div>
 					</form>
 				</div>
+
+			</div>
+			<div class="col-md-4">
+				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
+					<div id="signOut" class="pull-right" style="z-index: 1">Sign out</div>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -120,15 +134,15 @@
 <div class="container"><!-- Bootstrap container to manage page width across different sizes. All subsequent HTML is within the container. -->
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 <!-- Server alert component. Error messages and other system response messages go here. -->      
-			<div id="serverAlertContainer" class="serverAlert well">
+			<div id="serverAlertContainer" class="serverAlert">
 			</div>
 
 <!-- *********************************** END SERVER ALERT SECTION **************************************** -->
 <!-- *********************************** RELATIONSHIP SECTION **************************************** -->
 
-	<h2 id="relationshipTypeHeader"></h2>
+	<span id="relationshipTypeHeader"></span>
 	<div class="row">
-		<div id="relationshipColumn" class="col-md-9">  
+		<div id="relationshipColumn" class="col-md-9" style="margin-top:30px">  
 
 		</div>
 
@@ -199,20 +213,36 @@
 							<h4 class="modal-title">Make this an exclusive relationship</h4>
 						</div>
 						<div class="modal-body"> 
-							<p>An exclusive relationship in Trustjar has different rules than a casual one. </p>
 						
-							<p>When you and your partner agree to an exclusive relationship, all contacts in your profile are locked out of participating in any other relationsihp, whether you include them in the relationship or not. So if this is the person you want all to yourself, you have to remove all other relationships from your Trustjar.* </p>
+							<p>When you change a relationship to exclusive, all contacts in your profile are locked out of participating in any other relationsihp, whether you include them in the relationship or not. So if this is the person you want all to yourself, please continue. </p>
 
-							<p>Once this is the only relationship in your dashboard, you can start the upgrade process. </p>
-
-							<p style="color:#cc0000">*Remember, when you end a relationship of any kind, your partner's permission is not required but they will be notified across every contact in the relationship.</p> 
-
-							<p>Your partner will receive notifications across all contacts in the relationship and will have to accept each one to complete the upgrade. </p>
+							<p>Your partner will receive notifications across all contacts in the relationship. They will have to confirm each one to include it in the relationship. </p>
 
 							<p>Do you want to continue? </p>
 						</div>
 						<div class="modal-footer">
 							<button id="confirmBecomeExclusiveBtn" type="button" class="btn btn-default confirmBecomeExclusive" data-dismiss="modal">Become exclusive</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+
+			<!-- Modal confirmation dialog telling a user that they can't convert the relationship unless this is the only relationship in the dashboard -->
+			<div id="dashboardDontBecomeExclusive" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Make this an exclusive relationship</h4>
+						</div>
+						<div class="modal-body"> 
+							<p>In order to make this relationship exclusive, it has to be the only relationship in your Trustjar. Once you remove all other relationships from your Trustjar, you can start the upgrade process. </p>
+
+							<p style="color:#cc0000">Remember, when you end any relationship, your partner's permission is not required but they will be notified across every contact in the relationship.</p> 
+						</div>
+						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						</div>
 					</div>
@@ -251,35 +281,34 @@
 			<!-- 'Add a new relationship' form -->
 			<div class="well" id="newRelationshipContainer">
 				<div style="float:left">
-					<h5 style="margin:0px; font-weight:bold; color:#555555">
-					Add a new relationship
+					<h5 class="boxHeader">
+					add a new relationship
 					</h5>
-				</div>
-				<a href="#" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'Manage contacts' in the relationship." onClick="return false" style="float:right">
-					<span class="glyphicon glyphicon-info-sign pull-right" aria-hidden="true"></span>
+					<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'edit contacts' in the relationship." aria-hidden="true" style="float:right; position:absolute; top:30px; right:30px;">
 				</a>
+				</div>
 				<br>
-				<div style="border-top: 1px solid #999999; margin-top:5px; margin-bottom:5px"></div>
+				<hr class="dotted">
 				<span class="sr-only">Info:</span>
 				<div>
 					<form name="newRelationshipForm" action="" onsubmit="return newRelationshipFormSubmit()" data-ajax="false">
 						<div class="form-group" style="margin:0px">
-							<label for="exampleInputEmail1">You:</label>
+							<label for="yourContacts">YOU</label>
 							<!-- This is populated via Firebase listeners -->
-							<div id="newRelationshipFormContacts" style="text-align:left">   
+							<div id="newRelationshipFormContacts" class="profileContacts" style="text-align:left">   
 							</div>
-							<div class="bs-example" data-example-id="buttons-radio">
-								<label for="newRelationshipType">Relationship type (required)</label><br>
+							<div>
+								<hr class="dotted">
+								<label for="newRelationshipType">RELATIONSHIP TYPE</label><br>
 								<div class="btn-group" data-toggle="buttons">
 				  					<label>
-										<input id="newRelationshipRadioCasual" type="radio" name="newRelationshipType" value="casual" autocomplete="off" required> Casual
-				  					</label><br>
-
-										<label>
-											<input id="newRelationshipRadioExclusive" type="radio" name="newRelationshipType" value="exclusive" autocomplete="off" required> Exclusive
+										<input id="newRelationshipRadioCasual" type="radio" name="newRelationshipType" value="casual" autocomplete="off" required> Casual 
+				  					</label>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+										<label id="newRelationshipExclusive" data-toggle="tooltip" data-placement="right" title="You can't create an exclusive relationship if you have existing relationships in your Trustjar." style="float:right">
+											<input id="newRelationshipRadioExclusive" type="radio" name="newRelationshipType" value="exclusive" autocomplete="off" required disabled> Exclusive
 										</label>
-									</a>
 								</div>
+								<hr class="dotted">
 							</div>
 							<div style="height:10px"></div>
 							<div class="form-group" style="margin:0px">
@@ -302,18 +331,20 @@
 
 
 <!-- ********************************************* FOOTER ************************************************** -->
-
+<div class="container">
 	<footer class="footer globalFooter">
-		<div class='container'>
+		<img src="images/kitten_bunny250.jpg" style="float:left">
+		<div id="footerText" class='container'>
 			<div class='navbar-header'>
-			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='contactLink'>Contact</a>
-				<p>© Quantima 2015. All rights reserved.</p>
+				<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+				<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+				<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+				<a href='#' id='contactLink'>Contact</a>
+				&nbsp;&nbsp;&nbsp; <span id="copyrightCopy">© Quantima 2015. All rights reserved.</span>
 			</div>
 		</div><!-- /container -->
 	</footer>
+</div>
 <!-- ********************************************* END FOOTER ************************************************** -->
 <!-- *************************************** FOOTER LINK OVERLAY ************************************************** -->
 

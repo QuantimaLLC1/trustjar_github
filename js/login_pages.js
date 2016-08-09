@@ -141,7 +141,7 @@
 		var eventListenersMap = {
 			"home" : noPageData,
 			"homeConfirmation" : noPageData,
-			"requestPasscode" : noPageData,
+			"requestPasscodePage" : noPageData,
 			"requestPasscodeConfirmation": noPageData,
 			"requestorLanding" : requestorLandingPageHandler,
 			"requestorCancelConfirmation" : noPageData,
@@ -161,12 +161,12 @@
 		function requestorLandingPageHandler( pageData ) {
 			// Server assigns a new passcode for the requestor which is displayed. Because the requestor 
 			// will return this passcode when the form is submitted, we'll declare the value as a global variable.
-			GLOB.requestorLandingPasscode = pageData.requestorPasscode;
+			GLOB.requestorLandingPasscode = pageData.newRequestorPasscode;
 			// Populate and display the relationship components and the requestor passcode
-			$("#requestorLandingUserContact").html(pageData.userContactData);
+			$("#requestorLandingUserContact").html(pageData.requestorContact);
 			$("#requestorLandingPasscode").html(GLOB.requestorLandingPasscode);
 			$("#requestorLandingRelationshipType").html(pageData.relationshipType);
-			$("#requestorLandingCounterpartyContact").html(pageData.counterpartyContactData);
+			$("#requestorLandingCounterpartyContact").html(pageData.counterpartyContact);
 		};
 	 
 		function counterpartyLandingPageHandler( pageData ) {
@@ -267,130 +267,64 @@
 
 // FIREBASE SERVER FUNCTIONS
 	// Page display functions
-	GLOB.displayRef.on('child_added', function(childSnapshot, prevChildName) {
+	GLOB.displayRef.on('value', function(dataSnapshot) {
 		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
-		var handlerFunction = eventListenersMap[ val ];
-		var checkURL = val.substring(0,3)
-		if( checkURL == 'URL' ) {
-			var newPage = val.substring(4);
-			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
-			// For the time being, it's commented out.
-			// window.location = newPage
+		var val = dataSnapshot.val();
+		if (val !== null) {		
+			var handlerFunction = eventListenersMap[ val ];
+			var checkURL = val.substring(0,3)
+			if( checkURL == 'URL' ) {
+				var newPage = val.substring(4);
+				// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
+				// For the time being, it's commented out.
+				// window.location = newPage
 
-			// In the meantime, we'll call a function for the unit test.
-			goToNewPage(newPage)
-		} else {
-			if( handlerFunction == null ) {
-				badPageName( val );
+				// In the meantime, we'll call a function for the unit test.
+				goToNewPage(newPage)
 			} else {
-				getDataOnce (val, handlerFunction)
-				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-				var showNew = "#" + val;
-				// if the display is still showing the splash page, fade it out. SplashDiv is not part of the pageTemplate class
-				// because 'pageTemplate's are hidden by default, and the splash is displayed by default.
-				$('#splashDiv').fadeOut(300);
-				// if another page div is being displayed, fade it out
-				$('.pageTemplate').each(function() {
-					var pageId = '#' + this.id;
-					if ( $(pageId).css('display') == 'block') {
-						$(pageId).fadeOut(300);
-						// Remove the 'disable controls' overlay if one is present
-						enableControls();
-						$('#whatIsTrustjar').fadeOut(300)
+				if( handlerFunction == null ) {
+					badPageName( val );
+				} else {
+					getDataOnce (val, handlerFunction)
+					// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
+					var showNew = "#" + val;
+					// if the display is still showing the splash page, fade it out. SplashDiv is not part of the pageTemplate class
+					// because 'pageTemplate's are hidden by default, and the splash is displayed by default.
+					$('#splashDiv').fadeOut(300);
+					// if another page div is being displayed, fade it out
+					$('.pageTemplate').each(function() {
+						var pageId = '#' + this.id;
+						if ( $(pageId).css('display') == 'block') {
+							$(pageId).fadeOut(300);
+							// Remove the 'disable controls' overlay if one is present
+							enableControls();
+							$('#whatIsTrustjar').fadeOut(300)
+						}
+					});
+					// fade the new page in, allowing for the old page to fade out first
+					setTimeout(function() {
+						$(showNew).fadeIn(300);
+						$('.anonHeader').fadeIn(300);
+						$('.footer').fadeIn(300);
+						$('#whatIsTrustjar').fadeIn(300)
+					}, 300);
+					// Disable the 'return to home' link in the header logo if the user's already on the homepage.
+					if (showNew == '#home') {
+						$('#headerLogoLink').filter(function(){
+						    return this.innerHTML === 'trustjar';
+						}).replaceWith('trustjar');
 					}
-				});
-				// fade the new page in, allowing for the old page to fade out first
-				setTimeout(function() {
-					$(showNew).fadeIn(300);
-					$('.anonHeader').fadeIn(300);
-					$('.footer').fadeIn(300);
-					$('#whatIsTrustjar').fadeIn(300)
-				}, 300);
-				// Disable the 'return to home' link in the header logo if the user's already on the homepage.
-				if (showNew == '#home') {
-					$('#headerLogoLink').filter(function(){
-					    return this.innerHTML === 'trustjar';
-					}).replaceWith('trustjar');
-				}
-			}
-		}
-	});
-
-	// Server sets the page to be displayed
-	GLOB.displayRef.on('child_changed', function(childSnapshot, prevChildName) {
-		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
-		var handlerFunction = eventListenersMap[ val ];
-		var checkURL = val.substring(0,3)
-		if( checkURL == 'URL' ) {
-			var newPage = val.substring(4);
-			// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
-			// For the time being, it's commented out.
-			// window.location = newPage
-
-			// In the meantime, we'll call a function for the unit test.
-			goToNewPage(newPage)
-		} else {
-			if( handlerFunction == null ) {
-				badPageName( val );
-			} else {
-				getDataOnce (val, handlerFunction)
-				// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-				var showNew = "#" + val;
-				// if another page div is being displayed, fade it out
-				$('.pageTemplate').each(function() {
-					var pageId = '#' + this.id;
-					if ( $(pageId).css('display') == 'block') {
-						$(pageId).fadeOut(300);
-						// Remove the 'disable controls' overlay if one is present
-						enableControls();
-						$('#whatIsTrustjar').fadeOut(300)
-					}
-				});
-				// fade the new page in, allowing for the old page to fade out first
-				setTimeout(function() {
-					$(showNew).fadeIn(300);
-					$('.anonHeader').fadeIn(300);
-					$('.footer').fadeIn(300);
-					$('#whatIsTrustjar').fadeIn(300)
-				}, 300);
-				// Disable the 'return to home' link in the header logo if the user's already on the homepage.
-				if (showNew == '#home') {
-					$('#headerLogoLink').filter(function(){
-					    return this.innerHTML === 'trustjar';
-					}).replaceWith('trustjar');
 				}
 			}
 		}
 	});
 
 	// Server alert functions
-	GLOB.serverAlertRef.on('child_added', function(childSnapshot, prevChildName) {
-		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
+	GLOB.serverAlertRef.on('value', function(dataSnapshot) {
+		// Retrieve the alert string from the Firebase message
+		var val = dataSnapshot.val();
 		// If the alert comtent is empty, hide the server alert
-		if (val == "") {
-			$('#serverAlertContainer').fadeTo(500, 0, function(){
-	   		$('#serverAlertContainer').css("visibility", "hidden");   
-	   		// The opacity must be reset because opacity was the attribute used for the fade effect.  
-	   		$('#serverAlertContainer').css("opacity", "100");   
-			});
-		} else {
-		// If the alert comtent is not empty, show the server alert and remove the overlay
-		// that disables user controls.
-			enableControls();
-			$('#serverAlertContainer').css('visibility', 'visible').hide().fadeIn('slow');
-		};
-		$("#serverAlertContainer").html(val);
-	});
-
-
-	GLOB.serverAlertRef.on('child_changed', function(childSnapshot, prevChildName) {
-		// Retrieve the unique ID from the Firebase message
-		var val = childSnapshot.val();
-		// If the alert comtent is empty, hide the server alert
-		if (val == "") {
+		if (val == undefined) {
 			$('#serverAlertContainer').fadeTo(500, 0, function(){
 	   		$('#serverAlertContainer').css("visibility", "hidden");   
 	   		// The opacity must be reset because opacity was the attribute used for the fade effect.  
@@ -519,10 +453,7 @@
 			GLOB.clientRef.push( {  
 				"msgType": "newRequestorLandingForm",
 				"name" : $('#requestorLandingName').val(),
-				"TOSCheckbox" : $('#requestorLandingTOS').prop( "checked" ),
-				// The passcode was sent as server-provided page data when the page was generated. The client 
-				// simply returns the same passcode.
-				"passcode" : GLOB.requestorLandingPasscode
+				"TOSCheckbox" : $('#requestorLandingTOS').prop( "checked" )
 			}); 
 			// Disable user controls
 			disableControls ()
@@ -532,8 +463,8 @@
 		// Counterparty answers the question: "Do you have an existing Trustjar account?"
 		$('#isCurrentUser').on('change', function() {
 			GLOB.clientRef.push( { 
-				"msgType" : "counterpartyHasExistingAccount",
-				"hasAccount" : $('input[name="currentUser"]:checked').val()
+				"msgType" : "counterpartyLandingAnonymousUserForm",
+				"existingUser" : $('input[name="currentUser"]:checked').val()
 			}); 
 			// Disable user controls
 			disableControls ()
@@ -575,19 +506,33 @@
 			return false; // We don't want the link to trigger a page load. We want the server to control that to maintain state consistency.
 		});
 
-		// Counterparty selects 'cancel' on a counterpartyLanding page form. All versions of the counterparty
+		// Requestor selects 'cancel' on a requestorLanding page form. All versions of the counterparty
 		// landing page use this function.
-		// Retrieves help content from Firebase and opens the Help overlay
-		$(".cancelRelationshipConfirm").click(function(){
+		$("#counterpartyCancelConfirmBtn").click(function(){
 			GLOB.clientRef.push( {  
-				"msgType": "cancelRelationshipRequest"
+				"msgType": "counterpartyLandingCancel"
 			}); 
 			// Disable user controls
 			disableControls ()
 		});
 
-		$(".cancelRelationshipBtn").click(function(){
-			$("#cancelRelationshipOverlay").modal({backdrop: true});
+
+		// Counterparty selects 'cancel' on a counterpartyLanding page form. All versions of the counterparty
+		// landing page use this function.
+		$("#requestorCancelRequestBtn").click(function(){
+			GLOB.clientRef.push( {  
+				"msgType": "requestorLandingCancel"
+			}); 
+			// Disable user controls
+			disableControls ()
+		});
+
+		$(".counterpartyCancelBtn").click(function(){
+			$("#counterpartyCancelRelationshipOverlay").modal({backdrop: true});
+		});
+
+		$(".requestorCancelBtn").click(function(){
+			$("#requestorCancelRelationshipOverlay").modal({backdrop: true});
 		});
 
 		function counterpartyLandingCancel () {
@@ -631,7 +576,6 @@
 		function counterpartyLandingNewUserSubmit () {
 			GLOB.clientRef.push( {  
 				"msgType": "counterpartyLandingNewUserForm",
-				"newCounterpartyPasscode" : GLOB.counterpartyLandingPasscode,
 				"counterpartyName" : $('#counterpartyLandingNewUserName').val(),
 				"TOSCheckbox" : $('#counterpartyLandingNewUserTOSCheckbox').prop( "checked" ),
 			} ); 
