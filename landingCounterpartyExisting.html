@@ -17,16 +17,19 @@
 </head>
 
 <body>
-<div id="disableControls" class="hidden"><div class="overlay"></div><img src="images/loadinfo.net.gif" class="spinnyWheel"></div>
-<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
-<div id="landingWrapper"></div>
-
-<div id="splashDiv">
-	(splash)
+<div id="splash" class="splashDiv">
+	<br><br><br><br>(SPLASH)
 <!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
 		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
  -->
 </div>
+<!--Overlay to disable controls. Includes spinny wheel. -->
+<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
+	<img src="images/loadinfo.net.gif" class="spinnyWheel">
+</div>
+<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
+<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
+<div id="landingWrapper"></div>
 
 <!-- Server Alert section -->
 <div class="row">
@@ -45,7 +48,7 @@
 <!-- Header section -->
 
 
-<nav id="trustjarHeader" class="navbar navbar-fixed-top anonHeader">
+<nav id="trustjarHeader" class="navbar navbar-fixed-top">
 	<div class='container'>
 		<div class='navbar-header'>
 			<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'> 
@@ -73,79 +76,69 @@
 
 
 <!-- *********************************** END HEADER **************************************** -->
-<!-- *********************************** BLANK DIV **************************************** -->
-
-<div class="pageTemplate" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
-</div>
-
-<!-- *********************************** END BLANK DIV **************************************** -->
 
 
 <div class="container"><!-- Bootstrap container to manage page width across different sizes -->
 
-<!-- *********************************** REQUESTORLANDING DIV **************************************** -->
 
-<div class="pageTemplate row" id="requestorLanding">
-	<div class="col-md-1">     
-	</div> 
+<!-- *********************************** LANDING DIV **************************************** -->
 
-	<div class="col-md-10">     
-		<div class="row">
-			<div class="col-md-2">     
-			</div> 
+	<div class="pageTemplate row" id="landing">
+		<div class="col-md-1">    
+		</div> 
 
-			<div class="col-md-8 relationshipText">   
-				You are declaring the following <span id="requestorLandingRelationshipType"></span> relationship:
+		<div class="col-md-10"; margin-bottom:8px>
+			<div id="counterpartySubhead">
+				<h3><span id="landingRelationshipType1"></span> relationship request</h3>
+				<p><span id="landingRequestorName"></span> wants to connect to you in <span id="landingRelationshipType2"></span> relationship. By accepting, you're confirming that you're not in a<span class="hidden" id="landingCasualContent">n exclusive</span> relationship with anyone<span id="landingExclusiveContent" class="hidden"> else and you won't be able to accept any new relationships via this contact</span>. <span id="landingCasualContent2" class="hidden">Any other casual relationships you have will remain private.</span></p>
+				<p><b>Please make sure that ALL points of contact provided below are accurate for BOTH of you.</b> If not, please let your partner know. If you don't recognize the other person or this contact doesn't belong to you, you can remove the request from our system by selecting "Cancel".</p>
 				<div class="row">
 					<div class="col-md-5"> 
-						<div id="requestorLandingUserContact" class="relationshipContactContainer">   
+						<div id="landingRequestor" class="relationshipContactContainer">   
 						</div>
 					</div> 
 					<div class="col-md-2 center"> 
 						<span class="glyphicon glyphicon-resize-horizontal relationshipIcon" aria-hidden="true"></span>
 					</div> 
 					<div class="col-md-5"> 
-						<div id="requestorLandingCounterpartyContact" class="relationshipContactContainer">
+						<div id="landingUserContact" class="relationshipContactContainer">
 						</div>
 					</div> 
 				</div> <!-- End row -->
-			</div>
+			</div>	 
+			<p>The information you provide will NEVER be used for any other purpose. For more, read our <a href='#' class="termsLink">terms and conditions</a>.</p><hr>
 
-			<div class="col-md-2">   
+				<!-- Server-generated form copy (or conflict copy in the case of a conflict) -->
+				<div id="landingFormCopy">
+				</div><br>
+
+				<!-- landingExistingUser form -->
+				<div id="landingExistingUserForm">   
+					<form action="" onsubmit="return landingExistingUserSubmit()" data-ajax="false">Please enter your passcode to continue.
+						<div class="input-group">
+							<input type="password" class="form-control" id="landingExistingUserPasscode" placeholder="Passcode" required>
+							<div id="loginShowHide" class="input-group-addon">show</div>
+						</div>
+						<div class="checkbox">
+							<label>
+							<input id="landingExistingUserTOSCheckbox" type="checkbox" required>I have read and accept the Privacy Policy and Terms and Conditions and certify that <span id="landingFormUserContact"></span> belongs to me. I further acknowledge that this relationship is approved and is subject to the notification rules associated with other confirmed relationships as outlined in Terms and Conditions.
+						</div>
+						<button id="landingExistingUserSubmitBtn" type="submit" class="btn btn-primary">Approve this request</button>       
+						<button id="landingExistingUserCancelBtn" type="button" class="btn btn-primary landingCancelBtn">Cancel</button>
+					</form>
+				</div> <!-- End landingExistingUserForm -->
+
+			</div><!-- End landing page body -->
+
+			<div class="col-md-1">    
 			</div> 
-		</div> <!-- End row -->
-		<br>
-		<div class="well">
-			<form action="" onsubmit="return requestorLandingForm();" data-ajax="false"><!--   Requestor landing form: complete the request and register -->
-				<p>Thanks for confirming your identity. Please complete the form below so you can manage this relationship in the future. A message will be sent to your partner to confirm their identity and complete the process. We'll never use your contact information for any other purpose.</p>
-				<div class="row">
-					<div class="col-md-6">   
-						<label id="homeContactLabel" for="requestorLandingUserContact2">Name</label> <a data-toggle="tooltip" data-placement="top" title="This will be used to identify you to your partner(s)."><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
-						<input type="text" class="form-control" id="requestorLandingName" placeholder="Your name" required>	
-					</div>
-					<div class="col-md-6">                   
-						<label id="homeContactLabel" for="requestorLandingPasscode">Passcode</label> <a data-toggle="tooltip" data-placement="top" title="Use this to log into Trustjar. Your passcode will be sent to you when you submit thsi form." aria-hidden="true"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> 
-						<div id="requestorLandingPasscode" class="passcodeDisplay"></div>
-					</div>
-				</div> <!-- End row -->
-				<div class="checkbox">
-					<label>
-						<input id="requestorLandingTOS" type="checkbox" required> I have read and accept the Privacy Policy and Terms and Conditions.
-					</label>            
-				</div>
-				<button id="requestorLandingSubmitBtn" type="submit" class="btn btn-primary">Send this request</button>         
-				<button id="requestorLandingCancelBtn" type="button" class="btn btn-primary requestorCancelBtn">Cancel this request</button>   
-			</form>
-		</div>      
-	</div> <!-- End row -->
-	<div class="col-md-1">   
-	</div> 
+		</div>
 
-
-	<div class="row">
-		<div class="col-md-12">   
-			<div id="whatIsTrustjarContainer">
-				<a id="whatIsTrustjar">What is trustjar?</a>
+		<div class="row">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10" id="whatIsTrustjarContainer">
+				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
 				<div id="whatIsTrustjarCopy">
 					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
 
@@ -158,49 +151,47 @@
 					<p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
 				</div>
 			</div>
-		</div>
-	</div> <!-- End row -->
-</div><!-- End Home -->
+			<div class="col-md-1">   
+			</div> 
+	</div> <!-- End landing -->
 
 
+<!-- *********************************** END LANDING **************************************** -->
+<!-- *********************************** LANDINGCANCELCONFIRMATION DIV **************************************** -->
 
-	
-</div><!-- End requestorLanding -->
-
-
-<!-- *********************************** END REQUESTORLANDING DIV **************************************** -->
-<!-- *********************************** REQUESTORCANCELCONFIRMATION DIV **************************************** -->
-
-<div class="pageTemplate row" id="requestorCancelConfirmation">
-	<div class="col-md-1">   
-	</div> 
-	<div class="col-md-10">
-		<h3>Relationship request canceled.</h3> 
-		<p>To start a new request, return to the <a href="#" class="goHome">home page</a>.</p> 
+	<div class="pageTemplate row" id="landingCancelConfirmation">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10">
+				<h3>Request canceled.</h3>
+				<div>  
+					<p>The person who sent you this relationship request has been notified. </p>
+					<p>To start a new request, log in or start a relationship request on our <a class="goHome">home page</a>. </p>
+				</div>
+			</div>
+			<div class="col-md-1">     
+			</div> 
 	</div>
-	<div class="col-md-1">     
-	</div> 
-</div> <!-- End row -->
 
-<!-- *********************************** END REQUESTORCANCELCONFIRMATION DIV **************************************** -->
+<!-- *********************************** END LANDINGCONFIRMATION DIV **************************************** -->
 
 
-
-<!-- ********************************************* FOOTER ************************************************** -->
-
-<footer class="footer">
-	<div class='container'>
-		<div class='navbar-header'>
-			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='contactLink'>Contact</a>
-			<p>© Quantima 2015. All rights reserved.</p>
-		</div>
-	</div><!-- /container -->
-</footer>
 <!-- ********************************************* END FOOTER ************************************************** -->
 </div> <!-- /container -->
+<!-- ********************************************* FOOTER ************************************************** -->
+<div class="container">
+	<footer class="footer">
+		<div class='container'>
+			<div class='navbar-header'>
+				<a href='#' id='helpFooterLink' class='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href='#' id="privacyFooterLink" class='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href='#' id="termsFooterLink" class="termsLink">Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href='#' id="contactFooterLink" class='contactLink'>Contact</a>
+				<p>© Quantima 2015. All rights reserved.</p>
+			</div>
+		</div><!-- /container -->
+	</footer>
+</div>
 <!-- *************************************** FOOTER LINK OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
@@ -226,7 +217,7 @@
 <!-- *************************************** 'CANCEL CONFIRMATION' OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
-<div class='modal fade' id='requestorCancelRelationshipOverlay' role='dialog'>
+<div class='modal fade' id='landingCancelRelationshipOverlay' role='dialog'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>
 			<div class='modal-header' id='modalHeader'>
@@ -237,14 +228,14 @@
 				This will permanently remove the request from our system. Do you want to continue?
 			</div>
 			<div class='modal-footer'>
-				<button id='requestorCancelRequestBtn' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='landingCancelConfirmBtn' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
 				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
 			</div>
 		</div>
 	</div>
 </div>
 
-<!-- ********************************* END 'CANCEL CONFIRMATION' LINK OVERLAY ******************************************** -->
+<!-- ********************************* END 'CANCEL CONFIRMATION' OVERLAY ******************************************** -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -262,11 +253,13 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="js/unitTests.js"></script> <!-- Code containing the unit test --> 
-<!--
+
 	<script  language="javascript">
-		window.onload = animateLogotype()
+//		window.onload = animateLogotype()
+		window.onload = GLOB.clientRef.push({  "msgType" : "pageReady" }); 
+
 	</script>
--->
+
 
 </body>
 </html>

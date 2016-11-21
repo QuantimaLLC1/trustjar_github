@@ -31,7 +31,6 @@
 		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
  -->
 </div>
-
 <!-- Server Alert section -->
 <div class="row">
 	<div class="col-md-1">   
@@ -49,7 +48,7 @@
 <!-- Header section -->
 
 
-<nav id="trustjarHeader" class="navbar navbar-fixed-top anonHeader">
+<nav id="trustjarHeader" class="navbar navbar-fixed-top">
 	<div class='container'>
 		<div class='navbar-header'>
 			<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'> 
@@ -77,57 +76,96 @@
 
 
 <!-- *********************************** END HEADER **************************************** -->
-<!-- *********************************** BLANK DIV **************************************** -->
-
-<div class="pageTemplate" id="blank"><!-- FOR UNIT TEST ONLY. CAN BE REMOVED IN PRODUCTION. -->
-</div>
-
-<!-- *********************************** END BLANK DIV **************************************** -->
-
 
 <div class="container"><!-- Bootstrap container to manage page width across different sizes -->
 
-<!-- *********************************** requestPASSCODE DIV **************************************** -->
 
-<div class="pageTemplate row" id="requestPasscode">
-	<div class="col-md-3">   
-	</div>
-	<div class="col-md-6"> 
-		<h3>Passcode assistance</h3>
-		<p>Enter an email address or phone number that's already associated with your existing trustjar account. If it's part of a confirmed account, we'll send a new passcode to that contact.</p><br>
-		<div class="well">
-			<form action="" onsubmit="return requestPasscodeSubmit()" data-ajax="false"><!--   Request form: create a new relationshop-->
-				<label id="forgotContactLabel" for="requestPasscodeUserContact">Email or mobile phone number</label>
-				<div class="row">
-					<div class="col-md-9">   
-						<input type="text" class="form-control" id="requestPasscodeUserContact" required>
-					</div>
-					<div class="col-md-3">   
-						<button id="requestPasscodeSubmitBtn" type="submit" class="btn btn-primary">Submit</button>  
-					</div>
-				</div> <!-- End row -->
-			</form>
-		</div>
-		<div class="col-md-3">     
+<!-- *********************************** LANDING DIV **************************************** -->
+
+<div class="pageTemplate row" id="landing">
+		<div class="col-md-1">    
 		</div> 
-	</div> <!-- End row -->
-</div>
 
-<!-- *********************************** END requestPASSCODE DIV **************************************** -->
-<!-- *********************************** requestPASSCODECONFIRMATION DIV **************************************** -->
+		<div class="col-md-10"; margin-bottom:8px>
+			<div id="counterpartySubhead">
+				<h3><span id="landingRelationshipType1"></span> relationship request</h3>
+				<p><span id="landingRequestorName"></span> wants to connect to you in <span id="landingRelationshipType2"></span> relationship. By accepting, you're confirming that you're not in a<span class="hidden" id="landingCasualContent">n exclusive</span> relationship with anyone<span id="landingExclusiveContent" class="hidden"> else and you won't be able to accept any new relationships via this contact</span>. <span id="landingCasualContent2" class="hidden">Any other casual relationships you have will remain private.</span></p>
+				<p><b>Please make sure that ALL points of contact provided below are accurate for BOTH of you.</b> If not, please let your partner know. If you don't recognize the other person or this contact doesn't belong to you, you can remove the request from our system by selecting "Cancel".</p>
+				<div class="row">
+					<div class="col-md-5"> 
+						<div id="landingRequestor" class="relationshipContactContainer">   
+						</div>
+					</div> 
+					<div class="col-md-2 center"> 
+						<span class="glyphicon glyphicon-resize-horizontal relationshipIcon" aria-hidden="true"></span>
+					</div> 
+					<div class="col-md-5"> 
+						<div id="landingUserContact" class="relationshipContactContainer">
+						</div>
+					</div> 
+				</div> <!-- End row -->
+			</div>	 
+			<p>The information you provide will NEVER be used for any other purpose. For more, read our <a href='#' class="termsLink">terms and conditions</a>.</p><hr>
 
-<div class="pageTemplate row" id="requestPasscodeConfirmation">
-	<div class="col-md-1">   
-	</div> 
-	<div class="col-md-10">
-		<h3>Passcode sent.</h3>
-			If the contact you entered is in our system, a message will be sent to that contact with the new passcode. 
+				<!-- Server-generated form copy (or conflict copy in the case of a conflict) -->
+				<div id="landingFormCopy">
+				</div><br>
+
+				<!-- Merge form -->
+				<div id="landingMergeForm">   
+					<button id="landingMergeYesBtn" type="button" autocomplete="off" class="btn btn-primary">Yes</button>       
+					<button id="landingMergeNoBtn" type="button" autocomplete="off" class="btn btn-primary">No</button>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="landingMergeCancelBtn" type="button" class="btn btn-primary landingCancelBtn">Cancel request</button>
+				</div> <!-- End Merge Form. -->
+
+			</div><!-- End landing page body -->
+
+		<div class="col-md-1">    
+		</div> 
+
+		<div class="row">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10" id="whatIsTrustjarContainer">
+				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
+				<div id="whatIsTrustjarCopy">
+					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
+
+					<p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
+
+					<p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
+
+					<p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
+
+					<p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
+				</div>
+			</div>
+			<div class="col-md-1">   
+			</div> 
+		</div> <!-- End row -->
+	</div> <!-- End landing -->
+
+
+<!-- *********************************** END LANDING **************************************** -->
+<!-- *********************************** LANDINGCANCELCONFIRMATION DIV **************************************** -->
+
+	<div class="pageTemplate row" id="landingCancelConfirmation">
+			<div class="col-md-1">   
+			</div> 
+			<div class="col-md-10">
+				<h3>Request canceled.</h3>
+				<div>  
+					<p>The person who sent you this relationship request has been notified. </p>
+					<p>To start a new request, log in or start a relationship request on our <a class="goHome">home page</a>. </p>
+				</div>
+			</div>
+			<div class="col-md-1">     
+			</div> 
 	</div>
-	<div class="col-md-1">     
-	</div> 
-</div><!-- End homeConfirmation -->
 
-<!-- *********************************** END requestPASSCODECONFIRMATION DIV **************************************** -->
+<!-- *********************************** END LANDINGCONFIRMATION DIV **************************************** -->
+
+
 <!-- ********************************************* FOOTER ************************************************** -->
 
 <footer class="footer">
@@ -168,7 +206,7 @@
 <!-- *************************************** 'CANCEL CONFIRMATION' OVERLAY ************************************************** -->
 <!-- When a link is clicked, the overlay is populated with relevant footer content and displayed -->
 
-<div class='modal fade' id='cancelRelationshipOverlay' role='dialog'>
+<div class='modal fade' id='landingCancelRelationshipOverlay' role='dialog'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>
 			<div class='modal-header' id='modalHeader'>
@@ -179,7 +217,7 @@
 				This will permanently remove the request from our system. Do you want to continue?
 			</div>
 			<div class='modal-footer'>
-				<button id='modalCancelRequest' type='button' class='btn btn-default cancelRelationshipConfirm' data-dismiss='modal'>Yes, I'm sure</button>
+				<button id='landingCancelConfirmBtn' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
 				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
 			</div>
 		</div>
@@ -204,11 +242,13 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="js/unitTests.js"></script> <!-- Code containing the unit test --> 
-<!--
+
 	<script  language="javascript">
-		window.onload = animateLogotype()
+//		window.onload = animateLogotype()
+		window.onload = GLOB.clientRef.push({  "msgType" : "pageReady" }); 
+
 	</script>
--->
+
 
 </body>
 </html>

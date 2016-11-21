@@ -17,13 +17,18 @@
 </head>
 
 <body>
-<div id="disableControls" class="hidden"><div class="overlay"></div><img src="images/loadinfo.net.gif" class="spinnyWheel"></div>
+
+<!--Overlay to disable controls. Includes spinny wheel. -->
+<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
+	<img src="images/loadinfo.net.gif" class="spinnyWheel">
+</div>
+
+
 <div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
 <div id="landingWrapper"></div>
 
-<div id="splashDiv">
-	(splash)
-
+<div id="splash" class="splashDiv">
+	<br><br><br><br>(SPLASH)
 <!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
 		<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
  -->
@@ -78,13 +83,36 @@
 <!-- *********************************** HOME DIV **************************************** -->
 
 <div id="home" class="pageTemplate">
-	<h3>Certify your relationship.</h3>
+	<h3>Tell us about your relationship.</h3>
+
+
+<div class="row">
+<div class="col-md-12">
+
+	<div>
+		What your partner doesn't say about your relationship speaks volumes. <a href="#" data-toggle="collapse" data-target="#homeIntroCopy">(more)</a>
+	</div>
+	<div id="homeIntroCopy" class="collapse"><br>
+		<p>Start by creating a Trustjar relationship by entering the main email address or phone number for each of you below. Messages will be sent to confirm your respective identities, after which your relationship is established in a Trustjar. You can then add more contact channels to each side of the relationship if you wish.</p>
+
+		<p>What does this do for you? Let's say you want reassurances that you and your partner ARE exclusive, but you don't want to broadcast your relationship status to the world using something like Facebook. If your partner's contact channel is already in ANY other Trustjar relationship, they won't be allowed to accept your request. No other information about you or them or even whether they already belong to Trustjar is ever shared. All you'll ever know is if they accept your request, and once they accept it, you'll be notified if they leave the relationship. That's it.</p>
+
+		<p>Or maybe you're casually dating someone but don't want to be "the other person" in a love triangle. Enter your casual relationship here and if your partner is in an exclusive relationship, they won't be able to accept. And if they do and then down the road you meet someone else and want to be exclusive, you can end the casual relationship and your casual partner will only ever know that you ended the relationship with them. No other information will ever be divulged, and no one else will ever know about it. At least not from us.
+
+		<p>So when you're in a Trustjar relationship, rest assured that your privacy and your relationship are both secure.
+	</div>
+
+
+</div>
+</div>
+
+
 	<div class="form-group well">  
 		<form action="" onsubmit="return homeSubmitRequest()" data-ajax="false"><!--   Request form: create a new relationshop-->
 			<div class="row">
 				<div class="col-md-5 form-group">   
-					<label id="homeContactLabel" for="homeUserContact">You</label>
-					<input type="text" class="form-control" id="homeUserContact" placeholder="email or mobile" autofocus required>
+					<label id="homeContactLabel" for="homeRequestorContact">You</label>
+					<input type="text" class="form-control" id="homeRequestorContact" placeholder="email or mobile" autofocus required>
 				</div>			
 				<div class="col-md-2 form-group">   
 					<label id="relationshipType" for="homeRelationshipType">are in a</label><br>
@@ -103,31 +131,17 @@
 				</div>
 			</div> <!-- End row --> 
 			<div class="row">
-				<div class="col-md-12">   
+				<div class="col-md-12">						
+					<div class="checkbox">
+						<label>
+						<input id="homeNewUserCheckbox" type="checkbox" required>I'm a new user. (If you're an existing user, please sign in to add a relationship to your account.)
+					</div>
+   
 					<button id="homeRequestSubmitBtn" type="submit" class="btn btn-primary">Continue</button>  
 				</div>
 			</div> <!-- End row --> 
 		</form> <!--  End newRelationshiprequest form-->
 	</div>
-
-	<div class="row">
-		<div class="col-md-12">   
-			<div id="whatIsTrustjarContainer">
-				<a href="#" id="whatIsTrustjar">What is trustjar?</a>
-				<div id="whatIsTrustjarCopy">
-					<p>We are the anti-Ashley Madison: we’re here to keep people honest.</p>
-
-					<p>If you're in an exclusive relationship, declare it here. Connect your points of contact with theirs. Connect as many emails and phone numbers as you want. If someone else connects to ANY of those contacts, you’ll be notified and receive each other’s contact information.</p>
-
-					<p>If you're dating casually, maybe you want to be sure you’re not “the other woman” or man in someone’s exclusive relationship. By declaring your casual relationship here, you AND their “exclusive” partner will be notified along with each other’s contact information. Any other casual connections you (or they) make remains your own business.</p>
-
-					<p>Like trust itself, TrustJar works both ways, and the same rules apply to you as well as your partner. Otherwise, this connection remains completely private. No one's contact info is ever used for any other purpose. And your partner can’t refuse a relationship based on privacy concerns like they can with the rest of the social media circus.
-
-					<p>Sure, they can refuse to accept the connection request anyway. But what does that tell you?</p>
-				</div>
-			</div>
-		</div>
-	</div> <!-- End row -->
 </div><!-- End Home -->
 
 <!-- *********************************** END HOME DIV **************************************** -->
@@ -153,10 +167,10 @@
 <footer class="footer globalFooter">
 	<div class='container'>
 		<div class='navbar-header'>
-			<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-			<a href='#' id='contactLink'>Contact</a>
+			<a href='#' id='helpFooterLink' class='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id="privacyFooterLink" class='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id="termsFooterLink" class="termsLink">Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<a href='#' id="contactFooterLink" class='contactLink'>Contact</a>
 			<p>© Quantima 2015. All rights reserved.</p>
 		</div>
 	</div><!-- /container -->

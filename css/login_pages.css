@@ -99,13 +99,8 @@ h3 {
     display:none;
 }
 
-.anonHeader {
-  display:none;
-}
-
 .pageTemplate {
-  display:none; 
-  z-index:10
+  display:none;
 }
 
 table.box {
@@ -134,7 +129,7 @@ table.index td {
   top: 700px;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 10000000000000000;
 }
 
 .hideLabel {
@@ -156,12 +151,10 @@ table.index td {
   font-weight: bold;
   position: fixed;
   bottom: 0;
-  width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
   padding: 10px 10px 60px 0px; 
-  display:none;
 }
 
 
@@ -175,11 +168,11 @@ table.index td {
   }
 }
 
-.overlay {
+/*.overlay {
    background-color: #F0F0F0;
-   filter:alpha(opacity=50); /* IE */
-   opacity: 0.5; /* Safari, Opera */
-   -moz-opacity:0.50; /* FireFox */
+   filter:alpha(opacity=50);
+   opacity: 0.5;
+   -moz-opacity:0.50;
    z-index: 1050;
    background-repeat:no-repeat;
    background-position:center;
@@ -188,6 +181,21 @@ table.index td {
    position:absolute;
    top: 0px;
    left: 0px;
+}
+*/
+.splashDiv {
+  background-color: #F0F0F0;
+  text-align: center; 
+  font-size:40px; 
+  position: relative;
+  z-index: 1050;
+  background-repeat:no-repeat;
+  background-position:center;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
 }
 
 .techDifficulties {
@@ -204,7 +212,6 @@ table.index td {
     margin: auto;
     z-index: 1050;
   }
-
 
 .spinnyWheel {
     border:5px solid #000000;

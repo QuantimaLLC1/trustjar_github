@@ -10,313 +10,404 @@
 	<meta name="author" content="Paul Caron">
 	<title>Welcome to trustjar</title>
 	<!-- Bootstrap core CSS -->
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="disableControls" class="hidden"><div class="overlay"></div><img src="images/loadinfo.net.gif" class="spinnyWheel"></div>
-	<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
-<!-- 	<div id="landingWrapper"></div> -->
-	<div id="splashDiv">
-(SPLASH)
 
-	<!-- 	<div id="splashLogotype" class="splash" onClick="animateLogotype()">
-			<span id="t">t</span><span id="r">r</span><span id="u">u</span><span id="s">s</span><span id="t2">t</span><span id="j">j</span><span id="a">a</span><span id="r2">r</span></div>
-	 -->
+<!-- *********************************** MODAL SECTION **************************************** -->
+
+	<!--Overlay to disable controls. Includes spinny wheel. -->
+	<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
+		<img src="images/loadinfo.net.gif" class="spinnyWheel">
 	</div>
 
-<!-- *********************************** END HEADER **************************************** -->
+	<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
+		<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
+
+
+	<!-- Modal dialog to confirm that the user wants to close the accuount. User will still have to verify by responding to an email / SMS. -->
+	<div  id="closeAccount" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">close your trustjar account</h4>
+				</div>
+				<div class="modal-body">
+					<p>If you confirm, a notification will be sent to all your contacts. Respond to any one of them to cancel your account. Notifications will also be sent to your relationship partners. Are you sure you want to continue?</p>
+				</div>
+				<div class="modal-footer">
+					<!-- Confirmation sends a 'close account' message to Firebase -->
+					<button id="confirmCloseAccount" type="button" class="btn btn-danger" data-dismiss="modal">yes, close my account</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal dialog for resending a notification to a user contact that's unverified -->
+	<div id="resendVerification" class="modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">verify contact</h4>
+				</div>
+				<div class="modal-body">
+					<p>You must verify this contact before it can be added to a relationship. Verify by responding to the notification you received at the specified email address or phone number when you added it to your trustjar.</p>
+					<p>If you never received such a notification, make sure the email address or phone number you entered is correct. If it's incorrect, remove it from your profile and add the correct email or phone number. If you lost or deleted the notification, you can resend it again now.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="resendVerificationBtn" type="button" class="btn btn-primary" data-dismiss="modal">Resend</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal dialog for resending a notification to a counterparty contact that's unconfirmed -->
+	<div id="counterpartyResend" class="modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">your partner hasn't confirmed</h4>
+				</div>
+				<div class="modal-body">
+					<p>This contact has not responded to your request. If you think they responded, make sure the email or phone number for this contact was entered correctly. If not, remove it from the relationship and add (or have your partner add) the correct email or phone number.</p> 
+							
+					<p>If your partner lost the text or email containing the request, you can resend it.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="counterpartyResendBtn" type="button" class="btn btn-primary" data-dismiss="modal">Resend</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal dialog for confirming changes to a relationship via the 'edit relationship' function -->
+	<div id="confirmeditRelationshipContacts" class="modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">confirm relationship changes</h4>
+				</div>
+				<div class="modal-body">
+					<p>Remember, your partner will be notified at each contact point that's affected by the change. Are you sure?</p>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmChangeBtn" type="button" class="btn btn-primary confirmRelationshipChange" data-dismiss="modal">change my relationship</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal confirmation dialog telling a user that they can't convert the relationship unless this is the only relationship in the dashboard -->
+	<div id="saveProfileConfirm" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">are you sure?</h4>
+				</div>
+				<div class="modal-body"> 
+					<p>Any contacts you remove from your profile will have to reconfirmed all over again if you add them again.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmSaveProfileBtn" type="button" class="btn btn-primary" data-dismiss="modal">save profile</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal confirmation dialog to remove a relationship -->
+	<div id="dashboardRemoveRelationship" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title boxHeader">close this relationship</h4>
+				</div>
+				<div class="modal-body"> 
+					<p>You're about to remove this relationship from your trustjar.</p>
+					<p>When you confirm, the relationship will be closed and notifications will be sent to your partner at all their points of contact.</p>
+					<p class="warningText">*Remember, when you end a relationship of any kind, your partner's permission is not required but they will be notified across every contact in the relationship.</p> 
+					<p>If you want to restore the relationship, you will have to use the "Add a new relationship" form and start over.</p>
+					<p>Do you want to continue? </p>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmRemoveRelationshipBtn" type="button" class="btn btn-primary confirmRemoveRelationship" data-dismiss="modal">close this relationship</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<!-- Footer overlay. When a footer link is clicked, the overlay is dynamically populated with relevant 
+	header and body content and displayed when the corresponding link is selected. -->
+	<div class='modal fade' id='footerOverlay' role='dialog'>
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 id='footerHeader' class='modal-title boxHeader'></h4>
+				</div>
+				<div class='modal-body' id='modalBody'>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal confirmation dialog when a user cilcks 'sign out' -->
+	<div class='modal fade' id='signOutOverlay' role='dialog'>
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header' id='signOutHeader'>
+					<button type='button' class='close' data-dismiss='modal'>&times;</button>
+					<h4 class='modal-title boxHeader'>are you sure?</h4>
+				</div>
+				<div class='modal-body' id='modalBody'>
+					Please confirm that you want to sign out of Trustjar.
+				</div>
+				<div class='modal-footer'>
+					<button id='confirmSignOut' type='button' class='btn btn-primary' data-dismiss='modal'>yes, I'm sure</button>
+					<button id='modalClose' type='button' class='btn btn-primary' data-dismiss='modal'>no, go back</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- *********************************** END MODAL SECTION **************************************** -->
+
+<div id="splash" class="splashDiv">
+
+	<div id="splashBackground"></div> 
+	<div id="darkmask"></div>
+ 	<div id="splashLogotype" class="splashText" onClick="animateLogotype()">
+		<span id="t">T</span><span id="r">R</span><span id="u">U</span><span id="s">S</span><span id="t2" class="TJ">T</span><span id="j" class="TJ">J</span><span id="a">A</span><span id="r2">R</span>
+	</div>
+</div>
+
+
 <!-- *********************************** DASHBOARD SECTION **************************************** -->
 
 <div id="dashboard" class="pageTemplate topAnimals">
-
+<div class=responsiveAnimals></div>
 <!-- *********************************** JUMBOTRON SECTION **************************************** -->
 
-<!-- Main jumbotron header. Includes profile section. -->
+<!-- Main header. Includes profile section. -->
 <div class="header">
 	<div class="container">
+
+<!-- 
 		<div class="row">
 			<div class="col-md-8">
 
-				<!-- User's name is populated below -->
 				<div id="leftHeader">
-					<div style="float:left">
+					<div class="floatLeft">
 						<div id="headerName">
 							<span id="headerProfileName"></span>'s
 						</div> 
-						<div id="dashboardHeaderLogo">TRUS<span id="tj">TJ</span>AR</div>
-					</div>
-					<div id="profileContactsContainer" class="profileContacts" style="float:left; margin-left:40px">
-						<div id="profileContacts" style="display:none">
-						</div>
-						<div style="margin:auto">You have <span id="numberOfContacts" style="color:#228b22; font-weight:bold">3</span> contacts in your profile &nbsp;
-							<a href="#" id="editProfileLink">
-								<img src="images/edit.gif" alt="edit profile" title="edit profile">
-							</a>
-						</div>
-					</div>
-				</div>
-				<hr class="dotted">
 
-				<!-- 'Edit profile' form. Hidden by default. -->         
-				<div id="editProfileForm" class="row" style="color:#333333; background-color:#eeeeee; margin:5px; border: 6px solid #000000; display:none; z-index: 1">
-					<form name="profileForm" action="" onsubmit="return profileFormSubmit()" data-ajax="false" class="col-md-12">
-						<div id="editProfileContacts" class="col-md-6">
-							<label for="newProfileContact" style="margin-top:8px">Add a contact</label> 
-							<input type="text" class="form-control" id="newProfileContact" placeholder="phone or email">
-							<div style="font-weight: bold; margin-top:5px">
-								Current contacts
-								<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="right" title="Verified contacts can only be removed when they're not in a relationship." aria-hidden="true">
-							</div>
-							<!-- Profile contact list. Populated by Firebase, complete with checkboxes and 'unverified' links. -->
-							<div id="editProfileContactList">
-							</div>
+						<div>
+							<span id="dashboardHeaderLogo" style="vertical-align:middle">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
+							<span style="white-space:nowrap; vertical-align:middle" class="marginLeft15">
+								<span id="numberOfContacts"></span> verified contacts in your profile &nbsp;
+									<a href="#" id="editProfileLink">
+										<img src="images/edit.gif" alt="edit profile" title="edit profile"></a>
+									<br><br>
+							</span>
 						</div>
-						<div class="col-md-6">
-							<label for="editProfileFormName" style="margin-top:5px">Name</label> 
-							<!-- User's name. Prepopulated via Firebase with the user's current name. -->
-							<input type="text" class="form-control" id="editProfileFormName" placeholder="Add your name" required>
-							<!-- User's passcode. Required. Blank by default. -->
-							<label for="dashboardPasscode" style="margin-top:5px">Passcode (required)</label>
-							<input type="password" class="form-control" id="dashboardPasscode" required>
-							<div style="text-align:center; vertical-align:bottom; margin-top:15px; margin-bottom:10px">
-								<!-- 'Save' opens a confirmation dialog. -->
-								<button type="submit" id="profileFormSubmitBtn" class="btn btn-primary btn-md">
-								Save
-								</button>
-								<!-- 'Cancel' closes the Profile form and returns the user to the default contact display. -->
-								<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-sm">
-								Cancel
-								</button>
-								<span style="padding-left:30px"></span>
-								<!-- Opens a confirmation dialog. -->
-								<button id="closeAccountBtn" type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#closeAccount">
-								Close account
-								</button>
-							</div>
-						</div>
-					</form>
+
+					</div>
 				</div>
+				<hr class="dashed">
+
 
 			</div>
 			<div class="col-md-4">
 				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
-					<div id="signOut" class="pull-right" style="z-index: 1">Sign out</div>
+					<div id="signOut" class="pull-right">sign out</div>
 				</a>
 			</div>
+
+ -->
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
+					<div id="signOut" class="pull-right">sign out</div>
+				</a>
+				<div id="leftHeader">
+					<div class="floatLeft">
+						<div id="headerName">
+							<span id="headerProfileName"></span>'s
+						</div> 
+
+						<div>
+							<span id="dashboardHeaderLogo" style="vertical-align:middle">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
+							<span style="white-space:nowrap; vertical-align:middle" class="marginLeft15">
+								<span id="numberOfContacts"></span> verified contacts in your profile &nbsp;
+									<a href="#" id="editProfileLink">
+										<img src="images/edit.gif" alt="edit profile" title="edit profile"></a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-8 marginTop8">
+				<hr class="dashed">
+			</div>
+			<div class="col-md-4">
+			</div>
+
+
+
+
+
+
+			<div id="profileFormContainer" class="hidden">
+				<div class="col-md-9">
+
+					<!-- 'Edit profile' form. Hidden by default. -->         
+					<div id="profileFormHeader" class="blackBoxHeader">MY PROFILE</div>
+					<div id="editProfileForm" class="well profileForm marginTop30">
+						<div class="row">
+							<form name="profileForm" action="" data-ajax="false" class="col-md-12">
+								<div>Here you can change the name that your partners see and add or remove contact channel from your profile. You can only remove a contact if it's been removed from all relationships. Once removed, a contact channel will have to be confirmed all over again.</div><br>
+								<div id="editProfileContacts" class="col-md-6">
+									<label for="newProfileContact">Add a contact (optional)</label> 
+									<input type="text" class="form-control" id="newProfileContact" placeholder="phone or email">
+									<div class="marginTop8">
+										<b>Remove a contact</b>
+										<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="right" title="Click a contact to mark it for deletion." aria-hidden="true">
+									</div>
+									<!-- Profile contact list. Populated by Firebase, complete with checkboxes and 'unverified' links. -->
+									<div id="editProfileContactList" class="profileContacts">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label for="editProfileFormName">Name</label> 
+									<!-- User's name. Prepopulated via Firebase with the user's current name. -->
+									<input type="text" class="form-control" id="editProfileFormName" placeholder="Add your name" required>
+									<!-- User's passcode. Required. Blank by default. -->
+									<label for="dashboardPasscode" class="marginTop8">Passcode (required)</label>
+									<div class="input-group">
+										<input id='dashboardPasscode' type='password' placeholder='passcode' class='form-control' required>
+										<div id="dashboardShowHide" class="input-group-addon">show</div>
+									</div>
+									<div class="marginBottom8">
+										<!-- 'Save' opens a confirmation dialog. -->
+										<button type="submit" id="profileFormSubmitBtn" class="btn btn-primary btn-md" data-toggle="modal">
+										save
+										</button>&nbsp;
+										<!-- 'Cancel' closes the Profile form and returns the user to the default contact display. -->
+										<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-md">
+										cancel
+										</button>
+										<span class="paddingLeft30"></span>
+										<!-- Opens a confirmation dialog. -->
+										<button id="closeAccountBtn" type="submit" class="btn btn-danger btn-md" data-toggle="modal">
+										close account
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+
+
+
+
+
+
+
 	</div>
 </div>
 
-<!-- Modal dialog to confirm that the user wants to close the accuount. User will still have to verify by responding to an email / SMS. -->
-<div  id="closeAccount" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Close your Trustjar account</h4>
-			</div>
-			<div class="modal-body">
-				<p>If you confirm, a notification will be sent to all your contacts. Respond to any one of them to cancel your account. Notifications will also be sent to your relationship partners. Are you sure you want to continue?</p>
-			</div>
-			<div class="modal-footer">
-				<!-- Confirmation sends a 'close account' message to Firebase -->
-				<button id="confirmCloseAccount" type="button" class="btn btn-danger" data-dismiss="modal">Yes, close my account</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- *********************************** END JUMBOTRON SECTION **************************************** -->
 <div class="container"><!-- Bootstrap container to manage page width across different sizes. All subsequent HTML is within the container. -->
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 <!-- Server alert component. Error messages and other system response messages go here. -->      
-			<div id="serverAlertContainer" class="serverAlert">
+			<!-- Modal confirmation dialog to remove a relationship -->
+<!-- 			<div id="serverAlertContainer" class="modal fade" role="dialog" data-dismiss="modal">
+				<div class="modal-dialog">
+					<div class="modal-content" data-dismiss="modal">
+							<button type="button" class="close" data-dismiss="modal">&times;&nbsp;</button>
+						<div id="serverAlertContent" class="modal-body"> 
+						</div>
+					</div>
+				</div>
 			</div>
-
+		
+ -->
 <!-- *********************************** END SERVER ALERT SECTION **************************************** -->
 <!-- *********************************** RELATIONSHIP SECTION **************************************** -->
-
-	<span id="relationshipTypeHeader"></span>
 	<div class="row">
-		<div id="relationshipColumn" class="col-md-9" style="margin-top:30px">  
+		<div class="col-md-8">
+			<p>Welcome to Trustjar! Your relationships are represented below. If a partner's contact channel is grayed out, it means they haven't responded to your request yet. Click the icon next to their contact channel to resend the notification. Use 'edit relationship' to manage contact channels from either side of the relationship.</p>
+
+			<p>NOTE: You can be in many casual relationships but only one exclusive relationship. To create or accept an exclusive relationship you can't have ANY other relationships in your Trustjar.</p>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+
+	<span id="relationshipTypeHeader" class="blackBoxHeader"></span>
+	<div class="row">
+		<div id="relationshipColumn" class="col-md-9 marginTop30">  
 
 		</div>
-
-			<!-- Modal dialog for resending a notification to a user contact that's unverified -->
-			<div id="resendVerification" class="modal" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Verify contact</h4>
-						</div>
-						<div class="modal-body">
-							<p>You must verify this contact before it can be added to a relationship. Verify by responding to the notification you received at the specified email address or phone number when you added it to your trustjar.</p>
-							<p>If you never received such a notification, make sure the email address or phone number you entered is correct. If it's incorrect, remove it from your profile and add the correct email or phone number. If you lost or deleted the notification, you can resend it again now.</p>
-						</div>
-						<div class="modal-footer">
-							<button id="resendVerificationBtn" type="button" class="btn btn-default resendVerification" data-dismiss="modal">Resend</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Modal dialog for resending a notification to a counterparty contact that's unconfirmed -->
-			<div id="counterpartyResend" class="modal" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Your partner hasn't confirmed the relationship</h4>
-						</div>
-						<div class="modal-body">
-							<p>This contact has not responded to your request. If you think they responded, make sure the email or phone number for this contact was entered correctly. If not, remove it from the relationship and add (or have your partner add) the correct email or phone number.</p> 
-							
-							<p>If your partner lost the text or email containing the request, you can resend it.</p>
-						</div>
-						<div class="modal-footer">
-							<button id="counterpartyResendBtn" type="button" class="btn btn-default counterpartyResend" data-dismiss="modal">Resend</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Modal dialog for confirming changes to a relationship via the 'Edit contacts' function -->
-			<div id="confirmeditRelationshipContacts" class="modal" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Confirm relationship changes</h4>
-						</div>
-						<div class="modal-body">
-							<p>Remember, your partner will be notified at each contact point that's affected by the change. Are you sure?</p>
-						</div>
-						<div class="modal-footer">
-							<button id="confirmChangeBtn" type="button" class="btn btn-default confirmRelationshipChange" data-dismiss="modal">Change my profile</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Modal confirmation dialog to convert a relationship to exclusive -->
-			<div id="dashboardBecomeExclusive" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Make this an exclusive relationship</h4>
-						</div>
-						<div class="modal-body"> 
-						
-							<p>When you change a relationship to exclusive, all contacts in your profile are locked out of participating in any other relationsihp, whether you include them in the relationship or not. So if this is the person you want all to yourself, please continue. </p>
-
-							<p>Your partner will receive notifications across all contacts in the relationship. They will have to confirm each one to include it in the relationship. </p>
-
-							<p>Do you want to continue? </p>
-						</div>
-						<div class="modal-footer">
-							<button id="confirmBecomeExclusiveBtn" type="button" class="btn btn-default confirmBecomeExclusive" data-dismiss="modal">Become exclusive</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-
-			<!-- Modal confirmation dialog telling a user that they can't convert the relationship unless this is the only relationship in the dashboard -->
-			<div id="dashboardDontBecomeExclusive" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Make this an exclusive relationship</h4>
-						</div>
-						<div class="modal-body"> 
-							<p>In order to make this relationship exclusive, it has to be the only relationship in your Trustjar. Once you remove all other relationships from your Trustjar, you can start the upgrade process. </p>
-
-							<p style="color:#cc0000">Remember, when you end any relationship, your partner's permission is not required but they will be notified across every contact in the relationship.</p> 
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-
-			<!-- Modal confirmation dialog to remove a relationship -->
-			<div id="dashboardRemoveRelationship" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Close this relationship</h4>
-						</div>
-						<div class="modal-body"> 
-							<p>You're about to remove this relationship from your trustjar.</p>
-						
-							<p>When you confirm, the relationship will be closed and notifications will be sent to your partner at all their points of contact.</p>
-
-							<p style="color:#cc0000">*Remember, when you end a relationship of any kind, your partner's permission is not required but they will be notified across every contact in the relationship.</p> 
-
-							<p>If you want to restore the relationship, you will have to use the "Add a new relationship" form and start over.</p>
-
-							<p>Do you want to continue? </p>
-						</div>
-						<div class="modal-footer">
-							<button id="confirmRemoveRelationshipBtn" type="button" class="btn btn-default confirmRemoveRelationship" data-dismiss="modal">Close this relationship</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-		<div class="col-md-3">
+		<div class="col-md-3" id="newRelationshipColumn">
 			<!-- 'Add a new relationship' form -->
 			<div class="well" id="newRelationshipContainer">
-				<div style="float:left">
-					<h5 class="boxHeader">
+				<div>
+					<h5 class="floatLeft boxHeader">
 					add a new relationship
 					</h5>
-					<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'edit contacts' in the relationship." aria-hidden="true" style="float:right; position:absolute; top:30px; right:30px;">
-				</a>
+					<img src="images/info_icon.svg" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'edit relationship' in the relationship." aria-hidden="true" class="newRelationshipInfoIcon">
 				</div>
 				<br>
-				<hr class="dotted">
+				<hr class="dashed">
 				<span class="sr-only">Info:</span>
 				<div>
 					<form name="newRelationshipForm" action="" onsubmit="return newRelationshipFormSubmit()" data-ajax="false">
-						<div class="form-group" style="margin:0px">
+						<div class="form-group">
 							<label for="yourContacts">YOU</label>
-							<!-- This is populated via Firebase listeners -->
-							<div id="newRelationshipFormContacts" class="profileContacts" style="text-align:left">   
+							<div id="newRelationshipFormContacts" class="profileContacts"> <!-- This is populated via Firebase listeners -->  
 							</div>
 							<div>
-								<hr class="dotted">
+								<hr class="dashed">
 								<label for="newRelationshipType">RELATIONSHIP TYPE</label><br>
 								<div class="btn-group" data-toggle="buttons">
 				  					<label>
 										<input id="newRelationshipRadioCasual" type="radio" name="newRelationshipType" value="casual" autocomplete="off" required> Casual 
 				  					</label>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-										<label id="newRelationshipExclusive" data-toggle="tooltip" data-placement="right" title="You can't create an exclusive relationship if you have existing relationships in your Trustjar." style="float:right">
-											<input id="newRelationshipRadioExclusive" type="radio" name="newRelationshipType" value="exclusive" autocomplete="off" required disabled> Exclusive
+										<label>
+											<input id="newRelationshipRadioExclusive" type="radio" name="newRelationshipType" value="exclusive" autocomplete="off" required> Exclusive
 										</label>
 								</div>
-								<hr class="dotted">
+								<hr class="dashed">
 							</div>
-							<div style="height:10px"></div>
-							<div class="form-group" style="margin:0px">
+							<div class="form-group">
 								<label for="newRelationshipCounterpartyContact">Partner's phone or email</label>
 								  <input type="text" class="form-control" id="newRelationshipCounterpartyContact" placeholder="Partner's phone or email" required>
 							</div>
-							<div><br>
-								<button type="submit" id="newRelationshipFormSubmitBtn" class="btn btn-primary">Submit</button>
+							<div class="center">
+								<button type="submit" id="newRelationshipFormSubmitBtn" class="btn btn-primary center">add relationship</button>
 							</div>
 						</div>
 					</form>
@@ -332,60 +423,27 @@
 
 <!-- ********************************************* FOOTER ************************************************** -->
 <div class="container">
-	<footer class="footer globalFooter">
-		<img src="images/kitten_bunny250.jpg" style="float:left">
-		<div id="footerText" class='container'>
-			<div class='navbar-header'>
-				<a href='#' id='helpLink'>Help</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-				<a href='#' id='privacyLink'>Privacy</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-				<a href='#' id='termsLink'>Terms</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-				<a href='#' id='contactLink'>Contact</a>
-				&nbsp;&nbsp;&nbsp; <span id="copyrightCopy">© Quantima 2015. All rights reserved.</span>
-			</div>
+	<footer class="footer row">
+		<div class="col-md-3">
+			<img id="footerAnimals">
+		</div>
+
+		<div id="footerCopy" class='container col-md-9 footerText'>
+			<span>
+				<a href='#' id='helpFooterLink' class="helpLink">Help</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='privacyFooterLink' class="privacyLink">Privacy</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='termsFooterLink' class="termsLink">Terms</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='contactFooterLink' class="contactLink">Contact</a>&nbsp;&nbsp;&nbsp;
+			</span>
+				<span id="copyright" class="copyrightCopy">© Quantima 2015. All rights reserved.</span><p><br></p>
 		</div><!-- /container -->
 	</footer>
 </div>
 <!-- ********************************************* END FOOTER ************************************************** -->
 <!-- *************************************** FOOTER LINK OVERLAY ************************************************** -->
 
-<!-- When a link is clicked, the overlay is dynamically populated with relevant header and body content and displayed when
-the corresponding link is selected. -->
-<div class='modal fade' id='footerOverlay' role='dialog'>
-	<div class='modal-dialog'>
-		<div class='modal-content'>
-			<div class='modal-header' id='modalHeader'>
-				<button type='button' class='close' data-dismiss='modal'>&times;</button>
-				<h4 class='modal-title'></h4>
-			</div>
-			<div class='modal-body' id='modalBody'>
-			</div>
-			<div class='modal-footer'>
-				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- *************************************** END FOOTER LINK OVERLAY ************************************************** -->
 <!-- *************************************** 'SIGN OUT' OVERLAY ************************************************** -->
-
-<!-- Modal confirmation dialog when a user cilcks 'sign out' -->
-<div class='modal fade' id='signOutOverlay' role='dialog'>
-	<div class='modal-dialog'>
-		<div class='modal-content'>
-			<div class='modal-header' id='modalHeader'>
-				<button type='button' class='close' data-dismiss='modal'>&times;</button>
-				<h4 class='modal-title'>Are you sure?</h4>
-			</div>
-			<div class='modal-body' id='modalBody'>
-				Please confirm that you want to sign out of Trustjar.
-			</div>
-			<div class='modal-footer'>
-				<button id='confirmSignOut' type='button' class='btn btn-default' data-dismiss='modal'>Yes, I'm sure</button>
-				<button id='modalClose' type='button' class='btn btn-default' data-dismiss='modal'>No, go back</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <!-- ********************************* END 'SIGN OUT' OVERLAY ******************************************** -->
 <!-- This closes the 'container' div near the top of this code. -->
@@ -401,20 +459,35 @@ the corresponding link is selected. -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script>
 	if (!window.jQuery) {
-		document.write("<script src='../js/jquery-2.1.4.min.js'><\/script>");
+		document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
 	}
 	</script>
 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/dashboard.js"></script><!-- All the code specifically written for this application -->
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="../js/ie10-viewport-bug-workaround.js"></script>
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="../js/unitTests.js"></script> <!-- Code containing the unit test --> 
-<!--
+
 	<script  language="javascript">
 		window.onload = animateLogotype()
 	</script>
--->
+
+	<!-- Server alerts. These are generated so the system can communicate critical events to the user. -->
+	<div id="serverAlertContainer" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Server alert!</h4>
+				</div>
+				<div id="serverAlertContent" class="modal-body" style="padding:20px;">
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

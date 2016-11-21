@@ -2,42 +2,97 @@
 html, body {
     height:100%;
     font-family: 'Source Sans Pro', sans-serif;
+    color:#000000;
 }
 
-#landingWrapper {
+#splashBackground {
     display:table;
     width:100%;
     height:100%;
-/*    background: url('../images/6.jpg');  */
-    background-repeat:no-repeat;
-    background-position: center 0px;
     position: absolute;
 }
 
 
-.topAnimals {
-    background-image: url('../images/kitten_bunny300.jpg');
-    background-repeat: no-repeat;
-    background-position: calc(50% + 350px) top;
-}
-
-
-.bottomAnimals {
-    background-image: url('../images/kitten_bunny250.jpg');
-    background-repeat: no-repeat;
-    background-position: left bottom;
-}
-
 #darkmask {
-  display:table;
-  width:100%;
-  height:100%;
-  filter:alpha(opacity=70); /* IE */
-  opacity: 0.7; /* Safari, Opera */
-  -moz-opacity:0.70; /* FireFox */
-  background-repeat:no-repeat;
-  background-position: center top;
-  background-color:#000000;
+    display:table;
+    width:100%;
+    height:100%;
+    filter:alpha(opacity=50); /* IE */
+    opacity: 0.5; /* Safari, Opera */
+    -moz-opacity:0.50; /* FireFox */
+    background-repeat:no-repeat;
+    background-position: center 0px;
+    position: absolute;
+    background-color:#000000;
+}
+
+
+
+
+/* checkboxes for requestor side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-1 + label:after,
+input[type='checkbox'].pseudo-checkbox-1 + label:before{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-1 + label:after{/*unchecked icon*/
+    content: "\e157";
+}
+input[type='checkbox']:checked.pseudo-checkbox-1 + label:after{/*checked icon*/
+    content: "\e067";
+    color: #228b22 ;
+}
+
+
+/* checkboxes for requestor side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-3 + label:before,
+input[type='checkbox'].pseudo-checkbox-3 + label:after{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-3 + label:before{/*unchecked icon*/
+    content: "\e157";
+}
+input[type='checkbox']:checked.pseudo-checkbox-3 + label:before{/*checked icon*/
+    content: "\e067";
+    color: #000000 ;
+}
+
+
+/* checkboxes for counterparty side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-2 + label:before,
+input[type='checkbox'].pseudo-checkbox-2 + label:after{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-2 + label:before{/*unchecked icon*/
+    content: "\e020";
+    color: #A41410 ;
+}
+input[type='checkbox']:checked.pseudo-checkbox-2 + label:before{/*checked icon*/
+    content: "\e008";
+    color: #228b22 ;
 }
 
 .hidden {
@@ -66,12 +121,40 @@ html, body {
 
 .profileContacts {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 15px;
+  font-size: 15px
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
+@media (max-width: 991px) {
+  .relationshipRequestorName{
+    text-align: center;
+  }
+  .relationshipCounterpartyName{
+    text-align: center;
+  }
+  .requestorList{
+    text-align: left !important;
+  }
+  .requestorContactForm{
+    text-align: left !important;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .profileContacts{
+    font-size: 14px
+  }
+  .well{
+    padding: 3px;
+  }
+}
+
+
 /* The 'TJ' in the logo is a different color*/
-#tj {
-  color: #df331d;
+.TJ {
+  color: #df331d !important;
 }
 
 /* style for the 'add a new relationship' form */
@@ -84,18 +167,25 @@ html, body {
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
 }
 
-#relationshipTypeHeader {
+.blackBoxHeader {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 23px;
   font-weight: 700;
+  display: inline;
   color: #ffffff;
   background-color: #000000;
   position:relative;
-  top:28px;
-  padding: 5px 18px 18px 18px;
+  top:23px;
+  padding: 10px 18px 13px 18px;
   -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+@media screen and (max-width: 480px) {  
+  .blackBoxHeader  {
+  font-size: 18px;
+  }
 }
 
 .relationshipModule {
@@ -135,6 +225,21 @@ html, body {
 }
 
 
+.splashDiv {
+  background-color: #ffffff;
+  text-align: center; 
+  font-size:40px; 
+  position: relative;
+  z-index: 1050;
+  background-repeat:no-repeat;
+  background-position:center;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+}
+
 h3 {
   font-weight:bold; 
   color:#555555
@@ -145,7 +250,7 @@ h4 {
     font-size: 24px;
 }
 
-.dotted {
+.dashed {
   clear:both;
   border:none;
   border-top: 2px dashed #000;
@@ -154,18 +259,48 @@ h4 {
   margin:5px;
 }
 
-.logotype {
-  font-size:32px;
-  color:#333333;
-}
 
 .signInButton {
   color:#ffffff
 }
 
+
+.relationshipButtons {
+  width:170px;
+}
+
 #whatIsTrustjarCopy {
   display:none; 
   margin-bottom:70px
+}
+
+.relationshipForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+/*  border: 1px solid #000000; 
+*/  padding:5px;
+  display:none; 
+  z-index: 1
+}
+
+.tooltip-inner {
+  padding: 8px;
+}
+.relationshipFormCopy {
+  margin: 6px;
+}
+
+.profileForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+  border: 6px solid #000000; 
+/*  display:none; */
+  position: relative;
+  z-index: 1000000000
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+
 }
 
 .relationshipText {
@@ -181,7 +316,11 @@ h4 {
   text-align:center;
 }
 
-.alertText {     /*also used for conflict text*/
+.textRight {
+  text-align:right;
+}
+
+.warningText {     /*also used for conflict text*/
   color:#cc0000
 }
 
@@ -191,11 +330,20 @@ h4 {
   margin-top:8px
 }
 
-.serverAlert {
+#serverAlertContainer {
 /*  display:none; */ 
-  color: #cc0000; 
-  visibility:hidden;
-  margin-top: 10px;
+  margin-top: 100px;
+}
+
+.alertContent {
+/*  display:none; */ 
+    padding:9px 15px;
+    font-weight: normal;
+    background-color: #cccccc;
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow: hidden;
+
 }
 
 .hidden {
@@ -208,7 +356,6 @@ h4 {
 
 .pageTemplate {
   display:none; 
-/*  z-index:10*/
 }
 
 table.box {
@@ -227,14 +374,44 @@ table.index td {
     border-top: none !important;
 }
 
-.splash {
+.marginLeft15 {
+    margin-left:15px;
+}
+
+.marginTop8 {
+    margin-top:8px;
+}
+
+.marginBottom8 {
+    margin-bottom:8px;
+}
+
+.marginTop30 {
+    margin-top:30px;
+}
+
+
+.marginAuto {
+    margin:auto;
+}
+
+.paddingLeft30 {
+    padding-left:30px;
+}
+
+#numberOfContacts {
+    color:#228b22; 
+    font-weight:bold
+}
+
+.splashText {
   font-family: 'Source Sans Pro', sans-serif;
   color: #ffffff;
-  letter-spacing: 40px;
-  font-size: 60px;
-  font-weight:200;
+/*  letter-spacing: 20px;
+*/  font-size: 60px;
+  font-weight:900;
   position: fixed;
-  top: 700px;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -253,11 +430,9 @@ table.index td {
 .showEditContactsForm { 
   display:none;
 }
-
 */
-
 .pending { 
-  color:#999999;
+  color:#666666;
 }
 
 .glyphicon { 
@@ -271,75 +446,52 @@ table.index td {
   margin-top: 0px;
 }
 
-
-
-
-
-
 /* Sticky footer styles
 -------------------------------------------------- */
+
 .footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 260px;
   padding: 10px 10px 60px 0px; 
-  /*display:none;*/
 }
 
-#footerText {
-  font-family: Georgia;
-  font-size: 16px;
-  font-weight: bold;
-  font-style: italic;
-/*  position: fixed;
-*/  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 260px;
-  background-color: #ffffff; 
+
+#footerAnimals {
+margin-right: 10px;
+}
+
+.footerText {
   margin-top: 60px;
-  margin-left: 60px;
-
-  /*display:none;*/
 }
 
-#copyrightCopy {
+.copyrightCopy {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 13px;
   font-weight: normal;
   font-style: normal;
-  /* Set the fixed height of the footer here */
   height: 260px;
-  background-color: #ffffff;
-  padding: 10px 10px 60px 0px; 
-  /*display:none;*/
+  white-space: nowrap;
 }
 
 /* Footer media queries */
 
-@media (max-width: 600px) {
-  .footer{
-  font-size: 14px;
-  line-height: 1.8;
-  padding: 25px 0 90px;
-  }
-}
 
-.overlay {
-   background-color: #F0F0F0;
-   filter:alpha(opacity=50); /* IE */
-   opacity: 0.5; /* Safari, Opera */
-   -moz-opacity:0.50; /* FireFox */
-   z-index: 1050;
-   background-repeat:no-repeat;
-   background-position:center;
-   width: 100%;
-   height: 100%;
-   position:absolute;
-   top: 0px;
-   left: 0px;
-}
+.spinnyWheel {
+    border:5px solid #000000;
+    border-radius:5px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+
+
 
 .techDifficulties {
     padding:10px; 
@@ -360,6 +512,19 @@ table.index td {
 .header {
     padding-top:10px; 
   }
+
+
+.floatLeft {
+    float:left; 
+  }
+
+.newRelationshipInfoIcon {
+  float:right; 
+  position:absolute; 
+  top:20px; 
+  right:30px;
+}
+
 
 
   .unit-test-end {
@@ -387,24 +552,62 @@ table.index td {
   }
 }
 
-.modal-content {
-    /* 80% of window height */
-    height: 100%;
+
+
+
+.close {
+    /* The "X" close element in modals */
+    color: #000000;
+    opacity: 1;
+    font-size: 30px;
 }
+
+
+.modal-content {
+    border: 6px solid #000;
+}
+
+
+
+.modal-header {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size:23px;
+    padding:9px 15px;
+    background-color: #cccccc;
+    border-bottom: 0px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+     border-top-left-radius: 0px;
+     border-top-right-radius: 0px;
+ }
+
+
+.modal-footer {
+    padding:9px 15px;
+    background-color: #cccccc;
+    border-top: 0px;
+    text-align: center;
+    -webkit-border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -moz-border-radius-bottomright: 0px;
+     border-bottom-left-radius: 0px;
+     border-bottom-right-radius: 0px;
+ }
+
+
 .modal-body {
+    padding:9px 15px;
+    clear: both;
+    font-weight: normal;
+    border-top:2px dashed #000;
+    border-bottom: 0px;
+    background-color: #cccccc;
     /* 100% = dialog height, 120px = header + footer */
     max-height: calc(100% - 120px);
     overflow: hidden;
-}
-
-.modal-header {
-    padding:9px 15px;
-    border-bottom:1px solid #eee;
-    background-color: #cccccc;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
  }
+
