@@ -42,8 +42,8 @@
 				<div class="modal-footer">
 					<!-- Confirmation sends a 'close account' message to Firebase -->
 					<button id="confirmCloseAccount" type="button" class="btn btn-danger" data-dismiss="modal">yes, close my account</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-				</div>
+<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+ -->				</div>
 			</div>
 		</div>
 	</div>
@@ -101,8 +101,8 @@
 				</div>
 				<div class="modal-footer">
 					<button id="confirmChangeBtn" type="button" class="btn btn-primary confirmRelationshipChange" data-dismiss="modal">change my relationship</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-				</div>
+<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+ -->				</div>
 			</div>
 		</div>
 	</div>
@@ -120,8 +120,8 @@
 				</div>
 				<div class="modal-footer">
 					<button id="confirmSaveProfileBtn" type="button" class="btn btn-primary" data-dismiss="modal">save profile</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-				</div>
+<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+ -->				</div>
 			</div>
 		</div>
 	</div>
@@ -132,7 +132,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title boxHeader">close this relationship</h4>
+					<h4 class="modal-title boxHeader">remove this relationship</h4>
 				</div>
 				<div class="modal-body"> 
 					<p>You're about to remove this relationship from your trustjar.</p>
@@ -142,9 +142,9 @@
 					<p>Do you want to continue? </p>
 				</div>
 				<div class="modal-footer">
-					<button id="confirmRemoveRelationshipBtn" type="button" class="btn btn-primary confirmRemoveRelationship" data-dismiss="modal">close this relationship</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-				</div>
+					<button id="confirmRemoveRelationshipBtn" type="button" class="btn btn-primary confirmRemoveRelationship" data-dismiss="modal">remove this relationship</button>
+<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+ -->				</div>
 			</div>
 		</div>
 	</div>
@@ -177,8 +177,8 @@
 				</div>
 				<div class='modal-footer'>
 					<button id='confirmSignOut' type='button' class='btn btn-primary' data-dismiss='modal'>yes, I'm sure</button>
-					<button id='modalClose' type='button' class='btn btn-primary' data-dismiss='modal'>no, go back</button>
-				</div>
+<!-- 					<button id='modalClose' type='button' class='btn btn-primary' data-dismiss='modal'>no, go back</button>
+ -->				</div>
 			</div>
 		</div>
 	</div>
@@ -190,7 +190,7 @@
 	<div id="splashBackground"></div> 
 	<div id="darkmask"></div>
  	<div id="splashLogotype" class="splashText" onClick="animateLogotype()">
-		<span id="t">T</span><span id="r">R</span><span id="u">U</span><span id="s">S</span><span id="t2" class="TJ">T</span><span id="j" class="TJ">J</span><span id="a">A</span><span id="r2">R</span>
+		<span id="t">T</span><span id="r">R</span><span id="u">U</span><span id="s">S</span><span id="t2">T</span><span id="j">J</span><span id="a">A</span><span id="r2">R</span>
 	</div>
 </div>
 
@@ -204,49 +204,14 @@
 <!-- Main header. Includes profile section. -->
 <div class="header">
 	<div class="container">
-
-<!-- 
-		<div class="row">
-			<div class="col-md-8">
-
-				<div id="leftHeader">
-					<div class="floatLeft">
-						<div id="headerName">
-							<span id="headerProfileName"></span>'s
-						</div> 
-
-						<div>
-							<span id="dashboardHeaderLogo" style="vertical-align:middle">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
-							<span style="white-space:nowrap; vertical-align:middle" class="marginLeft15">
-								<span id="numberOfContacts"></span> verified contacts in your profile &nbsp;
-									<a href="#" id="editProfileLink">
-										<img src="images/edit.gif" alt="edit profile" title="edit profile"></a>
-									<br><br>
-							</span>
-						</div>
-
-					</div>
-				</div>
-				<hr class="dashed">
-
-
-			</div>
-			<div class="col-md-4">
-				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
-					<div id="signOut" class="pull-right">sign out</div>
-				</a>
-			</div>
-
- -->
-
-
-
-
 		<div class="row">
 			<div class="col-md-12">
-				<a href="#" data-toggle="modal" data-target="#signOutOverlay">
-					<div id="signOut" class="pull-right">sign out</div>
-				</a>
+				<div id="signOut" class="pull-right">
+					<a href="#" data-toggle="modal" data-target="#signOutOverlay">
+						sign out
+					</a>
+				</div>
+				
 				<div id="leftHeader">
 					<div class="floatLeft">
 						<div id="headerName">
@@ -254,8 +219,8 @@
 						</div> 
 
 						<div>
-							<span id="dashboardHeaderLogo" style="vertical-align:middle">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
-							<span style="white-space:nowrap; vertical-align:middle" class="marginLeft15">
+							<span id="dashboardHeaderLogo" class="headerAlign">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
+							<span class="marginLeft15 headerAlign">
 								<span id="numberOfContacts"></span> verified contacts in your profile &nbsp;
 									<a href="#" id="editProfileLink">
 										<img src="images/edit.gif" alt="edit profile" title="edit profile"></a>
@@ -271,12 +236,6 @@
 			</div>
 			<div class="col-md-4">
 			</div>
-
-
-
-
-
-
 			<div id="profileFormContainer" class="hidden">
 				<div class="col-md-9">
 
@@ -430,10 +389,10 @@
 
 		<div id="footerCopy" class='container col-md-9 footerText'>
 			<span>
-				<a href='#' id='helpFooterLink' class="helpLink">Help</a>&nbsp;&nbsp;/&nbsp;
-				<a href='#' id='privacyFooterLink' class="privacyLink">Privacy</a>&nbsp;&nbsp;/&nbsp;
-				<a href='#' id='termsFooterLink' class="termsLink">Terms</a>&nbsp;&nbsp;/&nbsp;
-				<a href='#' id='contactFooterLink' class="contactLink">Contact</a>&nbsp;&nbsp;&nbsp;
+				<a href='#' id='helpFooterLink' class="helpLink">help</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='privacyFooterLink' class="privacyLink">privacy</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='termsFooterLink' class="termsLink">terms</a>&nbsp;&nbsp;/&nbsp;
+				<a href='#' id='contactFooterLink' class="contactLink">contact</a>&nbsp;&nbsp;&nbsp;
 			</span>
 				<span id="copyright" class="copyrightCopy">© Quantima 2015. All rights reserved.</span><p><br></p>
 		</div><!-- /container -->
@@ -481,7 +440,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Server alert!</h4>
 				</div>
-				<div id="serverAlertContent" class="modal-body" style="padding:20px;">
+				<div id="serverAlertContent" class="modal-body serverAlertContent">
 				</div>
 				<div class="modal-footer">
 				</div>

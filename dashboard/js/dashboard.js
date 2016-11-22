@@ -46,11 +46,11 @@
 // PRE-LOAD RANDOMIZED ANIMAL IMAGES
 GLOB.splashAnimals = ['images/animals/bunnies_1000x1000.jpg', 'images/animals/elephants_1000x1000.jpg', 'images/animals/rhinos_1000x1000.jpg', 'images/animals/tortoises_1000x1000.jpg', 'images/animals/pigs_1000x1000.jpg', 'images/animals/penguins_1000x1000.jpg', 'images/animals/hamsters_1000x1000.jpg'];
 GLOB.topAnimals = ['images/animals/bunnies_300x300.jpg', 'images/animals/elephants_300x300.jpg', 'images/animals/rhinos_300x300.jpg', 'images/animals/tortoises_300x300.jpg', 'images/animals/pigs_300x300.jpg', 'images/animals/penguins_300x300.jpg', 'images/animals/hamsters_300x300.jpg'];
-GLOB.smallTopAnimals = ['images/animals/bunnies_100x100.jpg', 'images/animals/elephants_100x100.jpg', 'images/animals/rhinos_100x100.jpg', 'images/animals/tortoises_100x100.jpg', 'images/animals/pigs_100x100.jpg', 'images/animals/penguins_100x100.jpg', 'images/animals/hamsters_100x100.jpg'];
+// GLOB.smallTopAnimals = ['images/animals/bunnies_100x100.jpg', 'images/animals/elephants_100x100.jpg', 'images/animals/rhinos_100x100.jpg', 'images/animals/tortoises_100x100.jpg', 'images/animals/pigs_100x100.jpg', 'images/animals/penguins_100x100.jpg', 'images/animals/hamsters_100x100.jpg'];
 GLOB.footerAnimals = ['images/animals/bunnies_200x200.jpg', 'images/animals/elephants_200x200.jpg', 'images/animals/rhinos_200x200.jpg', 'images/animals/tortoises_200x200.jpg', 'images/animals/pigs_200x200.jpg', 'images/animals/penguins_200x200.jpg', 'images/animals/hamsters_200x200.jpg'];
 GLOB.randomizer = Math.floor(Math.random() * GLOB.topAnimals.length)
 GLOB.randomHeaderAnimal = GLOB.topAnimals[GLOB.randomizer]
-GLOB.randomSmallHeaderAnimal = GLOB.smallTopAnimals[GLOB.randomizer]
+//GLOB.randomSmallHeaderAnimal = GLOB.smallTopAnimals[GLOB.randomizer]
 GLOB.randomFooterAnimal = GLOB.topAnimals[GLOB.randomizer]
 GLOB.randomSplashAnimal = GLOB.splashAnimals[Math.floor(Math.random() * GLOB.splashAnimals.length)]
 
@@ -65,7 +65,8 @@ function responsiveAnimals() {
 	}
 	// For smaller page widths, use the 100px animal images in the header and change their position
 	if (window.matchMedia("(max-width: 991px)").matches) {
-		$('#dashboard').css("background", "url(" + GLOB.randomSmallHeaderAnimal + ") no-repeat calc(98%) 5px");
+//		$('#dashboard').css("background", "url(" + GLOB.randomSmallHeaderAnimal + ") no-repeat calc(98%) 5px");
+		$('#dashboard').css("background", "url('')");
 		$('.requestorRelationshipCheckbox').removeClass('pull-right');
 		$('#footerCopy').removeClass('footerText')
 	}
@@ -74,7 +75,6 @@ function responsiveAnimals() {
 		$('#splashBackground').css("background", "url(" + GLOB.randomSplashAnimal + ") no-repeat calc(50%)");
 	}
 	if (window.matchMedia("(max-width: 639px)").matches) {
-		$('#dashboard').css("background", "url('')");
 		$('.splashText').css({'font-size': '48px', 'letter-spacing': '10px'})
 		$('#splashBackground').css("background", "url(" + GLOB.randomHeaderAnimal + ") no-repeat calc(50%)");
 	}
@@ -229,113 +229,66 @@ $('#footerAnimals').attr('src', randomFooterAnimal)
 
 
 function animateLogotype() {
-// Pre-load character fonts. This will happen during the fade-in and will smooth the animation for later.
-setTimeout(function(){ $("#logotype").css({'font-weight':700})}, 25)
-setTimeout(function(){ $("#logotype").css({'font-weight':600})}, 50)
-setTimeout(function(){ $("#logotype").css({'font-weight':400})}, 75)
-setTimeout(function(){ $("#logotype").css({'font-weight':300})}, 100)
-setTimeout(function(){ $("#logotype").css({'font-weight':200})}, 125)
-setTimeout(function(){ $("#logotype").css({'font-weight':900})}, 150)
 
-  $( "#landingWrapper" ).fadeIn( 100 );
+setTimeout(function(){ $("#t").addClass('TJ')}, 500);
 
+setTimeout(function(){ $("#r").addClass('TJ')}, 550);
 
-setTimeout(function(){ $("#t").css({'font-weight':700})}, 500)
+setTimeout(function(){ $("#t").removeClass('TJ')}, 600);
+setTimeout(function(){ $("#u").addClass('TJ')}, 600);
 
-setTimeout(function(){ $("#t").css({'font-weight':600})}, 550)
-setTimeout(function(){ $("#r").css({'font-weight':700})}, 550)
+setTimeout(function(){ $("#r").removeClass('TJ')}, 650);
+setTimeout(function(){ $("#s").addClass('TJ')}, 650);
 
-setTimeout(function(){ $("#t").css({'font-weight':400})}, 600)
-setTimeout(function(){ $("#r").css({'font-weight':600})}, 600)
-setTimeout(function(){ $("#u").css({'font-weight':700})}, 600)
+setTimeout(function(){ $("#u").removeClass('TJ')}, 700)
+setTimeout(function(){ $("#t2").addClass('TJ')}, 700)
 
-setTimeout(function(){ $("#t").css({'font-weight':300})}, 650)
-setTimeout(function(){ $("#r").css({'font-weight':400})}, 650)
-setTimeout(function(){ $("#u").css({'font-weight':500})}, 650)
-setTimeout(function(){ $("#s").css({'font-weight':600})}, 650)
+setTimeout(function(){ $("#s").removeClass('TJ')}, 750)
+setTimeout(function(){ $("#j").addClass('TJ')}, 750)
 
-setTimeout(function(){ $("#t").css({'font-weight':200})}, 700)
-setTimeout(function(){ $("#r").css({'font-weight':300})}, 700)
-setTimeout(function(){ $("#u").css({'font-weight':400})}, 700)
-setTimeout(function(){ $("#s").css({'font-weight':600})}, 700)
-setTimeout(function(){ $("#t2").css({'font-weight':700})}, 700)
+setTimeout(function(){ $("#t2").removeClass('TJ')}, 800)
+setTimeout(function(){ $("#a").addClass('TJ')}, 800)
 
-setTimeout(function(){ $("#t").css({'font-weight':300})}, 750)
-setTimeout(function(){ $("#r").css({'font-weight':200})}, 750)
-setTimeout(function(){ $("#u").css({'font-weight':300})}, 750)
-setTimeout(function(){ $("#s").css({'font-weight':400})}, 750)
-setTimeout(function(){ $("#t2").css({'font-weight':600})}, 750)
-setTimeout(function(){ $("#j").css({'font-weight':700})}, 750)
+setTimeout(function(){ $("#j").removeClass('TJ')}, 850)
+setTimeout(function(){ $("#r2").addClass('TJ')}, 850)
 
-setTimeout(function(){ $("#t").css({'font-weight':400})}, 800)
-setTimeout(function(){ $("#r").css({'font-weight':300})}, 800)
-setTimeout(function(){ $("#u").css({'font-weight':200})}, 800)
-setTimeout(function(){ $("#s").css({'font-weight':300})}, 800)
-setTimeout(function(){ $("#t2").css({'font-weight':400})}, 800)
-setTimeout(function(){ $("#j").css({'font-weight':600})}, 800)
-setTimeout(function(){ $("#a").css({'font-weight':700})}, 800)
+setTimeout(function(){ $("#a").removeClass('TJ')}, 900)
 
-setTimeout(function(){ $("#t").css({'font-weight':600})}, 850)
-setTimeout(function(){ $("#r").css({'font-weight':400})}, 850)
-setTimeout(function(){ $("#u").css({'font-weight':300})}, 850)
-setTimeout(function(){ $("#s").css({'font-weight':200})}, 850)
-setTimeout(function(){ $("#t2").css({'font-weight':300})}, 850)
-setTimeout(function(){ $("#j").css({'font-weight':400})}, 850)
-setTimeout(function(){ $("#a").css({'font-weight':600})}, 850)
-setTimeout(function(){ $("#r2").css({'font-weight':700})}, 850)
+setTimeout(function(){ $("#a").addClass('TJ')}, 950)
 
-setTimeout(function(){ $("#t").css({'font-weight':700})}, 900)
-setTimeout(function(){ $("#r").css({'font-weight':600})}, 900)
-setTimeout(function(){ $("#u").css({'font-weight':400})}, 900)
-setTimeout(function(){ $("#s").css({'font-weight':300})}, 900)
-setTimeout(function(){ $("#t2").css({'font-weight':200})}, 900)
-setTimeout(function(){ $("#j").css({'font-weight':300})}, 900)
-setTimeout(function(){ $("#a").css({'font-weight':400})}, 900)
-setTimeout(function(){ $("#r2").css({'font-weight':600})}, 900)
+setTimeout(function(){ $("#j").addClass('TJ')}, 1000)
+setTimeout(function(){ $("#r2").removeClass('TJ')}, 1000)
 
-setTimeout(function(){ $("#t").css({'font-weight':900})}, 950)
-setTimeout(function(){ $("#r").css({'font-weight':700})}, 950)
-setTimeout(function(){ $("#u").css({'font-weight':600})}, 950)
-setTimeout(function(){ $("#s").css({'font-weight':400})}, 950)
-setTimeout(function(){ $("#t2").css({'font-weight':300})}, 950)
-setTimeout(function(){ $("#j").css({'font-weight':200})}, 950)
-setTimeout(function(){ $("#a").css({'font-weight':300})}, 950)
-setTimeout(function(){ $("#r2").css({'font-weight':400})}, 950)
+setTimeout(function(){ $("#t2").addClass('TJ')}, 1050)
+setTimeout(function(){ $("#a").removeClass('TJ')}, 1050)
 
-setTimeout(function(){ $("#r").css({'font-weight':900})}, 1000)
-setTimeout(function(){ $("#u").css({'font-weight':700})}, 1000)
-setTimeout(function(){ $("#s").css({'font-weight':600})}, 1000)
-setTimeout(function(){ $("#t2").css({'font-weight':400})}, 1000)
-setTimeout(function(){ $("#j").css({'font-weight':300})}, 1000)
-setTimeout(function(){ $("#a").css({'font-weight':200})}, 1000)
-setTimeout(function(){ $("#r2").css({'font-weight':300})}, 1000)
+setTimeout(function(){ $("#s").addClass('TJ')}, 1100)
+setTimeout(function(){ $("#j").removeClass('TJ')}, 1100)
 
-setTimeout(function(){ $("#u").css({'font-weight':900})}, 1050)
-setTimeout(function(){ $("#s").css({'font-weight':700})}, 1050)
-setTimeout(function(){ $("#t2").css({'font-weight':600})}, 1050)
-setTimeout(function(){ $("#j").css({'font-weight':400})}, 1050)
-setTimeout(function(){ $("#a").css({'font-weight':300})}, 1050)
-setTimeout(function(){ $("#r2").css({'font-weight':200})}, 1050)
+setTimeout(function(){ $("#u").addClass('TJ')}, 1150)
+setTimeout(function(){ $("#t2").removeClass('TJ')}, 1150)
 
-setTimeout(function(){ $("#s").css({'font-weight':900})}, 1100)
-setTimeout(function(){ $("#t2").css({'font-weight':700})}, 1100)
-setTimeout(function(){ $("#j").css({'font-weight':600})}, 1100)
-setTimeout(function(){ $("#a").css({'font-weight':400})}, 1100)
-setTimeout(function(){ $("#r2").css({'font-weight':300})}, 1100)
+setTimeout(function(){ $("#r").addClass('TJ')}, 1200)
+setTimeout(function(){ $("#s").removeClass('TJ')}, 1200)
 
-setTimeout(function(){ $("#t2").css({'font-weight':900})}, 1150)
-setTimeout(function(){ $("#j").css({'font-weight':700})}, 1150)
-setTimeout(function(){ $("#a").css({'font-weight':600})}, 1150)
-setTimeout(function(){ $("#r2").css({'font-weight':400})}, 1150)
+setTimeout(function(){ $("#t").addClass('TJ')}, 1250)
+setTimeout(function(){ $("#u").removeClass('TJ')}, 1250)
 
-setTimeout(function(){ $("#j").css({'font-weight':900})}, 1200)
-setTimeout(function(){ $("#a").css({'font-weight':700})}, 1200)
-setTimeout(function(){ $("#r2").css({'font-weight':600})}, 1200)
+setTimeout(function(){ $("#r").removeClass('TJ')}, 550)
 
-setTimeout(function(){ $("#a").css({'font-weight':900})}, 1250)
-setTimeout(function(){ $("#r2").css({'font-weight':700})}, 1250)
+setTimeout(function(){ $("#r").addClass('TJ')}, 1350)
 
-setTimeout(function(){ $("#r2").css({'font-weight':900})}, 1300)
+setTimeout(function(){ $("#t").removeClass('TJ')}, 1400)
+setTimeout(function(){ $("#u").addClass('TJ')}, 1400)
+
+setTimeout(function(){ $("#r").removeClass('TJ')}, 1450)
+setTimeout(function(){ $("#s").addClass('TJ')}, 1450)
+
+setTimeout(function(){ $("#u").removeClass('TJ')}, 1500)
+setTimeout(function(){ $("#t2").addClass('TJ')}, 1500)
+
+setTimeout(function(){ $("#s").removeClass('TJ')}, 1550)
+setTimeout(function(){ $("#j").addClass('TJ')}, 1550)
 
 };
 
@@ -531,7 +484,7 @@ setTimeout(function(){ $("#r2").css({'font-weight':900})}, 1300)
 					$('.pageTemplate').each(function() {
 						var pageId = '#' + this.id;
 						if ( $(pageId).css('display') == 'block') {
-							$(pageId).fadeOut(1300);
+							$(pageId).fadeOut(1700);
 							// Remove the 'disable controls' overlay if one is present
 							enableControls();
 						}
@@ -541,7 +494,7 @@ setTimeout(function(){ $("#r2").css({'font-weight':900})}, 1300)
 						$(showNew).fadeIn(300);
 						$("#splash").fadeOut(200);
 
-					}, 1000);
+					}, 1400);
 				}
 			}
 		}

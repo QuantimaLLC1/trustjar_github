@@ -126,6 +126,11 @@ input[type='checkbox']:checked.pseudo-checkbox-2 + label:before{/*checked icon*/
   word-wrap: break-word;
 }
 
+.headerAlign {
+  white-space:nowrap;
+  vertical-align:middle
+}
+
 @media (max-width: 991px) {
   .relationshipRequestorName{
     text-align: center;
@@ -403,6 +408,11 @@ table.index td {
     color:#228b22; 
     font-weight:bold
 }
+
+.serverAlertContent {
+  padding:20px;
+}
+
 
 .splashText {
   font-family: 'Source Sans Pro', sans-serif;

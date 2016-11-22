@@ -39,6 +39,43 @@
 			1000
 		);
 	};
+	
+// PRE-LOAD RANDOMIZED ANIMAL IMAGES
+GLOB.splashAnimals = ['images/animals/bunnies_1000x1000.jpg', 'images/animals/elephants_1000x1000.jpg', 'images/animals/rhinos_1000x1000.jpg', 'images/animals/tortoises_1000x1000.jpg', 'images/animals/pigs_1000x1000.jpg', 'images/animals/penguins_1000x1000.jpg', 'images/animals/hamsters_1000x1000.jpg'];
+GLOB.topAnimals = ['images/animals/bunnies_300x300.jpg', 'images/animals/elephants_300x300.jpg', 'images/animals/rhinos_300x300.jpg', 'images/animals/tortoises_300x300.jpg', 'images/animals/pigs_300x300.jpg', 'images/animals/penguins_300x300.jpg', 'images/animals/hamsters_300x300.jpg'];
+// GLOB.smallTopAnimals = ['images/animals/bunnies_100x100.jpg', 'images/animals/elephants_100x100.jpg', 'images/animals/rhinos_100x100.jpg', 'images/animals/tortoises_100x100.jpg', 'images/animals/pigs_100x100.jpg', 'images/animals/penguins_100x100.jpg', 'images/animals/hamsters_100x100.jpg'];
+GLOB.footerAnimals = ['images/animals/bunnies_200x200.jpg', 'images/animals/elephants_200x200.jpg', 'images/animals/rhinos_200x200.jpg', 'images/animals/tortoises_200x200.jpg', 'images/animals/pigs_200x200.jpg', 'images/animals/penguins_200x200.jpg', 'images/animals/hamsters_200x200.jpg'];
+GLOB.randomizer = Math.floor(Math.random() * GLOB.topAnimals.length)
+GLOB.randomHeaderAnimal = GLOB.topAnimals[GLOB.randomizer]
+//GLOB.randomSmallHeaderAnimal = GLOB.smallTopAnimals[GLOB.randomizer]
+GLOB.randomFooterAnimal = GLOB.topAnimals[GLOB.randomizer]
+GLOB.randomSplashAnimal = GLOB.splashAnimals[Math.floor(Math.random() * GLOB.splashAnimals.length)]
+
+
+// This function changes sizing and position of animal images depending on the page width.
+function responsiveAnimals() {
+	// For larger page widths, use the 300px animal images in the header and position them per Creative
+	if (window.matchMedia("(min-width: 992px)").matches) {
+		$('#dashboard').css("background", "url(" + GLOB.randomHeaderAnimal + ") no-repeat calc(50% + 350px) top");
+		$('.requestorRelationshipCheckbox').addClass('pull-right');
+		$('#footerCopy').addClass('footerText')
+	}
+	// For smaller page widths, use the 100px animal images in the header and change their position
+	if (window.matchMedia("(max-width: 991px)").matches) {
+//		$('#dashboard').css("background", "url(" + GLOB.randomSmallHeaderAnimal + ") no-repeat calc(98%) 5px");
+		$('#dashboard').css("background", "url('')");
+		$('.requestorRelationshipCheckbox').removeClass('pull-right');
+		$('#footerCopy').removeClass('footerText')
+	}
+	if (window.matchMedia("(min-width: 640px)").matches) {
+		$('.splashText').css({'font-size': '60px'})
+		$('#splashBackground').css("background", "url(" + GLOB.randomSplashAnimal + ") no-repeat calc(50%)");
+	}
+	if (window.matchMedia("(max-width: 639px)").matches) {
+		$('.splashText').css({'font-size': '48px', 'letter-spacing': '10px'})
+		$('#splashBackground').css("background", "url(" + GLOB.randomHeaderAnimal + ") no-repeat calc(50%)");
+	}
+}
 
 // NON-FIREBASE FUNCTIONS
 
