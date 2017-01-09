@@ -1,0 +1,62 @@
+<head>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style>
+
+	input[type=checkbox].leftStyled + label {
+	    background: url('http://image.flaticon.com/icons/png/128/61/61221.png') no-repeat;
+	    background-size:20px;
+	    text-indent:22px
+	}
+
+	input[type=checkbox]:checked.leftStyled + label  {
+	    background: url('https://cdn2.iconfinder.com/data/icons/menu-interface-1/256/flat_unchecked-128.png') no-repeat;
+	    background-size:20px;
+	}
+
+	input[type=checkbox].rightStyled + label {
+	    background: url('http://image.flaticon.com/icons/png/128/61/61221.png') no-repeat;
+	    background-size:20px;
+	}
+
+	input[type=checkbox]:checked.rightStyled + label  {
+	    background: url('https://cdn2.iconfinder.com/data/icons/menu-interface-1/256/flat_unchecked-128.png') no-repeat;
+	    background-size:20px;
+	    text-indent:-162px
+	}
+
+	#srjc-label {
+	    width: 20px;
+	    height: 20px;
+	}
+
+	</style>
+	<body>
+	  <div>
+	    <input id="rjc" type="checkbox" class="pull-right"><label for="rjc" class="pull-right">right-justify checkbox</label>
+	    
+	  </div><div>
+
+	    <input id="sc" type="checkbox">
+	    <label for="sc">standard checkbox</label>
+
+	  </div><div>
+
+	    <div id="srjc-copy" class='pull-right'>
+	      <input id="srjc" type="checkbox" class="rightStyled pull-right sr-only">
+	      <label for="srjc" id="srjc-label" class="pull-right"></label>styled right-justify checkbox&nbsp;
+	    </div>
+
+	  </div><div>
+
+	    <input id="sty" type="checkbox" class="leftStyled sr-only"><label for="sty">styled checkbox</label>
+
+	  </div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+    	$("#srjc-copy").css('cursor', 'default')
+   		$("#srjc-copy").on('click',function() {
+    		$("#srjc").prop("checked", !$("#srjc").prop("checked"));
+		});
+	</script>
+	</body>

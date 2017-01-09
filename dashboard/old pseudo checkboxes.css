@@ -1,0 +1,612 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
+html, body {
+    height:100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#000000;
+}
+
+
+/* ****************************** SPLASH SCREEN ******************************* */
+
+/* Splash screen element */
+.splashDiv {
+  background-color: #ffffff;
+  text-align: center; 
+  font-size:40px; 
+  position: relative;
+  z-index: 1050;
+  background-repeat:no-repeat;
+  background-position:center;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* Page element on which the animals appear */
+#splashBackground {
+    display:table;
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+
+/* Overlay that covers the animals and provides a background for the logo */
+#darkmask {
+    display:table;
+    width:100%;
+    height:100%;
+    filter:alpha(opacity=50); /* IE */
+    opacity: 0.5; /* Safari, Opera */
+    -moz-opacity:0.50; /* FireFox */
+    background-repeat:no-repeat;
+    background-position: center 0px;
+    position: absolute;
+    background-color:#000000;
+}
+
+/* ****************************** LOGOTYPE ******************************* */
+
+
+/* Trustjar logo in the dashboard header*/
+.logotype {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 58px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: 1px;
+  line-height: 50px;
+  margin-bottom: 10px
+}
+
+/* Splash screen logotype*/
+.splashLogotype {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  font-size: 60px;
+  font-weight:900;
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* The 'TJ' in the logo is a different color. This is also used for the header logotype*/
+.TJ {
+  color: #df331d !important;
+}
+
+/* ****************************** MODAL DIALOGS AND SERVER ALERTS ******************************* */
+
+.modal-content {
+  border: 6px solid #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-radius: 0px;
+
+}
+
+.modal-header {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size:23px;
+    padding:9px 15px;
+    background-color: #cccccc;
+    border-bottom: 0px;
+ }
+
+.modal-body {
+  padding:9px 15px;
+  clear: both;
+  font-weight: normal;
+  border-top:2px dashed #000;
+  border-bottom: 0px;
+  background-color: #cccccc;
+  /* 100% = dialog height, 120px = header + footer */
+  max-height: calc(100% - 120px);
+  overflow: hidden;
+ }
+
+.modal-footer {
+  padding:9px 15px;
+  background-color: #cccccc;
+  border-top: 0px;
+  text-align: center;
+ }
+
+/* The "X" close element in modals */
+.close {
+  color: #000000;
+  opacity: 1;
+  font-size: 30px;
+}
+
+#serverAlertContainer {
+  margin-top: 100px;
+}
+
+.alertContent {
+  padding:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* checkboxes for requestor side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-1 + label:after,
+input[type='checkbox'].pseudo-checkbox-1 + label:before{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-1 + label:after{/*unchecked icon*/
+    content: "\e157";
+}
+input[type='checkbox']:checked.pseudo-checkbox-1 + label:after{/*checked icon*/
+    content: "\e067";
+    color: #228b22 ;
+}
+
+
+/* checkboxes for requestor side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-3 + label:before,
+input[type='checkbox'].pseudo-checkbox-3 + label:after{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-3 + label:before{/*unchecked icon*/
+    content: "\e157";
+}
+input[type='checkbox']:checked.pseudo-checkbox-3 + label:before{/*checked icon*/
+    content: "\e067";
+    color: #000000 ;
+}
+
+
+/* checkboxes for counterparty side of a relationship: Using 2 :pseudo classes from predefined bootstrap icons*/
+input[type='checkbox'].pseudo-checkbox-2 + label:before,
+input[type='checkbox'].pseudo-checkbox-2 + label:after{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input[type='checkbox'].pseudo-checkbox-2 + label:before{/*unchecked icon*/
+    content: "\e020";
+    color: #A41410 ;
+}
+input[type='checkbox']:checked.pseudo-checkbox-2 + label:before{/*checked icon*/
+    content: "\e008";
+    color: #228b22 ;
+}
+
+.hidden {
+  display:none;
+}
+
+/* HEADER TEXT STYLES */
+
+/* User's name in the dashboard header*/
+#headerName {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.profileContacts {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.headerAlign {
+  white-space:nowrap;
+  vertical-align:middle
+}
+
+@media (max-width: 991px) {
+  .relationshipRequestorName{
+    text-align: center;
+  }
+  .relationshipCounterpartyName{
+    text-align: center;
+  }
+  .requestorList{
+    text-align: left !important;
+  }
+  .requestorContactForm{
+    text-align: left !important;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .profileContacts{
+    font-size: 14px
+  }
+  .well{
+    padding: 3px;
+  }
+}
+
+
+/* The 'TJ' in the logo is a different color*/
+.TJ {
+  color: #df331d !important;
+}
+
+/* style for the 'add a new relationship' form */
+#newRelationshipContainer {
+  border: 6px #000000 solid;
+  background-color: #c168bd;
+  padding:10px;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+.blackBoxHeader {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  display: inline;
+  color: #ffffff;
+  background-color: #000000;
+  position:relative;
+  top:23px;
+  padding: 10px 18px 13px 18px;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+@media screen and (max-width: 480px) {  
+  .blackBoxHeader  {
+  font-size: 18px;
+  }
+}
+
+.relationshipModule {
+  border: 6px #000000 solid;
+  background-color: #ccad42;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+.relationshipModule:nth-child(even) {
+  background-color: #31cfc2;
+}
+
+.callToActionButtons {
+  font-family: Georgia;
+  font-size: 17px;
+  font-weight: bold;
+  background-color:#ffffff;
+  border: 2px #000000 solid;
+  padding: 4px 6px 4px 6px;
+  margin-top: 150px;
+  white-space: nowrap;
+}
+
+.btn {
+  font-family: Georgia;
+  color:#000000;
+  font-size: 17px;
+  font-weight: bold;
+  background-color:#ffffff;
+  border: 2px #000000 solid;
+  padding: 4px 6px 4px 6px;
+  white-space: nowrap;
+  border-radius: 0px;
+  margin-top:10px;
+}
+
+
+h3 {
+  font-weight:bold; 
+  color:#555555
+}
+
+h4 {
+    margin-top: 0px;
+    font-size: 24px;
+}
+
+.dashed {
+  clear:both;
+  border:none;
+  border-top: 2px dashed #000;
+  color:#fff;
+  height:1px;
+  margin:5px;
+}
+
+
+.signInButton {
+  color:#ffffff
+}
+
+
+.relationshipButtons {
+  width:170px;
+}
+
+#whatIsTrustjarCopy {
+  display:none; 
+  margin-bottom:70px
+}
+
+.relationshipForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+/*  border: 1px solid #000000; 
+*/  padding:5px;
+  display:none; 
+  z-index: 1
+}
+
+.tooltip-inner {
+  padding: 8px;
+}
+.relationshipFormCopy {
+  margin: 6px;
+}
+
+.profileForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+  border: 6px solid #000000; 
+/*  display:none; */
+  position: relative;
+  z-index: 1000000000
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+
+}
+
+.relationshipText {
+  font-weight:bold; 
+  padding:10px
+}
+
+.relationshipIcon {
+  font-size:50px
+}
+
+.center {
+  text-align:center;
+}
+
+.textRight {
+  text-align:right;
+}
+
+.warningText {     /*also used for conflict text*/
+  color:#cc0000
+}
+
+.passcodeDisplay {
+  font-size:20px; 
+  font-weight:bold;
+  margin-top:8px
+}
+
+.hidden {
+    display:none;
+}
+
+.anonHeader {
+  display:none;
+}
+
+.pageTemplate {
+  display:none; 
+}
+
+table.box {
+  background-color:#EBFFEB;
+  border: 1px solid #cccccc;
+  border-spacing: 5px;
+  display:none;
+}
+
+table.box td {
+    border-top: none !important;
+}
+
+
+table.index td {
+    border-top: none !important;
+}
+
+.marginLeft15 {
+    margin-left:15px;
+}
+
+.marginTop8 {
+    margin-top:8px;
+}
+
+.marginBottom8 {
+    margin-bottom:8px;
+}
+
+.marginTop30 {
+    margin-top:30px;
+}
+
+
+.marginAuto {
+    margin:auto;
+}
+
+.paddingLeft30 {
+    padding-left:30px;
+}
+
+#numberOfContacts {
+    color:#228b22; 
+    font-weight:bold
+}
+
+.hideLabel {
+    position:absolute; 
+    clip:rect(1px 1px 1px 1px);
+}
+
+.requestorCheckbox {
+  text-align:left; 
+  font-weight: normal !important
+}
+/*
+.showEditContactsForm { 
+  display:none;
+}
+*/
+.pending { 
+  color:#666666;
+}
+
+.glyphicon { 
+  font-size: 16px;
+}
+
+.boxHeader {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size:23px;
+  margin-top: 0px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 260px;
+  padding: 10px 10px 60px 0px; 
+}
+
+
+#footerAnimals {
+margin-right: 10px;
+}
+
+.footerText {
+  margin-top: 60px;
+}
+
+.copyrightCopy {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  height: 260px;
+  white-space: nowrap;
+}
+
+/* Footer media queries */
+
+
+.spinnyWheel {
+    border:5px solid #000000;
+    border-radius:5px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+
+
+
+.techDifficulties {
+    padding:10px; 
+    background-color:#ffffff;
+    border: 1px #cc0000 solid;
+    position: absolute;
+    width:250px;
+    height:150px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+
+.header {
+    padding-top:10px; 
+  }
+
+
+.floatLeft {
+    float:left; 
+  }
+
+.newRelationshipInfoIcon {
+  float:right; 
+  position:absolute; 
+  top:20px; 
+  right:30px;
+}
+
+
+
+  .unit-test-end {
+    position: absolute;
+    color:#000000;
+    margin: auto;
+    top: 20%;
+    left: 0;
+    right: 0;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 12px;
+    background-color:#ffffff;
+    width:250px; 
+    padding:10px;
+    border: solid;
+    border-width: 5px;
+    border-color:#990000;
+    text-shadow:none;
+    z-index: 1200;
+  }
+
+

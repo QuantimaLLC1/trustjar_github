@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Trustjar dashboard">
+	<meta name="author" content="Paul Caron">
+	<title>Welcome to trustjar</title>
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<style media="screen" type="text/css">
+
+
+
+
+.newRelationshipButtons input:checked + .pseudo-radio{
+ 	background-image:url('images/radio_btn_filled.svg');
+}
+
+.pseudo-radio{
+ 	background-image:url('images/radio_btn_empty.svg');
+	text-indent: 22px;
+   	background-size:20px;
+    background-repeat:no-repeat;
+}
+
+	</style>
+</head>
+<body>
+<form>
+    <div class="newRelationshipButtons">
+        <input id="visa" type="radio" name="credit-card" class="sr-only" value="visa" />
+        <label class="pseudo-radio" for="visa">casual</label>
+        <input id="mastercard" type="radio" name="credit-card" class="sr-only" value="mastercard" />
+        <label class="pseudo-radio"for="mastercard">exclusive</label>
+    </div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+	if (!window.jQuery) {
+		document.write("<script src='js/jquery-2.1.4.min.js'><\/script>");
+	}
+</script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+
+
+</body>
