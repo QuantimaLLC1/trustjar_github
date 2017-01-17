@@ -154,6 +154,16 @@ html, body {
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
 }
 
+/* style for the 'add a new relationship' form */
+.newRelationshipContainer {
+  border: 6px #000000 solid;
+  background-color: #c168bd;
+  padding:20px;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
 .goHome {
   cursor: pointer;
 }
@@ -189,9 +199,6 @@ input[type='checkbox']:checked.pseudo-checkbox + label{
   background-repeat:no-repeat;
 }
 
-
-
-
 .relationshipModule {
   border: 6px #000000 solid;
   background-color: #ccad42;
@@ -224,7 +231,6 @@ input[type='checkbox']:checked.pseudo-checkbox + label{
   margin-top: 0px;
 }
 
-
 .textRight {
   text-align:right;
 }
@@ -245,11 +251,6 @@ h4 {
 
 .signInButton {
   color:#ffffff
-}
-
-#whatIsTrustjarCopy {
-  display:none; 
-  margin-bottom:70px
 }
 
 .relationshipText {
@@ -273,7 +274,6 @@ h4 {
   font-size:20px; 
   font-weight:bold;
 }
-
 
 .relationshipContactContainer {
   text-align:center; 
@@ -326,12 +326,84 @@ table.index td {
     clip:rect(1px 1px 1px 1px);
 }
 
-#whatIsTrustjarContainer {
-   margin-top: 20px
+/*a {
+  color: #386388 !important;  
+}
+*/
+.contentTitle {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size:16px;
+  margin-top: 0px;
 }
 
-#whatIsTrustjar {
+/* style for the relationship modules */
+.contentContainer {
+  border: 3px #000000 solid;
+  background-color: #ccad42;
+  padding: 10px;
 }
+/*
+.tab-content {
+    border-top: 1px solid #000;
+    padding: 1px;
+}
+
+
+.nav-tabs>li>a:hover {
+    border-bottom:#none;
+}
+
+*/
+
+/* This lengthy style ensures that tabs stack symmmetrically in smaller sizes. */
+@media (max-width: 768px) {
+  .nav-tabs > li { 
+    float: none; 
+    border: 1px solid #dddddd; 
+    } 
+  .nav-tabs > li.active {
+    background: #eeeeee; 
+  } 
+  .nav-tabs > li.active > a {
+    border: 1px solid transparent;
+  } 
+  .nav > li > a:hover, 
+  .nav > li > a:focus, 
+  .nav-tabs > li.active > a, 
+  .nav-tabs > li.active > a:hover, 
+  .nav-tabs > li.active > a:focus {
+    background: none; 
+    border: 1px solid transparent; 
+  } 
+}
+
+/* link style for "rules of good behavior" links */
+.goodBehavior {
+  color: #337ab7;
+  cursor: pointer;
+}
+
+/* set the border between tabs and tab content to black */
+.nav-tabs {
+    border-bottom: 1px solid #000;
+}
+
+/* set the style for tabs themselves */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  background-color: #fff !important;
+  color:#000;
+  border-top:2px solid #000;
+  border-left:2px solid #000;
+  border-right:2px solid #000;
+  border-radius: 0px;
+}
+
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */

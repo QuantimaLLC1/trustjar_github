@@ -51,8 +51,8 @@
 					<h4 class="modal-title boxHeader">verify contact channel</h4>
 				</div>
 				<div class="modal-body">
-					<p>You must verify this contact channel before it can be added to a relationship. Verify by responding to the notification you received at the specified email address or phone number when you added it to your trustjar.</p>
-					<p>If you never received such a notification, make sure the email address or phone number you entered is correct. If it's incorrect, remove it from your profile and add the correct email or phone number. If you lost or deleted the notification, you can resend it again now.</p>
+					<p>You must verify this contact channel before it can be added to a relationship. Verify by responding to the notification you received at the specified email address or mobile number when you added it to your trustjar.</p>
+					<p>If you never received such a notification, make sure the email or mobile number you entered is correct. If it's incorrect, remove it from your profile and add the correct email or mobile number. If you lost or deleted the notification, you can resend it again now.</p>
 				</div>
 				<div class="modal-footer">
 					<button id="resendVerificationBtn" type="button" class="btn btn-primary" data-dismiss="modal">resend</button>
@@ -70,7 +70,7 @@
 					<h4 class="modal-title boxHeader">your partner hasn't confirmed</h4>
 				</div>
 				<div class="modal-body">
-					<p>This contact channel has not responded to your request. If you think they responded, make sure the email or phone number for this contact channel was entered correctly. If not, remove it from the relationship and add (or have your partner add) the correct email or phone number.</p> 
+					<p>This contact channel has not responded to your request. If you think they responded, make sure it was entered correctly. If not, remove it from the relationship and add (or have your partner add) the correct email or mobile number.</p> 
 					<p>If your partner lost the text or email containing the request, you can resend it.</p>
 				</div>
 				<div class="modal-footer">
@@ -228,12 +228,12 @@
 						<div id="editProfileForm" class="well profileForm marginTop30">
 							<div class="row">
 								<form name="profileForm" action="" data-ajax="false" class="col-md-12">
-									<div>Here you can change the name that your partners see and add or remove contact channel from your profile. You can only remove a contact channel if it's been removed from all relationships. Once removed, a contact channel will have to be confirmed all over again.</div><br />
+									<div>Here you can change the name that your partners see and add or remove email addresses or mobile numbers from your profile. You can only remove them if they've already been removed from all relationships. Once removed, they will have to be confirmed all over again.</div><br />
 									<div id="editProfileContacts" class="col-md-6">
-										<label for="newProfileContact">Add an email or phone number</label> 
-										<input type="text" class="form-control" id="newProfileContact" placeholder="phone or email">
+										<label for="newProfileContact">Add one email or mobile number</label> 
+										<input type="text" class="form-control" id="newProfileContact" placeholder="email or mobile number">
 										<div class="marginTop8">
-											<b>Remove an email or phone number</b>
+											<b>Remove email addresses or mobile numbers</b>
 										</div>
 										<!-- Profile contact list. Populated by Firebase, complete with checkboxes and 'unverified' links. -->
 										<div id="editProfileContactList" class="profileContacts">
@@ -324,8 +324,8 @@
 									<hr class="dashed">
 								</div>
 								<div class="form-group">
-									<label for="newRelationshipCounterpartyContact">Partner's phone or email</label>
-									  <input type="text" class="form-control" id="newRelationshipCounterpartyContact" placeholder="Partner's phone or email" required>
+									<label for="newRelationshipCounterpartyContact">Partner's email or mobile number</label>
+									  <input type="text" class="form-control" id="newRelationshipCounterpartyContact" placeholder="Partner's email or mobile number" required>
 								</div>
 								<div class="center">
 									<button type="submit" id="newRelationshipFormSubmitBtn" class="btn btn-primary center">add relationship</button>
