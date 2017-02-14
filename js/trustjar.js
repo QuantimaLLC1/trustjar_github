@@ -42,35 +42,73 @@
 
 // NON-FIREBASE FUNCTIONS
 
-	// Randomized animal images
+
+
+		// This function changes sizing and position of animal images and other page elements depending on the page width.
+		function responsiveAnimals() {	
+	    // Get the full page URL and split its components into an array 
+	    var splitThisPageURL = window.location.pathname.split('/');
+	    // Get the page name by removing the last value from the array and returning it
+	    var thisPageName = splitThisPageURL.pop();
+	    // Repeat the above to get the parent directory name
+	    var thisPageParent = splitThisPageURL.pop();
+
+	if (thisPageParent == "dashboard") {
+		// Array of 1000 px animals for the splash screen
+		GLOB.splashAnimals = ['../images/animals/bunnies_1000x1000.jpg', '../images/animals/elephants_1000x1000.jpg', '../images/animals/rhinos_1000x1000.jpg', '../images/animals/tortoises_1000x1000.jpg', '../images/animals/pigs_1000x1000.jpg', '../images/animals/penguins_1000x1000.jpg', '../images/animals/hamsters_1000x1000.jpg', '../images/animals/bunny_tortoise_1000x1000.jpg', '../images/animals/cat_dog_1000x1000.jpg', '../images/animals/goldfish_1000x1000.jpg'];
+		// Array of 300px animals for the splash page at smaller sizes and for the dashboard header
+		GLOB.headerAnimals = ['../images/animals/bunnies_300x300.jpg', '../images/animals/elephants_300x300.jpg', '../images/animals/rhinos_300x300.jpg', '../images/animals/tortoises_300x300.jpg', '../images/animals/pigs_300x300.jpg', '../images/animals/penguins_300x300.jpg', '../images/animals/hamsters_300x300.jpg', '../images/animals/bunny_tortoise_300x300.jpg', '../images/animals/cat_dog_300x300.jpg', '../images/animals/goldfish_300x300.jpg'];
+		// Array of 200px animals for the footer
+		GLOB.footerAnimals = ['../images/animals/bunnies_200x200.jpg', '../images/animals/elephants_200x200.jpg', '../images/animals/rhinos_200x200.jpg', '../images/animals/tortoises_200x200.jpg', '../images/animals/pigs_200x200.jpg', '../images/animals/penguins_200x200.jpg', '../images/animals/hamsters_200x200.jpg', '../images/animals/bunny_tortoise_200x200.jpg', '../images/animals/cat_dog_200x200.jpg', '../images/animals/goldfish_200x200.jpg'];
+		// Select a random animal for each page location
+	} else {
+	
 		// Array of 1000 px animals for the splash screen
 		GLOB.splashAnimals = ['images/animals/bunnies_1000x1000.jpg', 'images/animals/elephants_1000x1000.jpg', 'images/animals/rhinos_1000x1000.jpg', 'images/animals/tortoises_1000x1000.jpg', 'images/animals/pigs_1000x1000.jpg', 'images/animals/penguins_1000x1000.jpg', 'images/animals/hamsters_1000x1000.jpg', 'images/animals/bunny_tortoise_1000x1000.jpg', 'images/animals/cat_dog_1000x1000.jpg', 'images/animals/goldfish_1000x1000.jpg'];
 		// Array of 300px animals for the splash page at smaller sizes and for the dashboard header
-		GLOB.topAnimals = ['images/animals/bunnies_300x300.jpg', 'images/animals/elephants_300x300.jpg', 'images/animals/rhinos_300x300.jpg', 'images/animals/tortoises_300x300.jpg', 'images/animals/pigs_300x300.jpg', 'images/animals/penguins_300x300.jpg', 'images/animals/hamsters_300x300.jpg', 'images/animals/bunny_tortoise_300x300.jpg', 'images/animals/cat_dog_300x300.jpg', 'images/animals/goldfish_300x300.jpg'];
+		GLOB.headerAnimals = ['images/animals/bunnies_300x300.jpg', 'images/animals/elephants_300x300.jpg', 'images/animals/rhinos_300x300.jpg', 'images/animals/tortoises_300x300.jpg', 'images/animals/pigs_300x300.jpg', 'images/animals/penguins_300x300.jpg', 'images/animals/hamsters_300x300.jpg', 'images/animals/bunny_tortoise_300x300.jpg', 'images/animals/cat_dog_300x300.jpg', 'images/animals/goldfish_300x300.jpg'];
 		// Array of 200px animals for the footer
 		GLOB.footerAnimals = ['images/animals/bunnies_200x200.jpg', 'images/animals/elephants_200x200.jpg', 'images/animals/rhinos_200x200.jpg', 'images/animals/tortoises_200x200.jpg', 'images/animals/pigs_200x200.jpg', 'images/animals/penguins_200x200.jpg', 'images/animals/hamsters_200x200.jpg', 'images/animals/bunny_tortoise_200x200.jpg', 'images/animals/cat_dog_200x200.jpg', 'images/animals/goldfish_200x200.jpg'];
 		// Select a random animal for each page location
-		GLOB.randomizer = Math.floor(Math.random() * GLOB.topAnimals.length)
-		GLOB.randomHeaderAnimal = GLOB.topAnimals[GLOB.randomizer]
-		GLOB.randomFooterAnimal = GLOB.topAnimals[GLOB.randomizer]
+	}
+
+
+
+
+
+		GLOB.randomizer = Math.floor(Math.random() * GLOB.headerAnimals.length)
+		GLOB.randomHeaderAnimal = GLOB.headerAnimals[Math.floor(Math.random() * GLOB.headerAnimals.length)]
 		GLOB.randomSplashAnimal = GLOB.splashAnimals[Math.floor(Math.random() * GLOB.splashAnimals.length)]
+		// For the footer animal, we'll do the same but the image is in the page and not the background so we can just replace it.
+		var randomFooterAnimal = GLOB.footerAnimals[Math.floor(Math.random() * GLOB.footerAnimals.length)]
+		$('#footerAnimals').attr('src', randomFooterAnimal)
 
 
-		// This function changes sizing and position of animal images depending on the page width.
-		function responsiveAnimals() {
-			// For smaller page widths, use a smaller animal
+
+
+			// For larger page widths, use the 300px animal images in the header and position them per Creative (dashboard only)
+			if (window.matchMedia("(min-width: 992px)").matches) {
+				$('#dashboard').css("background", "url(" + GLOB.randomHeaderAnimal + ") no-repeat calc(50% + 350px) top");
+				// dashboard: right-justify the requestor checkboxes in the relationship form. We do this here instead of in the 
+				// CSS because we're adding and removing the entire Bootstrap class itself. (dashboard only)
+				$('.pseudo-checkbox-1-Label').addClass('pull-right');
+			}
+			// For smaller page widths, remove the header animals (dashboard only)
+			if (window.matchMedia("(max-width: 991px)").matches) {
+				$('#dashboard').css("background", "url('')");
+				// change the text justification for checkboxes to match default responsive behavior. We do this here instead 
+				// of in the CSS because we're adding and removing the entire Bootstrap class itself. (dashboard only)
+				$('.pseudo-checkbox-1-Label').removeClass('pull-right');
+			}
+			// For smaller page widths, use a smaller animal for the splash screen
 			if (window.matchMedia("(max-width: 639px)").matches) {
-				$('#splashBackground').css("background", "url(" + GLOB.randomSmallSplashAnimal + ") no-repeat calc(50%)");
+				$('#splashBackground').css("background", "url(" + GLOB.randomHeaderAnimal + ") no-repeat calc(50%)");
 			}
 			// For larger page widths, user a full-sized splash animal
 			if (window.matchMedia("(min-width: 640px)").matches) {
 				$('#splashBackground').css("background", "url(" + GLOB.randomSplashAnimal + ") no-repeat calc(50%)");
 			}
 		}
-
-		// For the footer animal, we'll do the same but the image is in the page and not the background so we can just replace it.
-		var randomFooterAnimal = GLOB.footerAnimals[Math.floor(Math.random() * GLOB.footerAnimals.length)]
-		$('#footerAnimals').attr('src', randomFooterAnimal)
 
 
 	// Initialize all tooltips (required by bootstrap)
@@ -94,29 +132,27 @@
 			}
 		});
 
-	// Temporary placeholder for component of "currentPage" function will handle changing from one HTML page to another
-		function goToNewPage(newURL){
-			GLOB.goToNewURL = newURL;
-		}
-
-	// Overlay to disable controls. This overlay is activated when the client sends a Firebase message 
+	// Overlay to disable controls. This is activated when the client sends a Firebase message 
 	// to the server. Once the server responds, the overlay is removed.
-		var td;
-		function disableControls () {
-		$( "#disableControlsOverlay" ).modal('show')
-		// It also includes a timer that displays a message if the server hasn't responded after a certain amount of time. 
-		// For the unit test, the delay is set for 4 seconds. In production, it should be 30 seconds. 
-		td = setTimeout(
-			function () { 
-				$( "#technicalDifficulties" ).removeClass( "hidden" )
-			}, 4000);
-		}
+	var td;
+	function disableControls () {
+	$( "#disableControlsOverlay" ).modal('show')
+	// The 'technical difficulties' overlay appears if the 'disable controls' overlay is active for 
+	// too long, meaning there's been a disruption in client / server communication. Recommended delay time
+	// is a minimum of 30 seconds; to facilitate the unit test it's currently set for 4 seconds and should be
+	// changed before launch.
+	td = setTimeout(
+		function () { 
+			$( "#technicalDifficulties" ).removeClass( "hidden" )
+		}, 4000);
+	}
 
 	// Overlay to enable controls. Called when the client detects a new message on the server branch.
 		function enableControls () {
 			$( "#disableControlsOverlay" ).modal('hide')
 			$( "#technicalDifficulties" ).addClass( "hidden" );
-			// Clear the tech difficulties timeout so it's not triggered
+			// Clear the tech difficulties timeout so it's not triggered when this function is called before the disableControls 
+			// setTimeout is executed.
 			clearTimeout(td);
 		}
 
@@ -183,8 +219,9 @@
 			setTimeout(function(){ $("#j").addClass('TJ')}, 1550)
 		};
 
-	// Retrieve the unique ID from Firebase and assign it to a global variable. 
+	// Retrieve the session ID from Firebase and assign it to a global variable. 
 	// We'll use it to create the main branch for client / server communications.
+	// This is a placeholder until server implementation is complete.
 		GLOB.uniqueId = getSessionId()
 
 	// Open the tab containing Our Rules of Good Behavior in the content module.
@@ -199,64 +236,45 @@
 	}
 
 // FIREBASE REFERENCES
-	// Set our static Firebase key path
-	// The following references will not be overwritten when a unique ID is received.
-	GLOB.trustjarRef = new Firebase("https://trustjartemp.firebaseio.com");
+	// Set our primary static Firebase key path
+	GLOB.trustjarRef = new Firebase("https://trustjarTemp.firebaseio.com/");
+    // Set the branch for all client messages to Firebase
 	GLOB.clientRef = GLOB.trustjarRef.child('sessions/fromClient/' + GLOB.uniqueId);
+	// Set the branch for all server messages to Firebaser
 	GLOB.serverRef = GLOB.trustjarRef.child('sessions/fromServer/' + GLOB.uniqueId);
+	// Set the current page / page template display
 	GLOB.displayRef = GLOB.serverRef.child('currentPage');
+	// Used to read footer content on a common public branch set by Firebase. May change pending server implementation.
 	GLOB.footerRef = GLOB.trustjarRef.child('commonBranch/footer');
-	GLOB.landingPageDataRef = GLOB.serverRef.child('landingPageData'); 
+	// Firebase reference for all dashboard page data.
+	GLOB.dashboardPageDataRef = GLOB.serverRef.child('dashboardPageData');
+	// Reference for all server-generated 'system alert' messages.
 	GLOB.serverAlertRef = GLOB.serverRef.child('serverAlert');
-
 // SERVER FIREBASE FUNCTIONS
+/*
+	// List of page template IDs. If a value for currentPage in Firebase doesn't match one of the page templates in this list,
+	// return a "badPageName" message to the server. 
+		var pageTemplateList = [
+			"home",
+			"homeConfirmation",
+			"requestPasscode",
+			"requestPasscodeConfirmation",
+			"landingRequestorNew",
+			"cancelLandingRequestorNew",
+			"landingRequestorExisting",
+			"cancelLandingRequestorExisting",
+			"landingRequestorMerge",
+			"cancelLandingRequestorMerge",
+			"landingCounterpartyNew",
+			"cancelLandingCounterpartyNew",
+			"landingCounterpartyExisting",
+			"cancelLandingCounterpartyExisting",
+			"landingCounterpartyMerge",
+			"cancelLandingCounterpartyMerge",
+			"dashboard"
+		]
 
-	// Define an events listeners map. This maps page IDs against their respective page data handlers. 
-	// Note that in most cases, no page data handler is necessary. This is preserved for potential future use. 
-		var eventListenersMap = {
-			"home" : noPageData,
-			"homeConfirmation" : noPageData,
-			"requestPasscode" : noPageData,
-			"requestPasscodeConfirmation": noPageData,
-			"landingRequestorNew" : landingPageDataHandler,
-			"landingRequestorExisting" : landingPageDataHandler,
-			"landingRequestorMerge" : landingPageDataHandler,
-			"landingCounterpartyNew" : landingPageDataHandler,
-			"landingCounterpartyExisting" : landingPageDataHandler,
-			"landingCounterpartyMerge" : landingPageDataHandler,
-			"landingCancelConfirmation" : noPageData,
-			"dashboard": dashboardPageDataHandler,
-			"blank" : noPageData // This line is for the unit test only and can be reomved during production.
-		}
-
-	// Use the page name and the corresponding page handler function (as defined by the eventsListenerMap)
-	// The naming conventions were designed so they could be programmatically constructed based on the page name.
-		function getDataOnce( pageName, handlerFunction ) {
-			// Construct the URL corresponding to the Firebase page data reference, based on the page name.
-			if (pageName = 'landing') {
-				pageDataKeyPath = GLOB.serverRef + '/' + 'landingPageData'
-			} else {
-				var pageDataKeyPath = GLOB.serverRef + '/' + pageName + 'PageData';
-			}
-			// Create a true Firebase reference based on the URL constructed in the previous line.
-			var thisPathRef = new Firebase (pageDataKeyPath);
-			// Retrieve the data at the new Firebase reference
-			thisPathRef.once('value', function(dataSnapshot) {
-				var val = dataSnapshot.val();
-				// Send the retrieved data to the corresponding handler function
-				return (handlerFunction (val))
-			});
-		}
-
-		// THis function is used for pages that require no page data to populate them.
-		function noPageData( pageData ) {
-		};
-
-		// THis function is used for pages that require no page data to populate them.
-		function dashboardPageDataHandler( pageData ) {
-		};
-
-		// THis function is used for pages that require no page data to populate them.
+*/		// THis function is used for pages that require no page data to populate them.
 		function landingPageDataHandler( pageData ) {
 			// Display any landing form copy specified in the Firebase message.
 			if (pageData.landingFormCopy !== undefined) {
@@ -307,30 +325,26 @@
 			var val = dataSnapshot.val();
 			// Only execute the function if there is data at this reference
 			if (val !== null) {		
-				var handlerFunction = eventListenersMap[ val ];
 				var checkURL = val.substring(0,3)
 				if( checkURL == 'URL' ) {
 					var newPage = val.substring(4);
-					// This function will replace the current one as soon as we have a solution for DOM continuity on HTML page change.
-					// For the time being, it's commented out.
-					// window.location = newPage
-
-					// In the meantime, we'll call a function for the unit test.
-					// goToNewPage(newPage)
-
 					if( document.location.href == newPage ) {
 						return false;
 					} else {
 						window.location.replace(newPage);
 					}
 				} else {
-					// if the handler function returns a value that's not in the events listeners map, call the badPageName function
+					// if the handler function returns a value that's not in the pageTemplateList, call the badPageName function and return the value received.
 					// to tell the server via Firebase.
-					if( handlerFunction == null ) {
+					var arrayOfIds = $.map($(".pageTemplate"), function(n, i){
+						return n.id;
+					});
+					if($.inArray(val, arrayOfIds) == -1) {
+						alert(val);
 						badPageName( val );
 					} else {
-						// Disable a link if the link refers to the current page and restore it if we
-						// leave that page template for the confirmation template.
+						// Disable a link if the link refers to the current page and restore it if we leave that page template during the session.
+						// This only applies to the home page and the requestPasscode page.
 						if( val == "requestPasscode" ) {
 							$('#requestPasscodeLink').hide()
 						}
@@ -344,23 +358,29 @@
 							$("#headerLogoLink").addClass("goHome");
 						}
 
-						getDataOnce (val, handlerFunction)
-
-						// prepend '#' to the pageName so we can operate on the corresponding div in the HTML
-						var showNew = "#" + val;
-						$(showNew).show()
-						// if another page div is being displayed, fade it out
-						$('.pageTemplate').each(function() {
-							var pageId = '#' + this.id;
-							if ( $(pageId).css('display') == 'block') {
-								$(pageId).fadeOut(300);
-								$(showNew).fadeIn(300);
-								// Remove the 'disable controls' overlay if one is present
-								enableControls();
-							}
-						});
+						// If we're loading a landing page, create the Firebase reference and the listener that will call the landingPageData handler
+						// and then call the handler.
+						if (val.substr(0,7) == 'landing') {
+							// Create a Firebase reference for landing page data
+							var trustjarLandingRef = new Firebase (GLOB.serverRef + '/landingPageData');
+							// Retrieve the data at the new Firebase reference
+							trustjarLandingRef.once('value', function(dataSnapshot) {
+								var val = dataSnapshot.val();
+								// Send the retrieved data to the corresponding handler function
+								return (landingPageDataHandler (val))
+							});
+						}
+						// Hide any previous page template from display
+						$('.pageTemplate').hide();
+						// prepend '#' to the currentPage value (val) so we can display it
+						var newPageTemplate = "#" + val;
+						// display the specified template
+						$(newPageTemplate).show();
+						// Remove the 'disable controls' overlay if present
+						enableControls();
 						// if the display is still showing the splash page, fade it out. 'Splash' is not part of the pageTemplate class
 						// because 'pageTemplate's are hidden by default and the splash is displayed by default on page load.
+						// The timeout allows the splash page animation to complete.
 						setTimeout(function() {
 							$('#splash').fadeOut(200);
 						}, 1400);
@@ -438,8 +458,9 @@
 		function badPageName( pageName ) {
 			// If the client can't find a page that Firebase has specified for it in a page change message, alert Firebase
 			GLOB.clientRef.push( {  
-				"msgType": "pageDataError",
-				"badPageName" : pageName
+				"msgType": "pageError",
+				"errorType": "badPageName",
+				"messageReceived" : pageName
 			} ); 
 		}
 
@@ -534,12 +555,34 @@
 			disableControls ()
 		});
 
-// INITIALIZATION FUNCTION
+// INITIALIZATION FUNCTIONS
+
 	$(document).ready(function() {
 	    // Retrieve and display randomized animals
 	    responsiveAnimals();
 	    // check whenever page width is resized to handle dynamic elements in responsive design
 	    $(window).resize(responsiveAnimals);
 	    // run the logotype animation on page load
-	    window.onload = animateLogotype()
+	    window.onload = animateLogotype(); 
+
+	    // Since both the homepage and the dashboard page have the page name "index.html", we want to distinguish 
+	    // the dashboard index from the homepage index. So in that case, the message sent to Firebase should be "dashboard/index.html".
+	    // Get the full page URL and split its components into an array 
+	    var splitThisPageURL = window.location.pathname.split('/');
+	    // Get the page name by removing the last value from the array and returning it
+	    var thisPageName = splitThisPageURL.pop();
+	    // Repeat the above to get the parent directory name
+	    var thisPageParent = splitThisPageURL.pop();
+	    // If the parent directory is "dashboard", append that back onto the page name
+		if (thisPageParent == "dashboard") {
+			theCurrentSourcePage = "dashboard/" + thisPageName
+		} else {
+		// Otherwise just return the page name
+			theCurrentSourcePage = thisPageName
+		};
+		// send the pageReady message along with the name of the source page to Firebase.
+	    GLOB.clientRef.push({  
+	    	"msgType" : "pageReady",
+	    	"sourcePage": theCurrentSourcePage
+	    }); 
 	});

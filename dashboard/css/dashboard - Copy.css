@@ -1,0 +1,543 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
+html, body {
+    height:100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#000000;
+}
+
+
+/* ****************************** SPLASH SCREEN ******************************* */
+
+/* Splash screen element */
+#splash {
+  background-color: #ffffff;
+  text-align: center; 
+  font-size:40px; 
+  position: relative;
+  z-index: 1050;
+  background-repeat:no-repeat;
+  background-position:center;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* Page element on which the animals appear */
+#splashBackground {
+    display:table;
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+
+/* Overlay that covers the animals and provides a background for the logo */
+#darkmask {
+    display:table;
+    width:100%;
+    height:100%;
+    filter:alpha(opacity=50); /* IE */
+    opacity: 0.5; /* Safari, Opera */
+    -moz-opacity:0.50; /* FireFox */
+    background-repeat:no-repeat;
+    background-position: center 0px;
+    position: absolute;
+    background-color:#000000;
+}
+
+/* ****************************** LOGOTYPE ******************************* */
+
+
+/* Trustjar logo in the dashboard header*/
+.logotype {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 58px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: 1px;
+  line-height: 50px;
+  margin-bottom: 10px
+}
+
+/* Splash screen logotype*/
+.splashLogotype {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  font-size: 60px;
+  font-weight:900;
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* The 'TJ' in the logo is a different color. This is also used for the header logotype*/
+.TJ {
+  color: #df331d !important;
+}
+
+/* ****************************** MODAL DIALOGS AND SERVER ALERTS ******************************* */
+
+.modal-content {
+  border: 6px solid #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-radius: 0px;
+
+}
+
+.modal-header {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size:23px;
+    padding:9px 15px;
+    background-color: #cccccc;
+    border-bottom: 0px;
+ }
+
+.modal-body {
+  padding:9px 15px;
+  clear: both;
+  font-weight: normal;
+  border-top:2px dashed #000;
+  border-bottom: 0px;
+  background-color: #cccccc;
+  /* 100% = dialog height, 120px = header + footer */
+  max-height: calc(100% - 120px);
+  overflow: hidden;
+ }
+
+.modal-footer {
+  padding:9px 15px;
+  background-color: #cccccc;
+  border-top: 0px;
+  text-align: center;
+ }
+
+/* The "X" close element in modals */
+.close {
+  color: #000000;
+  opacity: 1;
+  font-size: 30px;
+}
+
+#serverAlertContainer {
+  margin-top: 100px;
+}
+
+.alertContent {
+  padding:20px;
+}
+
+/* ****************************** PSEUDO-CHECKBOXES ******************************* */
+
+/* These are stylized versions of a checked and unchecked checkbox to match Creative design. */
+input[type='checkbox'].pseudo-checkbox-1 + label{
+     background: url('../images/check_box_empty.svg') no-repeat;
+     background-size:20px;
+     text-indent:20px;
+}
+
+input[type='checkbox']:checked.pseudo-checkbox-1 + label{
+    background: url('../images/check_box_checked.svg') no-repeat;
+    background-size:20px;
+    text-indent:20px;
+}
+
+/* When unchecked, the checkbox is a trash can. When checked, it's a person. */
+input[type='checkbox'].pseudo-checkbox-2 + label{
+     background: url('../images/trashcan.svg') no-repeat;
+     background-size: 20px;
+     text-indent: 22px;
+}
+
+input[type='checkbox']:checked.pseudo-checkbox-2 + label{
+     background: url('../images/person.svg') no-repeat;
+     background-size: 20px;
+     text-indent: 22px;
+ }
+
+/* These are stylized versions of a selected and unselected radio button to match Creative design. */
+.newRelationshipButtons input:checked + .pseudo-radio{
+  background-image:url('../images/radio_btn_filled.svg');
+}
+
+.pseudo-radio{
+  background-image:url('../images/radio_btn_empty.svg');
+  text-indent: 22px;
+    background-size:20px;
+    background-repeat:no-repeat;
+}
+/* ****************************** HEADER ******************************* */
+
+.header {
+    padding-top:10px; 
+  }
+
+/* User's name in the dashboard header */
+#headerName {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+/* Since profile contact channels may be long email labels, make sure they break properly if necessary */
+.profileContacts {
+  font-size: 15px
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Centers the copy to the right of the logo with the logo itself */
+.headerAlign {
+  white-space:nowrap;
+  vertical-align:middle
+}
+
+/* The 'TJ' in the logo is a different color - also used for the splash logo */
+.TJ {
+  color: #df331d !important;
+}
+
+/* ********************************** FOOTER *********************************** */
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 260px;
+  padding: 10px 10px 60px 0px; 
+}
+
+#footerAnimals {
+margin-right: 10px;
+}
+
+/* Formats the copyright text in the footer in accordance with Creative */
+.copyrightCopy {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  height: 260px;
+  white-space: nowrap;
+}
+
+/* ****************************** "DISABLE CONTROLS" OVERLAY ******************************* */
+
+/* "spinny wheel" for the disableControls overlay */
+.spinnyWheel {
+    border:5px solid #000000;
+    border-radius:5px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+/* "technical difficulties" element that appears when the disableControls overlay is active for too long */
+.techDifficulties {
+    padding:10px; 
+    background-color:#ffffff;
+    border: 1px #cc0000 solid;
+    position: absolute;
+    width:250px;
+    height:150px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+
+/* ****************************** OTHER ELEMENTS ******************************* */
+
+h3 {
+  font-weight:bold; 
+  color:#555555
+}
+
+h4 {
+    margin-top: 0px;
+    font-size: 24px;
+}
+
+/* "Black box" header that labels relationships as casual or exclusive */
+.blackBoxHeader {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  display: inline;
+  color: #ffffff;
+  background-color: #000000;
+  position:relative;
+  top:23px;
+  padding: 10px 18px 13px 18px;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+/* Header for the interior of relationship and form modules */
+.boxHeader {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size:23px;
+  margin-top: 0px;
+}
+
+/* Style for bootstrap buttons */
+.btn {
+  font-family: Georgia;
+  color:#000000;
+  font-size: 17px;
+  font-weight: bold;
+  background-color:#ffffff;
+  border: 2px #000000 solid;
+  padding: 4px 6px 4px 6px;
+  white-space: nowrap;
+  border-radius: 0px;
+  margin-top:10px;
+}
+
+.center {
+  text-align:center;
+}
+
+/* Clearfix to help with right-justified checkbox formatting and responsive design */
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.dashed {
+  clear:both;
+  border:none;
+  border-top: 2px dashed #000;
+  color:#fff;
+  height:1px;
+  margin:5px;
+}
+
+.floatLeft {
+    float:left; 
+}
+
+.form-control, .input-group-addon{
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+/* Tooltip icon for additional information */
+.infoIcon {
+  float:right; 
+  position:absolute; 
+  top:20px; 
+  right:30px;
+}
+
+.hidden {
+  display:none;
+}
+
+.marginTop8 {
+    margin-top:8px;
+}
+
+.marginTop30 {
+    margin-top:30px;
+}
+
+.marginBottom8 {
+    margin-bottom:8px;
+}
+
+.marginLeft15 {
+    margin-left:15px;
+}
+
+.marginAuto {
+    margin:auto;
+}
+
+/* style for the 'add a new relationship' form */
+#newRelationshipContainer {
+  border: 6px #000000 solid;
+  background-color: #c168bd;
+  padding:10px;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+#numberOfContacts {
+    color:#228b22; 
+    font-weight:bold
+}
+
+.paddingLeft30 {
+    padding-left:30px;
+}
+
+.pageTemplate {
+  display:none; 
+}
+
+.pending { 
+  color:#666666;
+}
+
+.profileForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+  border: 6px solid #000000; 
+  position: relative;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+/* Fixes dimensions for 'resend' icon */
+.resendIcon {
+  height:20px;
+  width:20px;
+}
+
+/* Needed to square up the buttons in layout */
+.relationshipButtons {
+  width:200px;
+}
+
+/* style for the 'edit' form in relationship modules */
+.relationshipForm {
+  color:#000000; 
+  background-color:#d0d0d0; 
+  padding:5px;
+  display:none; 
+  z-index: 1
+}
+
+.relationshipFormCopy {
+  margin: 6px;
+}
+
+/* style for the relationship modules */
+.relationshipModule {
+  border: 6px #000000 solid;
+  background-color: #ccad42;
+  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+/* Alternate the color for multiple relationships */
+.relationshipModule:nth-child(even) {
+  background-color: #31cfc2;
+}
+
+.requestorCheckbox {
+  text-align:left; 
+  font-weight: normal !important
+}
+
+/* Make the rollover for this checkbox copy match the others */
+.rightJustifiedCheckboxCopy {
+  cursor:default;
+}
+
+.textRight {
+  text-align:right;
+}
+
+.tooltip-inner {
+  padding: 8px;
+}
+
+.warningText {     /*also used for conflict text*/
+  color:#cc0000
+}
+
+/* Only required for the unit test and can be removed for production*/
+.unit-test-end {
+   position: absolute;
+   color:#000000;
+   margin: auto;
+   top: 20%;
+   left: 0;
+   right: 0;
+   font-family: arial, helvetica, sans-serif;
+   font-size: 12px;
+   background-color:#ffffff;
+   width:250px; 
+   padding:10px;
+   border: solid;
+   border-width: 5px;
+   border-color:#990000;
+   text-shadow:none;
+   z-index: 1200;
+ }
+
+/* ********************* RESPONSIVE DESIGN MEDIA QUERIES *********************** */
+@media (max-width: 991px) {
+  .relationshipRequestorName{
+    text-align: center;
+  }
+  .relationshipCounterpartyName {
+    text-align: center;
+  }
+  .requestorList {
+    text-align: left !important;
+  }
+  .requestorContactForm {
+    text-align: left !important;
+  }
+  .pseudo-checkbox-1-Label {
+    text-align: left !important;
+  }
+  .footerText {
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footerText {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 639px) {
+  .splashLogotype {
+    font-size: 48px;
+  }
+  
+}
+@media (min-width: 640px) {
+  .splashLogotype {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 320px) {
+  .profileContacts{
+    font-size: 14px
+  }
+  .well{
+    padding: 3px;
+  }
+}
+
+/* Resize the "Black box" header for small screens */
+@media (max-width: 480px) {  
+  .blackBoxHeader  {
+  font-size: 18px;
+  }
+}

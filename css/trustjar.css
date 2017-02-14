@@ -132,7 +132,7 @@ html, body {
   padding:20px;
 }
 
-
+/* Style for bootstrap buttons */
 .btn {
   font-family: Georgia;
   color:#000000;
@@ -143,22 +143,13 @@ html, body {
   padding: 4px 6px 4px 6px;
   white-space: nowrap;
   border-radius: 0px;
+  margin-top:10px;
 }
 
 
 .well {
   border: 6px #000000 solid;
   border-radius: 0px;
-  -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
-}
-
-/* style for the 'add a new relationship' form */
-.newRelationshipContainer {
-  border: 6px #000000 solid;
-  background-color: #c168bd;
-  padding:20px;
   -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
@@ -228,7 +219,7 @@ input[type='checkbox']:checked.pseudo-checkbox + label{
   margin:5px;
 }
 
-
+/* Header for the interior of relationship and form modules */
 .boxHeader {
   font-family: Georgia;
   font-weight: bold;
@@ -426,6 +417,7 @@ table.index td {
 margin-right: 10px;
 }
 
+/* Formats the copyright text in the footer in accordance with Creative */
 .copyrightCopy {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 13px;
@@ -436,21 +428,9 @@ margin-right: 10px;
 }
 
 
-.techDifficulties {
-    padding:10px; 
-    background-color:#ffffff;
-    border: 1px #cc0000 solid;
-    position: absolute;
-    width:250px;
-    height:150px;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 1050;
-  }
+/* ****************************** "DISABLE CONTROLS" OVERLAY ******************************* */
 
+/* "spinny wheel" for the disableControls overlay */
 .spinnyWheel { 
     color: #ffffff;
     text-align:center;
@@ -469,7 +449,24 @@ margin-right: 10px;
     z-index: 1050;
   }
 
-  .unit-test-end {
+/* "technical difficulties" element that appears when the disableControls overlay is active for too long */
+.techDifficulties {
+    padding:10px; 
+    background-color:#ffffff;
+    border: 1px #cc0000 solid;
+    position: absolute;
+    width:250px;
+    height:150px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1050;
+  }
+
+/* Only required for the unit test and can be removed for production*/
+.unit-test-end {
     position: absolute;
     color:#000000;
     margin: auto;
@@ -538,9 +535,6 @@ margin-right: 10px;
 }
 
 @media (max-width: 320px) {
-  .profileContacts{
-    font-size: 14px
-  }
   .well{
     padding: 3px;
   }

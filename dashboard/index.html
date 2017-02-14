@@ -10,14 +10,17 @@
 	<meta name="author" content="Paul Caron">
 	<title>Welcome to trustjar</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap core CSS -->
-	<link href="css/dashboard.css" rel="stylesheet"><!-- Trustjar dashboard CSS -->
+	<link href="../css/trustjar.css" rel="stylesheet"><!-- Trustjar CSS -->
+	<link href="css/dashboard.css" rel="stylesheet"><!-- Dashboard-specific CSS -->
 </head>
 <body>
 
 <!-- *************************************** MODAL SECTION ********************************************* -->
 	<!--Overlay to disable controls. Includes spinny wheel. -->
-	<div id='disableControlsOverlay' class='modal fade' role='dialog' data-keyboard="false" data-backdrop="static">
-		<img src="images/loadinfo.net.gif" class="spinnyWheel" alt="Waiting...">
+	<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
+		<div class='spinnyWheel'><img src="../images/loadinfo.net.gif" alt="Processing request. Please don't refresh the page."><br>
+		Processing request.<br>Please don't refresh the page.
+		</div>
 	</div>
 
 	<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
@@ -172,7 +175,7 @@
 	</div>
 
 <!-- *************************************** SPLASH SCREEN ********************************************* -->
-	<div id="splash">
+	<div id="splash" class="splashDiv">
 		<div id="splashBackground"></div><!-- Random animal image is placed here on page load --> 
 		<div id="darkmask"></div><!-- Provides a dark overlay mask for the logotype and the animals --> 
 	 	<div id="splashLogotype" class="splashLogotype" onClick="animateLogotype()"><!-- Animated logo element --> 
@@ -205,7 +208,7 @@
 								<span class="marginLeft15 headerAlign">
 									<span id="numberOfContacts"></span> verified contact channels in your profile &nbsp;
 										<a href="#" id="editProfileLink">
-											<img src="images/edit.gif" alt="edit profile" title="edit profile">
+											<img src="images/edit_icon.svg" alt="edit profile" title="edit profile">
 										</a>
 									</span>
 								</span>
@@ -247,7 +250,7 @@
 										<label for="dashboardPasscode" class="marginTop8">Passcode (required)</label>
 										<div class="input-group">
 											<input id='dashboardPasscode' type='password' placeholder='passcode' class='form-control' required>
-											<div id="dashboardShowHide" class="input-group-addon">show</div>
+											<div id="dashboardShowHide" class="input-group-addon showHide">show</div>
 										</div>
 										<div class="marginBottom8">
 											<!-- 'Save' opens a confirmation dialog. -->
@@ -298,7 +301,7 @@
 						<h5 class="floatLeft boxHeader">
 						add a new relationship
 						</h5>
-						<img src="images/info_icon.svg" alt="more info" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'edit relationship' in the relationship." aria-hidden="true" class="infoIcon">
+						<img src="../images/info_icon.svg" alt="more info" data-toggle="tooltip" data-placement="top" title="We'll send instructions to your partner to complete the process. If you already have a relationship with this person in your Trustjar, select 'edit relationship' in the relationship." aria-hidden="true" class="infoIcon">
 					</div>
 					<br />
 					<hr class="dashed">
@@ -373,7 +376,8 @@
 	</script>
 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/dashboard.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
+	<script src="../js/trustjar.js"></script><!-- All the javascript and jQuery code that is shared by multiple pages -->
+	<script src="js/dashboard.js"></script><!-- All the javascript and jQuery code specific to this page -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!-- 	<script type="text/javascript" src="../js/unitTests.js"></script> Code containing the unit test --> 
 

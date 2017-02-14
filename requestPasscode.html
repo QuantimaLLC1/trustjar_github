@@ -21,7 +21,9 @@
 
 	<!--Overlay to disable controls. Includes spinny wheel. -->
 	<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
-		<img src="images/loadinfo.net.gif" class="spinnyWheel" alt="Waiting...">
+		<div class='spinnyWheel'><img src="images/loadinfo.net.gif" alt="Processing request. Please don't refresh the page."><br>
+		Processing request.<br>Please don't refresh the page.
+		</div>
 	</div>
 
 	<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
@@ -153,8 +155,21 @@
 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<!-- Bootstrap core JavaScript ================================================== -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/login_pages.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
+	<script src="js/trustjar.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+	<script> // Trustjar-related scripts specific to this page
+		// User submits 'request passcode' form from the requestPasscode page. Returns the request with the specified contact to Firebase.
+			$('#requestPasscodeSubmitBtn').on('click', function() {
+				GLOB.clientRef.push( {  
+					"msgType" : "requestPasscodeForm",
+					"userContact" : $('#requestPasscodeUserContact').val()
+				}); 
+				// Disable user controls
+				disableControls ();
+				return false; // We don't want the link to trigger a page load. We want the server to control that to maintain state consistency.
+			});
+	</script>
 	<!-- 	<script type="text/javascript" src="../js/unitTests.js"></script> Code containing the unit test --> 
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->

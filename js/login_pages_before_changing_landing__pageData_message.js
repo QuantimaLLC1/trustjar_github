@@ -218,12 +218,7 @@
 			"homeConfirmation" : noPageData,
 			"requestPasscode" : noPageData,
 			"requestPasscodeConfirmation": noPageData,
-			"landingRequestorNew" : landingPageDataHandler,
-			"landingRequestorExisting" : landingPageDataHandler,
-			"landingRequestorMerge" : landingPageDataHandler,
-			"landingCounterpartyNew" : landingPageDataHandler,
-			"landingCounterpartyExisting" : landingPageDataHandler,
-			"landingCounterpartyMerge" : landingPageDataHandler,
+			"landing" : landingPageDataHandler,
 			"landingCancelConfirmation" : noPageData,
 			"dashboard": dashboardPageDataHandler,
 			"blank" : noPageData // This line is for the unit test only and can be reomved during production.
@@ -233,11 +228,7 @@
 	// The naming conventions were designed so they could be programmatically constructed based on the page name.
 		function getDataOnce( pageName, handlerFunction ) {
 			// Construct the URL corresponding to the Firebase page data reference, based on the page name.
-			if (pageName = 'landing') {
-				pageDataKeyPath = GLOB.serverRef + '/' + 'landingPageData'
-			} else {
-				var pageDataKeyPath = GLOB.serverRef + '/' + pageName + 'PageData';
-			}
+			var pageDataKeyPath = GLOB.serverRef + '/' + pageName + 'PageData';
 			// Create a true Firebase reference based on the URL constructed in the previous line.
 			var thisPathRef = new Firebase (pageDataKeyPath);
 			// Retrieve the data at the new Firebase reference

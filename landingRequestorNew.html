@@ -21,7 +21,9 @@
 
 	<!--Overlay to disable controls. Includes spinny wheel. -->
 	<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
-		<img src="images/loadinfo.net.gif" class="spinnyWheel" alt="Waiting...">
+		<div class='spinnyWheel'><img src="images/loadinfo.net.gif" alt="Processing request. Please don't refresh the page."><br>
+		Processing request.<br>Please don't refresh the page.
+		</div>
 	</div>
 
 	<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
@@ -104,7 +106,7 @@
 	</div>
 
 <!-- *********************************** LANDINGREQUESTORNEW PAGE BODY **************************************** -->
-	<div class="pageTemplate row" id="landing">
+	<div class="pageTemplate row" id="landingRequestorNew">
 		<div class="col-md-1">    
 		</div> 
 
@@ -164,10 +166,10 @@
 
 	</div> <!-- End landingRequestorNew -->
 
-<!-- *********************************** LANDINGCANCELCONFIRMATION PAGE BODY **************************************** -->
+<!-- *********************************** CANCELLANDINGREQUESTORNEW PAGE BODY **************************************** -->
 
 	<!-- Confirmation page that appears after user cancels a landing page request -->
-	<div class="pageTemplate row" id="landingCancelConfirmation">
+	<div class="pageTemplate row" id="cancelLandingRequestorNew">
 		<div class="col-md-1">   
 		</div> 
 		<div class="col-md-10">
@@ -213,13 +215,9 @@
 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<!-- Bootstrap core JavaScript ================================================== -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/login_pages.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
+	<script src="js/trustjar.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<!-- 	<script type="text/javascript" src="../js/unitTests.js"></script> Code containing the unit test --> 
-	<!-- Send a 'pageReady' message to Firebase to notify the server. The message is sent on a branch that includes the client's unique ID. -->
-	<script  language="javascript">
-		window.onload = GLOB.clientRef.push({  "msgType" : "pageReady" }); 
-	</script>
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 	<!-- These are generated so the system can communicate critical events to the user. It's a simplified form of the Bootstrap modal dialog. -->

@@ -21,7 +21,9 @@
 
 	<!--Overlay to disable controls. Includes spinny wheel. -->
 	<div class='modal fade' id='disableControlsOverlay' role='dialog' data-keyboard="false" data-backdrop="static">
-		<img src="images/loadinfo.net.gif" class="spinnyWheel" alt="Waiting...">
+		<div class='spinnyWheel'><img src="images/loadinfo.net.gif" alt="Processing request. Please don't refresh the page."><br>
+		Processing request.<br>Please don't refresh the page.
+		</div>
 	</div>
 
 	<!-- 'Technical Difficulties' element. This comes up automatically if the server takes too long to respond to a client request. -->
@@ -135,7 +137,7 @@
 			</div>
 			<br />
 
-			<ul id="contentTabs" class="nav nav-tabs">
+			<ul id="contentTabs" class="nav nav-tabs whatIsTrustjar">
 			  <li class="active"><a href="#whatIsTrustjarCopy" id="whatIsTrustjar" class="contentTitle active" data-toggle="tab">what is trustjar?</a></li>
 			  <li><a href="#whyTrustjarCopy" id="whyTrustjar" class="contentTitle" data-toggle="tab">why use trustjar?</a></li>
 			  <li><a href="#howTrustjarCopy" id="howTrustjar" class="contentTitle" data-toggle="tab">how does it work?</a></li>
@@ -248,8 +250,34 @@
 	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 	<!-- Bootstrap core JavaScript ================================================== -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/login_pages.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
+	<script src="js/trustjar.js"></script><!-- All the javascript and jQuery code specifically written for this application -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+
+	<script> // Trustjar-related scripts specific to this page
+		// New requestor sends 'home' page form request to Firebase on form submission.
+		function homeSubmitRequest () {
+			var me = $('#homeRequestorContact').val();
+			var you = $('#homeCounterpartyContact').val();
+			// Stop the request if the requestor and counterparty IDs are identical.
+			if (me == you) {
+				alert("You appear to be creating a relationship with yourself. Please change one of the contacts you entered.")
+				return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+			} else {
+			// send the form contents to Firebase: requestor and counterparty contacts and relationship type, and TOS confirmation.
+				GLOB.clientRef.push( {  
+					"msgType": "newRequestorForm",
+					"newRequestorContact" : $('#homeRequestorContact').val(),
+					"relationshipType" : $("input[name=homeRelationshipType]:checked").val(),
+					"counterpartyContact" : $('#homeCounterpartyContact').val(),
+					"newUserCheckbox" : $('#homeNewUserCheckbox').prop( "checked" )
+				}); 
+				disableControls ()
+				return false; // We don't want the form to trigger a page load. We want to do that through jQuery. 
+			}
+		}
+	</script>
+
 	<!-- 	<script type="text/javascript" src="../js/unitTests.js"></script> Code containing the unit test --> 
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
