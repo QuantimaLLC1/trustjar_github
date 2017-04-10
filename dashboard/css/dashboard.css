@@ -39,11 +39,6 @@ input[type='checkbox']:checked.pseudo-checkbox-2 + label{
 }
 /* ****************************** HEADER ******************************* */
 
-/*.header {
-    padding-top:10px; 
-  }
-*/
-
 /* User's name in the dashboard header */
 #headerName {
   font-family: Georgia;
@@ -52,7 +47,7 @@ input[type='checkbox']:checked.pseudo-checkbox-2 + label{
 }
 
 /* Since profile contact channels may be long email labels, make sure they break properly if necessary */
-.profileContacts {
+.profileContactChannels {
   font-size: 15px
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -132,7 +127,7 @@ input[type='checkbox']:checked.pseudo-checkbox-2 + label{
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
 }
 
-#numberOfContacts {
+#numberOfProfileContactChannels {
     color:#228b22; 
     font-weight:bold
 }

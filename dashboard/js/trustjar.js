@@ -245,20 +245,6 @@
 		    $(this).parent().animate({opacity: 0}, 500).hide('slow');
 		});
 
-	// This increments the z-index for bootstrap modal overlays. We need this to allow multiple overlays
-	// to stack "on top" of each other, specifically for the case where alerts appear over modal dialogs, since
-	// this implementation of alerts uses the modal dialog overlay when an alert is presented.
-	$(document).on('show.bs.modal', '.modal', function () {
-	    var zIndex = 1040 + (10 * $('.modal:visible').length);
-	    $(this).css('z-index', zIndex);
-	    setTimeout(function() {
-	        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-	    }, 0);
-	});
-
-
-
-
 	// Splash screen load animation. Changes color of each letter in the logo.
 		function animateLogotype() {
 			setTimeout(function(){ $("#t").addClass('TJ')}, 500);
@@ -335,15 +321,15 @@
 
 // FIREBASE REFERENCES
 	// Set our primary Firebase reference
-	GLOB.trustjarRef = new Firebase("https://trustjarTemp.firebaseio.com/");
+	GLOB.trustjarRef = new Firebase("https://trustjar-46e35.firebaseio.com/");
 	// All subsequent references will incorporate the unique ID received when the page is built
     // Set the branch for all client messages to Firebase
 	GLOB.clientRef = GLOB.trustjarRef.child('sessions/fromClient/' + GLOB.uniqueId);
 	// Set the branch for all server messages to Firebaser
 	GLOB.serverRef = GLOB.trustjarRef.child('sessions/fromServer/' + GLOB.uniqueId);
 	// Set the current HTML page or page template display
-	GLOB.displayRef = GLOB.serverRef.child('currentPage')
-;	// Used to read footer content on a common public branch set by Firebase. May change pending server implementation.
+	GLOB.displayRef = GLOB.serverRef.child('currentPage');
+	// Used to read footer content on a common public branch set by Firebase. May change pending server implementation.
 	GLOB.footerRef = GLOB.trustjarRef.child('commonBranch/footer');
 	// Firebase reference for all dashboard page data. The page data handler itself is in dashboard.js in the /dashboard directory.
 	GLOB.dashboardPageDataRef = GLOB.serverRef.child('dashboardPageData');
@@ -559,10 +545,8 @@
 		});
 
 
-	// Several clickable elements send a Firebase message containing only a value for "msgType". This function reads
+	// Several clickable elements send a Firebase message containing only a value for "msgType" This function reads
 	// the value contained in the 'data-msgtype' attribute of the clicked element and passes it on as the msgType value.
-	// Used for msgTypes "signOut" (dashboard), requestPasscodeLink (all pages except dashboard), returnToHomepage (all
-	// pages except dashboard), and the 'cancel' button on each landing page. 
 		$(document).on('click', '.msgTypeElement', function() {
 			GLOB.clientRef.push( {  
 				"msgType" : $(this).data('msgtype')

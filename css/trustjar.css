@@ -60,6 +60,15 @@ html, body {
   margin-bottom: 10px
 }
 
+.dashboardHeader {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: 1px;
+  line-height: 40px;
+}
+
 /* Splash screen logotype*/
 .splashLogotype {
   font-family: 'Source Sans Pro', sans-serif;
@@ -86,7 +95,6 @@ html, body {
   -webkit-border-radius: 0px;
   -moz-border-radius-topleft: 0px;
   border-radius: 0px;
-
 }
 
 .modal-header {
@@ -124,13 +132,59 @@ html, body {
   font-size: 30px;
 }
 
+
+/* The following two styles were added to resolve an issue where a bootstrap
+modal overlay was offset versus an alert when both appear at the same time.
+This ensures that they are properly aligned. */
+.modal
+{
+    overflow-y: auto !important;
+}
+
+.modal-open
+{
+   overflow:auto !important;
+   overflow-x:hidden !important;
+   padding-right: 0 !important;
+}
+
+/* Alert elements */
+
+.alert {
+  background-color: #cccccc;
+  border: 6px solid #000;
+  padding: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-radius: 0px;
+
+}
+
+.alert-header {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size:23px;
+    padding:9px 15px 0px 9px;
+    background-color: #cccccc;
+    border-bottom: 0px;
+}
+
+.alertContent {
+  padding:9px 15px;
+  clear: both;
+  font-weight: normal;
+  border-top:2px dashed #000;
+  border-bottom: 0px;
+  background-color: #cccccc;
+  /* 100% = dialog height, 120px = header + footer */
+  max-height: calc(100% - 120px);
+  overflow: hidden;
+}
+
 #serverAlertContainer {
   margin-top: 100px;
 }
 
-.alertContent {
-  padding:20px;
-}
 
 /* Style for bootstrap buttons */
 .btn {
@@ -143,7 +197,6 @@ html, body {
   padding: 4px 6px 4px 6px;
   white-space: nowrap;
   border-radius: 0px;
-  margin-top:10px;
 }
 
 
@@ -155,12 +208,12 @@ html, body {
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
 }
 
-.goHome {
+.msgTypeElement {
   cursor: pointer;
 }
 
-#loginShowHide {
-  width:60px;  
+.showHide { 
+  cursor: pointer;
 }
 
 /* Checkbox styles */
@@ -259,7 +312,7 @@ h4 {
 }
 
 .center {
-  text-align:center;
+  text-align: center;
 }
 
 .warningText {     /*also used for conflict text*/
@@ -397,10 +450,6 @@ table.index td {
   border-radius: 0px;
 }
 
-
-
-
-
 /* Sticky footer styles
 -------------------------------------------------- */
 
@@ -432,7 +481,7 @@ margin-right: 10px;
 
 /* "spinny wheel" for the disableControls overlay */
 .spinnyWheel { 
-    color: #ffffff;
+    color: #ccad42;
     text-align:center;
     vertical-align: middle;
     background-color:#000000;
@@ -453,8 +502,8 @@ margin-right: 10px;
 .techDifficulties {
     padding:10px; 
     background-color:#ffffff;
-    border: 1px #cc0000 solid;
-    position: absolute;
+    border: 6px #c168bd solid;
+    position: fixed;
     width:250px;
     height:150px;
     top:0;
@@ -485,7 +534,7 @@ margin-right: 10px;
     z-index: 1200;
   }
 
-
+/* Media queries for responsive design */
 @media (max-width: 320px) {
   .well{
     padding: 3px;

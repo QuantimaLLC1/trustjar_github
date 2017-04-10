@@ -12,7 +12,7 @@
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="css/login_pages.css" rel="stylesheet">
+	<link href="css/trustjar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -174,16 +174,8 @@
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 	<!-- These are generated so the system can communicate critical events to the user. It's a simplified form of the Bootstrap modal dialog. -->
-	<div id="serverAlertContainer" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Server alert!</h4>
-				</div>
-				<div id="serverAlertContent" class="modal-body alertContent"><!-- THe actual alert copy will appear here -->
-				</div>
-			</div>
+	<div id="serverAlertContainer" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+		<div id="serverAlertOverlay" class="modal-dialog">
 		</div>
 	</div>
 

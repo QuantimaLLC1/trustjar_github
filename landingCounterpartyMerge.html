@@ -12,7 +12,7 @@
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="css/login_pages.css" rel="stylesheet">
+	<link href="css/trustjar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
 
 
 	<!-- Modal confirmation dialog to confirm that the user is cancelling the landing page request. -->
-	<div class='modal fade' id='landingCancelRelationshipOverlay' role='dialog'>
+	<div class='modal fade landingCancelOverlay' role='dialog'>
 		<div class='modal-dialog'>
 			<div class='modal-content'>
 				<div class='modal-header' id='modalHeader'>
@@ -57,7 +57,7 @@
 					This will permanently remove the request from our system. Do you want to continue?
 				</div>
 				<div class='modal-footer'>
-					<button id='landingCancelConfirmBtn' type='button' class='btn btn-default' data-dismiss='modal'>yes, I'm sure</button>
+					<button id='landingCancelConfirmBtn' data-msgtype="landingCounterpartyMergeCancel" type='button' class='btn btn-default msgTypeElement' data-dismiss='modal'>yes, I'm sure</button>
 				</div>
 			</div>
 		</div>
@@ -90,14 +90,14 @@
 							</div>
 							<button id='loginBtn' type='submit' class='btn btn-success'>sign in</button>
 							<br />
-							<a href='#' id="requestPasscodeLink" class="pull-right">request passcode</a>
+							<a id="requestPasscodeLink" data-msgtype="requestPasscodeLink" class="pull-right msgTypeElement">request passcode</a>
 						 </div>
 					</form>
 				</div>
 				<div id="leftHeader">
 					<div class="floatLeft">
 						<div>
-							<span id="headerLogoLink" class="logotype goHome">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
+							<span id="headerLogoLink" data-msgtype="returnToHomepage" class="logotype msgTypeElement">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
 						</div>
 					</div>
 				</div>
@@ -108,10 +108,7 @@
 <!-- *********************************** LANDING DIV **************************************** -->
 
 	<div class="pageTemplate row" id="landingCounterpartyMerge">
-		<div class="col-md-1">    
-		</div> 
-
-		<div class="col-md-10"; margin-bottom:8px>
+		<div class="col-md-12"; margin-bottom:8px>
 			<div id="counterpartySubhead">
 				<h3><span id="landingRelationshipType1"></span> relationship request</h3>
 
@@ -147,16 +144,14 @@
 
 					<!-- Merge form -->
 					<div id="landingMergeForm">   
-						<button id="landingMergeYesBtn" type="button" autocomplete="off" class="btn btn-primary">yes</button>       
-						<button id="landingMergeNoBtn" type="button" autocomplete="off" class="btn btn-primary">no</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button id="landingMergeYesBtn" type="button" data-msgType="counterpartyMergeYes" autocomplete="off" class="btn btn-primary msgTypeElement">yes</button>       
+						<button id="landingMergeNoBtn" type="button" data-msgType="counterpartyMergeNo" autocomplete="off" class="btn btn-primary msgTypeElement">no</button>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button id="landingMergeCancelBtn" type="button" class="btn btn-primary landingCancelBtn">cancel request</button>
 					</div> <!-- End Merge Form. -->
 				</div>
-			</div><!-- End landing page body -->
-		</div>
-		<div class="col-md-1">    
-		</div> 
-
+			</div>
+			<br />
+			<!--  Tabbed content module. Content appears beneath the tab when selected -->
 			<ul id="contentTabs" class="nav nav-tabs whatIsTrustjar">
 			  <li class="active"><a href="#whatIsTrustjarCopy" id="whatIsTrustjar" class="contentTitle active" data-toggle="tab">what is trustjar?</a></li>
 			  <li><a href="#whyTrustjarCopy" id="whyTrustjar" class="contentTitle" data-toggle="tab">why use trustjar?</a></li>
@@ -164,6 +159,7 @@
 			  <li><a href="#trustjarIsPrivateCopy" id="trustjarIsPrivate" class="contentTitle" data-toggle="tab">trustjar is private!</a></li>
 			</ul>
 			<div class="tab-content clearfix">			
+				<!--  'what is trustjar? content' -->
 			  	<div id="whatIsTrustjarCopy" class="tab-pane active">
 			  		<br>
 
@@ -175,7 +171,7 @@
 
 					<p>When you accept an invitation, you’re bound by <span class="goodBehavior">Our Rules of Good Behavior</span>, so before you do, give it some thought or even talk to your partner.</p>
 				</div>
-
+				<!--  'why use trustjar?' content -->
 				<div id="whyTrustjarCopy" class="tab-pane">
 					<br>
 					<p>It’s obvious when you read Our Rules of Good Behavior! Trustjar not only follows these rules, we make sure that you and your partner do too.</p>
@@ -195,14 +191,14 @@
 						</div>
 					</div>
 				</div>
-
+				<!--  'how does it work?' content -->
 				<div id="howTrustjarCopy" class="tab-pane">
 					<br>
 					<p>Start by creating a Trustjar relationship. Enter the main email or mobile number for you and your partner. An invitation will be sent to each of you so that you can 1) confirm you are who you say you are and 2) accept or reject the invitation.</p>
 
 					<p>After accepting, you'll both have a Trustjar account with access to a dashboard. From there you can add or remove email addresses or mobile numbers, add or remove relationships, or manage your profile.</p>
 				</div>
-
+				<!--  'trustjar is private!' content -->
 				<div id="trustjarIsPrivateCopy" class="tab-pane">
 					<br>
 					<p>Information about relationships or even membership in Trustjar's service will NOT appear in any search database and can NOT be found by browsing the Trustjar site.</p> 
@@ -217,24 +213,22 @@
 					<strong>This is all the rest of the world will ever know about your relationship:</strong><br>
 					Nothing! The rest of the world won’t know you even have a Trustjar account.
 
-					For more about privacy, see our <a href="#" class="privacyLink">privacy policy.</span>
+					For more about privacy, see our <a href="#" class="privacyLink">privacy policy.</a></span>
 				</div>
-			</div>
-
-		</div><!-- End Home -->
-
+			</div> <!-- End tabbed content module -->
+		</div>
 	</div> <!-- End landing -->
 
 <!-- *********************************** CANCELLANDINGCOUNTERPARTYMERGE DIV **************************************** -->
 	<!-- Confirmation page that appears after user cancels a landing page request -->
-	<div class="pageTemplate row" id="cancelLandingCounterpartyMergeCancel">
+	<div class="pageTemplate row" id="cancelLandingCounterpartyMerge">
 		<div class="col-md-1">   
 		</div> 
 		<div class="col-md-10">
 			<h3>Request canceled.</h3>
 			<div>  
 				<p>The person who sent you this relationship request has been notified. </p>
-				<p>To start a new request, log in or start a relationship request on our <a class="goHome">home page</a>. </p>
+				<p>To start a new request, log in or start a relationship request on our <a data-msgtype="returnToHomepage" class="msgTypeElement">home page</a>. </p>
 			</div>
 		</div>
 		<div class="col-md-1">     
@@ -279,16 +273,8 @@
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 	<!-- These are generated so the system can communicate critical events to the user. It's a simplified form of the Bootstrap modal dialog. -->
-	<div id="serverAlertContainer" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Server alert!</h4>
-				</div>
-				<div id="serverAlertContent" class="modal-body alertContent"><!-- THe actual alert copy will appear here -->
-				</div>
-			</div>
+	<div id="serverAlertContainer" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+		<div id="serverAlertOverlay" class="modal-dialog">
 		</div>
 	</div>
 </body>

@@ -27,7 +27,7 @@
 	<div id="technicalDifficulties" class="techDifficulties hidden">We appear to be having trouble reaching you. If you're on a mobile device, check that your data service is working properly. If the problem continues, please close your browser and try again. </div>
 
 	<!-- Modal dialog to confirm that the user wants to close the account. User will still have to verify by responding to an email / SMS. -->
-	<div  id="closeAccount" class="modal fade" role="dialog">
+	<div id="closeAccount" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -35,17 +35,29 @@
 					<h4 class="modal-title boxHeader">close your trustjar account</h4>
 				</div>
 				<div class="modal-body">
-					<p>If you confirm, a notification will be sent to all your contact channels. Respond to any one of them to cancel your account. Notifications will also be sent to your relationship partners. Are you sure you want to continue?</p>
+					<form name="confirmCloseAccountForm" onsubmit="return confirmCloseAccountFormSubmit()" action="" data-ajax="false">
+						<p>If you confirm, a notification will be sent to all your contact channels. Respond to any one of them to cancel your account. Notifications will also be sent to your relationship partners. Please enter your passcode to continue.</p>
+
+						<label for="confirmCloseAccountPasscode" class="marginTop8">Passcode (required)</label>
+						<div class="input-group">
+							<input id='confirmCloseAccountPasscode' type='password' placeholder='passcode' class='form-control' required>
+							<div id="confirmCloseAccountShowHide" class="input-group-addon showHide">show</div>
+						</div>
+						<div class="center">
+							<button id="confirmCloseAccountBtn" type="submit" class="btn btn-danger marginTop30">
+								yes, close my account
+							</button>
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<!-- Confirmation sends a 'close account' message to Firebase -->
-					<button id="confirmCloseAccount" type="button" class="btn btn-danger" data-dismiss="modal">yes, close my account</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Modal confirmation dialog for resending a notification to a user contact that's unverified -->
+	<!-- Modal confirmation dialog for resending a notification to a profile contact channel that's unverified -->
 	<div id="resendVerification" class="modal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -103,7 +115,7 @@
 
 
 	<!-- Modal dialog for confirming changes to a relationship via the 'edit relationship' function -->
-	<div id="confirmeditRelationshipContacts" class="modal" role="dialog">
+	<div id="confirmSaveRelationshipChanges" class="modal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -168,7 +180,7 @@
 					Please confirm that you want to sign out of Trustjar.
 				</div>
 				<div class='modal-footer'>
-					<button id='confirmSignOut' type='button' class='btn btn-primary' data-dismiss='modal'>yes, I'm sure</button>
+					<button id='confirmSignOut' type='button' class='btn btn-primary msgTypeElement' data-msgtype="signOut" data-dismiss='modal'>yes, I'm sure</button>
 				</div>
 			</div>
 		</div>
@@ -206,13 +218,14 @@
 							<div>
 								<span id="dashboardHeaderLogo" class="headerAlign logotype">TRUS<span id="tj" class="TJ">TJ</span>AR</span>
 								<span class="marginLeft15 headerAlign">
-									<span id="numberOfContacts"></span> verified contact channels in your profile &nbsp;
+									<span id="numberOfProfileContactChannels"></span> verified contact channels in your profile &nbsp;
 										<a href="#" id="editProfileLink">
 											<img src="images/edit_icon.svg" alt="edit profile" title="edit profile">
 										</a>
 									</span>
 								</span>
 							</div>
+							<div class="dashboardHeader">DASHBOARD</div>
 						</div>
 					</div>
 				</div>
@@ -232,14 +245,14 @@
 							<div class="row">
 								<form name="profileForm" action="" data-ajax="false" class="col-md-12">
 									<div>Here you can change the name that your partners see and add or remove email addresses or mobile numbers from your profile. You can only remove them if they've already been removed from all relationships. Once removed, they will have to be confirmed all over again.</div><br />
-									<div id="editProfileContacts" class="col-md-6">
-										<label for="newProfileContact">Add one email or mobile number</label> 
-										<input type="text" class="form-control" id="newProfileContact" placeholder="email or mobile number">
+									<div id="editProfileContactChannels" class="col-md-6">
+										<label for="newProfileContactChannel">Add one email or mobile number</label> 
+										<input type="text" class="form-control" id="newProfileContactChannel" placeholder="email or mobile number">
 										<div class="marginTop8">
 											<b>Remove email addresses or mobile numbers</b>
 										</div>
 										<!-- Profile contact list. Populated by Firebase, complete with checkboxes and 'unverified' links. -->
-										<div id="editProfileContactList" class="profileContacts">
+										<div id="editProfileContactChannelList" class="profileContactChannels">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -247,23 +260,18 @@
 										<!-- User's name. Prepopulated via Firebase with the user's current name. -->
 										<input type="text" class="form-control" id="editProfileFormName" placeholder="Add your name" required>
 										<!-- User's passcode. Required. Blank by default. -->
-										<label for="dashboardPasscode" class="marginTop8">Passcode (required)</label>
-										<div class="input-group">
-											<input id='dashboardPasscode' type='password' placeholder='passcode' class='form-control' required>
-											<div id="dashboardShowHide" class="input-group-addon showHide">show</div>
-										</div>
-										<div class="marginBottom8">
+										<div>
 											<!-- 'Save' opens a confirmation dialog. -->
-											<button type="submit" id="profileFormSubmitBtn" class="btn btn-primary btn-md" data-toggle="modal">
+											<button type="submit" id="profileFormSubmitBtn" class="btn btn-primary btn-md marginTop30" data-toggle="modal">
 											save
 											</button>&nbsp;
 											<!-- 'Cancel' closes the Profile form and returns the user to the default contact display. -->
-											<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-md">
+											<button id="cancelEditProfileBtn" type="button" class="btn btn-primary btn-md marginTop30">
 											cancel
 											</button>
 											<span class="paddingLeft30"></span>
 											<!-- Opens a confirmation dialog. -->
-											<button id="closeAccountBtn" type="submit" class="btn btn-danger btn-md" data-toggle="modal">
+											<button id="closeAccountBtn" type="submit" class="btn btn-danger btn-md marginTop30" data-toggle="modal">
 											close account
 											</button>
 										</div>
@@ -311,7 +319,7 @@
 						<form name="newRelationshipForm" action="" onsubmit="return newRelationshipFormSubmit()" data-ajax="false">
 							<div class="form-group">
 								<label for="yourContacts">YOU</label>
-								<div id="newRelationshipFormContacts" class="profileContacts"> <!-- populated via Firebase listeners -->  
+								<div id="newRelationshipFormContacts" class="profileContactChannels"> <!-- populated via Firebase listeners -->  
 								</div>
 								<div>
 									<hr class="dashed">
@@ -339,6 +347,90 @@
 				</div>
 			</div>
 		</div>
+
+
+
+
+			<!--  Tabbed content module. Content appears beneath the tab when selected -->
+			<ul id="contentTabs" class="nav nav-tabs whatIsTrustjar">
+			  <li class="active"><a href="#whatIsTrustjarCopy" id="whatIsTrustjar" class="contentTitle active" data-toggle="tab">what is trustjar?</a></li>
+			  <li><a href="#whyTrustjarCopy" id="whyTrustjar" class="contentTitle" data-toggle="tab">why use trustjar?</a></li>
+			  <li><a href="#howTrustjarCopy" id="howTrustjar" class="contentTitle" data-toggle="tab">how does it work?</a></li>
+			  <li><a href="#trustjarIsPrivateCopy" id="trustjarIsPrivate" class="contentTitle" data-toggle="tab">trustjar is private!</a></li>
+			</ul>
+			<div class="tab-content clearfix">			
+				<!--  'what is trustjar? content' -->
+			  	<div id="whatIsTrustjarCopy" class="tab-pane active">
+			  		<br>
+
+					<p>Trustjar is a site where you can invite someone to confirm that you’re either casually dating or in an exclusive relationship. Trustjar sends your partner a link via text or email, giving them the option of accepting or rejecting a relationship invitation. Trustjar's sole purpose is to prevent its members from accepting relationship invitations that violate <span class="goodBehavior">Our Rules of Good Behavior</span>.</p>
+
+					<p>Once you’re in a relationship, your email addresses and mobile numbers are used to make sure that no conflicting relationships can be accepted by you or your partner.</p>
+
+					<p>Trustjar is completely private. Information about relationships or even membership in Trustjar's service will NOT appear in search engines and can NOT be found by browsing the Trustjar site.</p>
+
+					<p>When you accept an invitation, you’re bound by <span class="goodBehavior">Our Rules of Good Behavior</span>, so before you do, give it some thought or even talk to your partner.</p>
+				</div>
+				<!--  'why use trustjar?' content -->
+				<div id="whyTrustjarCopy" class="tab-pane">
+					<br>
+					<p>It’s all explained in Our Rules of Good Behavior! We're here to make sure that you and your partner(s) follow these rules.</p>
+					<br>
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="contentContainer col-md-8">
+							<div class="contentTitle center">
+								Our Rules of Good Behavior
+							</div><br />
+								<p><strong>Everyone knows ‘exclusive’ means you’re not in a relationship with anyone else.</strong><br /> Trustjar won't allow your partner to accept an exclusive relationship invitation from you unless they have no other relationships. </p>
+									
+								<p><strong>You can have as many casual relationships as you want and no one else needs to know.</strong><br /> By definition, in a casual relationship, there’s no expectation of exclusivity. However, Trustjar won't allow your partner to accept a casual relationship invitation from you when they’re already in an exclusive relationship.</p>
+									
+								<p><strong>You can’t end a relationship without telling your partner.</strong> Whether your relationship is casual or exclusive, you or your partner must end it before accepting a conflicting relationship invitation from someone else. If your partner ends your relationship, Trustjar will send a message telling you that they did so.</p>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+				<!--  'how does it work?' content -->
+				<div id="howTrustjarCopy" class="tab-pane">
+					<br>
+					<p>Start by creating a Trustjar relationship. Enter the main email or mobile number for you and your partner. An invitation will be sent to each of you so that you can 1) confirm you are who you say you are and 2) accept or reject the invitation.</p>
+
+					<p>After accepting, you'll both have a Trustjar account with access to a dashboard. From there you can add or remove email addresses or mobile numbers, add or remove relationships, or manage your profile.</p>
+				</div>
+				<!--  'trustjar is private!' content -->
+				<div id="trustjarIsPrivateCopy" class="tab-pane">
+					<br>
+					<p>Information about relationships or even membership in Trustjar's service will NOT appear in any search engine or database and can NOT be found by browsing our site.</p> 
+
+					<strong>This is all your partner will ever know about you by using Trustjar:</strong>
+					<ul>
+						<li>You accepted a relationship request</li>
+						<li>You removed yourself from an existing relationship with your partner</li>
+						<li>You added a new email or mobile number to an existing relationship</li>
+						<li>You cancelled a request. (You may choose to do this when you don’t recognize the name or the email or mobile number in the relationship request.)</li>
+					</ul>
+					<strong>This is all the rest of the world will ever know about your relationship:</strong><br>
+					Nothing! The rest of the world won’t know you even have a Trustjar account.
+
+					For more about privacy, see our <a href="#" class="privacyLink">privacy policy.</a></span>
+				</div>
+			</div> <!-- End tabbed content module -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</div> <!-- /container -->
 
 <!-- ****************************************** FOOTER ************************************************* -->
@@ -383,16 +475,8 @@
 
 <!-- *********************************** SERVER ALERT SECTION **************************************** -->
 	<!-- These are generated so the system can communicate critical events to the user. It's a simplified form of the Bootstrap modal dialog. -->
-	<div id="serverAlertContainer" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button><!-- 'close' element -->
-					<h4 class="modal-title">Server alert!</h4>
-				</div>
-				<div id="serverAlertContent" class="modal-body alertContent"><!-- THe actual alert copy will appear here -->
-				</div>
-			</div>
+	<div id="serverAlertContainer" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+		<div id="serverAlertOverlay" class="modal-dialog">
 		</div>
 	</div>
 
